@@ -10,5 +10,20 @@
 #include <WPILib.h>
 
 OI::OI() {
-	// Process operator interface input here.
+
 }
+
+	double OI::GetTurn() {
+		//gets turning values
+		return Desensitize(-driverController.GetRawAxis(4));
+	}
+	double OI::GetMove() {
+		//gets forward/backward values
+			return Desensitize(-driverController.GetRawAxis(1));
+	}
+	double OI::Desensitize(double value) {
+		//set threshold so tiny values on the joystick don't register,
+		//sometimes resting value of joystick is not 0
+		if (fabs(value) < 0.3) value = 0;
+		return value;
+	}
