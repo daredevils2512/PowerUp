@@ -53,12 +53,15 @@ public:
 	void AutonomousInit() override {
 		std::string autoSelected = frc::SmartDashboard::GetString(
 				"Auto Selector", "Default");
+		
+		//THERE IS AN EXTRA ELSE HERE.. you don't need it. 
 		if (autoSelected == "My Auto") {
 			m_autonomousCommand = &m_myAuto;
 		} else {
 			m_autonomousCommand = &m_defaultAuto;
 		}
-
+		
+		//THIS WILL OVERRIDE EVERYTHING ABOVE
 		m_autonomousCommand = m_chooser.GetSelected();
 
 		if (m_autonomousCommand != nullptr) {
