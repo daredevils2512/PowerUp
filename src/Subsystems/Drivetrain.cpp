@@ -9,11 +9,10 @@ Drivetrain::Drivetrain() : Subsystem("Drivetrain") {
     DriveTrainShift = RobotMap::drivetrainShifter;
     Chassis = RobotMap::drivetrainChassis;
     blockJoysticks = false;
-
 }
 
 void Drivetrain::InitDefaultCommand() {
-
+	SetDefaultCommand(new Drive());
 }
 void Drivetrain::DriveRobotArcade(double speed, double rotation) {
 	//drives robot in arcade mode from specified values (TELEOP)
