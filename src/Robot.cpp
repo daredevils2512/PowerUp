@@ -5,15 +5,16 @@ std::unique_ptr<OI> Robot::oi;
 std::shared_ptr<frc::Compressor> Robot::compressor;
 
 void Robot::RobotInit() {
+	RobotMap::init();
     drivetrain.reset(new Drivetrain());
 	oi.reset(new OI());
-	compressor.reset(new frc::Compressor());
-  }
+	//compressor.reset(new frc::Compressor());
+}
 void Robot::RobotPeriodic() {
 
 }
 void Robot::DisabledInit(){
-	compressor->SetClosedLoopControl(false);
+	//compressor->SetClosedLoopControl(false);
 }
 
 void Robot::DisabledPeriodic() {
@@ -32,7 +33,7 @@ void Robot::AutonomousPeriodic() {
 }
 
 void Robot::TeleopInit() {
-	compressor->SetClosedLoopControl(true);
+	//compressor->SetClosedLoopControl(true);
 
 	if (autonomousCommand.get() != nullptr)
 			autonomousCommand->Cancel();
