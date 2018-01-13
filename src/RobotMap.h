@@ -17,6 +17,12 @@ public:
 
 	static std::shared_ptr<AHRS> navX;
 	static std::shared_ptr<frc::PIDController> navXTurnController;
+
+	static std::shared_ptr<frc::Spark> motor1;
+	static std::shared_ptr<frc::Spark> motor2;
+	static std::shared_ptr<frc::Spark> motor3;
+	static std::shared_ptr<frc::Spark> motor4;
+
 	static void init();
 
 };

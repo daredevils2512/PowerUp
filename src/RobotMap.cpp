@@ -19,6 +19,10 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainFrontRightMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainRearRightMotor;
 std::shared_ptr<frc::DifferentialDrive> RobotMap::drivetrainChassis;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::drivetrainShifter;
+std::shared_ptr<frc::Spark> RobotMap::motor1;
+std::shared_ptr<frc::Spark> RobotMap::motor2;
+std::shared_ptr<frc::Spark> RobotMap::motor3;
+std::shared_ptr<frc::Spark> RobotMap::motor4;
 
 std::shared_ptr<AHRS> RobotMap::navX;
 std::shared_ptr<frc::PIDController> RobotMap::navXTurnController;
@@ -47,5 +51,9 @@ void RobotMap::init() {
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
 
+	// motor1.reset(new frc::Spark(1));
+	// motor2.reset(new frc::Spark(2));
+	// motor3.reset(new frc::Spark(3));
+	// motor4.reset(new frc::Spark(4));
 
 }

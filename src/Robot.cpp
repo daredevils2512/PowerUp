@@ -57,6 +57,10 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("F-Value", RobotMap::navXTurnController->GetF());
 	SmartDashboard::PutNumber("Set- Point", RobotMap::navXTurnController->GetSetpoint());
 
+	SmartDashboard::PutNumber("X-Displacement", RobotMap::navX->GetDisplacementX());
+	SmartDashboard::PutNumber("Y-Displacement", RobotMap::navX->GetDisplacementY());
+	SmartDashboard::PutNumber("Z-Displacement", RobotMap::navX->GetDisplacementZ());
+
 }
 void Robot::DisabledInit(){
 	//compressor->SetClosedLoopControl(false);
