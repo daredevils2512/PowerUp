@@ -24,7 +24,7 @@ void Robot::RobotInit() {
 		));
 		RobotMap::navXTurnController->SetInputRange(-180.0f,  180.0f);
 		RobotMap::navXTurnController->SetOutputRange(-1.0, 1.0);
-		RobotMap::navXTurnController->SetAbsoluteTolerance(2.0f);
+		RobotMap::navXTurnController->SetAbsoluteTolerance(0.5f);
 		RobotMap::navXTurnController->SetContinuous(true);
 
 	oi.reset(new OI());
