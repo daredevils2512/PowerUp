@@ -1,17 +1,32 @@
 #include "Robot.h"
 
+
+
 std::shared_ptr<Drivetrain> Robot::drivetrain;
 std::unique_ptr<OI> Robot::oi;
 std::shared_ptr<frc::Compressor> Robot::compressor;
 std::shared_ptr<NavXSubsystem> Robot::navXSubsystem;
+std::shared_ptr<NavXPIDSource> Robot::pidSource;
 
 
 void Robot::RobotInit() {
 
-	//TODO: Move drivetrain subsystem init after RobotMap init, move NavX init to after both of those inside RobotInit
-
-    drivetrain.reset(new Drivetrain());
 	RobotMap::init();
+    drivetrain.reset(new Drivetrain());
+    pidSource.reset(new NavXPIDSource());
+    RobotMap::navXTurnController.reset(new frc::PIDController(
+    		NavXSubsystem::NAVX_P_VALUE,
+			NavXSubsystem::NAVX_I_VALUE,
+			NavXSubsystem::NAVX_D_VALUE,
+			NavXSubsystem::NAVX_F_VALUE,
+			pidSource.get(),
+			drivetrain.get()
+		));
+		RobotMap::navXTurnController->SetInputRange(-180.0f,  180.0f);
+		RobotMap::navXTurnController->SetOutputRange(-1.0, 1.0);
+		RobotMap::navXTurnController->SetAbsoluteTolerance(2.0f);
+		RobotMap::navXTurnController->SetContinuous(true);
+
 	oi.reset(new OI());
 	//compressor.reset(new frc::Compressor());
 	lw = frc::LiveWindow::GetInstance();
@@ -40,13 +55,14 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("I-Value", RobotMap::navXTurnController->GetI());
 	SmartDashboard::PutNumber("D-Value", RobotMap::navXTurnController->GetD());
 	SmartDashboard::PutNumber("F-Value", RobotMap::navXTurnController->GetF());
+	SmartDashboard::PutNumber("Set- Point", RobotMap::navXTurnController->GetSetpoint());
 
 }
 void Robot::DisabledInit(){
 	//compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
-
+	drivetrain->SetPIDEnabled(false);
 	//drivetrain->GetPIDOutput();
 
 }
@@ -77,12 +93,24 @@ void Robot::TeleopPeriodic() {
 	}
 
 void Robot::TestInit() {
+	drivetrain->SetPIDEnabled(false);
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Cancel();
+
+	drivetrain->SetPIDSetpoint(90);
 }
 
 void Robot::TestPeriodic() {
 	Scheduler::GetInstance()->Run();
+
+	if(drivetrain->IsPIDEnabled()){
+		double output = drivetrain->GetPIDOutput();
+		SmartDashboard::PutNumber("PID Input", pidSource->PIDGet());
+		SmartDashboard::PutNumber("PID Output", output);
+		drivetrain->DriveRobotArcade(0.0,output);
+	}else{
+		drivetrain->DriveRobotArcade(0,0);
+	}
 	//lw->Run();
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <WPILib.h>
 #include <ctre/Phoenix.h>
 #include <AHRS.h>

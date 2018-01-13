@@ -13,6 +13,7 @@ Drivetrain::Drivetrain() : Subsystem("Drivetrain") {
 }
 
 void Drivetrain::PIDWrite(double output) {
+	std::cout<<"pid output updated"<<std::endl;
 	pidOutput = output;
 }
 
@@ -43,6 +44,7 @@ bool Drivetrain::GetAutonomous() {
 }
 
 bool Drivetrain::IsPIDEnabled() {
+
 	return RobotMap::navXTurnController->IsEnabled();
 }
 

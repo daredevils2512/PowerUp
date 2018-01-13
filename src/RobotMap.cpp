@@ -39,19 +39,13 @@ void RobotMap::init() {
 
 	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 
-	drivetrainChassis->SetSafetyEnabled(false);
+	drivetrainChassis->SetSafetyEnabled(true);
 		drivetrainChassis->SetExpiration(0.5);
 		drivetrainChassis->SetMaxOutput(1.0);
 
 	//drivetrainShifter.reset (new frc::DoubleSolenoid (0,0,1));
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
-	navXTurnController.reset(new frc::PIDController(NavXSubsystem::NAVX_P_VALUE, NavXSubsystem::NAVX_I_VALUE, NavXSubsystem::NAVX_D_VALUE, NavXSubsystem::NAVX_F_VALUE, navX.get(), Robot::drivetrain.get()));
-	navXTurnController->SetInputRange(-180.0f,  180.0f);
-	navXTurnController->SetOutputRange(-1.0, 1.0);
-	navXTurnController->SetAbsoluteTolerance(2.0f);
-	navXTurnController->SetContinuous(true);
-
 
 
 }
