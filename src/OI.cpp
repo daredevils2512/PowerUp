@@ -8,9 +8,10 @@
 #include "OI.h"
 
 #include <WPILib.h>
+#include "Commands/PIDDriveStraight.h"
 
 OI::OI() {
-
+	DRC_aButton.WhenPressed(new PIDDriveStraight(PIDDriveStraight::PIDSettings::CARPET90,1));
 }
 
 	double OI::GetTurn() {

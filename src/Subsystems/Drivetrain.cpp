@@ -13,7 +13,7 @@ Drivetrain::Drivetrain() : Subsystem("Drivetrain") {
 }
 
 void Drivetrain::PIDWrite(double output) {
-	std::cout<<"pid output updated"<<std::endl;
+	//std::cout<<"pid output updated"<<std::endl;
 	pidOutput = output;
 }
 
