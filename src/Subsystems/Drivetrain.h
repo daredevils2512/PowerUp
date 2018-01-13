@@ -4,7 +4,7 @@
 #include <WPILib.h>
 #include "ctre/Phoenix.h"
 
-class Drivetrain: public Subsystem {
+class Drivetrain: public Subsystem, public PIDOutput {
 private:
 	std::shared_ptr<WPI_TalonSRX> FrontLeftMotor;
 	std::shared_ptr<WPI_TalonSRX> RearLeftMotor;
@@ -12,16 +12,24 @@ private:
 	std::shared_ptr<WPI_TalonSRX> RearRightMotor;
 	std::shared_ptr<frc::DifferentialDrive> Chassis;
 	std::shared_ptr<DoubleSolenoid> DriveTrainShift;
+	double pidOutput = 0;
 
 public:
 	Drivetrain();
 	void InitDefaultCommand();
+	virtual void PIDWrite(double output);
 	void DriveRobotArcade(double move, double turn);
 	void DriveRobotTank(double leftSide, double rightSide);
 	void Shifter (frc::DoubleSolenoid::Value dir);
 	void SetAutonomous(bool isAutonomous);
 	bool GetAutonomous();
 	bool blockJoysticks;
+
+	bool IsPIDEnabled();
+	double GetPIDOutput();
+
+	void SetPIDSetpoint(double setpoint);
+	void SetPIDEnabled(bool enabled);
 
 };
 

@@ -1,7 +1,9 @@
 #pragma once
 
 #include <WPILib.h>
-#include"ctre/Phoenix.h"
+#include <ctre/Phoenix.h>
+#include <AHRS.h>
+#include "Util.h"
 
 class RobotMap {
 public:
@@ -12,7 +14,8 @@ public:
 	static std::shared_ptr<frc::DifferentialDrive> drivetrainChassis;
 	static std::shared_ptr<frc::DoubleSolenoid> drivetrainShifter;
 
-
+	static std::shared_ptr<AHRS> navX;
+	static std::shared_ptr<frc::PIDController> navXTurnController;
 	static void init();
 
 };

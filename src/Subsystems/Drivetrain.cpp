@@ -9,6 +9,11 @@ Drivetrain::Drivetrain() : Subsystem("Drivetrain") {
     DriveTrainShift = RobotMap::drivetrainShifter;
     Chassis = RobotMap::drivetrainChassis;
     blockJoysticks = false;
+
+}
+
+void Drivetrain::PIDWrite(double output) {
+	pidOutput = output;
 }
 
 void Drivetrain::InitDefaultCommand() {
@@ -35,4 +40,26 @@ void Drivetrain::SetAutonomous(bool isAutonomous) {
 
 bool Drivetrain::GetAutonomous() {
 	return blockJoysticks;
+}
+
+bool Drivetrain::IsPIDEnabled() {
+	return RobotMap::navXTurnController->IsEnabled();
+}
+
+void Drivetrain::SetPIDEnabled(bool enabled){
+	if(enabled){
+		RobotMap::navXTurnController->Enable();
+	}else{
+		RobotMap::navXTurnController->Disable();
+	}
+}
+
+double Drivetrain::GetPIDOutput() {
+	if(!this->IsPIDEnabled()){
+		Util::ReportError("Accessing PID Output while PID is disabled!");
+	}
+	return pidOutput;
+}
+void Drivetrain::SetPIDSetpoint(double setpoint){
+	RobotMap::navXTurnController->SetSetpoint(setpoint);
 }
