@@ -7,8 +7,11 @@ std::shared_ptr<NavXSubsystem> Robot::navXSubsystem;
 
 
 void Robot::RobotInit() {
-	RobotMap::init();
+
+	//TODO: Move drivetrain subsystem init after RobotMap init, move NavX init to after both of those inside RobotInit
+
     drivetrain.reset(new Drivetrain());
+	RobotMap::init();
 	oi.reset(new OI());
 	//compressor.reset(new frc::Compressor());
 	lw = frc::LiveWindow::GetInstance();
