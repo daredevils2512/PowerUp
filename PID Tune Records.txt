@@ -1,0 +1,10 @@
+Working Values
+
+P: 0.04
+I: 0.00
+D: 0.065
+F: 0.00
+
+Modified Values
+
+D: 0.75

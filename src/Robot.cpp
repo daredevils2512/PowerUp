@@ -107,9 +107,9 @@ void Robot::TestPeriodic() {
 		double output = drivetrain->GetPIDOutput();
 		SmartDashboard::PutNumber("PID Input", pidSource->PIDGet());
 		SmartDashboard::PutNumber("PID Output", output);
-		drivetrain->DriveRobotArcade(0.0,output);
+		drivetrain->DriveRobotTank(-output,output);
 	}else{
-		drivetrain->DriveRobotArcade(0,0);
+		drivetrain->DriveRobotTank(0,0);
 	}
 	//lw->Run();
 }
