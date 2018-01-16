@@ -20,6 +20,10 @@ private:
 	double m_distance;
 	double navXDistance;
 	long lastTime;
+	double lastVelX;
+	double lastVelY;
+	long lastTimeDiff;
+	long cumlTime;
 };
 
 #endif  // PIDDriveStraight_H
