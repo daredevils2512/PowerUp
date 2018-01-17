@@ -20,7 +20,7 @@ OI::OI() {
 	}
 	double OI::GetMove() {
 		//gets forward/backward values
-			return Desensitize(-driverController.GetRawAxis(1));
+		return Desensitize(-driverController.GetRawAxis(1));
 	}
 	double OI::Desensitize(double value) {
 		//set threshold so tiny values on the joystick don't register,

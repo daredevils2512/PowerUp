@@ -5,7 +5,7 @@
 #include <ctre/Phoenix.h>
 #include <AHRS.h>
 #include "Util.h"
-
+#include <Encoder.h>
 class RobotMap {
 public:
 	static std::shared_ptr<WPI_TalonSRX> drivetrainFrontLeftMotor;
@@ -14,6 +14,8 @@ public:
 	static std::shared_ptr<WPI_TalonSRX> drivetrainRearRightMotor;
 	static std::shared_ptr<frc::DifferentialDrive> drivetrainChassis;
 	static std::shared_ptr<frc::DoubleSolenoid> drivetrainShifter;
+	static std::shared_ptr<frc::Encoder> drivetrainLeftEncoder;
+	static std::shared_ptr<frc::Encoder> drivetrainRightEncoder;
 
 	static std::shared_ptr<AHRS> navX;
 	static std::shared_ptr<frc::PIDController> navXTurnController;

@@ -61,6 +61,13 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Y-Displacement", RobotMap::navX->GetDisplacementY());
 	SmartDashboard::PutNumber("Z-Displacement", RobotMap::navX->GetDisplacementZ());
 
+	SmartDashboard::PutNumber("Left Encoder", RobotMap::drivetrainLeftEncoder->GetDistance());
+	SmartDashboard::PutNumber("Right Encoder", RobotMap::drivetrainRightEncoder->GetDistance());
+
+	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
+	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
+
+
 
 }
 void Robot::DisabledInit(){
@@ -77,7 +84,7 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
-
+	Robot::drivetrain->ResetEncoders();
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Start();
 }
@@ -88,6 +95,7 @@ void Robot::AutonomousPeriodic() {
 }
 
 void Robot::TeleopInit() {
+	Robot::drivetrain->ResetEncoders();
 	//compressor->SetClosedLoopControl(true);
 	if (autonomousCommand.get() != nullptr)
 			autonomousCommand->Cancel();
@@ -98,6 +106,7 @@ void Robot::TeleopPeriodic() {
 	}
 
 void Robot::TestInit() {
+	Robot::drivetrain->ResetEncoders();
 	drivetrain->SetPIDEnabled(false);
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Cancel();

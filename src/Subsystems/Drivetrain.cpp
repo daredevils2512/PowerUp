@@ -8,6 +8,10 @@ Drivetrain::Drivetrain() : Subsystem("Drivetrain") {
 
     DriveTrainShift = RobotMap::drivetrainShifter;
     Chassis = RobotMap::drivetrainChassis;
+
+    leftEncoder = RobotMap::drivetrainLeftEncoder;
+    rightEncoder = RobotMap::drivetrainRightEncoder;
+
     blockJoysticks = false;
 
 }
@@ -30,6 +34,18 @@ void Drivetrain::DriveRobotTank(double leftSpeed, double rightSpeed) {
 	Chassis->TankDrive(leftSpeed, rightSpeed);
 }
 
+double Drivetrain::GetLeftEncoder() {
+	return leftEncoder->GetDistance();
+}
+
+double Drivetrain::GetRightEncoder() {
+	return rightEncoder->GetDistance();
+}
+
+void Drivetrain::ResetEncoders() {
+	leftEncoder->Reset();
+	rightEncoder->Reset();
+}
 void Drivetrain::Shifter(frc::DoubleSolenoid::Value dir) {
 	//sets the direction of the shifter solenoid
 	DriveTrainShift->Set(dir);
