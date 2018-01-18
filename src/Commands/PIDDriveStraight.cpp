@@ -6,7 +6,23 @@ PIDDriveStraight::PIDDriveStraight(PIDDriveStraight::PIDSettings settings, doubl
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::drivetrain.get());
 	m_settings = settings;
-	m_distance = goalDistance;
+	// GOAL DISTANCE IS IN INCHES
+	m_distance = (goalDistance) - 12;
+	lastTime = 0;
+	navXDistance = 0;
+	lastVelX = 0;
+	lastVelY = 0;
+	lastTimeDiff=0;
+	cumlTime=0;
+}
+//@chris / cosmo how do we call a common constructor from another constructor
+PIDDriveStraight::PIDDriveStraight(double goalDistance) {
+	// Use Requires() here to declare subsystem dependencies
+	// eg. Requires(Robot::chassis.get());
+	Requires(Robot::drivetrain.get());
+	m_settings = PIDSettings::CARPET90;
+	// GOAL DISTANCE IS IN INCHES
+	m_distance = (goalDistance) - 12;
 	lastTime = 0;
 	navXDistance = 0;
 	lastVelX = 0;
@@ -45,13 +61,16 @@ void PIDDriveStraight::Initialize() {
 	RobotMap::navXTurnController->SetPID(PVal, IVal, DVal, FVal);
 	Robot::drivetrain->SetPIDSetpoint(0);
 	Robot::drivetrain->SetPIDEnabled(true);
-	lastTime = frc::RobotController::GetFPGATime()/1000; // last time in milliseconds
-	cumlTime = 0;
+
+	Robot::drivetrain->ResetEncoders();
+
+	//lastTime = frc::RobotController::GetFPGATime()/1000; // last time in milliseconds
+	//cumlTime = 0;
 }
 
 // Called repeatedly when this Command is scheduled to run
 void PIDDriveStraight::Execute() {
-	double currentTime = frc::RobotController::GetFPGATime()/1000;
+	/*double currentTime = frc::RobotController::GetFPGATime()/1000;
 	//distance traveled in time since last execution
 	double tDiff = currentTime-lastTime;
 	cumlTime+=tDiff;
@@ -67,7 +86,7 @@ void PIDDriveStraight::Execute() {
 	frc::SmartDashboard::PutNumber("NavX VelX (AUTO)",velX);
 	frc::SmartDashboard::PutNumber("NavX VelY (AUTO)",velY);
 
-	double disty = sqrt( pow( (velX *  tDiff) /*- (lastVelX * lastTimeDiff)*/ ,2) + pow( (velY * tDiff) /*- (lastVelY*lastTimeDiff)*/,2) );
+	double disty = sqrt( pow( (velX *  tDiff) - (lastVelX * lastTimeDiff)/ ,2) + pow( (velY * tDiff) /*- (lastVelY*lastTimeDiff)/,2) );
 	frc::SmartDashboard::PutNumber("NavX Travel Dist (AUTO)",disty);
 	lastTime = currentTime; // update the last execution time
 	lastTimeDiff = tDiff;
@@ -78,21 +97,23 @@ void PIDDriveStraight::Execute() {
 	navXDistance+=disty;
 	frc::SmartDashboard::PutNumber("NavX Cuml Distance (AUTO)",navXDistance);
 
-	//quarter steering control for PID to prevent crazy turns
+	//quarter steering control for PID to prevent crazy turns*/
 	double output = Robot::drivetrain->GetPIDOutput()/4;
 
-	Robot::drivetrain->DriveRobotTank(0.7-output,0.7+output); //70% besides corrections
+	Robot::drivetrain->DriveRobotTank(0.55-output,0.55+output); //70% besides corrections
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool PIDDriveStraight::IsFinished() {
-	return navXDistance >= m_distance;
+	//get average encoder distance in inches, compare to mdist (scaled to feet)
+	return Robot::drivetrain->GetLeftEncoder() /*( ( Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder() )/2 )*/ >= m_distance;
 }
 
 // Called once after isFinished returns true
 void PIDDriveStraight::End() {
 	Robot::drivetrain->SetPIDEnabled(false);
 	Robot::drivetrain->DriveRobotTank(0.0,0.0);
+	std::cout << "encoder @  end: " << Robot::drivetrain->GetLeftEncoder() << std::endl;
 }
 
 // Called when another command which requires one or more of the same

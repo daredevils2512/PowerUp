@@ -1,5 +1,6 @@
 #include "PIDTurn.h"
 #include "Robot.h"
+#include <algorithm>
 
 /****
  * TODO: TEST, COMMAND IS UNTESTED AND EXPERIMENTAL
@@ -10,6 +11,12 @@ PIDTurn::PIDTurn(PIDTurn::PIDSettings settings, double goalAngle) {
 	// eg.
 	Requires(Robot::drivetrain.get());
 	m_settings = settings;
+	m_angle = goalAngle;
+}
+
+PIDTurn::PIDTurn(double goalAngle){
+	Requires(Robot::drivetrain.get());
+	m_settings = PIDSettings::CARPET90;
 	m_angle = goalAngle;
 }
 
@@ -46,8 +53,8 @@ void PIDTurn::Initialize() {
 void PIDTurn::Execute() {
 
 	//apply pid values to motors to turn robot (dime spin)
-
-	double output = Robot::drivetrain->GetPIDOutput();
+	double maxOutput = 0.75;
+	double output = std::max(-maxOutput,std::min(maxOutput,Robot::drivetrain->GetPIDOutput()));
 	Robot::drivetrain->DriveRobotTank(-output,output);
 }
 

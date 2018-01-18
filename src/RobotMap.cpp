@@ -30,6 +30,7 @@ std::shared_ptr<frc::Spark> RobotMap::motor2;
 std::shared_ptr<frc::Spark> RobotMap::motor3;
 std::shared_ptr<frc::Spark> RobotMap::motor4;
 
+
 void RobotMap::init() {
 
 
@@ -49,12 +50,14 @@ void RobotMap::init() {
 	drivetrainChassis->SetSafetyEnabled(true);
 		drivetrainChassis->SetExpiration(0.5);
 		drivetrainChassis->SetMaxOutput(1.0);
-
+	double leftInchPerPulse = (1/9.537878);
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X)); //theoretical a and b channels
-		drivetrainLeftEncoder->SetDistancePerPulse(0.09817421875); //took the circumference of 12.5663 and divided by the 128 internal encoder clicks
+		drivetrainLeftEncoder->SetDistancePerPulse(leftInchPerPulse); //took the circumference of 12.5663 and divided by the 128 internal encoder clicks
+		drivetrainLeftEncoder->SetReverseDirection(true);
 
+	double rightInchPerPulse = (1/9.737373);
 	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));
-		drivetrainRightEncoder->SetDistancePerPulse(0.09817421875);
+		drivetrainRightEncoder->SetDistancePerPulse(rightInchPerPulse);
 
 	//drivetrainShifter.reset (new frc::DoubleSolenoid (0,0,1));
 

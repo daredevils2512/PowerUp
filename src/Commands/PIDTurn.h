@@ -11,6 +11,7 @@ public:
 	};
 
 	PIDTurn(PIDSettings settings, double goalAngle);
+	PIDTurn(double goalAngle);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

@@ -8,10 +8,10 @@
 #include "OI.h"
 
 #include <WPILib.h>
-#include "Commands/PIDDriveStraight.h"
+#include "Commands/_CMG_NavXAutoTest.h"
 
 OI::OI() {
-	DRC_aButton.WhenPressed(new PIDDriveStraight(PIDDriveStraight::PIDSettings::CARPET90,1));
+	DRC_aButton.WhenPressed(new _CMG_NavXAutoTest());
 }
 
 	double OI::GetTurn() {

@@ -10,6 +10,7 @@ public:
 	};
 
 	PIDDriveStraight(PIDSettings settings, double goalDistance);
+	PIDDriveStraight(double goalDistance);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

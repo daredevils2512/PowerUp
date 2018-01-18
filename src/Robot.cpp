@@ -67,6 +67,9 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 
+	SmartDashboard::PutNumber("Left Encoder Clicks", RobotMap::drivetrainLeftEncoder->Get());
+	SmartDashboard::PutNumber("Right Encoder Clicks", RobotMap::drivetrainRightEncoder->Get());
+
 
 
 }
