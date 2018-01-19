@@ -5,12 +5,11 @@
 
 class PIDDriveStraight : public frc::Command {
 public:
-	 enum PIDSettings {
+	 enum class PIDSettings {
 		CARPET90
 	};
 
-	PIDDriveStraight(PIDSettings settings, double goalDistance);
-	PIDDriveStraight(double goalDistance);
+	PIDDriveStraight(double goalDistance , PIDSettings settings = PIDSettings::CARPET90);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

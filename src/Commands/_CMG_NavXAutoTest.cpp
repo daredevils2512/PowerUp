@@ -28,15 +28,15 @@ _CMG_NavXAutoTest::_CMG_NavXAutoTest() {
 	AddSequential(new Pause(0.25));
 	AddSequential(new PIDTurn(45));
 	AddSequential(new Pause(0.25));
-	AddSequential(new PIDDriveStraight(75.5));
+	AddSequential(new PIDDriveStraight(75.5 + 18));
 	AddSequential(new Pause(0.25));
 	AddSequential(new PIDTurn(90));
 	AddSequential(new Pause(0.25));
-	AddSequential(new PIDDriveStraight(22));
+	AddSequential(new PIDDriveStraight(22+6));
 	AddSequential(new Pause(0.25));
 	AddSequential(new PIDTurn(-90));
 	AddSequential(new Pause(0.25));
-	AddSequential(new PIDDriveStraight(38));
+	AddSequential(new PIDDriveStraight(38+6));
 	AddSequential(new Pause(0.25));
 	AddSequential(new PIDTurn(-65));
 	AddSequential(new Pause(0.25));
