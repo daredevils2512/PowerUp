@@ -70,7 +70,8 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Left Encoder Clicks", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Right Encoder Clicks", RobotMap::drivetrainRightEncoder->Get());
 
-
+	SmartDashboard::PutNumber("Left Ultrasonic distance", RobotMap::ultrasonicLeft->GetValue());
+	SmartDashboard::PutNumber("Right Ultrasonic distance", RobotMap::ultrasonicRight->GetValue());
 
 }
 void Robot::DisabledInit(){

@@ -30,6 +30,9 @@ std::shared_ptr<frc::Spark> RobotMap::motor2;
 std::shared_ptr<frc::Spark> RobotMap::motor3;
 std::shared_ptr<frc::Spark> RobotMap::motor4;
 
+std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicLeft;
+std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicRight;
+
 
 void RobotMap::init() {
 
@@ -67,5 +70,8 @@ void RobotMap::init() {
 	// motor2.reset(new frc::Spark(2));
 	// motor3.reset(new frc::Spark(3));
 	// motor4.reset(new frc::Spark(4));
+
+	ultrasonicLeft.reset(new frc::AnalogInput(4)); //navX analog port 0
+	ultrasonicRight.reset(new frc::AnalogInput(5)); //navX analog port 1
 
 }

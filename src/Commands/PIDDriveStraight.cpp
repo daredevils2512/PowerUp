@@ -86,7 +86,7 @@ void PIDDriveStraight::Execute() {
 	frc::SmartDashboard::PutNumber("NavX VelX (AUTO)",velX);
 	frc::SmartDashboard::PutNumber("NavX VelY (AUTO)",velY);
 
-	double disty = sqrt( pow( (velX *  tDiff) - (lastVelX * lastTimeDiff)/ ,2) + pow( (velY * tDiff) /*- (lastVelY*lastTimeDiff)/,2) );
+	double disty = sqrt( pow( (velX *  tDiff) - (lastVelX * lastTimeDiff)/ ,2) + pow( (velY * tDiff) - (lastVelY*lastTimeDiff)/,2) );
 	frc::SmartDashboard::PutNumber("NavX Travel Dist (AUTO)",disty);
 	lastTime = currentTime; // update the last execution time
 	lastTimeDiff = tDiff;
