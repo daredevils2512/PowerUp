@@ -62,7 +62,7 @@ void PIDTurn::Execute() {
 bool PIDTurn::IsFinished() {
 	//PIDGet returns yaw, or whatever implementation now represents
 	//Turn robot until acceptance threshold met (0.5 deg)
-	return abs(m_angle - Robot::pidSource->PIDGet()) <= 0.5;
+	return abs(m_angle - Robot::navxPidSource->PIDGet()) <= 0.5;
 }
 
 // Called once after isFinished returns true

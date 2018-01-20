@@ -28,6 +28,7 @@ std::shared_ptr<frc::Spark> RobotMap::motor4;
 
 std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicFrontLeft;
 std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicRearLeft;
+std::shared_ptr<frc::PIDController> RobotMap::ultrasonicTurnController;
 
 
 void RobotMap::init() {
@@ -49,14 +50,12 @@ void RobotMap::init() {
 	drivetrainChassis->SetSafetyEnabled(true);
 		drivetrainChassis->SetExpiration(0.5);
 		drivetrainChassis->SetMaxOutput(1.0);
-	double leftInchPerPulse = (1/9.537878);
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X)); //theoretical a and b channels
-		drivetrainLeftEncoder->SetDistancePerPulse(leftInchPerPulse); //took the circumference of 12.5663 and divided by the 128 internal encoder clicks
+		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE); //took the circumference of 12.5663 and divided by the 128 internal encoder clicks
 		drivetrainLeftEncoder->SetReverseDirection(true);
 
-	double rightInchPerPulse = (1/9.737373);
 	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));
-		drivetrainRightEncoder->SetDistancePerPulse(rightInchPerPulse);
+		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
 
 	//drivetrainShifter.reset (new frc::DoubleSolenoid (0,0,1));
 
@@ -67,7 +66,11 @@ void RobotMap::init() {
 	// motor3.reset(new frc::Spark(3));
 	// motor4.reset(new frc::Spark(4));
 
-	ultrasonicFrontLeft.reset(new frc::AnalogInput(4)); //navX analog port 0
-	ultrasonicRearLeft.reset(new frc::AnalogInput(5)); //navX analog port 1
-
+	ultrasonicFrontLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT));
+		ultrasonicFrontLeft->SetAverageBits(50);
+		ultrasonicFrontLeft->SetOversampleBits(2);
+	ultrasonicRearLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT));
+		ultrasonicRearLeft->SetAverageBits(50);
+		ultrasonicRearLeft->SetOversampleBits(2);
+	ultrasonicTurnController.reset(new frc::PIDController(Util::ULTRASONIC_P_VALUE, Util::ULTRASONIC_I_VALUE, Util::ULTRASONIC_D_VALUE, Util::ULTRASONIC_F_VALUE, ultrasonicPIDSource))
 }

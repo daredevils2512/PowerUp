@@ -1,26 +1,26 @@
 #include "Robot.h"
 
-
-
 std::shared_ptr<Drivetrain> Robot::drivetrain;
 std::unique_ptr<OI> Robot::oi;
 std::shared_ptr<frc::Compressor> Robot::compressor;
 std::shared_ptr<NavXSubsystem> Robot::navXSubsystem;
 std::shared_ptr<UltrasonicSubsystem> Robot::ultrasonicSubsystem;
-std::shared_ptr<NavXPIDSource> Robot::pidSource;
+std::shared_ptr<NavXPIDSource> Robot::navxPidSource;
+std::shared_ptr<UltrasonicPIDSource> Robot::ultrasonicPidSource;
 
 
 void Robot::RobotInit() {
 
 	RobotMap::init();
     drivetrain.reset(new Drivetrain());
-    pidSource.reset(new NavXPIDSource());
+    navxPidSource.reset(new NavXPIDSource());
+    ultrasonicPIDSource.reset(new UltrasonicPIDSource);
     RobotMap::navXTurnController.reset(new frc::PIDController(
     		NavXSubsystem::NAVX_P_VALUE,
 			NavXSubsystem::NAVX_I_VALUE,
 			NavXSubsystem::NAVX_D_VALUE,
 			NavXSubsystem::NAVX_F_VALUE,
-			pidSource.get(),
+			navxPidSource.get(),
 			drivetrain.get()
 		));
 		RobotMap::navXTurnController->SetInputRange(-180.0f,  180.0f);
@@ -59,10 +59,10 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 
-	SmartDashboard::PutNumber("Left Ultrasonic voltage", RobotMap::ultrasonicFrontLeft->GetValue());
-	SmartDashboard::PutNumber("Right Ultrasonic voltage", RobotMap::ultrasonicRearLeft->GetValue());
-	SmartDashboard::PutNumber("Left Ultrasonic distance", Robot::ultrasonicSubsystem->GetDistance(RobotMap::ultrasonicFrontLeft->GetVoltage()));
-	SmartDashboard::PutNumber("Right Ultrasonic distance", Robot::ultrasonicSubsystem->GetDistance(RobotMap::ultrasonicRearLeft->GetVoltage()));
+	SmartDashboard::PutNumber("Front Ultrasonic voltage", RobotMap::ultrasonicFrontLeft->GetAverageVoltage());
+	SmartDashboard::PutNumber("Rear Ultrasonic voltage", RobotMap::ultrasonicRearLeft->GetAverageVoltage());
+	SmartDashboard::PutNumber("Front  Ultrasonic distance", Robot::ultrasonicSubsystem->GetKaleDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()));
+	SmartDashboard::PutNumber("Rear Ultrasonic distance", Robot::ultrasonicSubsystem->GetDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()));
 
 }
 void Robot::DisabledInit(){

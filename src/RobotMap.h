@@ -27,6 +27,7 @@ public:
 
 	static std::shared_ptr<frc::AnalogInput> ultrasonicFrontLeft;
 	static std::shared_ptr<frc::AnalogInput> ultrasonicRearLeft;
+	static std::shared_ptr<frc::PIDController> ultrasonicTurnController;
 
 	static void init();
 

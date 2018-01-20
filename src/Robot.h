@@ -9,6 +9,7 @@
 #include "Subsystems/NavXSubsystem.h"
 #include "LiveWindow/LiveWindow.h"
 #include "NavXPIDSource.h"
+#include "UltrasonicPIDSource.h"
 #include "Subsystems/UltrasonicSubsystem.h"
 
 
@@ -21,10 +22,12 @@ public:
 	static std::unique_ptr<OI> oi;
 	static std::shared_ptr<Drivetrain> drivetrain;
 	static std::shared_ptr<frc::Compressor> compressor;
+
 	static std::shared_ptr<NavXSubsystem> navXSubsystem;
 	static std::shared_ptr<UltrasonicSubsystem> ultrasonicSubsystem;
 
-	static std::shared_ptr<NavXPIDSource> pidSource;
+	static std::shared_ptr<NavXPIDSource> navxPidSource;
+	static std::shared_ptr<UltrasonicPIDSource> ultrasonicPidSource;
 
 
 	virtual void RobotInit();
