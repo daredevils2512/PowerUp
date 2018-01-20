@@ -9,6 +9,7 @@
 #include "Subsystems/NavXSubsystem.h"
 #include "LiveWindow/LiveWindow.h"
 #include "NavXPIDSource.h"
+#include "Subsystems/UltrasonicSubsystem.h"
 
 
 class Robot : public IterativeRobot {
@@ -21,6 +22,7 @@ public:
 	static std::shared_ptr<Drivetrain> drivetrain;
 	static std::shared_ptr<frc::Compressor> compressor;
 	static std::shared_ptr<NavXSubsystem> navXSubsystem;
+	static std::shared_ptr<UltrasonicSubsystem> ultrasonicSubsystem;
 
 	static std::shared_ptr<NavXPIDSource> pidSource;
 

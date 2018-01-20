@@ -15,3 +15,9 @@ void Util::ReportError(std::string errorMessage){
 void Util::ReportWarning(std::string warningMessage){
 	frc::DriverStation::GetInstance().ReportError(false,2512,warningMessage,"","");
 }
+
+bool Util::IsInTolerance(double tolerance, double firstObject, double secondObject) {
+	//determining if two objects are within a certain range of each other
+	double tol = tolerance / 2;
+	return (firstObject - tol <= secondObject && firstObject + tol >= secondObject) && (secondObject - tol <= firstObject && secondObject + tol >= firstObject);
+}

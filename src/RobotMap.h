@@ -25,8 +25,8 @@ public:
 	static std::shared_ptr<frc::Spark> motor3;
 	static std::shared_ptr<frc::Spark> motor4;
 
-	static std::shared_ptr<frc::AnalogInput> ultrasonicLeft;
-	static std::shared_ptr<frc::AnalogInput> ultrasonicRight;
+	static std::shared_ptr<frc::AnalogInput> ultrasonicFrontLeft;
+	static std::shared_ptr<frc::AnalogInput> ultrasonicRearLeft;
 
 	static void init();
 

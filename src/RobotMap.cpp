@@ -5,11 +5,7 @@
 #include <ctre/Phoenix.h>
 #include <RobotDrive.h>
 #include <LiveWindow/LiveWindow.h>
-
-static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 2; //ports for Aries drivetrain, change for comp robot
-static const int DRIVETRAIN_REAR_LEFT_MOTOR = 1;
-static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 10;
-static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 6;
+#include "Util.h"
 
 double PIDOutput = 0.0;
 
@@ -30,22 +26,22 @@ std::shared_ptr<frc::Spark> RobotMap::motor2;
 std::shared_ptr<frc::Spark> RobotMap::motor3;
 std::shared_ptr<frc::Spark> RobotMap::motor4;
 
-std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicLeft;
-std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicRight;
+std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicFrontLeft;
+std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicRearLeft;
 
 
 void RobotMap::init() {
 
 
-	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (DRIVETRAIN_FRONT_LEFT_MOTOR));
-	drivetrainRearLeftMotor.reset (new WPI_TalonSRX (DRIVETRAIN_REAR_LEFT_MOTOR));
-	drivetrainFrontRightMotor.reset (new WPI_TalonSRX (DRIVETRAIN_FRONT_RIGHT_MOTOR));
-	drivetrainRearRightMotor.reset (new WPI_TalonSRX (DRIVETRAIN_REAR_RIGHT_MOTOR));
+	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
+	drivetrainRearLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_LEFT_MOTOR));
+	drivetrainFrontRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_RIGHT_MOTOR));
+	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
 
-	drivetrainFrontLeftMotor->Set(ControlMode::Follower,DRIVETRAIN_REAR_LEFT_MOTOR);
+	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
 	drivetrainRearLeftMotor->SetInverted(true);
 
-	drivetrainFrontRightMotor->Set(ControlMode::Follower,DRIVETRAIN_REAR_RIGHT_MOTOR);
+	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
 	drivetrainRearRightMotor->SetInverted(true);
 
 	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
@@ -71,7 +67,7 @@ void RobotMap::init() {
 	// motor3.reset(new frc::Spark(3));
 	// motor4.reset(new frc::Spark(4));
 
-	ultrasonicLeft.reset(new frc::AnalogInput(4)); //navX analog port 0
-	ultrasonicRight.reset(new frc::AnalogInput(5)); //navX analog port 1
+	ultrasonicFrontLeft.reset(new frc::AnalogInput(4)); //navX analog port 0
+	ultrasonicRearLeft.reset(new frc::AnalogInput(5)); //navX analog port 1
 
 }

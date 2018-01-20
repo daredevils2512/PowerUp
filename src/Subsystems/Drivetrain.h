@@ -4,7 +4,7 @@
 #include <WPILib.h>
 #include "ctre/Phoenix.h"
 
-class Drivetrain: public Subsystem, public PIDOutput {
+class Drivetrain: public frc::Subsystem, public PIDOutput {
 private:
 	std::shared_ptr<WPI_TalonSRX> FrontLeftMotor;
 	std::shared_ptr<WPI_TalonSRX> RearLeftMotor;
