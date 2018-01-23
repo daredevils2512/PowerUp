@@ -26,7 +26,7 @@ class Util {
 		static constexpr double SUPPLIED_VOLTAGE = 4.96; //The voltage sent through the NavX analogInput pins for converting voltage to distance
 		static constexpr double ULTRASONIC_TOLERANCE = 1.5; //The acceptable tolerance for comparing the two ultrasonic sensors on a side
 		static constexpr double ULTRASONIC_TURN_REDUCER = 0.2; //The amount we reduce motor speed for ultrasonic staightDrive
-		static constexpr double ULTRASONIC_P_VALUE = 0.055;	   //values used for PID turning while straight driving with ultrasonic sensors
+		static constexpr double ULTRASONIC_P_VALUE = 0.055;	   //values used for PID turning while driving with ultrasonic sensors
 		static constexpr double ULTRASONIC_I_VALUE = 0.00001;
 		static constexpr double ULTRASONIC_D_VALUE = 0.045;
 		static constexpr double ULTRASONIC_F_VALUE = 0.0;

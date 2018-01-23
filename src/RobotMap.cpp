@@ -32,8 +32,6 @@ std::shared_ptr<frc::PIDController> RobotMap::ultrasonicTurnController;
 
 
 void RobotMap::init() {
-
-
 	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
 	drivetrainRearLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_LEFT_MOTOR));
 	drivetrainFrontRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_RIGHT_MOTOR));
@@ -69,8 +67,8 @@ void RobotMap::init() {
 	ultrasonicFrontLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT));
 		ultrasonicFrontLeft->SetAverageBits(50);
 		ultrasonicFrontLeft->SetOversampleBits(2);
+
 	ultrasonicRearLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT));
 		ultrasonicRearLeft->SetAverageBits(50);
 		ultrasonicRearLeft->SetOversampleBits(2);
-	ultrasonicTurnController.reset(new frc::PIDController(Util::ULTRASONIC_P_VALUE, Util::ULTRASONIC_I_VALUE, Util::ULTRASONIC_D_VALUE, Util::ULTRASONIC_F_VALUE, ultrasonicPIDSource))
 }

@@ -10,12 +10,14 @@
 #include <WPILib.h>
 #include "Commands/_CMG_NavXAutoTest.h"
 #include "Commands/UltraSonicStraightDrive.h"
+#include "Commands/PIDTurn.h"
 #include "Robot.h"
 #include "Util.h"
 
 OI::OI() {
 	DRC_aButton.WhenPressed(new _CMG_NavXAutoTest());
 	DRC_bButton.WhenPressed(new UltrasonicStraightDrive(0.45, 200, Util::RobotSide::leftSide));
+	DRC_xButton.WhenPressed(new PIDTurn(90));
 }
 
 	double OI::GetTurn() {

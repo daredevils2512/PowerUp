@@ -10,11 +10,12 @@ std::shared_ptr<UltrasonicPIDSource> Robot::ultrasonicPidSource;
 
 
 void Robot::RobotInit() {
-
+	std::cout << "Robot Init" << std::endl;
 	RobotMap::init();
     drivetrain.reset(new Drivetrain());
+    ultrasonicSubsystem.reset(new UltrasonicSubsystem());
     navxPidSource.reset(new NavXPIDSource());
-    ultrasonicPIDSource.reset(new UltrasonicPIDSource);
+    ultrasonicPidSource.reset(new UltrasonicPIDSource());
     RobotMap::navXTurnController.reset(new frc::PIDController(
     		NavXSubsystem::NAVX_P_VALUE,
 			NavXSubsystem::NAVX_I_VALUE,
@@ -27,14 +28,25 @@ void Robot::RobotInit() {
 		RobotMap::navXTurnController->SetOutputRange(-1.0, 1.0);
 		RobotMap::navXTurnController->SetAbsoluteTolerance(0.5f);
 		RobotMap::navXTurnController->SetContinuous(true);
-
+		RobotMap::ultrasonicTurnController.reset(new frc::PIDController(
+				Util::ULTRASONIC_P_VALUE,
+				Util::ULTRASONIC_I_VALUE,
+				Util::ULTRASONIC_D_VALUE,
+				Util::ULTRASONIC_F_VALUE,
+				Robot::ultrasonicPidSource.get(),
+				Robot::ultrasonicSubsystem.get()));
+			RobotMap::ultrasonicTurnController->SetInputRange(-6.5, 6.5);
+			RobotMap::ultrasonicTurnController->SetOutputRange(-0.25, 0.25);
+			RobotMap::ultrasonicTurnController->SetAbsoluteTolerance(1.5);
+			RobotMap::ultrasonicTurnController->SetContinuous(true);
 	oi.reset(new OI());
 	//compressor.reset(new frc::Compressor());
 	lw = frc::LiveWindow::GetInstance();
-	lw->Add(RobotMap::navXTurnController);
-
+//	lw->Add(RobotMap::navXTurnController);
+	lw->Add(RobotMap::ultrasonicTurnController);
 }
 void Robot::RobotPeriodic() {
+//	std::cout << "Robto Periodic" << std::endl;
 	SmartDashboard::PutNumber("Pitch", RobotMap::navX->GetPitch());
 	SmartDashboard::PutNumber("Roll",RobotMap::navX->GetRoll());
 	SmartDashboard::PutNumber("Yaw",RobotMap::navX->GetYaw());
@@ -61,20 +73,22 @@ void Robot::RobotPeriodic() {
 
 	SmartDashboard::PutNumber("Front Ultrasonic voltage", RobotMap::ultrasonicFrontLeft->GetAverageVoltage());
 	SmartDashboard::PutNumber("Rear Ultrasonic voltage", RobotMap::ultrasonicRearLeft->GetAverageVoltage());
-	SmartDashboard::PutNumber("Front  Ultrasonic distance", Robot::ultrasonicSubsystem->GetKaleDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()));
+	SmartDashboard::PutNumber("Front  Ultrasonic distance", Robot::ultrasonicSubsystem->GetDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()));
 	SmartDashboard::PutNumber("Rear Ultrasonic distance", Robot::ultrasonicSubsystem->GetDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()));
-
+	SmartDashboard::PutNumber("Ultrasonic Difference", Robot::ultrasonicPidSource->PIDGet());
 }
 void Robot::DisabledInit(){
 	//compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
 	drivetrain->SetPIDEnabled(false);
+	ultrasonicSubsystem->SetPIDEnabled(false);
 	//drivetrain->GetPIDOutput();
 
 }
 
 void Robot::DisabledPeriodic() {
+//	std::cout << "I'm Disabled!" << std::endl;
 	Scheduler::GetInstance()->Run();
 }
 
@@ -114,7 +128,7 @@ void Robot::TestPeriodic() {
 
 	if(drivetrain->IsPIDEnabled()){
 		double output = drivetrain->GetPIDOutput();
-		SmartDashboard::PutNumber("PID Input", pidSource->PIDGet());
+		SmartDashboard::PutNumber("PID Input", navxPidSource->PIDGet());
 		SmartDashboard::PutNumber("PID Output", output);
 		drivetrain->DriveRobotTank(-output,output);
 	}else{
