@@ -28,13 +28,13 @@ _CMG_NavXAutoTest::_CMG_NavXAutoTest() {
 	AddSequential(new Pause(0.25));
 	AddSequential(new PIDTurn(45));//Turn 2
 	AddSequential(new Pause(0.25));
-	AddSequential(new PIDDriveStraight(75.5 + 18));//S 3
+	AddSequential(new PIDDriveStraight(68));//S 3
 	AddSequential(new Pause(0.25));
-	AddSequential(new PIDTurn(85)); //T 3 ,90
+	AddSequential(new PIDTurn(45)); //T 3 ,90
 	AddSequential(new Pause(0.25));
-	AddSequential(new PIDDriveStraight(22+6));//S 4
+	AddSequential(new PIDDriveStraight(33));//S 4
 	AddSequential(new Pause(0.25));
-	AddSequential(new PIDTurn(-90));//T 4
+	AddSequential(new PIDTurn(-45));//T 4
 	AddSequential(new Pause(0.25));
 	AddSequential(new PIDDriveStraight(38+6));// S 5
 	AddSequential(new Pause(0.25));
