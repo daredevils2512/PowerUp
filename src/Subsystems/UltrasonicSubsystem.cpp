@@ -18,12 +18,11 @@ void UltrasonicSubsystem::InitDefaultCommand() {
 // here. Call these from Commands.
 
 void UltrasonicSubsystem::PIDWrite(double output) {
-	std::cout << "Writing ultrasonic PID output: " << output << std::endl;
+//	std::cout << "Writing ultrasonic PID output: " << output << std::endl;
 	pidOutput = output;
 }
 
 double UltrasonicSubsystem::GetPIDOutput() {
-	std::cout << "Getting PID Output: " << pidOutput << std::endl;
 	if (!this->IsPIDEnabled()) {
 		Util::ReportError("Accessing PID Output while PID is disabled!");
 	}
@@ -31,17 +30,17 @@ double UltrasonicSubsystem::GetPIDOutput() {
 }
 
 bool UltrasonicSubsystem::IsPIDEnabled() {
-	std::cout << "CHecking if PID is enabled" << std::endl;
+//	std::cout << "CHecking if PID is enabled" << std::endl;
 	return RobotMap::ultrasonicTurnController->IsEnabled();
 }
 
 void UltrasonicSubsystem::SetPIDEnabled(bool enabled) {
 	if(enabled){
 		RobotMap::ultrasonicTurnController->Enable();
-		std::cout << "PID Enabled for ultrasonic" << std::endl;
+//		std::cout << "PID Enabled for ultrasonic" << std::endl;
 	}else{
 		RobotMap::ultrasonicTurnController->Disable();
-		std::cout <<"PID Disabled for ultrasonic" << std::endl;
+//		std::cout <<"PID Disabled for ultrasonic" << std::endl;
 	}
 }
 
@@ -76,36 +75,33 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 
 	}
 	if (IsPIDEnabled()) {
-		double turnOutput = GetPIDOutput();
-		std::cout << "PID output : " << turnOutput << std::endl;
-		if (Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDistance, rearDistance)) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
-		} else {
-			if (frontDistance > rearDistance) {
-				switch (robotSide) {
-				case Util::RobotSide::leftSide:
-					Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed-turnOutput);
-					break;
-				case Util::RobotSide::rightSide:
-					Robot::drivetrain->DriveRobotTank(driveSpeed-turnOutput, driveSpeed);
-					break;
-				default:
-					std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
-				}
-			} else if (rearDistance > frontDistance) {
-				switch (robotSide) {
-				case Util::RobotSide::leftSide:
-					Robot::drivetrain->DriveRobotTank(driveSpeed-turnOutput, driveSpeed);
-					break;
-				case Util::RobotSide::rightSide:
-					Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed-turnOutput);
-					break;
-				default:
-					std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
-				}
-			} else {
-				std::cout << "Something is wrong, check the ultrasonic sensors" << std::endl;
+		double turnSlowdown = GetPIDOutput();
+		double turnSpeedup = turnSlowdown/2;
+		std::cout << "PID output : " << turnSlowdown << std::endl;
+		if (frontDistance > rearDistance) {
+			switch (robotSide) {
+			case Util::RobotSide::leftSide:
+				Robot::drivetrain->DriveRobotTank(driveSpeed+turnSpeedup, driveSpeed-turnSlowdown);
+				break;
+			case Util::RobotSide::rightSide:
+				Robot::drivetrain->DriveRobotTank(driveSpeed-turnSlowdown, driveSpeed+turnSpeedup);
+				break;
+			default:
+				std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
 			}
+		} else if (rearDistance > frontDistance) {
+			switch (robotSide) {
+			case Util::RobotSide::leftSide:
+				Robot::drivetrain->DriveRobotTank(driveSpeed-turnSlowdown, driveSpeed+turnSpeedup);
+				break;
+			case Util::RobotSide::rightSide:
+				Robot::drivetrain->DriveRobotTank(driveSpeed+turnSpeedup, driveSpeed-turnSlowdown);
+				break;
+			default:
+				std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
+			}
+		} else {
+			std::cout << "Something is wrong, check the ultrasonic sensors" << std::endl;
 		}
 	}
 }

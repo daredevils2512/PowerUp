@@ -27,7 +27,7 @@ PIDSourceType UltrasonicPIDSource::GetPIDSourceType() const {
 }
 
 double UltrasonicPIDSource::PIDGet() {
-	std::cout << "Getting PID" << std::endl;
+//	std::cout << "Getting PID" << std::endl;
 	switch (m_robotSide) {
 	case (Util::RobotSide::leftSide):
 		frontDistance = Robot::ultrasonicSubsystem->GetDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage());
@@ -38,7 +38,7 @@ double UltrasonicPIDSource::PIDGet() {
 		rearDistance = Robot::ultrasonicSubsystem->GetDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage());
 		break;
 	}
-	return (frontDistance - rearDistance);
+	return abs(frontDistance - rearDistance);
 }
 
 void UltrasonicPIDSource::SetPIDSourceType(PIDSourceType pidSource) {
