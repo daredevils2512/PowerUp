@@ -30,7 +30,6 @@ std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicFrontLeft;
 std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicRearLeft;
 std::shared_ptr<frc::PIDController> RobotMap::ultrasonicTurnController;
 
-
 void RobotMap::init() {
 	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
 	drivetrainRearLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_LEFT_MOTOR));

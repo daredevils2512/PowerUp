@@ -69,6 +69,7 @@ bool PIDTurn::IsFinished() {
 void PIDTurn::End() {
 	Robot::drivetrain->SetPIDEnabled(false);
 	Robot::drivetrain->DriveRobotTank(0,0);
+	std::cout<< "ENDED " << m_angle << " DEG TURN END AT " << RobotMap::navX->GetYaw() << " (" << ( m_angle-RobotMap::navX->GetYaw() ) << " DEG OFF)"<<std::endl;
 }
 
 // Called when another command which requires one or more of the same
