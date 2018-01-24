@@ -24,7 +24,10 @@ public:
 	static std::shared_ptr<frc::Spark> motor2;
 	static std::shared_ptr<frc::Spark> motor3;
 	static std::shared_ptr<frc::Spark> motor4;
+	static std::shared_ptr<frc::Spark> motor5;
 
+	static std::shared_ptr<frc::DoubleSolenoid> cubeIntakeSolenoid;
+	static std::shared_ptr<frc::DoubleSolenoid> cubeExtakeSolenoid;
 	static void init();
 
 };
