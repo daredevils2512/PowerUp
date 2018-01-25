@@ -25,7 +25,7 @@ class Util {
 		static const int ULTRASONIC_REAR_LEFT = 5; //Equivalent to NavX Analog Pin 1
 		static constexpr double SUPPLIED_VOLTAGE = 4.96; //The voltage sent through the NavX analogInput pins for converting voltage to distance
 		static constexpr double ULTRASONIC_TOLERANCE = 0.5; //The acceptable tolerance for comparing the two ultrasonic sensors on a side
-		static constexpr double ULTRASONIC_TURN_MULTIPLIER = 0.05; //The amount we reduce motor speed for ultrasonic staightDrive
+		static constexpr double ULTRASONIC_TURN_MULTIPLIER = 0.0775; //The amount we reduce motor speed for ultrasonic staightDrive
 
 		enum class RobotSide {
 			unknown,

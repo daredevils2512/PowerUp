@@ -65,7 +65,7 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 	}
 
 	currentAvgDistance = (frontDistance + rearDistance) / 2;
-	turnSlowDown = GetDifference(frontDistance, rearDistance) * Util::ULTRASONIC_TURN_MULTIPLIER;
+	turnSlowDown = GetDifference(currentAvgDistance, startingDistance) * Util::ULTRASONIC_TURN_MULTIPLIER;
 	std::cout << "Slowdown thing: " << turnSlowDown << std::endl;
 
 //	if (Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDistance, rearDistance)) {
