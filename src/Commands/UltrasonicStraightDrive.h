@@ -16,8 +16,9 @@ public:
 
 private:
 	double m_driveSpeed = 0.0;
-	double m_driveDistance = 0.0;
-	Util::RobotSide m_robotSide = Util::RobotSide::leftSide;
+	double m_distanceToDrive = 0.0;
+	Util::RobotSide m_robotSide = Util::RobotSide::unknown;
+	double m_startDistance = 0.0;
 };
 
 #endif  // UltrasonicStraightDrive_H

@@ -5,22 +5,19 @@
 #include <WPILib.h>
 #include "../Util.h"
 
-class UltrasonicSubsystem : public frc::Subsystem, public PIDOutput {
+class UltrasonicSubsystem : public frc::Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	double pidOutput = 0.0;
 
 public:
 
 	UltrasonicSubsystem();
 	void InitDefaultCommand();
-	virtual void PIDWrite(double output);
-	double GetDistance(double voltageMeasured);
-	void DriveStaight(Util::RobotSide robotSide, double driveSpeed);
-	bool IsPIDEnabled();
-	double GetPIDOutput();
-	void SetPIDEnabled(bool enabled);
+	double ConvertToDistance(double voltageMeasured);
+	double GetAverageDistance(Util::RobotSide robotSide);
+	double GetDifference(double frontDistance, double rearDistance);
+	void DriveStaight(Util::RobotSide robotSide, double driveSpeed, double startingDistance);
 };
 
 #endif  // UltrasonicSubsystem_H

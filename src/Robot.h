@@ -9,7 +9,6 @@
 #include "Subsystems/NavXSubsystem.h"
 #include "LiveWindow/LiveWindow.h"
 #include "NavXPIDSource.h"
-#include "UltrasonicPIDSource.h"
 #include "Subsystems/UltrasonicSubsystem.h"
 
 
@@ -27,7 +26,6 @@ public:
 	static std::shared_ptr<UltrasonicSubsystem> ultrasonicSubsystem;
 
 	static std::shared_ptr<NavXPIDSource> navxPidSource;
-	static std::shared_ptr<UltrasonicPIDSource> ultrasonicPidSource;
 
 
 	virtual void RobotInit();
