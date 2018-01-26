@@ -69,8 +69,8 @@ void RobotMap::init() {
 	 motor2.reset(new frc::Spark(2));
 	 motor3.reset(new frc::Spark(3));
 	 motor4.reset(new frc::Spark(4));
-	 motor5.reset(new frc::Spark(5)); // cube extake motor. will be changed to one of the 4 previous motor controllers for testing
-	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0,0,1));
-	 cubeExtakeSolenoid.reset (new frc::DoubleSolenoid (0,2,3));
+//	 motor5.reset(new frc::Spark(5)); // cube extake motor. will be changed to one of the 4 previous motor controllers for testing
+//	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0,0,1));
+//	 cubeExtakeSolenoid.reset (new frc::DoubleSolenoid (0,2,3));
 
 }

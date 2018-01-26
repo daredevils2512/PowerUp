@@ -24,7 +24,7 @@ bool CubeRunIntake::IsFinished() {
 
 // Called once after isFinished returns true
 void CubeRunIntake::End() {
-
+	Robot::cube->SetIntakeSpeed(0.0);
 }
 
 // Called when another command which requires one or more of the same
