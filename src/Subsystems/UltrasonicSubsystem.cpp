@@ -46,6 +46,8 @@ double UltrasonicSubsystem::GetAverageDistance(Util::RobotSide robotSide) {
 }
 
 void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSpeed, double startDist) {
+	//Function for driving the robot along a wall at any given distance using ultrasonic sensors
+	//Compares both the front and back sensors, along with the starting distance away and the current distance away
 	Robot::drivetrain->ResetEncoders();
 
 	//All the doubles we using for calculations
@@ -62,10 +64,13 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
 		rearDist = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
 		avgDist = (frontDist + rearDist) / 2;
+
 		//calculating the slow-downs
 		avgDistSlowDown = GetDifference(avgDist, startDist);
 		avgFrontVsRearSlowDown = GetDifference(frontDist, rearDist);
 		avgSlowDown = ((avgDistSlowDown + avgFrontVsRearSlowDown) / 2) * Util::ULTRASONIC_TURN_MULTIPLIER;
+
+		//All the cases between the two inputs
 		if ((avgDist <= startDist && frontDist >= rearDist) ||
 			(avgDist == startDist && frontDist == rearDist) ||
 			(avgDist >= startDist && frontDist <= rearDist)) {
@@ -75,19 +80,46 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed);
 		} else if ((avgDist <= startDist && frontDist == rearDist) ||
 				   (avgDist == startDist && frontDist <= rearDist)) {
-
+			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - avgSlowDown);
 		} else if (avgDist >= startDist && frontDist >= rearDist) {
-
+			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed + (avgSlowDown / 2));
 		} else if (avgDist <= startDist && frontDist <= rearDist) {
-
+			Robot::drivetrain->DriveRobotTank(driveSpeed + (avgSlowDown / 2), driveSpeed - avgSlowDown);
 		} else {
 			std::cout << "Something is wrong. Stopping driving" << std::endl;
 			Robot::drivetrain->DriveRobotTank(0.0, 0.0);
 		}
 		break;
 	case Util::RobotSide::rightSide:
-//		frontDistance = GetDistance(RobotMap::ultrasonicFrontRight->GetVoltage());
-//		rearDistance = GetDistance(RobotMap::ultrasonicRearRight->GetVoltage());
+		//Getting the distances the ultrasonic sensors are returning
+//		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontRight->GetVoltage());
+//		rearDist = ConvertToDistance(RobotMap::ultrasonicRearRight->GetVoltage());
+//		avgDist = (frontDist + rearDist) / 2;
+//
+//		//calculating the slow-downs
+//		avgDistSlowDown = GetDifference(avgDist, startDist);
+//		avgFrontVsRearSlowDown = GetDifference(frontDist, rearDist);
+//		avgSlowDown = ((avgDistSlowDown + avgFrontVsRearSlowDown) / 2) * Util::ULTRASONIC_TURN_MULTIPLIER;
+//
+//		//All the cases between the two inputs
+//		if ((avgDist <= startDist && frontDist >= rearDist) ||
+//			(avgDist == startDist && frontDist == rearDist) ||
+//			(avgDist >= startDist && frontDist <= rearDist)) {
+//			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
+//		} else if ((avgDist >= startDist && frontDist == rearDist) ||
+//				   (avgDist == startDist && frontDist >= rearDist)) {
+//			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - avgSlowDown);
+//		} else if ((avgDist <= startDist && frontDist == rearDist) ||
+//				   (avgDist == startDist && frontDist <= rearDist)) {
+//			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed);
+//		} else if (avgDist >= startDist && frontDist >= rearDist) {
+//			Robot::drivetrain->DriveRobotTank(driveSpeed + (avgSlowDown / 2), driveSpeed - avgSlowDown);
+//		} else if (avgDist <= startDist && frontDist <= rearDist) {
+//			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed + (avgSlowDown / 2));
+//		} else {
+//			std::cout << "Something is wrong. Stopping driving" << std::endl;
+//			Robot::drivetrain->DriveRobotTank(0.0, 0.0);
+//		}
 		break;
 	default:
 		std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
