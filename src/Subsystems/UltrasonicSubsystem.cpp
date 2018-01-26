@@ -45,16 +45,45 @@ double UltrasonicSubsystem::GetAverageDistance(Util::RobotSide robotSide) {
 	return (frontDistance + rearDistance) / 2;
 }
 
-void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSpeed, double startingDistance) {
+void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSpeed, double startDist) {
 	Robot::drivetrain->ResetEncoders();
-	double frontDistance = 0.0;
-	double rearDistance = 0.0;
-	double turnSlowDown = 0.0;
-	double currentAvgDistance = 0.0;
+
+	//All the doubles we using for calculations
+	double frontDist = 0.0;
+	double rearDist = 0.0;
+	double avgDist = 0.0;
+	double avgDistSlowDown = 0.0;
+	double avgFrontVsRearSlowDown = 0.0;
+	double avgSlowDown = 0.0;
+
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
-		frontDistance = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
-		rearDistance = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
+		//Getting the distances the ultrasonic sensors are returning
+		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
+		rearDist = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
+		avgDist = (frontDist + rearDist) / 2;
+		//calculating the slow-downs
+		avgDistSlowDown = GetDifference(avgDist, startDist);
+		avgFrontVsRearSlowDown = GetDifference(frontDist, rearDist);
+		avgSlowDown = ((avgDistSlowDown + avgFrontVsRearSlowDown) / 2) * Util::ULTRASONIC_TURN_MULTIPLIER;
+		if ((avgDist <= startDist && frontDist >= rearDist) ||
+			(avgDist == startDist && frontDist == rearDist) ||
+			(avgDist >= startDist && frontDist <= rearDist)) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
+		} else if ((avgDist >= startDist && frontDist == rearDist) ||
+				   (avgDist == startDist && frontDist >= rearDist)) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed);
+		} else if ((avgDist <= startDist && frontDist == rearDist) ||
+				   (avgDist == startDist && frontDist <= rearDist)) {
+
+		} else if (avgDist >= startDist && frontDist >= rearDist) {
+
+		} else if (avgDist <= startDist && frontDist <= rearDist) {
+
+		} else {
+			std::cout << "Something is wrong. Stopping driving" << std::endl;
+			Robot::drivetrain->DriveRobotTank(0.0, 0.0);
+		}
 		break;
 	case Util::RobotSide::rightSide:
 //		frontDistance = GetDistance(RobotMap::ultrasonicFrontRight->GetVoltage());
@@ -63,67 +92,4 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 	default:
 		std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
 	}
-
-	currentAvgDistance = (frontDistance + rearDistance) / 2;
-	turnSlowDown = GetDifference(currentAvgDistance, startingDistance) * Util::ULTRASONIC_TURN_MULTIPLIER;
-	std::cout << "Slowdown thing: " << turnSlowDown << std::endl;
-
-//	if (Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDistance, rearDistance)) {
-//		Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
-//	} else {
-//		if (frontDistance > rearDistance) {
-//			switch (robotSide) {
-//			case Util::RobotSide::leftSide:
-//				Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - turnSlowDown);
-//				break;
-//			case Util::RobotSide::rightSide:
-//				Robot::drivetrain->DriveRobotTank(driveSpeed - turnSlowDown, driveSpeed);
-//				break;
-//			default:
-//				std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
-//			}
-//		} else if (rearDistance > frontDistance) {
-//			switch (robotSide) {
-//			case Util::RobotSide::leftSide:
-//				Robot::drivetrain->DriveRobotTank(driveSpeed - turnSlowDown, driveSpeed);
-//				break;
-//			case Util::RobotSide::rightSide:
-//				Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - turnSlowDown);
-//				break;
-//			default:
-//				std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
-//			}
-//		} else {
-//			std::cout << "Something is wrong, check the ultrasonic sensors" << std::endl;
-//		}
-//	}
-	if (Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, currentAvgDistance, startingDistance)) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
-		} else {
-			if (currentAvgDistance > startingDistance) {
-				switch (robotSide) {
-				case Util::RobotSide::leftSide:
-					Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - turnSlowDown);
-					break;
-				case Util::RobotSide::rightSide:
-					Robot::drivetrain->DriveRobotTank(driveSpeed - turnSlowDown, driveSpeed);
-					break;
-				default:
-					std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
-				}
-			} else if (startingDistance > currentAvgDistance) {
-				switch (robotSide) {
-				case Util::RobotSide::leftSide:
-					Robot::drivetrain->DriveRobotTank(driveSpeed - turnSlowDown, driveSpeed);
-					break;
-				case Util::RobotSide::rightSide:
-					Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - turnSlowDown);
-					break;
-				default:
-					std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
-				}
-			} else {
-				std::cout << "Something is wrong, check the ultrasonic sensors" << std::endl;
-			}
-		}
 }
