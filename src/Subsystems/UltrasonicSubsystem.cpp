@@ -56,6 +56,7 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 	double avgDistSlowDown = 0.0;
 	double avgFrontVsRearSlowDown = 0.0;
 	double avgSlowDown = 0.0;
+	m_startingDistance = startDist;
 
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:

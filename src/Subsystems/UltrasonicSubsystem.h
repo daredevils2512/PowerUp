@@ -18,6 +18,8 @@ public:
 	double GetAverageDistance(Util::RobotSide robotSide);
 	double GetDifference(double frontDistance, double rearDistance);
 	void DriveStaight(Util::RobotSide robotSide, double driveSpeed, double startingDistance);
+
+	double m_startingDistance = 0.0;
 };
 
 #endif  // UltrasonicSubsystem_H

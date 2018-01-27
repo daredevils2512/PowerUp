@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.2326315789473684,
+  "dividerPosition": 0.23774765380604795,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -301,6 +301,105 @@
               "_source0": "network_table:///SmartDashboard/Average Distance Away",
               "_title": "Average Distance Away"
             }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Altitude",
+              "_title": "Altitude"
+            }
+          },
+          "9,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right Encoder",
+              "_title": "Right Encoder"
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Z-Displacement",
+              "_title": "Z-Displacement"
+            }
+          },
+          "2,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left Encoder Clicks",
+              "_title": "Left Encoder Clicks"
+            }
+          },
+          "5,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left Encoder",
+              "_title": "Left Encoder"
+            }
+          },
+          "9,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right Encoder Clicks",
+              "_title": "Right Encoder Clicks"
+            }
+          },
+          "2,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Y-Displacement",
+              "_title": "Y-Displacement"
+            }
+          },
+          "6,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Compass",
+              "_title": "Compass"
+            }
+          },
+          "7,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Starting Distance",
+              "_title": "Starting Distance"
+            }
           }
         }
       }
@@ -384,50 +483,6 @@
             }
           }
         }
-      }
-    },
-    {
-      "title": "Tab 3",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {}
-      }
-    },
-    {
-      "title": "Tab 4",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {}
-      }
-    },
-    {
-      "title": "Tab 5",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {}
-      }
-    },
-    {
-      "title": "Tab 6",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {}
       }
     }
   ]
