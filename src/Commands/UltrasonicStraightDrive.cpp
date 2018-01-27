@@ -34,6 +34,7 @@ bool UltrasonicStraightDrive::IsFinished() {
 // Called once after isFinished returns true
 void UltrasonicStraightDrive::End() {
 	Robot::drivetrain->DriveRobotTank(0.0, 0.0);
+
 }
 
 // Called when another command which requires one or more of the same

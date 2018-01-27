@@ -2,6 +2,7 @@
 #define UltrasonicStraightDrive_H
 
 #include <Commands/Command.h>
+#include <WPILib.h>
 #include "../Robot.h"
 #include "Util.h"
 

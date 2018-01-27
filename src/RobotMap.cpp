@@ -65,10 +65,10 @@ void RobotMap::init() {
 	// motor4.reset(new frc::Spark(4));
 
 	ultrasonicFrontLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT));
-		ultrasonicFrontLeft->SetAverageBits(50);
+		ultrasonicFrontLeft->SetAverageBits(50); //50
 		ultrasonicFrontLeft->SetOversampleBits(2);
 
 	ultrasonicRearLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT));
-		ultrasonicRearLeft->SetAverageBits(50);
+		ultrasonicRearLeft->SetAverageBits(50); //50
 		ultrasonicRearLeft->SetOversampleBits(2);
 }
