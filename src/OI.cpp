@@ -16,17 +16,18 @@
 
 
 OI::OI() {
-//	//DRC_aButton.WhenPressed(new _CMG_NavXAutoTest());
+//	DRC_aButton.WhenPressed(new _CMG_NavXAutoTest());
+
 //	DRC_leftBumper.WhileHeld (new CubeIntakeActuate(true));
 //	DRC_leftBumper.WhenReleased (new CubeIntakeActuate(false));
-	DRC_leftBumper.WhileHeld(new CubeRunIntake(0.75));
+	DRC_leftBumper.WhileHeld(new CubeRunIntake(0.75)); //intake cube
 	DRC_leftBumper.WhenReleased(new CubeRunIntake(0.0));
-	DRC_rightBumper.WhileHeld(new CubeRunIntake(-0.75));
-	DRC_leftBumper.WhenReleased(new CubeRunIntake(0.0));
+	DRC_rightBumper.WhileHeld(new CubeRunIntake(-0.75)); //spit cube out
+	DRC_rightBumper.WhenReleased(new CubeRunIntake(0.0));
 //	DRC_xButton.WhenPressed(new CubeExtakeActuate(true));
 //	DRC_yButton.WhenReleased(new CubeExtakeActuate(false));
-	DRC_bButton.WhileHeld(new CubeRunExtake(0.75));
-	DRC_bButton.WhenReleased(new CubeRunExtake(0.0));
+//	DRC_bButton.WhileHeld(new CubeRunExtake(0.75));
+//	DRC_bButton.WhenReleased(new CubeRunExtake(0.0));
 
 
 }

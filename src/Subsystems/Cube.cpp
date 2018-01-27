@@ -18,9 +18,9 @@ void Cube::InitDefaultCommand() {
 }
 
 void Cube::SetIntakeSpeed(double speed) {
-	intakeMotor1->Set(-speed * 0.6667);
+	intakeMotor1->Set(-speed * 0.6667); //-0.5
 	intakeMotor2->Set(-speed);
-	intakeMotor3->Set(speed * 0.6667);
+	intakeMotor3->Set(speed * 0.6667); //0.5
 	intakeMotor4->Set(speed);
 }
 
