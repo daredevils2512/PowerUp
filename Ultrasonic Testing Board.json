@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.32263157894736844,
+  "dividerPosition": 0.2326315789473684,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -30,17 +30,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Roll",
               "_title": "Roll"
-            }
-          },
-          "0,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Rear Ultrasonic voltage",
-              "_title": "Rear Ultrasonic voltage"
             }
           },
           "3,0": {
@@ -102,17 +91,6 @@
               "_title": "Z-Velocity"
             }
           },
-          "2,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Rear Ultrasonic distance",
-              "_title": "Rear Ultrasonic distance"
-            }
-          },
           "0,1": {
             "size": [
               1,
@@ -124,20 +102,9 @@
               "_title": "Pitch"
             }
           },
-          "2,3": {
+          "3,3": {
             "size": [
               2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Front  Ultrasonic distance",
-              "_title": "Front  Ultrasonic distance"
-            }
-          },
-          "2,1": {
-            "size": [
-              1,
               1
             ],
             "content": {
@@ -170,9 +137,9 @@
               "colorWhenFalse": "#8B0000FF"
             }
           },
-          "5,1": {
+          "5,3": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -236,17 +203,6 @@
               "_title": "P-Value"
             }
           },
-          "0,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Front Ultrasonic voltage",
-              "_title": "Front Ultrasonic voltage"
-            }
-          },
           "3,2": {
             "size": [
               1,
@@ -280,15 +236,70 @@
               "_title": "Angle"
             }
           },
-          "2,0": {
+          "8,0": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Ultrasonic Difference",
-              "_title": "Ultrasonic Difference"
+              "_source0": "network_table:///SmartDashboard/X-Displacement",
+              "_title": "X-Displacement"
+            }
+          },
+          "1,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Rear Ultrasonic distance",
+              "_title": "Rear Ultrasonic distance"
+            }
+          },
+          "0,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Front Ultrasonic distance",
+              "_title": "Front Ultrasonic distance"
+            }
+          },
+          "5,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Raw Right Encoder",
+              "_title": "Raw Right Encoder"
+            }
+          },
+          "3,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Raw Left ENbcoder",
+              "_title": "Raw Left ENbcoder"
+            }
+          },
+          "0,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Average Distance Away",
+              "_title": "Average Distance Away"
             }
           }
         }
@@ -296,141 +307,69 @@
     },
     {
       "title": "LiveWindow",
-      "autoPopulate": true,
+      "autoPopulate": false,
       "autoPopulatePrefix": "LiveWindow/",
       "widgetPane": {
-        "gridSize": 128.0,
-        "hgap": 16.0,
-        "vgap": 16.0,
+        "gridSize": 150.0,
+        "hgap": 4.0,
+        "vgap": 4.0,
         "tiles": {
-          "0,0": {
+          "2,0": {
             "size": [
               3,
               3
             ],
             "content": {
-              "_type": "PID Controller",
-              "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[2]",
-              "_title": "Ungrouped/PIDController[2]"
+              "_type": "Differential Drivebase",
+              "_source0": "network_table:///LiveWindow/Ungrouped/DifferentialDrive[1]",
+              "_title": "Drivetrain",
+              "numberOfWheels": 8,
+              "wheelDiameter": 40.0,
+              "showVectors": true
             }
           },
-          "8,0": {
+          "0,1": {
             "size": [
-              1,
-              4
+              2,
+              1
             ],
             "content": {
-              "_type": "List Layout",
-              "_source0": "network_table:///LiveWindow/Ungrouped",
-              "_title": "Ungrouped",
-              "_children": [
-                {
-                  "_type": "Voltage View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[5]",
-                  "_title": "AnalogInput[5]",
-                  "min": 0.0,
-                  "max": 5.0,
-                  "center": 0.0,
-                  "orientation": "HORIZONTAL",
-                  "numTickMarks": 5.0
-                },
-                {
-                  "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [1]",
-                  "_title": "Talon SRX [1]",
-                  "controllable": false,
-                  "orientation": "HORIZONTAL"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[2]/Speed",
-                  "_title": "Encoder[2]/Speed"
-                },
-                {
-                  "_type": "Differential Drivebase",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DifferentialDrive[1]",
-                  "_title": "DifferentialDrive[1]",
-                  "numberOfWheels": 4,
-                  "wheelDiameter": 80.0,
-                  "showVectors": true
-                },
-                {
-                  "_type": "Voltage View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[4]",
-                  "_title": "AnalogInput[4]",
-                  "min": 0.0,
-                  "max": 5.0,
-                  "center": 0.0,
-                  "orientation": "HORIZONTAL",
-                  "numTickMarks": 5.0
-                },
-                {
-                  "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [10]",
-                  "_title": "Talon SRX [10]",
-                  "controllable": false,
-                  "orientation": "HORIZONTAL"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[0]/Distance per Tick",
-                  "_title": "Encoder[0]/Distance per Tick"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[2]",
-                  "_title": "PIDController[2]"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [6]/Value",
-                  "_title": "Talon SRX [6]/Value"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[0]/Speed",
-                  "_title": "Encoder[0]/Speed"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[2]/Distance per Tick",
-                  "_title": "Encoder[2]/Distance per Tick"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[2]/Distance",
-                  "_title": "Encoder[2]/Distance"
-                },
-                {
-                  "_type": "PID Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[1]",
-                  "_title": "PIDController[1]"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [2]/Value",
-                  "_title": "Talon SRX [2]/Value"
-                },
-                {
-                  "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [6]",
-                  "_title": "Talon SRX [6]",
-                  "controllable": false,
-                  "orientation": "HORIZONTAL"
-                },
-                {
-                  "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [2]",
-                  "_title": "Talon SRX [2]",
-                  "controllable": false,
-                  "orientation": "HORIZONTAL"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[0]/Distance",
-                  "_title": "Encoder[0]/Distance"
-                }
-              ]
+              "_type": "Encoder",
+              "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[0]",
+              "_title": "Left Encoder"
+            }
+          },
+          "5,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Encoder",
+              "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[2]",
+              "_title": "Right Encoder"
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Front Ultrasonic distance",
+              "_title": "Front Ultrasonic distance"
+            }
+          },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Rear Ultrasonic distance",
+              "_title": "Rear Ultrasonic distance"
             }
           }
         }

@@ -30,33 +30,18 @@ void Robot::RobotInit() {
 	//compressor.reset(new frc::Compressor());
 	lw = frc::LiveWindow::GetInstance();
 //	lw->Add(RobotMap::navXTurnController);
-	lw->Add(RobotMap::ultrasonicTurnController);
+	lw->Add(RobotMap::drivetrainChassis);
 }
 void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;
-	SmartDashboard::PutNumber("Pitch", RobotMap::navX->GetPitch());
-	SmartDashboard::PutNumber("Roll",RobotMap::navX->GetRoll());
-	SmartDashboard::PutNumber("Yaw",RobotMap::navX->GetYaw());
 	SmartDashboard::PutBoolean("Is Connected",RobotMap::navX->IsConnected());
 	SmartDashboard::PutBoolean("Is Moving",RobotMap::navX->IsMoving());
 	SmartDashboard::PutBoolean("Is Rotating",RobotMap::navX->IsRotating());
 
-	SmartDashboard::PutNumber("Angle", RobotMap::navX->GetAngle());
-	SmartDashboard::PutNumber("X-Velocity", RobotMap::navX->GetVelocityX());
-	SmartDashboard::PutNumber("Y-Velocity", RobotMap::navX->GetVelocityY());
-	SmartDashboard::PutNumber("Z-Velocity", RobotMap::navX->GetVelocityZ());
-	SmartDashboard::PutNumber("X-Velocity Num", RobotMap::navX->GetVelocityX());
-	SmartDashboard::PutNumber("Y-Velocity Num", RobotMap::navX->GetVelocityY());
-	SmartDashboard::PutNumber("Z-Velocity Num", RobotMap::navX->GetVelocityZ());
-
-	SmartDashboard::PutNumber("P-Value", RobotMap::navXTurnController->GetP());
-	SmartDashboard::PutNumber("I-Value", RobotMap::navXTurnController->GetI());
-	SmartDashboard::PutNumber("D-Value", RobotMap::navXTurnController->GetD());
-	SmartDashboard::PutNumber("F-Value", RobotMap::navXTurnController->GetF());
-	SmartDashboard::PutNumber("Set- Point", RobotMap::navXTurnController->GetSetpoint());
-
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
+	SmartDashboard::PutNumber("Raw Left ENbcoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
+	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
 
 	SmartDashboard::PutNumber("Front Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()));
 	SmartDashboard::PutNumber("Rear Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()));

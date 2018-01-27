@@ -53,7 +53,7 @@ void PIDTurn::Initialize() {
 void PIDTurn::Execute() {
 
 	//apply pid values to motors to turn robot (dime spin)
-	double maxOutput = 0.70; //0.75
+	double maxOutput = 0.85; //0.75 //0.70
 	double output = std::max(-maxOutput,std::min(maxOutput,Robot::drivetrain->GetPIDOutput()));
 	Robot::drivetrain->DriveRobotTank(-output,output);
 }

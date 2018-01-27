@@ -47,6 +47,7 @@ void RobotMap::init() {
 	drivetrainChassis->SetSafetyEnabled(true);
 		drivetrainChassis->SetExpiration(0.5);
 		drivetrainChassis->SetMaxOutput(1.0);
+
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X)); //theoretical a and b channels
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE); //took the circumference of 12.5663 and divided by the 128 internal encoder clicks
 		drivetrainLeftEncoder->SetReverseDirection(true);

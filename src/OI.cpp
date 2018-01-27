@@ -11,13 +11,16 @@
 #include "Commands/_CMG_NavXAutoTest.h"
 #include "Commands/UltraSonicStraightDrive.h"
 #include "Commands/PIDTurn.h"
+#include "COmmands/AutoStraightDrive.h"
 #include "Robot.h"
 #include "Util.h"
 
 OI::OI() {
 	DRC_aButton.WhenPressed(new _CMG_NavXAutoTest());
-	DRC_bButton.WhenPressed(new UltrasonicStraightDrive(0.50, 156, Util::RobotSide::leftSide));
-	DRC_xButton.WhenPressed(new PIDTurn(90));
+	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.50, 276, Util::RobotSide::leftSide));
+	DRC_bButton.WhenPressed(new AutoStraightDrive(144, 0.5));
+	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
+	DRC_rightBumper.WhenPressed(new PIDTurn(90));
 }
 
 	double OI::GetTurn() {
@@ -31,6 +34,6 @@ OI::OI() {
 	double OI::Desensitize(double value) {
 		//set threshold so tiny values on the joystick don't register,
 		//sometimes resting value of joystick is not 0
-		if (fabs(value) < 0.3) value = 0;
+		if (fabs(value) < 0.25) value = 0; //0.3
 		return value;
 	}
