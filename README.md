@@ -1,5 +1,5 @@
-# NavXTesting
-Project for testing the NavX and various other features that will be seen on our 2018 Robot.
+# PowerUp
+Project for our 2018 comp season.
 
 # Features
 - Ultrasonic Sensors
