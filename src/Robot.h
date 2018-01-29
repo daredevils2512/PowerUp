@@ -4,13 +4,12 @@
 #include <WPILib.h>
 #include "RobotMap.h"
 #include "Commands/Command.h"
-#include "LiveWindow/LiveWindow.h"
 #include "Subsystems/Drivetrain.h"
-#include "Subsystems/NavXSubsystem.h"
-#include "Subsystems/Cube.h"
-#include "NavXPIDSource.h"
 #include "OI.h"
-
+#include "Subsystems/NavXSubsystem.h"
+#include "LiveWindow/LiveWindow.h"
+#include "NavXPIDSource.h"
+#include "Subsystems/UltrasonicSubsystem.h"
 
 
 class Robot : public IterativeRobot {
@@ -22,9 +21,11 @@ public:
 	static std::unique_ptr<OI> oi;
 	static std::shared_ptr<Drivetrain> drivetrain;
 	static std::shared_ptr<frc::Compressor> compressor;
+
 	static std::shared_ptr<NavXSubsystem> navXSubsystem;
-	static std::shared_ptr<Cube> cube;
-	static std::shared_ptr<NavXPIDSource> pidSource;
+	static std::shared_ptr<UltrasonicSubsystem> ultrasonicSubsystem;
+
+	static std::shared_ptr<NavXPIDSource> navxPidSource;
 
 
 	virtual void RobotInit();

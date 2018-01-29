@@ -1,78 +1,52 @@
 #include "Robot.h"
 
-
 std::shared_ptr<Drivetrain> Robot::drivetrain;
 std::unique_ptr<OI> Robot::oi;
 std::shared_ptr<frc::Compressor> Robot::compressor;
 std::shared_ptr<NavXSubsystem> Robot::navXSubsystem;
-std::shared_ptr<NavXPIDSource> Robot::pidSource;
-std::shared_ptr<Cube> Robot::cube;
+std::shared_ptr<UltrasonicSubsystem> Robot::ultrasonicSubsystem;
+std::shared_ptr<NavXPIDSource> Robot::navxPidSource;
 
 
 void Robot::RobotInit() {
-
+	std::cout << "Robot Init" << std::endl;
 	RobotMap::init();
     drivetrain.reset(new Drivetrain());
-    pidSource.reset(new NavXPIDSource());
-    cube.reset (new Cube());
+    ultrasonicSubsystem.reset(new UltrasonicSubsystem());
+    navxPidSource.reset(new NavXPIDSource());
     RobotMap::navXTurnController.reset(new frc::PIDController(
     		NavXSubsystem::NAVX_P_VALUE,
 			NavXSubsystem::NAVX_I_VALUE,
 			NavXSubsystem::NAVX_D_VALUE,
 			NavXSubsystem::NAVX_F_VALUE,
-			pidSource.get(),
+			navxPidSource.get(),
 			drivetrain.get()
 		));
 		RobotMap::navXTurnController->SetInputRange(-180.0f,  180.0f);
 		RobotMap::navXTurnController->SetOutputRange(-1.0, 1.0);
 		RobotMap::navXTurnController->SetAbsoluteTolerance(0.5f);
 		RobotMap::navXTurnController->SetContinuous(true);
-
 	oi.reset(new OI());
 	//compressor.reset(new frc::Compressor());
 	lw = frc::LiveWindow::GetInstance();
-	lw->Add(RobotMap::navXTurnController);
-
+//	lw->Add(RobotMap::navXTurnController);
+	lw->Add(RobotMap::drivetrainChassis);
 }
 void Robot::RobotPeriodic() {
-	SmartDashboard::PutNumber("Pitch", RobotMap::navX->GetPitch());
-	SmartDashboard::PutNumber("Roll",RobotMap::navX->GetRoll());
-	SmartDashboard::PutNumber("Yaw",RobotMap::navX->GetYaw());
+//	std::cout << "Robto Periodic" << std::endl;
 	SmartDashboard::PutBoolean("Is Connected",RobotMap::navX->IsConnected());
 	SmartDashboard::PutBoolean("Is Moving",RobotMap::navX->IsMoving());
 	SmartDashboard::PutBoolean("Is Rotating",RobotMap::navX->IsRotating());
 
-	SmartDashboard::PutNumber("Altitude", RobotMap::navX->GetAltitude());
-	SmartDashboard::PutNumber("Compass", RobotMap::navX->GetCompassHeading());
-	SmartDashboard::PutNumber("Angle", RobotMap::navX->GetAngle());
-	SmartDashboard::PutNumber("X-Velocity", RobotMap::navX->GetVelocityX());
-	SmartDashboard::PutNumber("Y-Velocity", RobotMap::navX->GetVelocityY());
-	SmartDashboard::PutNumber("Z-Velocity", RobotMap::navX->GetVelocityZ());
-	SmartDashboard::PutNumber("X-Velocity Num", RobotMap::navX->GetVelocityX());
-	SmartDashboard::PutNumber("Y-Velocity Num", RobotMap::navX->GetVelocityY());
-	SmartDashboard::PutNumber("Z-Velocity Num", RobotMap::navX->GetVelocityZ());
-
-	SmartDashboard::PutNumber("P-Value", RobotMap::navXTurnController->GetP());
-	SmartDashboard::PutNumber("I-Value", RobotMap::navXTurnController->GetI());
-	SmartDashboard::PutNumber("D-Value", RobotMap::navXTurnController->GetD());
-	SmartDashboard::PutNumber("F-Value", RobotMap::navXTurnController->GetF());
-	SmartDashboard::PutNumber("Set- Point", RobotMap::navXTurnController->GetSetpoint());
-
-	SmartDashboard::PutNumber("X-Displacement", RobotMap::navX->GetDisplacementX());
-	SmartDashboard::PutNumber("Y-Displacement", RobotMap::navX->GetDisplacementY());
-	SmartDashboard::PutNumber("Z-Displacement", RobotMap::navX->GetDisplacementZ());
-
-	SmartDashboard::PutNumber("Left Encoder", RobotMap::drivetrainLeftEncoder->GetDistance());
-	SmartDashboard::PutNumber("Right Encoder", RobotMap::drivetrainRightEncoder->GetDistance());
-
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
+	SmartDashboard::PutNumber("Raw Left ENbcoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
+	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
 
-	SmartDashboard::PutNumber("Left Encoder Clicks", RobotMap::drivetrainLeftEncoder->Get());
-	SmartDashboard::PutNumber("Right Encoder Clicks", RobotMap::drivetrainRightEncoder->Get());
-
-
-
+	SmartDashboard::PutNumber("Front Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()));
+	SmartDashboard::PutNumber("Rear Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()));
+	SmartDashboard::PutNumber("Average Distance Away", Robot::ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
+	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 }
 void Robot::DisabledInit(){
 	//compressor->SetClosedLoopControl(false);
@@ -84,6 +58,7 @@ void Robot::DisabledInit(){
 }
 
 void Robot::DisabledPeriodic() {
+//	std::cout << "I'm Disabled!" << std::endl;
 	Scheduler::GetInstance()->Run();
 }
 
@@ -123,7 +98,7 @@ void Robot::TestPeriodic() {
 
 	if(drivetrain->IsPIDEnabled()){
 		double output = drivetrain->GetPIDOutput();
-		SmartDashboard::PutNumber("PID Input", pidSource->PIDGet());
+		SmartDashboard::PutNumber("PID Input", navxPidSource->PIDGet());
 		SmartDashboard::PutNumber("PID Output", output);
 		drivetrain->DriveRobotTank(-output,output);
 	}else{

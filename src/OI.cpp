@@ -9,27 +9,20 @@
 
 #include <WPILib.h>
 #include "Commands/_CMG_NavXAutoTest.h"
-#include "Commands/CubeRunIntake.h"
-#include "Commands/CubeRunExtake.h"
-#include "Commands/CubeIntakeActuate.h"
-#include "Commands/CubeExtakeActuate.h"
-
+#include "Commands/UltraSonicStraightDrive.h"
+#include "Commands/PIDTurn.h"
+#include "Commands/AutoStraightDrive.h"
+#include "Commands/_CMG_UltrasonicAutoTest.h"
+#include "Robot.h"
+#include "Util.h"
 
 OI::OI() {
-//	DRC_aButton.WhenPressed(new _CMG_NavXAutoTest());
-
-//	DRC_leftBumper.WhileHeld (new CubeIntakeActuate(true));
-//	DRC_leftBumper.WhenReleased (new CubeIntakeActuate(false));
-	DRC_leftBumper.WhileHeld(new CubeRunIntake(0.75)); //intake cube
-	DRC_leftBumper.WhenReleased(new CubeRunIntake(0.0));
-	DRC_rightBumper.WhileHeld(new CubeRunIntake(-0.75)); //spit cube out
-	DRC_rightBumper.WhenReleased(new CubeRunIntake(0.0));
-//	DRC_xButton.WhenPressed(new CubeExtakeActuate(true));
-//	DRC_yButton.WhenReleased(new CubeExtakeActuate(false));
-//	DRC_bButton.WhileHeld(new CubeRunExtake(0.75));
-//	DRC_bButton.WhenReleased(new CubeRunExtake(0.0));
-
-
+	DRC_aButton.WhenPressed(new _CMG_NavXAutoTest());
+	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.70, 224, Util::RobotSide::leftSide)); //0.5
+	DRC_bButton.WhenPressed(new AutoStraightDrive(24.0, -0.55));
+	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
+	DRC_rightBumper.WhenPressed(new PIDTurn(90));
+	DRC_startButton.WhenPressed (new _CMG_UltrasonicAutoTest());
 }
 
 	double OI::GetTurn() {
@@ -43,6 +36,6 @@ OI::OI() {
 	double OI::Desensitize(double value) {
 		//set threshold so tiny values on the joystick don't register,
 		//sometimes resting value of joystick is not 0
-		if (fabs(value) < 0.3) value = 0;
+		if (fabs(value) < 0.25) value = 0; //0.3
 		return value;
 	}

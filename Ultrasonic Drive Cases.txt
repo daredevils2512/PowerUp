@@ -1,0 +1,34 @@
+avgDist >= startDist
+avgDist == startDist
+avgDist <= startDist
+
+frontDist >= rearDist
+frontDist == rearDist
+frontDist <= rearDist
+
+avgDistSlowDown = GetDiff(avgDist && startDist)
+frontVsRearSlowDown = GetDiff(frontDist && rearDist)
+avgSlowDown = ((avgDistSlowDown + frontVsRearSlowDown) / 2) * slowDownMultiplier
+
+if (robotSide == left):
+	if ((avgDist <= startDist && frontDist >= rearDist) || (avgDist == startDist && frontDist == rearDist) || (avgDist >= startDist && frontDist <= rearDist)):
+		drive straight = driveTank(output, output)
+	else if ((avgDist >= startDist && frontDist == rearDist) || (avgDist == startDist && frontDist >= rearDist)):
+		drive gradual left = driveTank(output - avgSlowDown, output)
+	else if ((avgDist <= startDist && frontDist == rearDist) || (avgDist == startDist && frontDist <= rearDist))
+		drive gradual right = driveTank(output, output - avgSlowDown)
+	else if (avgDist >= startDist && frontDist >= rearDist):
+		drive hard left = driveTank(output - avgSlowDown, output + (avgSlowDown / 2)
+	else if (avgDist <= startDist && frontDist <= rearDist):
+		drive hard right = driveTank(output + (avgSlowDown / 2), output - avgSlowDown)
+if (robotSide == right):
+	if ((avgDist <= startDist && frontDist >= rearDist) || (avgDist == startDist && frontDist == rearDist) || (avgDist >= startDist && frontDist <= rearDist)):
+		drive straight = driveTank(output, output)
+	else if ((avgDist >= startDist && frontDist == rearDist) || (avgDist == startDist && frontDist >= rearDist)):
+		drive gradual left = driveTank(output, output - avgSlowDown)
+	else if ((avgDist <= startDist && frontDist == rearDist) || (avgDist == startDist && frontDist <= rearDist))
+		drive gradual right = driveTank(output - avgSlowDown, output)
+	else if (avgDist >= startDist && frontDist >= rearDist):
+		drive hard left = driveTank(output + (avgSlowDown / 2), output - avgSlowDown)
+	else if (avgDist <= startDist && frontDist <= rearDist):
+		drive hard right = driveTank(output - avgSlowDown, output + (avgSlowDown / 2))
