@@ -1,12 +1,12 @@
 #include "Robot.h"
 
 
-
 std::shared_ptr<Drivetrain> Robot::drivetrain;
 std::unique_ptr<OI> Robot::oi;
 std::shared_ptr<frc::Compressor> Robot::compressor;
 std::shared_ptr<NavXSubsystem> Robot::navXSubsystem;
 std::shared_ptr<NavXPIDSource> Robot::pidSource;
+std::shared_ptr<Cube> Robot::cube;
 
 
 void Robot::RobotInit() {
@@ -14,6 +14,7 @@ void Robot::RobotInit() {
 	RobotMap::init();
     drivetrain.reset(new Drivetrain());
     pidSource.reset(new NavXPIDSource());
+    cube.reset (new Cube());
     RobotMap::navXTurnController.reset(new frc::PIDController(
     		NavXSubsystem::NAVX_P_VALUE,
 			NavXSubsystem::NAVX_I_VALUE,

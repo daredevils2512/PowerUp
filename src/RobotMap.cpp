@@ -29,7 +29,9 @@ std::shared_ptr<frc::Spark> RobotMap::motor1;
 std::shared_ptr<frc::Spark> RobotMap::motor2;
 std::shared_ptr<frc::Spark> RobotMap::motor3;
 std::shared_ptr<frc::Spark> RobotMap::motor4;
-
+std::shared_ptr<frc::Spark> RobotMap::motor5;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeExtakeSolenoid;
 
 
 void RobotMap::init() {
@@ -64,9 +66,12 @@ void RobotMap::init() {
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
 
-	// motor1.reset(new frc::Spark(1));
-	// motor2.reset(new frc::Spark(2));
-	// motor3.reset(new frc::Spark(3));
-	// motor4.reset(new frc::Spark(4));
+	 motor1.reset(new frc::Spark(1));
+	 motor2.reset(new frc::Spark(2));
+	 motor3.reset(new frc::Spark(3));
+	 motor4.reset(new frc::Spark(4));
+//	 motor5.reset(new frc::Spark(5)); // cube extake motor. will be changed to one of the 4 previous motor controllers for testing
+//	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0,0,1));
+//	 cubeExtakeSolenoid.reset (new frc::DoubleSolenoid (0,2,3));
 
 }
