@@ -5,6 +5,7 @@ std::unique_ptr<OI> Robot::oi;
 std::shared_ptr<frc::Compressor> Robot::compressor;
 std::shared_ptr<NavXSubsystem> Robot::navXSubsystem;
 std::shared_ptr<UltrasonicSubsystem> Robot::ultrasonicSubsystem;
+std::shared_ptr<Cube> Robot::cube;
 std::shared_ptr<NavXPIDSource> Robot::navxPidSource;
 
 
@@ -27,7 +28,8 @@ void Robot::RobotInit() {
 		RobotMap::navXTurnController->SetAbsoluteTolerance(0.5f);
 		RobotMap::navXTurnController->SetContinuous(true);
 	oi.reset(new OI());
-	//compressor.reset(new frc::Compressor());
+	compressor.reset(new frc::Compressor());
+	cube.reset (new Cube());
 	lw = frc::LiveWindow::GetInstance();
 //	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
@@ -47,9 +49,14 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Rear Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()));
 	SmartDashboard::PutNumber("Average Distance Away", Robot::ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
+
 }
 void Robot::DisabledInit(){
-	//compressor->SetClosedLoopControl(false);
+	RobotMap::ultrasonicRelay1->Set(false);
+	RobotMap::ultrasonicRelay2->Set(false);
+	RobotMap::ultrasonicRelay3->Set(false);
+	RobotMap::ultrasonicRelay4->Set(false);
+	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
 	drivetrain->SetPIDEnabled(false);
@@ -63,6 +70,10 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
+	RobotMap::ultrasonicRelay1->Set(false);
+	RobotMap::ultrasonicRelay2->Set(false);
+	RobotMap::ultrasonicRelay3->Set(false);
+	RobotMap::ultrasonicRelay4->Set(false);
 	Robot::drivetrain->ResetEncoders();
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Start();
@@ -74,8 +85,12 @@ void Robot::AutonomousPeriodic() {
 }
 
 void Robot::TeleopInit() {
+	RobotMap::ultrasonicRelay1->Set(false);
+	RobotMap::ultrasonicRelay2->Set(false);
+	RobotMap::ultrasonicRelay3->Set(false);
+	RobotMap::ultrasonicRelay4->Set(false);
 	Robot::drivetrain->ResetEncoders();
-	//compressor->SetClosedLoopControl(true);
+	compressor->SetClosedLoopControl(true);
 	if (autonomousCommand.get() != nullptr)
 			autonomousCommand->Cancel();
 }
@@ -85,6 +100,10 @@ void Robot::TeleopPeriodic() {
 	}
 
 void Robot::TestInit() {
+	RobotMap::ultrasonicRelay1->Set(false);
+	RobotMap::ultrasonicRelay2->Set(false);
+	RobotMap::ultrasonicRelay3->Set(false);
+	RobotMap::ultrasonicRelay4->Set(false);
 	Robot::drivetrain->ResetEncoders();
 	drivetrain->SetPIDEnabled(false);
 	if (autonomousCommand.get() != nullptr)

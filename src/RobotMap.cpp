@@ -25,10 +25,19 @@ std::shared_ptr<frc::Spark> RobotMap::motor1;
 std::shared_ptr<frc::Spark> RobotMap::motor2;
 std::shared_ptr<frc::Spark> RobotMap::motor3;
 std::shared_ptr<frc::Spark> RobotMap::motor4;
+std::shared_ptr<frc::Spark> RobotMap::motor5;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeExtakeSolenoid;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
+
 
 std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicFrontLeft;
 std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicRearLeft;
 std::shared_ptr<frc::PIDController> RobotMap::ultrasonicTurnController;
+
+std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay1;
+std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay2;
+std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay3;
+std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay4;
 
 void RobotMap::init() {
 	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
@@ -59,10 +68,14 @@ void RobotMap::init() {
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
 
-	// motor1.reset(new frc::Spark(1));
-	// motor2.reset(new frc::Spark(2));
-	// motor3.reset(new frc::Spark(3));
-	// motor4.reset(new frc::Spark(4));
+	 motor1.reset(new frc::Spark(1));
+	 motor2.reset(new frc::Spark(2));
+	 motor3.reset(new frc::Spark(3));
+	 motor4.reset(new frc::Spark(4));
+	 //motor5.reset(new frc::Spark(5));
+
+//	 cubeExtakeSolenoid.reset (new frc::DoubleSolenoid (0, 2 ,3));
+//	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 4 ,5));
 
 	ultrasonicFrontLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT));
 		ultrasonicFrontLeft->SetAverageBits(50); //50
@@ -71,4 +84,9 @@ void RobotMap::init() {
 	ultrasonicRearLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT));
 		ultrasonicRearLeft->SetAverageBits(50); //50
 		ultrasonicRearLeft->SetOversampleBits(2);
+
+	ultrasonicRelay1.reset(new frc::DigitalOutput(10));
+	ultrasonicRelay2.reset(new frc::DigitalOutput(11));
+	ultrasonicRelay3.reset(new frc::DigitalOutput(12));
+	ultrasonicRelay4.reset(new frc::DigitalOutput(13));
 }

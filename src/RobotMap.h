@@ -24,10 +24,20 @@ public:
 	static std::shared_ptr<frc::Spark> motor2;
 	static std::shared_ptr<frc::Spark> motor3;
 	static std::shared_ptr<frc::Spark> motor4;
+	static std::shared_ptr<frc::Spark> motor5;
+
+	static std::shared_ptr<frc::DoubleSolenoid> cubeExtakeSolenoid;
+	static std::shared_ptr<frc::DoubleSolenoid> cubeIntakeSolenoid;
+
 
 	static std::shared_ptr<frc::AnalogInput> ultrasonicFrontLeft;
 	static std::shared_ptr<frc::AnalogInput> ultrasonicRearLeft;
 	static std::shared_ptr<frc::PIDController> ultrasonicTurnController;
+
+	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay1;
+	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay2;
+	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay3;
+	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay4;
 
 	static void init();
 

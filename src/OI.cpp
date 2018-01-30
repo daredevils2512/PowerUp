@@ -13,6 +13,7 @@
 #include "Commands/PIDTurn.h"
 #include "Commands/AutoStraightDrive.h"
 #include "Commands/_CMG_UltrasonicAutoTest.h"
+#include "Commands/RelayOnOff.h"
 #include "Robot.h"
 #include "Util.h"
 
@@ -20,6 +21,7 @@ OI::OI() {
 	DRC_aButton.WhenPressed(new _CMG_NavXAutoTest());
 	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.70, 224, Util::RobotSide::leftSide)); //0.5
 	DRC_bButton.WhenPressed(new AutoStraightDrive(24.0, -0.55));
+	DRC_xButton.WhenPressed(new RelayOnOff());
 	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
 	DRC_rightBumper.WhenPressed(new PIDTurn(90));
 	DRC_startButton.WhenPressed (new _CMG_UltrasonicAutoTest());

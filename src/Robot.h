@@ -4,12 +4,14 @@
 #include <WPILib.h>
 #include "RobotMap.h"
 #include "Commands/Command.h"
-#include "Subsystems/Drivetrain.h"
-#include "OI.h"
-#include "Subsystems/NavXSubsystem.h"
 #include "LiveWindow/LiveWindow.h"
-#include "NavXPIDSource.h"
+#include "Subsystems/Drivetrain.h"
+#include "Subsystems/NavXSubsystem.h"
 #include "Subsystems/UltrasonicSubsystem.h"
+#include "Subsystems/Cube.h"
+#include "NavXPIDSource.h"
+
+#include "OI.h"
 
 
 class Robot : public IterativeRobot {
@@ -24,6 +26,7 @@ public:
 
 	static std::shared_ptr<NavXSubsystem> navXSubsystem;
 	static std::shared_ptr<UltrasonicSubsystem> ultrasonicSubsystem;
+	static std::shared_ptr<Cube> cube;
 
 	static std::shared_ptr<NavXPIDSource> navxPidSource;
 
