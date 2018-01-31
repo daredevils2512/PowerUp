@@ -14,6 +14,8 @@
 #include "Commands/PIDTurn.h"
 #include "Commands/AutoStraightDrive.h"
 #include "Commands/RelayOnOff.h"
+#include "Commands/ClimberLeftWingRun.h"
+#include "Commands/ClimberRightWingRun.h"
 #include "Robot.h"
 #include "Util.h"
 
@@ -29,6 +31,11 @@ OI::OI() {
 	CDB_topRed.WhenPressed(new RelayOnOff(2));
 	CDB_middleWhite.WhenPressed(new RelayOnOff(3));
 	CDB_middleRed.WhenPressed(new RelayOnOff(4));
+	CDB_bigRed.WhileHeld(new ClimberLeftWingRun(0.8)); // run motors to move left wing up
+	CDB_bigRed.WhenReleased(new ClimberLeftWingRun(0.0));
+	CDB_bigWhite.WhileHeld(new ClimberRightWingRun(0.8)); // run motors to move right wing up
+	CDB_bigWhite.WhileHeld(new ClimberRightWingRun(0.0));
+
 }
 
 	double OI::GetTurn() {

@@ -29,6 +29,10 @@ std::shared_ptr<frc::Spark> RobotMap::motor5;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeExtakeSolenoid;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
 
+std::shared_ptr<WPI_TalonSRX> RobotMap::climberLeftWingMotor1;
+std::shared_ptr<WPI_TalonSRX> RobotMap::climberLeftWingMotor2;
+std::shared_ptr<WPI_TalonSRX> RobotMap::climberRightWingMotor1;
+std::shared_ptr<WPI_TalonSRX> RobotMap::climberRightWingMotor2;
 
 std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicFrontLeft;
 std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicRearLeft;
@@ -76,6 +80,11 @@ void RobotMap::init() {
 
 //	 cubeExtakeSolenoid.reset (new frc::DoubleSolenoid (0, 2 ,3));
 //	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 4 ,5));
+
+	climberLeftWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_1));
+	climberLeftWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_2));
+	climberRightWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_1));
+	climberRightWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_2));
 
 	ultrasonicFrontLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT));
 		ultrasonicFrontLeft->SetAverageBits(50); //50

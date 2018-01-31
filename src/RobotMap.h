@@ -20,7 +20,7 @@ public:
 	static std::shared_ptr<AHRS> navX;
 	static std::shared_ptr<frc::PIDController> navXTurnController;
 
-	static std::shared_ptr<frc::Spark> motor1;
+	static std::shared_ptr<frc::Spark> motor1; //will end up being 2 TalonSRX's for the intake on comp robot
 	static std::shared_ptr<frc::Spark> motor2;
 	static std::shared_ptr<frc::Spark> motor3;
 	static std::shared_ptr<frc::Spark> motor4;
@@ -28,6 +28,11 @@ public:
 
 	static std::shared_ptr<frc::DoubleSolenoid> cubeExtakeSolenoid;
 	static std::shared_ptr<frc::DoubleSolenoid> cubeIntakeSolenoid;
+
+	static std::shared_ptr<WPI_TalonSRX> climberLeftWingMotor1;
+	static std::shared_ptr<WPI_TalonSRX> climberLeftWingMotor2;
+	static std::shared_ptr<WPI_TalonSRX> climberRightWingMotor1;
+	static std::shared_ptr<WPI_TalonSRX> climberRightWingMotor2;
 
 
 	static std::shared_ptr<frc::AnalogInput> ultrasonicFrontLeft;
