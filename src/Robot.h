@@ -9,6 +9,7 @@
 #include "Subsystems/NavXSubsystem.h"
 #include "Subsystems/UltrasonicSubsystem.h"
 #include "Subsystems/Cube.h"
+#include "Subsystems/Climber.h"
 #include "NavXPIDSource.h"
 
 #include "OI.h"
@@ -27,6 +28,7 @@ public:
 	static std::shared_ptr<NavXSubsystem> navXSubsystem;
 	static std::shared_ptr<UltrasonicSubsystem> ultrasonicSubsystem;
 	static std::shared_ptr<Cube> cube;
+	static std::shared_ptr<Climber> climber;
 
 	static std::shared_ptr<NavXPIDSource> navxPidSource;
 

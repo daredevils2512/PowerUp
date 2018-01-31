@@ -6,6 +6,7 @@ std::shared_ptr<frc::Compressor> Robot::compressor;
 std::shared_ptr<NavXSubsystem> Robot::navXSubsystem;
 std::shared_ptr<UltrasonicSubsystem> Robot::ultrasonicSubsystem;
 std::shared_ptr<Cube> Robot::cube;
+std::shared_ptr<Climber> Robot::climber;
 std::shared_ptr<NavXPIDSource> Robot::navxPidSource;
 
 
@@ -30,6 +31,7 @@ void Robot::RobotInit() {
 	oi.reset(new OI());
 	compressor.reset(new frc::Compressor());
 	cube.reset (new Cube());
+	climber.reset (new Climber());
 	lw = frc::LiveWindow::GetInstance();
 //	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
