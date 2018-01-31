@@ -5,7 +5,7 @@
 
 class RelayOnOff : public frc::Command {
 public:
-	RelayOnOff();
+	RelayOnOff(double relayID);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -13,7 +13,7 @@ public:
 	void Interrupted();
 
 private:
-	bool m_currentState = true;
+	double m_relayID = 0.0;
 };
 
 #endif  // RelayOnOff_H

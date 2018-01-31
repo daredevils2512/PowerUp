@@ -1,9 +1,9 @@
-#include "_CMG_NavXAutoTest.h"
+#include <Commands/CMG_NavXAutoTest.h>
 #include "PIDDriveStraight.h"
 #include "PIDTurn.h"
 #include "Pause.h"
 
-_CMG_NavXAutoTest::_CMG_NavXAutoTest() {
+CMG_NavXAutoTest::CMG_NavXAutoTest() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

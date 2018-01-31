@@ -39,15 +39,22 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("Is Connected",RobotMap::navX->IsConnected());
 	SmartDashboard::PutBoolean("Is Moving",RobotMap::navX->IsMoving());
 	SmartDashboard::PutBoolean("Is Rotating",RobotMap::navX->IsRotating());
+	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
+	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
+	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+
+
 
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
-	SmartDashboard::PutNumber("Raw Left ENbcoder", RobotMap::drivetrainLeftEncoder->Get());
+	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
 
 	SmartDashboard::PutNumber("Front Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()));
 	SmartDashboard::PutNumber("Rear Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()));
 	SmartDashboard::PutNumber("Average Distance Away", Robot::ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
+	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAverageVoltage());
+	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAverageVoltage());
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
 }

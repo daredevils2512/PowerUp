@@ -1,10 +1,10 @@
-#include "_CMG_UltrasonicAutoTest.h"
+#include <Commands/CMG_UltrasonicAutoTest.h>
 #include "UltrasonicStraightDrive.h"
 #include "AutoStraightDrive.h"
 #include "PIDTurn.h"
 #include "Pause.h"
 
-_CMG_UltrasonicAutoTest::_CMG_UltrasonicAutoTest() {
+CMG_UltrasonicAutoTest::CMG_UltrasonicAutoTest() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());

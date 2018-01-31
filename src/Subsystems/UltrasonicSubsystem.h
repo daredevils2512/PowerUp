@@ -14,6 +14,8 @@ public:
 
 	UltrasonicSubsystem();
 	void InitDefaultCommand();
+	void RelayToggle(int relayID);
+	void RelaysOff();
 	double ConvertToDistance(double voltageMeasured);
 	double GetAverageDistance(Util::RobotSide robotSide);
 	double GetDifference(double frontDistance, double rearDistance);

@@ -15,6 +15,48 @@ void UltrasonicSubsystem::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void UltrasonicSubsystem::RelayToggle(int relayID) {
+	switch (relayID) {
+	case 1:
+		if (RobotMap::ultrasonicRelay1->Get()) {
+			RobotMap::ultrasonicRelay1->Set(false);
+		} else {
+			RobotMap::ultrasonicRelay1->Set(true);
+		}
+		break;
+	case 2:
+		if (RobotMap::ultrasonicRelay2->Get()) {
+			RobotMap::ultrasonicRelay2->Set(false);
+		} else {
+			RobotMap::ultrasonicRelay2->Set(true);
+		}
+		break;
+	case 3:
+		if (RobotMap::ultrasonicRelay3->Get()) {
+			RobotMap::ultrasonicRelay3->Set(false);
+		} else {
+			RobotMap::ultrasonicRelay3->Set(true);
+		}
+		break;
+	case 4:
+		if (RobotMap::ultrasonicRelay4->Get()) {
+			RobotMap::ultrasonicRelay4->Set(false);
+		} else {
+			RobotMap::ultrasonicRelay4->Set(true);
+		}
+		break;
+	default:
+		std::cout << "That's not a valid Relay ID: " << relayID << std::endl;
+	}
+}
+
+void UltrasonicSubsystem::RelaysOff () {
+	RobotMap::ultrasonicRelay1->Set(false);
+	RobotMap::ultrasonicRelay2->Set(false);
+	RobotMap::ultrasonicRelay3->Set(false);
+	RobotMap::ultrasonicRelay4->Set(false);
+}
+
 double UltrasonicSubsystem::ConvertToDistance(double voltageMeasured) {
 	double voltagePerCm = 0.0;
 	double distanceCm = 0.0;
@@ -48,6 +90,7 @@ double UltrasonicSubsystem::GetAverageDistance(Util::RobotSide robotSide) {
 void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSpeed, double startDist) {
 	//Function for driving the robot along a wall at any given distance using ultrasonic sensors
 	//Compares both the front and back sensors, along with the starting distance away and the current distance away
+
 
 	//All the doubles we using for calculations
 	double frontDist = 0.0;
