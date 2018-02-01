@@ -3,6 +3,7 @@
 
 #include <Commands/Subsystem.h>
 #include <WPILib.h>
+#include <ctre/Phoenix.h>
 
 class Cube : public Subsystem {
 private:
@@ -13,6 +14,8 @@ private:
 	std::shared_ptr<frc::Spark> intakeMotor3;
 	std::shared_ptr<frc::Spark> intakeMotor4;
 	std::shared_ptr<frc::Spark> extakeMotor;
+	std::shared_ptr <WPI_TalonSRX> intakeLeft;
+	std::shared_ptr <WPI_TalonSRX> intakeRight;
 	std::shared_ptr<frc::DoubleSolenoid> cubeIntakeSolenoid;
 	std::shared_ptr<frc::DoubleSolenoid> cubeExtakeSolenoid;
 

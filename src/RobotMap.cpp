@@ -26,6 +26,9 @@ std::shared_ptr<frc::Spark> RobotMap::motor2;
 std::shared_ptr<frc::Spark> RobotMap::motor3;
 std::shared_ptr<frc::Spark> RobotMap::motor4;
 std::shared_ptr<frc::Spark> RobotMap::motor5;
+
+std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeLeftMotor;
+std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeRightMotor;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeExtakeSolenoid;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
 
@@ -42,6 +45,13 @@ std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay1;
 std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay2;
 std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay3;
 std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay4;
+
+
+std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorLeftMotor;
+std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorRightMotor;
+std::shared_ptr<frc::Encoder> RobotMap::elevatorEncoder;
+std::shared_ptr<frc::DigitalInput> RobotMap::elevatorTopSwitch;
+std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
 
 void RobotMap::init() {
 	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
@@ -78,7 +88,9 @@ void RobotMap::init() {
 	 motor4.reset(new frc::Spark(4));
 	 //motor5.reset(new frc::Spark(5));
 
-//	 cubeExtakeSolenoid.reset (new frc::DoubleSolenoid (0, 2 ,3));
+//	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
+//	 cubeIntakeRightMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_RIGHT_MOTOR));
+//   cubeExtakeSolenoid.reset (new frc::DoubleSolenoid (0, 2 ,3));
 //	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 4 ,5));
 
 	climberLeftWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_1));
@@ -98,4 +110,10 @@ void RobotMap::init() {
 	ultrasonicRelay2.reset(new frc::DigitalOutput(11));
 	ultrasonicRelay3.reset(new frc::DigitalOutput(12));
 	ultrasonicRelay4.reset(new frc::DigitalOutput(13));
+
+	elevatorLeftMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_LEFT_MOTOR));
+	elevatorRightMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_RIGHT_MOTOR));
+	elevatorTopSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_TOP_LIMIT_SWITCH));
+	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
+	elevatorEncoder.reset(new frc::Encoder(6, 7, false, frc::Encoder::k4X));
 }

@@ -16,6 +16,9 @@
 #include "Commands/RelayOnOff.h"
 #include "Commands/ClimberLeftWingRun.h"
 #include "Commands/ClimberRightWingRun.h"
+#include "Commands/ElevatorRunToHeight.h"
+#include "Commands/CubeIntakeActuate.h"
+#include "Commands/CubeRunIntake.h"
 #include "Robot.h"
 #include "Util.h"
 
@@ -27,14 +30,26 @@ OI::OI() {
 	DRC_rightBumper.WhenPressed(new PIDTurn(90));
 	DRC_startButton.WhenPressed (new CMG_UltrasonicAutoTest());
 
-	CDB_topWhite.WhenPressed(new RelayOnOff(1));
-	CDB_topRed.WhenPressed(new RelayOnOff(2));
-	CDB_middleWhite.WhenPressed(new RelayOnOff(3));
-	CDB_middleRed.WhenPressed(new RelayOnOff(4));
+	CDR_bottomLeftBase.WhenPressed(new CubeIntakeActuate(true));
+	CDR_bottomRightBase.WhenPressed(new CubeIntakeActuate(false));
+	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0));
+	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0));
+	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0));
+	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0));
+	CDR_trigger.WhenPressed(new CubeIntakeActuate(true));
+	CDR_trigger.WhileHeld(new CubeRunIntake(1.0));
+	CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
+	CDR_trigger.WhenReleased(new CubeIntakeActuate(false));
+
+	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.5, 500)); //arbitrary numbers. Need testing
+	CDB_topRed.WhenPressed(new ElevatorRunToHeight(0.5, 400)); //arbitrary numbers. Need testing
+	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.5, 300)); //arbitrary numbers. Need testing
+	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.5, 0)); //arbitrary numbers. Need testing
 	CDB_bigRed.WhileHeld(new ClimberLeftWingRun(0.8)); // run motors to move left wing up
 	CDB_bigRed.WhenReleased(new ClimberLeftWingRun(0.0));
 	CDB_bigWhite.WhileHeld(new ClimberRightWingRun(0.8)); // run motors to move right wing up
-	CDB_bigWhite.WhileHeld(new ClimberRightWingRun(0.0));
+	CDB_bigWhite.WhenReleased(new ClimberRightWingRun(0.0));
+
 
 }
 
@@ -42,13 +57,19 @@ OI::OI() {
 		//gets turning values
 		return Desensitize(-driverController.GetRawAxis(4));
 	}
+
 	double OI::GetMove() {
 		//gets forward/backward values
 		return Desensitize(-driverController.GetRawAxis(1));
 	}
+
 	double OI::Desensitize(double value) {
 		//set threshold so tiny values on the joystick don't register,
 		//sometimes resting value of joystick is not 0
 		if (fabs(value) < 0.25) value = 0; //0.3
 		return value;
+	}
+
+	double OI::GetLiftControl() {
+		return Desensitize(coDriverController.GetRawAxis(1));
 	}

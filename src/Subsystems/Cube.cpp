@@ -7,6 +7,8 @@ intakeMotor2 = RobotMap::motor2;
 intakeMotor3 = RobotMap::motor3;
 intakeMotor4 = RobotMap::motor4;
 extakeMotor = RobotMap::motor5;
+intakeLeft = RobotMap::cubeIntakeLeftMotor;
+intakeRight = RobotMap::cubeIntakeRightMotor;
 cubeIntakeSolenoid = RobotMap::cubeIntakeSolenoid;
 cubeExtakeSolenoid = RobotMap::cubeExtakeSolenoid;
 
@@ -22,6 +24,8 @@ void Cube::SetIntakeSpeed(double speed) {
 	intakeMotor2->Set(-speed);
 	intakeMotor3->Set(speed * 0.6667); //0.5
 	intakeMotor4->Set(speed);
+	intakeLeft->Set(speed);
+	intakeRight->Set(speed);
 }
 
 void Cube::SetExtakeSpeed(double speed) {

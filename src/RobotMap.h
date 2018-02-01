@@ -26,6 +26,8 @@ public:
 	static std::shared_ptr<frc::Spark> motor4;
 	static std::shared_ptr<frc::Spark> motor5;
 
+	static std::shared_ptr<WPI_TalonSRX> cubeIntakeLeftMotor;
+	static std::shared_ptr<WPI_TalonSRX> cubeIntakeRightMotor;
 	static std::shared_ptr<frc::DoubleSolenoid> cubeExtakeSolenoid;
 	static std::shared_ptr<frc::DoubleSolenoid> cubeIntakeSolenoid;
 
@@ -33,7 +35,6 @@ public:
 	static std::shared_ptr<WPI_TalonSRX> climberLeftWingMotor2;
 	static std::shared_ptr<WPI_TalonSRX> climberRightWingMotor1;
 	static std::shared_ptr<WPI_TalonSRX> climberRightWingMotor2;
-
 
 	static std::shared_ptr<frc::AnalogInput> ultrasonicFrontLeft;
 	static std::shared_ptr<frc::AnalogInput> ultrasonicRearLeft;
@@ -43,6 +44,13 @@ public:
 	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay2;
 	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay3;
 	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay4;
+
+	static std::shared_ptr<WPI_TalonSRX> elevatorLeftMotor;
+	static std::shared_ptr<WPI_TalonSRX> elevatorRightMotor;
+	static std::shared_ptr<frc::Encoder> elevatorEncoder;
+	static std::shared_ptr<frc::DigitalInput> elevatorTopSwitch;
+	static std::shared_ptr<frc::DigitalInput> elevatorBottomSwitch;
+
 
 	static void init();
 

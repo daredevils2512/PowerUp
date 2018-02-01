@@ -8,7 +8,7 @@ std::shared_ptr<UltrasonicSubsystem> Robot::ultrasonicSubsystem;
 std::shared_ptr<Cube> Robot::cube;
 std::shared_ptr<Climber> Robot::climber;
 std::shared_ptr<NavXPIDSource> Robot::navxPidSource;
-
+std::shared_ptr<Elevator> Robot::elevator;
 
 void Robot::RobotInit() {
 	std::cout << "Robot Init" << std::endl;
@@ -16,6 +16,7 @@ void Robot::RobotInit() {
     drivetrain.reset(new Drivetrain());
     ultrasonicSubsystem.reset(new UltrasonicSubsystem());
     navxPidSource.reset(new NavXPIDSource());
+    elevator.reset(new Elevator());
     RobotMap::navXTurnController.reset(new frc::PIDController(
     		NavXSubsystem::NAVX_P_VALUE,
 			NavXSubsystem::NAVX_I_VALUE,
@@ -58,6 +59,11 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAverageVoltage());
 	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAverageVoltage());
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
+
+	SmartDashboard::PutBoolean("Top Limit Switch" , RobotMap::elevatorTopSwitch->Get());
+	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+	SmartDashboard::PutNumber("Raw Elevator Clicks" , RobotMap::elevatorEncoder->Get());
+
 
 }
 void Robot::DisabledInit(){
