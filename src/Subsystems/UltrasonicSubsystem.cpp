@@ -56,7 +56,15 @@ void UltrasonicSubsystem::RelaysOff () {
 	RobotMap::ultrasonicRelay3->Set(false);
 	RobotMap::ultrasonicRelay4->Set(false);
 }
+void UltrasonicSubsystem::RelaySwitch() {
+	RobotMap::ultrasonicRelay1->Set(true);
+	RobotMap::ultrasonicRelay2->Set(false);
+	Wait(0.5);
+	RobotMap::ultrasonicRelay1->Set(false);
+	RobotMap::ultrasonicRelay2->Set(true);
+	Wait(0.5);
 
+}
 double UltrasonicSubsystem::ConvertToDistance(double voltageMeasured) {
 	double voltagePerCm = 0.0;
 	double distanceCm = 0.0;
@@ -90,7 +98,7 @@ double UltrasonicSubsystem::GetAverageDistance(Util::RobotSide robotSide) {
 void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSpeed, double startDist) {
 	//Function for driving the robot along a wall at any given distance using ultrasonic sensors
 	//Compares both the front and back sensors, along with the starting distance away and the current distance away
-
+	RelaySwitch();
 
 	//All the doubles we using for calculations
 	double frontDist = 0.0;
@@ -104,6 +112,7 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
 		//Getting the distances the ultrasonic sensors are returning
+
 		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
 		rearDist = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
 		avgDist = (frontDist + rearDist) / 2;
