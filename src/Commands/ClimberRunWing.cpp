@@ -1,34 +1,35 @@
-#include "ClimberRightWingRun.h"
+#include "Commands/ClimberRunWing.h"
 
-ClimberRightWingRun::ClimberRightWingRun(double speed) {
+ClimberRunWing::ClimberRunWing(Climber::ClimberWing wing, double speed) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires (Robot::climber.get());
 	m_speed = speed;
+	m_wing = wing;
 }
 
 // Called just before this Command runs the first time
-void ClimberRightWingRun::Initialize() {
+void ClimberRunWing::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ClimberRightWingRun::Execute() {
-	Robot::climber->SetRightWingSpeed(m_speed);
+void ClimberRunWing::Execute() {
+	Robot::climber->SetWingSpeed(m_wing, m_speed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ClimberRightWingRun::IsFinished() {
+bool ClimberRunWing::IsFinished() {
 	return true;
 }
 
 // Called once after isFinished returns true
-void ClimberRightWingRun::End() {
-	Robot::climber->SetRightWingSpeed(0.0);
+void ClimberRunWing::End() {
+	Robot::climber->SetWingSpeed(m_wing, 0.0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ClimberRightWingRun::Interrupted() {
+void ClimberRunWing::Interrupted() {
 
 }

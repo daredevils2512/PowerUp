@@ -5,36 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include <Commands/ClimberRunWing.h>
 #include <Commands/CMG_NavXAutoTest.h>
 #include <Commands/CMG_UltrasonicAutoTest.h>
+#include <Commands/UltrasonicRelayOnOff.h>
 #include "OI.h"
 
 #include <WPILib.h>
+#include "Commands/DrivetrainShift.h"
 #include "Commands/UltraSonicStraightDrive.h"
 #include "Commands/PIDTurn.h"
 #include "Commands/AutoStraightDrive.h"
-#include "Commands/RelayOnOff.h"
-#include "Commands/ClimberLeftWingRun.h"
-#include "Commands/ClimberRightWingRun.h"
+#include "Commands/ClimberRunWing.h"
+#include "Commands/CMG_UltrasonicRelaySwitching.h"
 #include "Robot.h"
 #include "Util.h"
 
 OI::OI() {
+	DRC_rightTrigger.WhileHeld (new DrivetrainShift(true));
+	DRC_rightTrigger.WhenReleased (new DrivetrainShift(false));
 	DRC_aButton.WhenPressed(new CMG_NavXAutoTest());
 	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.45, 36, Util::RobotSide::leftSide)); //0.5
 	DRC_bButton.WhenPressed(new AutoStraightDrive(24.0, -0.55));
+	DRC_xButton.WhenPressed(new CMG_UltrasonicRelaySwitching());
 	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
 	DRC_rightBumper.WhenPressed(new PIDTurn(90));
 	DRC_startButton.WhenPressed (new CMG_UltrasonicAutoTest());
 
-	CDB_topWhite.WhenPressed(new RelayOnOff(1));
-	CDB_topRed.WhenPressed(new RelayOnOff(2));
-	CDB_middleWhite.WhenPressed(new RelayOnOff(3));
-	CDB_middleRed.WhenPressed(new RelayOnOff(4));
-	CDB_bigRed.WhileHeld(new ClimberLeftWingRun(0.8)); // run motors to move left wing up
-	CDB_bigRed.WhenReleased(new ClimberLeftWingRun(0.0));
-	CDB_bigWhite.WhileHeld(new ClimberRightWingRun(0.8)); // run motors to move right wing up
-	CDB_bigWhite.WhileHeld(new ClimberRightWingRun(0.0));
+	CDB_topWhite.WhenPressed(new UltrasonicRelayOnOff(1));
+	CDB_topRed.WhenPressed(new UltrasonicRelayOnOff(2));
+	CDB_middleWhite.WhenPressed(new UltrasonicRelayOnOff(3));
+	CDB_bigRed.WhileHeld(new ClimberRunWing(Climber::ClimberWing::leftWing, 0.8)); // run motors to move left wing up
+	CDB_bigRed.WhenReleased(new ClimberRunWing(Climber::ClimberWing::leftWing, 0.0));
+	CDB_bigWhite.WhileHeld(new ClimberRunWing(Climber::ClimberWing::rightWing, 0.8)); // run motors to move right wing up
+	CDB_bigWhite.WhileHeld(new ClimberRunWing(Climber::ClimberWing::rightWing, 0.0));
 
 }
 

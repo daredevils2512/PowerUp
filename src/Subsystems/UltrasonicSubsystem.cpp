@@ -2,48 +2,36 @@
 #include "../RobotMap.h"
 #include "../Robot.h"
 #include "../Util.h"
+#include "../Commands/CMG_UltrasonicRelaySwitching.h"
 
-UltrasonicSubsystem::UltrasonicSubsystem() : Subsystem("ExampleSubsystem") {
+UltrasonicSubsystem::UltrasonicSubsystem() : Subsystem("UltrasonicSubsystem") {
 	std::cout << "Constructed ultrasonic subsystem" << std::endl;
+
 }
 
 void UltrasonicSubsystem::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new CMG_UltrasonicRelaySwitching());
 }
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
-void UltrasonicSubsystem::RelayToggle(int relayID) {
+void UltrasonicSubsystem::ToggleRelay(int relayID) {
+	std::cout << "Toggling Relay: " << relayID << std::endl;
 	switch (relayID) {
 	case 1:
-		if (RobotMap::ultrasonicRelay1->Get()) {
-			RobotMap::ultrasonicRelay1->Set(false);
-		} else {
-			RobotMap::ultrasonicRelay1->Set(true);
-		}
+		RobotMap::ultrasonicRelay1->Set(!RobotMap::ultrasonicRelay1->Get());
 		break;
 	case 2:
-		if (RobotMap::ultrasonicRelay2->Get()) {
-			RobotMap::ultrasonicRelay2->Set(false);
-		} else {
-			RobotMap::ultrasonicRelay2->Set(true);
-		}
+		RobotMap::ultrasonicRelay2->Set(!RobotMap::ultrasonicRelay2->Get());
 		break;
 	case 3:
-		if (RobotMap::ultrasonicRelay3->Get()) {
-			RobotMap::ultrasonicRelay3->Set(false);
-		} else {
-			RobotMap::ultrasonicRelay3->Set(true);
-		}
+		RobotMap::ultrasonicRelay3->Set(!RobotMap::ultrasonicRelay3->Get());
 		break;
 	case 4:
-		if (RobotMap::ultrasonicRelay4->Get()) {
-			RobotMap::ultrasonicRelay4->Set(false);
-		} else {
-			RobotMap::ultrasonicRelay4->Set(true);
-		}
+		RobotMap::ultrasonicRelay4->Set(!RobotMap::ultrasonicRelay4->Get());
 		break;
 	default:
 		std::cout << "That's not a valid Relay ID: " << relayID << std::endl;
@@ -56,14 +44,24 @@ void UltrasonicSubsystem::RelaysOff () {
 	RobotMap::ultrasonicRelay3->Set(false);
 	RobotMap::ultrasonicRelay4->Set(false);
 }
-void UltrasonicSubsystem::RelaySwitch() {
-	RobotMap::ultrasonicRelay1->Set(true);
-	RobotMap::ultrasonicRelay2->Set(false);
-	Wait(0.5);
-	RobotMap::ultrasonicRelay1->Set(false);
-	RobotMap::ultrasonicRelay2->Set(true);
-	Wait(0.5);
 
+void UltrasonicSubsystem::LastValidValue (SensorSide side) {
+	lastValidFront = 0.0;
+	lastValidRear = 0.0;
+	currentFrontDistance = 0.0;
+	currentRearDistance = 0.0;
+	switch (side) {
+	case SensorSide::frontSensor:
+		currentFrontDistance = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
+		lastValidFront = currentFrontDistance;
+		break;
+	case SensorSide::rearSensor:
+		currentRearDistance = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
+		lastValidRear = currentRearDistance;
+		break;
+	default:
+		std::cout << "Oops, something went wrong" << std::endl;
+	}
 }
 double UltrasonicSubsystem::ConvertToDistance(double voltageMeasured) {
 	double voltagePerCm = 0.0;
@@ -98,7 +96,6 @@ double UltrasonicSubsystem::GetAverageDistance(Util::RobotSide robotSide) {
 void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSpeed, double startDist) {
 	//Function for driving the robot along a wall at any given distance using ultrasonic sensors
 	//Compares both the front and back sensors, along with the starting distance away and the current distance away
-	RelaySwitch();
 
 	//All the doubles we using for calculations
 	double frontDist = 0.0;
@@ -112,9 +109,11 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
 		//Getting the distances the ultrasonic sensors are returning
+		Robot::ultrasonicSubsystem->lastValidFront = frontDist; // experimental, probably won't work
+		Robot::ultrasonicSubsystem->lastValidRear = rearDist;
 
-		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
-		rearDist = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
+//		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage()); //proven to work
+//		rearDist = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
 		avgDist = (frontDist + rearDist) / 2;
 
 		//calculating the slow-downs

@@ -1,34 +1,34 @@
-#include "RelayOnOff.h"
+#include <Commands/UltrasonicRelayOnOff.h>
 #include "../Robot.h"
 
-RelayOnOff::RelayOnOff(double relayID) {
+UltrasonicRelayOnOff::UltrasonicRelayOnOff(double relayID) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	m_relayID = relayID;
 }
 
 // Called just before this Command runs the first time
-void RelayOnOff::Initialize() {
+void UltrasonicRelayOnOff::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void RelayOnOff::Execute() {
-	Robot::ultrasonicSubsystem->RelayToggle(m_relayID);
+void UltrasonicRelayOnOff::Execute() {
+	Robot::ultrasonicSubsystem->ToggleRelay(m_relayID);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool RelayOnOff::IsFinished() {
+bool UltrasonicRelayOnOff::IsFinished() {
 	return true;
 }
 
 // Called once after isFinished returns true
-void RelayOnOff::End() {
+void UltrasonicRelayOnOff::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void RelayOnOff::Interrupted() {
+void UltrasonicRelayOnOff::Interrupted() {
 
 }
