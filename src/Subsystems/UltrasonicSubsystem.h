@@ -12,8 +12,6 @@ private:
 
 double lastValidFront = 0.0;
 double lastValidRear= 0.0;
-double currentFrontDistance = 0.0;
-double currentRearDistance = 0.0;
 
 public:
 
@@ -26,7 +24,7 @@ enum class SensorSide {
 	void InitDefaultCommand();
 	void ToggleRelay(int relayID);
 	void RelaysOff();
-	void LastValidValue (SensorSide side);
+	void LastValidValue(Util::RobotSide robotSide, SensorSide side);
 	double ConvertToDistance(double voltageMeasured);
 	double GetAverageDistance(Util::RobotSide robotSide);
 	double GetDifference(double frontDistance, double rearDistance);

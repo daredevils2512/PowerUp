@@ -38,29 +38,47 @@ void UltrasonicSubsystem::ToggleRelay(int relayID) {
 	}
 }
 
-void UltrasonicSubsystem::RelaysOff () {
+void UltrasonicSubsystem::RelaysOff() {
 	RobotMap::ultrasonicRelay1->Set(false);
 	RobotMap::ultrasonicRelay2->Set(false);
 	RobotMap::ultrasonicRelay3->Set(false);
 	RobotMap::ultrasonicRelay4->Set(false);
 }
 
-void UltrasonicSubsystem::LastValidValue (SensorSide side) {
-	lastValidFront = 0.0;
-	lastValidRear = 0.0;
-	currentFrontDistance = 0.0;
-	currentRearDistance = 0.0;
-	switch (side) {
-	case SensorSide::frontSensor:
-		currentFrontDistance = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
-		lastValidFront = currentFrontDistance;
-		break;
-	case SensorSide::rearSensor:
-		currentRearDistance = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
-		lastValidRear = currentRearDistance;
-		break;
-	default:
-		std::cout << "Oops, something went wrong" << std::endl;
+void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide side) {
+	switch (robotSide) {
+		case (Util::RobotSide::leftSide):
+			switch (side) {
+				case SensorSide::frontSensor:
+					lastValidFront = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
+					break;
+				case SensorSide::rearSensor:
+					lastValidRear = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
+					break;
+				default:
+					std::cout << "Oops, something went wrong" << std::endl;
+					break;
+			}
+			break;
+		case (Util::RobotSide::rightSide):
+	//Add back in when sensors are added to the right
+//			switch (side) {
+//				case SensorSide::frontSensor:
+//					currentFrontDistance = ConvertToDistance(RobotMap::ultrasonicFrontRight->GetVoltage());
+//					lastValidFront = currentFrontDistance;
+//					break;
+//				case SensorSide::rearSensor:
+//					currentRearDistance = ConvertToDistance(RobotMap::ultrasonicRearRight->GetVoltage());
+//					lastValidRear = currentRearDistance;
+//					break;
+//				default:
+//					std::cout << "Oops, something went wrong" << std::endl;
+//					break;
+//			}
+			break;
+		default:
+			std::cout << "Oops, something went wrong" << std::endl;
+			break;
 	}
 }
 double UltrasonicSubsystem::ConvertToDistance(double voltageMeasured) {

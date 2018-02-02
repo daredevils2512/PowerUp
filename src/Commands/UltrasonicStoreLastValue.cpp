@@ -1,11 +1,12 @@
 #include "UltrasonicStoreLastValue.h"
 
-UltrasonicStoreLastValue::UltrasonicStoreLastValue(UltrasonicSubsystem::SensorSide side) {
+UltrasonicStoreLastValue::UltrasonicStoreLastValue(Util::RobotSide robotSide, UltrasonicSubsystem::SensorSide side) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::ultrasonicSubsystem.get());
 	//m_valid = lastValid;
 	m_side = side;
+	m_robotSide = robotSide;
 
 }
 
@@ -16,7 +17,7 @@ void UltrasonicStoreLastValue::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void UltrasonicStoreLastValue::Execute() {
-	Robot::ultrasonicSubsystem->LastValidValue(m_side);
+	Robot::ultrasonicSubsystem->LastValidValue(m_robotSide, m_side);
 }
 
 // Make this return true when this Command no longer needs to run execute()

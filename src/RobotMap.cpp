@@ -72,19 +72,19 @@ void RobotMap::init() {
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
 
-	 motor1.reset(new frc::Spark(1));
-	 motor2.reset(new frc::Spark(2));
-	 motor3.reset(new frc::Spark(3));
-	 motor4.reset(new frc::Spark(4));
-	 //motor5.reset(new frc::Spark(5));
+//	 motor1.reset(new frc::Spark(1));
+//	 motor2.reset(new frc::Spark(2));
+//	 motor3.reset(new frc::Spark(3));
+//	 motor4.reset(new frc::Spark(4));
+//	 //motor5.reset(new frc::Spark(5));
 
 //	 cubeExtakeSolenoid.reset (new frc::DoubleSolenoid (0, 2 ,3));
 //	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 4 ,5));
 
-	climberLeftWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_1));
-	climberLeftWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_2));
-	climberRightWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_1));
-	climberRightWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_2));
+//	climberLeftWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_1));
+//	climberLeftWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_2));
+//	climberRightWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_1));
+//	climberRightWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_2));
 
 	ultrasonicFrontLeft.reset(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT));
 		ultrasonicFrontLeft->SetAverageBits(50); //50
