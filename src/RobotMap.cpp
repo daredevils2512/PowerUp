@@ -50,10 +50,10 @@ void RobotMap::init() {
 	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
 
 	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
-	//drivetrainRearLeftMotor->SetInverted(true); //only needed for Aries
+	drivetrainRearLeftMotor->SetInverted(true); //only needed for Aries
 
 	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
-	//drivetrainRearRightMotor->SetInverted(true); //only needed for Aries
+	drivetrainRearRightMotor->SetInverted(true); //only needed for Aries
 
 	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 
@@ -68,7 +68,7 @@ void RobotMap::init() {
 	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X)); //(2,3,false,k4x)
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
 
-	drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4, 5)); //0,1
+//	drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4, 5)); //0,1
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
 

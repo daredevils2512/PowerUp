@@ -10,8 +10,8 @@ class UltrasonicSubsystem : public frc::Subsystem {
 
 private:
 
-double lastValidFront = 0.0;
-double lastValidRear= 0.0;
+double lastValidFront;
+double lastValidRear;
 
 public:
 

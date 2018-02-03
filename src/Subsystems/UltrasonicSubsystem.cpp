@@ -4,8 +4,13 @@
 #include "../Util.h"
 #include "../Commands/CMG_UltrasonicRelaySwitching.h"
 
-UltrasonicSubsystem::UltrasonicSubsystem() : Subsystem("UltrasonicSubsystem") {
+//UltrasonicSubsystem::lastValidFront = 0.0;
+//UltrasonicSubsystem::lastValidRear = 0.0;
+
+UltrasonicSubsystem::UltrasonicSubsystem() : Subsystem("UltrasonicSubsystem"), lastValidFront(0.0), lastValidRear(0.0) {
 	std::cout << "Constructed ultrasonic subsystem" << std::endl;
+	std::cout << "Initial Last Valid Front" << lastValidFront << std::endl;
+	std::cout << "Intitial Last Valid Rear" << lastValidRear << std::endl;
 
 }
 
@@ -13,7 +18,7 @@ void UltrasonicSubsystem::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 	std::cout << "Running default command" << std::endl;
-	//SetDefaultCommand(new CMG_UltrasonicRelaySwitching());
+	SetDefaultCommand(new CMG_UltrasonicRelaySwitching());
 }
 
 // Put methods for controlling this subsystem

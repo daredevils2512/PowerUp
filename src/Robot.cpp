@@ -66,16 +66,16 @@ void Robot::RobotPeriodic() {
 
 }
 void Robot::DisabledInit(){
-	RobotMap::ultrasonicRelay1->Set(false);
-	RobotMap::ultrasonicRelay2->Set(false);
-	RobotMap::ultrasonicRelay3->Set(false);
-	RobotMap::ultrasonicRelay4->Set(false);
+	RobotMap::ultrasonicRelay1->Set(true);
+	RobotMap::ultrasonicRelay2->Set(true);
+	RobotMap::ultrasonicRelay3->Set(true);
+	RobotMap::ultrasonicRelay4->Set(true);
 	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
 	drivetrain->SetPIDEnabled(false);
 	//drivetrain->GetPIDOutput();
-	drivetrain->Shifter(frc::DoubleSolenoid::kForward);
+//	drivetrain->Shifter(frc::DoubleSolenoid::kForward);
 
 }
 
@@ -85,10 +85,6 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
-	RobotMap::ultrasonicRelay1->Set(false);
-	RobotMap::ultrasonicRelay2->Set(false);
-	RobotMap::ultrasonicRelay3->Set(false);
-	RobotMap::ultrasonicRelay4->Set(false);
 	Robot::drivetrain->ResetEncoders();
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Start();
@@ -100,10 +96,6 @@ void Robot::AutonomousPeriodic() {
 }
 
 void Robot::TeleopInit() {
-	RobotMap::ultrasonicRelay1->Set(false);
-	RobotMap::ultrasonicRelay2->Set(false);
-	RobotMap::ultrasonicRelay3->Set(false);
-	RobotMap::ultrasonicRelay4->Set(false);
 	Robot::drivetrain->ResetEncoders();
 	compressor->SetClosedLoopControl(true);
 	if (autonomousCommand.get() != nullptr)
@@ -115,10 +107,6 @@ void Robot::TeleopPeriodic() {
 	}
 
 void Robot::TestInit() {
-	RobotMap::ultrasonicRelay1->Set(false);
-	RobotMap::ultrasonicRelay2->Set(false);
-	RobotMap::ultrasonicRelay3->Set(false);
-	RobotMap::ultrasonicRelay4->Set(false);
 	Robot::drivetrain->ResetEncoders();
 	drivetrain->SetPIDEnabled(false);
 	if (autonomousCommand.get() != nullptr)

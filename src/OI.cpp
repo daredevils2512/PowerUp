@@ -33,8 +33,8 @@ OI::OI() {
 //	DRC_rightBumper.WhenPressed(new PIDTurn(90));
 //	DRC_startButton.WhenPressed (new CMG_UltrasonicAutoTest());
 
-//	CDB_topWhite.WhenPressed(new UltrasonicRelayOnOff(1));
-//	CDB_topRed.WhenPressed(new UltrasonicRelayOnOff(2));
+	CDB_topWhite.WhenPressed(new UltrasonicRelayOnOff(1));
+	CDB_topRed.WhenPressed(new UltrasonicRelayOnOff(2));
 //	CDB_middleWhite.WhenPressed(new UltrasonicRelayOnOff(3));
 //	CDB_bigRed.WhileHeld(new ClimberRunWing(Climber::ClimberWing::leftWing, 0.8)); // run motors to move left wing up
 //	CDB_bigRed.WhenReleased(new ClimberRunWing(Climber::ClimberWing::leftWing, 0.0));
