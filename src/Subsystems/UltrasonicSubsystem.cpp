@@ -135,8 +135,8 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
 		//Getting the distances the ultrasonic sensors are returning
-		Robot::ultrasonicSubsystem->lastValidFront = frontDist;
-		Robot::ultrasonicSubsystem->lastValidRear = rearDist;
+		frontDist = Robot::ultrasonicSubsystem->lastValidFront;
+		rearDist = Robot::ultrasonicSubsystem->lastValidRear;
 
 //		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage()); //proven to work //switch to GetAverageVoltage
 //		rearDist = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
@@ -158,20 +158,25 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 			 Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
 			std::cout << "Driving Straight" << std::endl;
-		} else if ((avgDist >= startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
-				   (frontDist >= rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - avgSlowDown); //flip-flopped with right slow turn
-			std::cout << "Turning Left Gradually" << std::endl;
+
 		} else if ((avgDist <= startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
 				   (frontDist <= rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - avgSlowDown); //flip-flopped with right slow turn
+			std::cout << "Turning Left Gradually" << std::endl;
+
+		} else if ((avgDist >= startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
+				   (frontDist >= rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed);
 			std::cout << "Turning Right Gradually" << std::endl;
+
 		} else if (avgDist >= startDist && frontDist >= rearDist) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed + (avgSlowDown / 2), driveSpeed - avgSlowDown); //flip-flopped with right turn wuick
 			std::cout << "Turning Left Quickly" << std::endl;
+
 		} else if (avgDist <= startDist && frontDist <= rearDist) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed + (avgSlowDown / 2));
 			std::cout << "Turning Right Quickly" << std::endl;
+
 		} else {
 			std::cout << "Something is wrong. Stopping driving" << std::endl;
 			Robot::drivetrain->DriveRobotTank(0.0, 0.0);

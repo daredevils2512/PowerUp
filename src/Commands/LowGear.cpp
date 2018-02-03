@@ -8,7 +8,7 @@
 #include "Commands/LowGear.h"
 #include "../RobotMap.h"
 
-LowGear::LowGear() {
+LowGear::LowGear() : DrivetrainShift() {
 	// TODO Auto-generated constructor stub
 
 }

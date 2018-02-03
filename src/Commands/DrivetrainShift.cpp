@@ -2,7 +2,7 @@
 #include "Robot.h"
 
 DrivetrainShift::DrivetrainShift() {
-	Requires(Robot::drivetrain.get());
+	//Requires(Robot::drivetrain.get());
 }
 
 void DrivetrainShift::Initialize() {

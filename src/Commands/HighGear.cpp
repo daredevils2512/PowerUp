@@ -7,7 +7,7 @@
 
 #include <Commands/HighGear.h>
 
-HighGear::HighGear() {
+HighGear::HighGear() : DrivetrainShift(){
 	// TODO Auto-generated constructor stub
 
 }

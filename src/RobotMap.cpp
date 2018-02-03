@@ -68,7 +68,7 @@ void RobotMap::init() {
 	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X)); //(2,3,false,k4x)
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
 
-//	drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4, 5)); //0,1
+	//drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4, 5)); //0,1
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
 
