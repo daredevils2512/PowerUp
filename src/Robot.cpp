@@ -59,6 +59,7 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAverageVoltage());
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
+
 }
 void Robot::DisabledInit(){
 	RobotMap::ultrasonicRelay1->Set(false);

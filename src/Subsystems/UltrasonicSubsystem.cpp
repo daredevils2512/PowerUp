@@ -51,10 +51,10 @@ void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide s
 		case (Util::RobotSide::leftSide):
 			switch (side) {
 				case SensorSide::frontSensor:
-					lastValidFront = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
+					lastValidFront = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()); //GetVoltage
 					break;
 				case SensorSide::rearSensor:
-					lastValidRear = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
+					lastValidRear = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage());
 					break;
 				default:
 					std::cout << "Oops, something went wrong" << std::endl;
@@ -103,8 +103,8 @@ double UltrasonicSubsystem::GetAverageDistance(Util::RobotSide robotSide) {
 	double rearDistance = 0.0;
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
-		frontDistance = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
-		rearDistance = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
+		frontDistance = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()); //GetVoltage
+		rearDistance = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage());
 		break;
 	case Util::RobotSide::rightSide:
 		break;
@@ -130,7 +130,7 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
 		//Getting the distances the ultrasonic sensors are returning
-		Robot::ultrasonicSubsystem->lastValidFront = frontDist; // experimental, probably won't work
+		Robot::ultrasonicSubsystem->lastValidFront = frontDist;
 		Robot::ultrasonicSubsystem->lastValidRear = rearDist;
 
 //		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage()); //proven to work
