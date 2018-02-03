@@ -12,6 +12,7 @@
 #include "Subsystems/Climber.h"
 #include "NavXPIDSource.h"
 #include "Util.h"
+#include "Commands/DrivetrainShift.h"
 
 #include "OI.h"
 

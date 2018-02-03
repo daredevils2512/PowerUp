@@ -50,25 +50,25 @@ void RobotMap::init() {
 	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
 
 	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
-	drivetrainRearLeftMotor->SetInverted(true);
+	//drivetrainRearLeftMotor->SetInverted(true); //only needed for Aries
 
 	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
-	drivetrainRearRightMotor->SetInverted(true);
+	//drivetrainRearRightMotor->SetInverted(true); //only needed for Aries
 
 	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 
-	drivetrainChassis->SetSafetyEnabled(false); //true
+	drivetrainChassis->SetSafetyEnabled(true); //true
 		drivetrainChassis->SetExpiration(0.5);
 		drivetrainChassis->SetMaxOutput(1.0);
 
-	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X)); //theoretical a and b channels
+	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X)); //theoretical a and b channels //(0,1,false,k4x)
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE); //took the circumference of 12.5663 and divided by the 128 internal encoder clicks
 		drivetrainLeftEncoder->SetReverseDirection(true);
 
-	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));
+	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X)); //(2,3,false,k4x)
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
 
-	//drivetrainShifter.reset (new frc::DoubleSolenoid (0,0,1));
+	drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4, 5)); //0,1
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
 

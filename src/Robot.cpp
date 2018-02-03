@@ -46,7 +46,6 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
 
 
-
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
@@ -58,6 +57,11 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAverageVoltage());
 	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAverageVoltage());
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
+
+	SmartDashboard::PutNumber("Drivetrain Front Left" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Front Right" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Rear Left" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Rear Right" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
 
 
 }
@@ -71,6 +75,7 @@ void Robot::DisabledInit(){
 	RobotMap::navX->ResetDisplacement();
 	drivetrain->SetPIDEnabled(false);
 	//drivetrain->GetPIDOutput();
+	drivetrain->Shifter(frc::DoubleSolenoid::kForward);
 
 }
 

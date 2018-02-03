@@ -13,7 +13,7 @@ void UltrasonicSubsystem::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
 	std::cout << "Running default command" << std::endl;
-	SetDefaultCommand(new CMG_UltrasonicRelaySwitching());
+	//SetDefaultCommand(new CMG_UltrasonicRelaySwitching());
 }
 
 // Put methods for controlling this subsystem
@@ -46,7 +46,7 @@ void UltrasonicSubsystem::RelaysOff() {
 }
 
 void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide side) {
-	std::cout << "Running the save value thingy" << std::endl;
+	std::cout << "Running the save last value function" << std::endl;
 	switch (robotSide) {
 		case (Util::RobotSide::leftSide):
 			switch (side) {
@@ -54,7 +54,7 @@ void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide s
 					lastValidFront = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()); //GetVoltage
 					break;
 				case SensorSide::rearSensor:
-					lastValidRear = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage());
+					lastValidRear = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()); //GetVoltage
 					break;
 				default:
 					std::cout << "Oops, something went wrong" << std::endl;
@@ -67,11 +67,11 @@ void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide s
 	//Add back in when sensors are added to the right
 //			switch (side) {
 //				case SensorSide::frontSensor:
-//					currentFrontDistance = ConvertToDistance(RobotMap::ultrasonicFrontRight->GetVoltage());
+//					currentFrontDistance = ConvertToDistance(RobotMap::ultrasonicFrontRight->GetAverageVoltage()); //GetVoltage
 //					lastValidFront = currentFrontDistance;
 //					break;
 //				case SensorSide::rearSensor:
-//					currentRearDistance = ConvertToDistance(RobotMap::ultrasonicRearRight->GetVoltage());
+//					currentRearDistance = ConvertToDistance(RobotMap::ultrasonicRearRight->GetAverageVoltage());
 //					lastValidRear = currentRearDistance;
 //					break;
 //				default:
@@ -104,7 +104,7 @@ double UltrasonicSubsystem::GetAverageDistance(Util::RobotSide robotSide) {
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
 		frontDistance = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()); //GetVoltage
-		rearDistance = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage());
+		rearDistance = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()); //GetVoltage
 		break;
 	case Util::RobotSide::rightSide:
 		break;
@@ -133,7 +133,7 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 		Robot::ultrasonicSubsystem->lastValidFront = frontDist;
 		Robot::ultrasonicSubsystem->lastValidRear = rearDist;
 
-//		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage()); //proven to work
+//		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage()); //proven to work //switch to GetAverageVoltage
 //		rearDist = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
 		avgDist = (frontDist + rearDist) / 2;
 
