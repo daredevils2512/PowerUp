@@ -28,12 +28,12 @@ CMG_UltrasonicRelaySwitching::CMG_UltrasonicRelaySwitching() {
 	std::cout << "Running CMG" << std::endl;
 	AddSequential(new UltrasonicRelaysOff());
 	AddSequential(new UltrasonicRelayOnOff(1));
-	AddSequential(new frc::WaitCommand(0.2)); //.15//.25
+	AddSequential(new frc::WaitCommand(0.25)); //.15//.25
 	std::cout <<"Saving Value 1" << std::endl;
 	AddSequential(new UltrasonicStoreLastValue(Util::RobotSide::leftSide, UltrasonicSubsystem::SensorSide::frontSensor));
 	AddSequential(new UltrasonicRelayOnOff(1)); //save value from 1
 	AddSequential(new UltrasonicRelayOnOff(2)); //save value from 2
-	AddSequential(new frc::WaitCommand(0.2)); //.15
+	AddSequential(new frc::WaitCommand(0.25)); //.15
 	std::cout <<"Saving Value 2" << std::endl;
 	AddSequential(new UltrasonicStoreLastValue(Util::RobotSide::leftSide, UltrasonicSubsystem::SensorSide::rearSensor));
 

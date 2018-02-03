@@ -12,6 +12,7 @@ UltrasonicSubsystem::UltrasonicSubsystem() : Subsystem("UltrasonicSubsystem") {
 void UltrasonicSubsystem::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
+	std::cout << "Running default command" << std::endl;
 	SetDefaultCommand(new CMG_UltrasonicRelaySwitching());
 }
 
@@ -19,7 +20,6 @@ void UltrasonicSubsystem::InitDefaultCommand() {
 // here. Call these from Commands.
 
 void UltrasonicSubsystem::ToggleRelay(int relayID) {
-	std::cout << "Toggling Relay: " << relayID << std::endl;
 	switch (relayID) {
 	case 1:
 		RobotMap::ultrasonicRelay1->Set(!RobotMap::ultrasonicRelay1->Get());
@@ -46,6 +46,7 @@ void UltrasonicSubsystem::RelaysOff() {
 }
 
 void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide side) {
+	std::cout << "Running the save value thingy" << std::endl;
 	switch (robotSide) {
 		case (Util::RobotSide::leftSide):
 			switch (side) {
@@ -59,6 +60,8 @@ void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide s
 					std::cout << "Oops, something went wrong" << std::endl;
 					break;
 			}
+		std::cout << "lastValidFront dist: " << lastValidFront << std::endl;
+		std::cout << "lastValidRear dist: " << lastValidRear << std::endl;
 			break;
 		case (Util::RobotSide::rightSide):
 	//Add back in when sensors are added to the right
@@ -134,6 +137,9 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 //		rearDist = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
 		avgDist = (frontDist + rearDist) / 2;
 
+		std::cout << "Front dist: " << frontDist << std::endl;
+		std::cout << "Rear dist: " << rearDist << std::endl;
+		std::cout << "Avg Dist: " << avgDist << std::endl;
 		//calculating the slow-downs
 		avgDistSlowDown = GetDifference(avgDist, startDist);
 		avgFrontVsRearSlowDown = GetDifference(frontDist, rearDist);

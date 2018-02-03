@@ -17,6 +17,7 @@ void UltrasonicStoreLastValue::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void UltrasonicStoreLastValue::Execute() {
+	std::cout << "Storing values" << std::endl;
 	Robot::ultrasonicSubsystem->LastValidValue(m_robotSide, m_side);
 }
 
