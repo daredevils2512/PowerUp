@@ -62,7 +62,13 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Drivetrain Front Right" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
 	SmartDashboard::PutNumber("Drivetrain Rear Left" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
 	SmartDashboard::PutNumber("Drivetrain Rear Right" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Slowdown Speed", Robot::ultrasonicSubsystem->m_avgSlowdown);
 
+	SmartDashboard::PutNumber("Ending Distance", ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
+	SmartDashboard::PutNumber("Last Front", ultrasonicSubsystem->m_lastFront);
+	SmartDashboard::PutNumber("Last Rear", ultrasonicSubsystem->m_lastRear);
+	SmartDashboard::PutNumber("This Front", ultrasonicSubsystem->m_thisFront);
+    SmartDashboard::PutNumber("This Rear", ultrasonicSubsystem->m_thisRear);
 
 }
 void Robot::DisabledInit(){
@@ -103,6 +109,10 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
+//	std::cout << "this front value: " << ultrasonicSubsystem->m_thisFront << std::endl;
+//	std::cout << "this rear value: " << ultrasonicSubsystem->m_thisRear << std::endl;
+//	std::cout << "last front value: " << ultrasonicSubsystem->m_lastFront << std::endl;
+//	std::cout << "last rear value: " << ultrasonicSubsystem->m_lastRear << std::endl;
 	Scheduler::GetInstance()->Run();
 	}
 

@@ -7,11 +7,16 @@
 //UltrasonicSubsystem::lastValidFront = 0.0;
 //UltrasonicSubsystem::lastValidRear = 0.0;
 
-UltrasonicSubsystem::UltrasonicSubsystem() : Subsystem("UltrasonicSubsystem"), lastValidFront(0.0), lastValidRear(0.0) {
+UltrasonicSubsystem::UltrasonicSubsystem() : Subsystem("UltrasonicSubsystem") {
+	lastValidFront = 0.0;
+	lastValidRear = 0.0;
 	std::cout << "Constructed ultrasonic subsystem" << std::endl;
 	std::cout << "Initial Last Valid Front" << lastValidFront << std::endl;
 	std::cout << "Intitial Last Valid Rear" << lastValidRear << std::endl;
-
+	m_lastFront = 0.0;
+	m_lastRear = 0.0;
+	m_thisFront = 0.0;
+	m_thisRear = 0.0;
 }
 
 void UltrasonicSubsystem::InitDefaultCommand() {
@@ -50,23 +55,26 @@ void UltrasonicSubsystem::RelaysOff() {
 	RobotMap::ultrasonicRelay4->Set(false);
 }
 
-void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide side) {
+void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide side, int arrayVal) {
+
 	std::cout << "Running the save last value function" << std::endl;
 	switch (robotSide) {
 		case (Util::RobotSide::leftSide):
 			switch (side) {
 				case SensorSide::frontSensor:
-					lastValidFront = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()); //GetVoltage
+					ultrasonicSaves[arrayVal] = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage());
+//					lastValidFront = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()); //GetVoltage
 					break;
 				case SensorSide::rearSensor:
-					lastValidRear = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()); //GetVoltage
+					ultrasonicSaves[arrayVal] = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage());
+//					lastValidRear = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()); //GetVoltage
 					break;
 				default:
 					std::cout << "Oops, something went wrong" << std::endl;
 					break;
 			}
-		std::cout << "lastValidFront dist: " << lastValidFront << std::endl;
-		std::cout << "lastValidRear dist: " << lastValidRear << std::endl;
+//		std::cout << "lastValidFront dist: " << lastValidFront << std::endl;
+//		std::cout << "lastValidRear dist: " << lastValidRear << std::endl;
 			break;
 		case (Util::RobotSide::rightSide):
 	//Add back in when sensors are added to the right
@@ -88,6 +96,10 @@ void UltrasonicSubsystem::LastValidValue(Util::RobotSide robotSide, SensorSide s
 			std::cout << "Oops, something went wrong" << std::endl;
 			break;
 	}
+	m_lastFront = ultrasonicSaves[0];
+	m_lastRear = ultrasonicSaves[1];
+	m_thisFront = ultrasonicSaves[2];
+	m_thisRear = ultrasonicSaves[3];
 }
 double UltrasonicSubsystem::ConvertToDistance(double voltageMeasured) {
 	double voltagePerCm = 0.0;
@@ -124,19 +136,23 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 	//Compares both the front and back sensors, along with the starting distance away and the current distance away
 
 	//All the doubles we using for calculations
-	double frontDist = 0.0;
+	double frontDist = 0.0; //defaulted to 0 before
 	double rearDist = 0.0;
 	double avgDist = 0.0;
 	double avgDistSlowDown = 0.0;
 	double avgFrontVsRearSlowDown = 0.0;
-	double avgSlowDown = 0.0;
+	double m_avgSlowDown = 0.0;
 	m_startingDistance = startDist;
 
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
 		//Getting the distances the ultrasonic sensors are returning
-		frontDist = Robot::ultrasonicSubsystem->lastValidFront;
-		rearDist = Robot::ultrasonicSubsystem->lastValidRear;
+
+		frontDist = m_thisFront + m_lastFront;
+		rearDist = m_thisRear + m_lastRear;
+
+//		frontDist = Robot::ultrasonicSubsystem->lastValidFront;
+//		rearDist = Robot::ultrasonicSubsystem->lastValidRear;
 
 //		frontDist = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage()); //proven to work //switch to GetAverageVoltage
 //		rearDist = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
@@ -148,8 +164,8 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 		//calculating the slow-downs
 		avgDistSlowDown = GetDifference(avgDist, startDist);
 		avgFrontVsRearSlowDown = GetDifference(frontDist, rearDist);
-		avgSlowDown = ((avgDistSlowDown + avgFrontVsRearSlowDown) / 2) * Util::ULTRASONIC_TURN_MULTIPLIER;
-		std::cout << "Slowdown Speed: " << avgSlowDown << std::endl;
+		m_avgSlowDown = ((avgDistSlowDown + avgFrontVsRearSlowDown) / 2) * Util::ULTRASONIC_TURN_MULTIPLIER;
+		std::cout << "Slowdown Speed: " << m_avgSlowDown << std::endl;
 
 		//All the cases between the two inputs
 		if ((avgDist <= startDist && frontDist >= rearDist) ||
@@ -159,22 +175,22 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
 			std::cout << "Driving Straight" << std::endl;
 
-		} else if ((avgDist <= startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
-				   (frontDist <= rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - avgSlowDown); //flip-flopped with right slow turn
+		} else if ((avgDist < startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
+				   (frontDist < rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - m_avgSlowDown); //flip-flopped with right slow turn
 			std::cout << "Turning Left Gradually" << std::endl;
 
-		} else if ((avgDist >= startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
-				   (frontDist >= rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed);
+		} else if ((avgDist > startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
+				   (frontDist > rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed - m_avgSlowDown, driveSpeed);
 			std::cout << "Turning Right Gradually" << std::endl;
 
-		} else if (avgDist >= startDist && frontDist >= rearDist) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed + (avgSlowDown / 2), driveSpeed - avgSlowDown); //flip-flopped with right turn wuick
+		} else if (avgDist > startDist && frontDist > rearDist) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed + (m_avgSlowDown / 2), driveSpeed - m_avgSlowDown); //flip-flopped with right turn wuick
 			std::cout << "Turning Left Quickly" << std::endl;
 
-		} else if (avgDist <= startDist && frontDist <= rearDist) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed + (avgSlowDown / 2));
+		} else if (avgDist < startDist && frontDist < rearDist) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed - m_avgSlowDown, driveSpeed + (m_avgSlowDown / 2));
 			std::cout << "Turning Right Quickly" << std::endl;
 
 		} else {
@@ -193,7 +209,7 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 //		//calculating the slow-downs
 //		avgDistSlowDown = GetDifference(avgDist, startDist);
 //		avgFrontVsRearSlowDown = GetDifference(frontDist, rearDist);
-//		avgSlowDown = ((avgDistSlowDown + avgFrontVsRearSlowDown) / 2) * Util::ULTRASONIC_TURN_MULTIPLIER;
+//		m_avgSlowDown = ((avgDistSlowDown + avgFrontVsRearSlowDown) / 2) * Util::ULTRASONIC_TURN_MULTIPLIER;
 //
 //		//All the cases between the two inputs
 //		if ((avgDist <= startDist && frontDist >= rearDist) ||
@@ -202,14 +218,14 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 //			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
 //		} else if ((avgDist >= startDist && frontDist == rearDist) ||
 //				   (avgDist == startDist && frontDist >= rearDist)) {
-//			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - avgSlowDown);
+//			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - m_avgSlowDown);
 //		} else if ((avgDist <= startDist && frontDist == rearDist) ||
 //				   (avgDist == startDist && frontDist <= rearDist)) {
-//			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed);
+//			Robot::drivetrain->DriveRobotTank(driveSpeed - m_avgSlowDown, driveSpeed);
 //		} else if (avgDist >= startDist && frontDist >= rearDist) {
-//			Robot::drivetrain->DriveRobotTank(driveSpeed + (avgSlowDown / 2), driveSpeed - avgSlowDown);
+//			Robot::drivetrain->DriveRobotTank(driveSpeed + (m_avgSlowDown / 2), driveSpeed - m_avgSlowDown);
 //		} else if (avgDist <= startDist && frontDist <= rearDist) {
-//			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed + (avgSlowDown / 2));
+//			Robot::drivetrain->DriveRobotTank(driveSpeed - m_avgSlowDown, driveSpeed + (m_avgSlowDown / 2));
 //		} else {
 //			std::cout << "Something is wrong. Stopping driving" << std::endl;
 //			Robot::drivetrain->DriveRobotTank(0.0, 0.0);

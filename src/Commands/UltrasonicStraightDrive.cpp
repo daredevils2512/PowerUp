@@ -1,5 +1,5 @@
 #include "UltrasonicStraightDrive.h"
-#include "../Robot.h"
+//#include "../Robot.h"
 #include "../RobotMap.h"
 
 UltrasonicStraightDrive::UltrasonicStraightDrive(double driveSpeed, double distanceToDrive, Util::RobotSide robotSide) {
@@ -24,8 +24,8 @@ void UltrasonicStraightDrive::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool UltrasonicStraightDrive::IsFinished() {
-	double frontDist = Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetVoltage());
-	double rearDist = Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicRearLeft->GetVoltage());
+	double frontDist = Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()); //GetVoltage
+	double rearDist = Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage());
 	double avgDist = (frontDist + rearDist) / 2;
 	std::cout << "Ending distance Away: " << avgDist << std::endl;
 	return ((Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder()) / 2) >= m_distanceToDrive;

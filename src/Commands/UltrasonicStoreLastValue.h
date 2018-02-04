@@ -7,7 +7,7 @@
 
 class UltrasonicStoreLastValue : public frc::Command {
 public:
-	UltrasonicStoreLastValue(Util::RobotSide robotSide, UltrasonicSubsystem::SensorSide side);
+	UltrasonicStoreLastValue(Util::RobotSide robotSide, UltrasonicSubsystem::SensorSide side, int arrayVal);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -17,6 +17,7 @@ private:
 	//double m_valid;
 	UltrasonicSubsystem::SensorSide m_side;
 	Util::RobotSide m_robotSide;
+	int m_arrayVal;
 };
 
 #endif  // UltrasonicStoreLastValue_H
