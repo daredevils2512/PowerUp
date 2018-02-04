@@ -42,6 +42,10 @@ double ultrasonicSaves[4] = {}; //ID 0 = thisFront value
 	double m_thisFront;
 	double m_thisRear;
 
+	double m_avgDist = 0.0;
+	double m_frontDist = 0.0;
+	double m_rearDist = 0.0;
+
 
 };
 

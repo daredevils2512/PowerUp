@@ -26,7 +26,7 @@ OI::OI() {
 	DRC_rightTrigger.WhileHeld (new LowGear());
 	DRC_rightTrigger.WhenReleased (new HighGear());
 //	DRC_aButton.WhenPressed(new CMG_NavXAutoTest());
-	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.50, 106, Util::RobotSide::leftSide)); //0.5
+	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.55, 148, Util::RobotSide::leftSide)); //0.5
 //	DRC_bButton.WhenPressed(new AutoStraightDrive(24.0, -0.55));
 //	DRC_xButton.WhenPressed(new CMG_UltrasonicRelaySwitching());
 //	DRC_leftBumper.WhenPressed(new PIDTurn(-90));

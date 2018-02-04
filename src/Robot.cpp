@@ -69,6 +69,10 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Last Rear", ultrasonicSubsystem->m_lastRear);
 	SmartDashboard::PutNumber("This Front", ultrasonicSubsystem->m_thisFront);
     SmartDashboard::PutNumber("This Rear", ultrasonicSubsystem->m_thisRear);
+    SmartDashboard::PutNumber("Avg Dist", ultrasonicSubsystem->m_avgDist);
+    SmartDashboard::PutBoolean("Dist Away Tol", Util::IsInTolerance(ultrasonicSubsystem->m_avgDist, ultrasonicSubsystem->m_startingDistance, Util::ULTRASONIC_DISTANCE_TOLERANCE));
+    SmartDashboard::PutBoolean("Front vs Rear Tol", Util::IsInTolerance(ultrasonicSubsystem->m_frontDist, ultrasonicSubsystem->m_rearDist, Util::ULTRASONIC_ANGLE_TOLERANCE));
+
 
 }
 void Robot::DisabledInit(){
