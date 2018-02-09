@@ -20,7 +20,7 @@ CMG_NavXAutoTest::CMG_NavXAutoTest() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddSequential(new PIDDriveStraight(19));//Straight 1
+	/*AddSequential(new PIDDriveStraight(19));//Straight 1
 	AddSequential(new Pause(0.25));
 	AddSequential(new PIDTurn(-45));//Turn1
 	AddSequential(new Pause(0.25));
@@ -77,6 +77,17 @@ CMG_NavXAutoTest::CMG_NavXAutoTest() {
 	AddSequential(new PIDTurn(190));// T 14
 	AddSequential(new Pause(0.25));
 	AddSequential(new PIDDriveStraight(58)); // S15
-	AddSequential(new Pause(0.25));
+	AddSequential(new Pause(0.25));*/
+	AddSequential(new PIDDriveStraight(148));
+	AddSequential(new Pause(0.5));
+	AddSequential(new PIDTurn(90));
+	AddSequential(new Pause(0.5));
+	AddSequential(new PIDTurn(90));
+	AddSequential(new Pause(0.5));
+	AddSequential(new PIDDriveStraight(148));
+	AddSequential(new Pause(0.5));
+	AddSequential(new PIDTurn(90));
+	AddSequential(new Pause(0.5));
+	AddSequential(new PIDTurn(90));
 
 }

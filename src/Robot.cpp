@@ -29,10 +29,10 @@ void Robot::RobotInit() {
 		RobotMap::navXTurnController->SetOutputRange(-1.0, 1.0);
 		RobotMap::navXTurnController->SetAbsoluteTolerance(0.5f);
 		RobotMap::navXTurnController->SetContinuous(true);
-	oi.reset(new OI());
 	compressor.reset(new frc::Compressor());
-	cube.reset (new Cube());
+	cube.reset(new Cube());
 	climber.reset (new Climber());
+	oi.reset(new OI());
 	lw = frc::LiveWindow::GetInstance();
 //	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
@@ -46,18 +46,16 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
 	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
 
-
-
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
 
-	SmartDashboard::PutNumber("Front Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()));
-	SmartDashboard::PutNumber("Rear Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()));
+	SmartDashboard::PutNumber("Front Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
+	SmartDashboard::PutNumber("Rear Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
 	SmartDashboard::PutNumber("Average Distance Away", Robot::ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
-	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAverageVoltage());
-	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAverageVoltage());
+	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAnalogInput()->GetAverageVoltage());
+	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAnalogInput()->GetAverageVoltage());
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
 	SmartDashboard::PutBoolean("Top Limit Switch" , RobotMap::elevatorTopSwitch->Get());
@@ -67,10 +65,6 @@ void Robot::RobotPeriodic() {
 
 }
 void Robot::DisabledInit(){
-	RobotMap::ultrasonicRelay1->Set(false);
-	RobotMap::ultrasonicRelay2->Set(false);
-	RobotMap::ultrasonicRelay3->Set(false);
-	RobotMap::ultrasonicRelay4->Set(false);
 	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
@@ -85,10 +79,6 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
-	RobotMap::ultrasonicRelay1->Set(false);
-	RobotMap::ultrasonicRelay2->Set(false);
-	RobotMap::ultrasonicRelay3->Set(false);
-	RobotMap::ultrasonicRelay4->Set(false);
 	Robot::drivetrain->ResetEncoders();
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Start();
@@ -100,10 +90,6 @@ void Robot::AutonomousPeriodic() {
 }
 
 void Robot::TeleopInit() {
-	RobotMap::ultrasonicRelay1->Set(false);
-	RobotMap::ultrasonicRelay2->Set(false);
-	RobotMap::ultrasonicRelay3->Set(false);
-	RobotMap::ultrasonicRelay4->Set(false);
 	Robot::drivetrain->ResetEncoders();
 	compressor->SetClosedLoopControl(true);
 	if (autonomousCommand.get() != nullptr)
@@ -115,10 +101,6 @@ void Robot::TeleopPeriodic() {
 	}
 
 void Robot::TestInit() {
-	RobotMap::ultrasonicRelay1->Set(false);
-	RobotMap::ultrasonicRelay2->Set(false);
-	RobotMap::ultrasonicRelay3->Set(false);
-	RobotMap::ultrasonicRelay4->Set(false);
 	Robot::drivetrain->ResetEncoders();
 	drivetrain->SetPIDEnabled(false);
 	if (autonomousCommand.get() != nullptr)

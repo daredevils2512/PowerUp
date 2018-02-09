@@ -12,8 +12,7 @@
 #include <WPILib.h>
 #include "Commands/UltraSonicStraightDrive.h"
 #include "Commands/PIDTurn.h"
-#include "Commands/AutoStraightDrive.h"
-#include "Commands/RelayOnOff.h"
+#include "Commands/PIDDriveStraight.h"
 #include "Commands/ClimberLeftWingRun.h"
 #include "Commands/ClimberRightWingRun.h"
 #include "Commands/ElevatorRunToHeight.h"
@@ -24,11 +23,15 @@
 
 OI::OI() {
 	DRC_aButton.WhenPressed(new CMG_NavXAutoTest());
-	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.45, 36, Util::RobotSide::leftSide)); //0.5
-	DRC_bButton.WhenPressed(new AutoStraightDrive(24.0, -0.55));
+	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.45, 112, Util::RobotSide::leftSide)); //0.5
+	DRC_bButton.WhenPressed(new PIDDriveStraight(136.0));
 	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
 	DRC_rightBumper.WhenPressed(new PIDTurn(90));
 	DRC_startButton.WhenPressed (new CMG_UltrasonicAutoTest());
+	DRC_leftTrigger.WhenPressed(new CubeIntakeActuate(true));
+	DRC_leftTrigger.WhileHeld(new CubeRunIntake(1.0));
+	DRC_leftTrigger.WhenReleased(new CubeIntakeActuate(false));
+	DRC_leftTrigger.WhenReleased(new CubeRunIntake(-1.0));
 
 	CDR_bottomLeftBase.WhenPressed(new CubeIntakeActuate(true));
 	CDR_bottomRightBase.WhenPressed(new CubeIntakeActuate(false));

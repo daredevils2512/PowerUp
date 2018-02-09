@@ -25,6 +25,8 @@ class Util {
 
 		static const int CUBE_INTAKE_LEFT_MOTOR = 5;
 		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;
+
+		//Drivetrain encoder clicky things for distance
 		static constexpr double LEFT_INCH_PER_PULSE = (1/9.537878); //Inches per pulse for the left encoder
 		static constexpr double RIGHT_INCH_PER_PULSE = (1/9.737373); // Inches per pulse for the right encoder
 
