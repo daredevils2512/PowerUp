@@ -13,10 +13,10 @@
 class Util {
 	public:
 		//Keeping all the constants in one place
-		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 2; //ports for Aries drivetrain, change for comp robot
-		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 1;
-		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 10;
-		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 6;
+		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 2; //1 //ports for Aries drivetrain, change for comp robot
+		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 1; //2
+		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 10; //3
+		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 6;//4
 
 		static const int CLIMBER_LEFT_WING_MOTOR_1 = 0; //theoretical CAN Talong ID's
 		static const int CLIMBER_LEFT_WING_MOTOR_2 = 1;

@@ -5,8 +5,9 @@
  *      Author: noahg
  */
 
-#include <UltrasonicSensor.h>
+#include "UltrasonicSensor.h"
 #include "Util.h"
+
 UltrasonicSensor::UltrasonicSensor(frc::AnalogInput* ultrasonicInput) {
 	// TODO Auto-generated constructor stub
 	this->ultrasonicInput = ultrasonicInput;
@@ -23,3 +24,4 @@ double UltrasonicSensor::GetDistance() {
 	double distanceCm = ultrasonicInput->GetAverageVoltage()/voltagePerCm;
 	return distanceCm/2.54; // to inches
 }
+
