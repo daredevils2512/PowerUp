@@ -6,14 +6,14 @@
 
 class DrivetrainShift : public frc::Command {
 public:
-	DrivetrainShift();
+	DrivetrainShift(bool Direction);
 	void Initialize();
-	virtual void Execute();
+	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
-protected:
-	DoubleSolenoid::Value currentStatus = DoubleSolenoid::kOff;
+private:
+	bool m_Direction;
 };
 
 #endif  // DrivetrainShift_H

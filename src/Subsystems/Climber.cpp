@@ -14,18 +14,12 @@ void Climber::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
-void Climber::SetWingSpeed(ClimberWing wing, double speed) {
-	switch (wing){
-	case ClimberWing::leftWing:
-		LeftWingMotor1->Set(speed);
-		LeftWingMotor2->Set(speed);
-		break;
-	case ClimberWing::rightWing:
-		RightWingMotor1->Set(speed);
-		RightWingMotor2->Set(speed);
-		break;
-	default:
-		std::cout << "Sorry, that isn't a climber side" << std::endl;
-	}
+void Climber::SetLeftWingSpeed(double speed) {
+	LeftWingMotor1->Set(speed);
+	LeftWingMotor2->Set(speed);
+}
 
+void Climber::SetRightWingSpeed(double speed) {
+	RightWingMotor1->Set(speed);
+	RightWingMotor2->Set(speed);
 }

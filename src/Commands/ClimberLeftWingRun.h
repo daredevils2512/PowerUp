@@ -1,13 +1,13 @@
-#ifndef ClimberRunWing_H
-#define ClimberRunWing_H
+#ifndef ClimberLeftWingRun_H
+#define ClimberLeftWingRun_H
 
 #include "Commands/Command.h"
 #include "../Subsystems/Climber.h"
 #include "../Robot.h"
 
-class ClimberRunWing : public frc::Command {
+class ClimberLeftWingRun : public frc::Command {
 public:
-	ClimberRunWing(Climber::ClimberWing wing, double speed);
+	ClimberLeftWingRun(double speed);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -15,7 +15,6 @@ public:
 	void Interrupted();
 private:
 	double m_speed;
-	Climber::ClimberWing m_wing;
 };
 
-#endif  // ClimberRightWingRun_H
+#endif  // ClimberLeftWingRun_H

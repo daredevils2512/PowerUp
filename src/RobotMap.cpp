@@ -46,31 +46,30 @@ void RobotMap::init() {
 	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
 
 	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
-	drivetrainRearLeftMotor->SetInverted(true); //only needed for Aries
+	drivetrainRearLeftMotor->SetInverted(true);
 
 	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
-	drivetrainRearRightMotor->SetInverted(true); //only needed for Aries
+	drivetrainRearRightMotor->SetInverted(true);
 
 	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 
-	drivetrainChassis->SetSafetyEnabled(true); //true
+	drivetrainChassis->SetSafetyEnabled(true);
 		drivetrainChassis->SetExpiration(0.5);
 		drivetrainChassis->SetMaxOutput(1.0);
 
-	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X)); //theoretical a and b channels //(0,1,false,k4x)
+	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X)); //theoretical a and b channels
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE); //took the circumference of 12.5663 and divided by the 128 internal encoder clicks
 		drivetrainLeftEncoder->SetReverseDirection(true);
 
-	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X)); //(2,3,false,k4x)
+	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
 
-	//drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4, 5)); //0,1
+	//drivetrainShifter.reset (new frc::DoubleSolenoid (0,0,1));
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
 
 //	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
 //	 cubeIntakeRightMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_RIGHT_MOTOR));
-
 //	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 4 ,5));
 
 //	climberLeftWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_1));
@@ -78,9 +77,7 @@ void RobotMap::init() {
 //	climberRightWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_1));
 //	climberRightWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_2));
 
-
 	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
-
 
 
 	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));
