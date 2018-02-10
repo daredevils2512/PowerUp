@@ -1,34 +1,34 @@
-#include "ClimberLeftWingRun.h"
+#include <Commands/UltrasonicRelayOnOff.h>
+#include "../Robot.h"
 
-ClimberLeftWingRun::ClimberLeftWingRun(double speed) {
+UltrasonicRelayOnOff::UltrasonicRelayOnOff(double relayID) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires (Robot::climber.get());
-	m_speed = speed;
+	m_relayID = relayID;
 }
 
 // Called just before this Command runs the first time
-void ClimberLeftWingRun::Initialize() {
+void UltrasonicRelayOnOff::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ClimberLeftWingRun::Execute() {
-	Robot::climber->SetLeftWingSpeed(m_speed);
+void UltrasonicRelayOnOff::Execute() {
+	Robot::ultrasonicSubsystem->ToggleRelay(m_relayID);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ClimberLeftWingRun::IsFinished() {
+bool UltrasonicRelayOnOff::IsFinished() {
 	return true;
 }
 
 // Called once after isFinished returns true
-void ClimberLeftWingRun::End() {
-	Robot::climber->SetLeftWingSpeed(0.0);
+void UltrasonicRelayOnOff::End() {
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ClimberLeftWingRun::Interrupted() {
+void UltrasonicRelayOnOff::Interrupted() {
 
 }

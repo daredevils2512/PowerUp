@@ -5,24 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include <Commands/ClimberRunWing.h>
 #include <Commands/CMG_NavXAutoTest.h>
 #include <Commands/CMG_UltrasonicAutoTest.h>
+#include <Commands/UltrasonicRelayOnOff.h>
 #include "OI.h"
 
 #include <WPILib.h>
+#include "Commands/LowGear.h"
+#include "Commands/HighGear.h"
 #include "Commands/UltraSonicStraightDrive.h"
 #include "Commands/PIDTurn.h"
 #include "Commands/PIDDriveStraight.h"
-#include "Commands/ClimberLeftWingRun.h"
-#include "Commands/ClimberRightWingRun.h"
 #include "Commands/ElevatorRunToHeight.h"
 #include "Commands/CubeIntakeActuate.h"
 #include "Commands/CubeRunIntake.h"
+#include "Commands/AutoStraightDrive.h"
+#include "Commands/ClimberRunWing.h"
 #include "Robot.h"
 #include "Util.h"
 
 
 OI::OI() {
+
 	DRC_aButton.WhenPressed(new CMG_NavXAutoTest());
 	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.55, 246
 			, Util::RobotSide::leftSide)); //0.95 for straight //220 dist 206
@@ -50,11 +55,9 @@ OI::OI() {
 	CDB_topRed.WhenPressed(new ElevatorRunToHeight(0.5, 400)); //arbitrary numbers. Need testing
 	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.5, 300)); //arbitrary numbers. Need testing
 	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.5, 0)); //arbitrary numbers. Need testing
-	CDB_bigRed.WhileHeld(new ClimberLeftWingRun(0.8)); // run motors to move left wing up
-	CDB_bigRed.WhenReleased(new ClimberLeftWingRun(0.0));
-	CDB_bigWhite.WhileHeld(new ClimberRightWingRun(0.8)); // run motors to move right wing up
-	CDB_bigWhite.WhenReleased(new ClimberRightWingRun(0.0));
 
+	DRC_rightTrigger.WhileHeld (new LowGear());
+	DRC_rightTrigger.WhenReleased (new HighGear());
 
 }
 
@@ -65,13 +68,13 @@ OI::OI() {
 
 	double OI::GetMove() {
 		//gets forward/backward values
-		return Desensitize(-driverController.GetRawAxis(1));
+		return Desensitize(driverController.GetRawAxis(1));
 	}
 
 	double OI::Desensitize(double value) {
 		//set threshold so tiny values on the joystick don't register,
 		//sometimes resting value of joystick is not 0
-		if (fabs(value) < 0.25) value = 0; //0.3
+		if (fabs(value) < 0.3) value = 0; //0.3
 		return value;
 	}
 
