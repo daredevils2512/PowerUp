@@ -24,10 +24,6 @@ void UltrasonicStraightDrive::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool UltrasonicStraightDrive::IsFinished() {
-	double frontDist = RobotMap::ultrasonicFrontLeft->GetDistance();
-	double rearDist = RobotMap::ultrasonicRearLeft->GetDistance();
-	double avgDist = (frontDist + rearDist) / 2;
-	std::cout << "Ending distance Away: " << avgDist << std::endl;
 	return ((Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder()) / 2) >= m_distanceToDrive;
 }
 

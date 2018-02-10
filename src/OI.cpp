@@ -21,9 +21,11 @@
 #include "Robot.h"
 #include "Util.h"
 
+
 OI::OI() {
 	DRC_aButton.WhenPressed(new CMG_NavXAutoTest());
-	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.45, 112, Util::RobotSide::leftSide)); //0.5
+	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.55, 246
+			, Util::RobotSide::leftSide)); //0.95 for straight //220 dist 206
 	DRC_bButton.WhenPressed(new PIDDriveStraight(136.0));
 	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
 	DRC_rightBumper.WhenPressed(new PIDTurn(90));
