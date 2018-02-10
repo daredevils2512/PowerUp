@@ -27,11 +27,10 @@ OI::OI() {
 	DRC_rightTrigger.WhileHeld(new LowGear());
 	DRC_rightTrigger.WhenReleased(new HighGear());
 	DRC_aButton.WhenPressed(new CMG_NavXAutoTest());
-	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.55, 246
-			, Util::RobotSide::leftSide)); //0.95 for straight //220 dist 206
+	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.50, 550, Util::RobotSide::leftSide)); //0.95 for straight //220 dist 206, 0.55 power curved walls
 	DRC_bButton.WhenPressed(new PIDDriveStraight(136.0));
-	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
-	DRC_rightBumper.WhenPressed(new PIDTurn(90));
+	DRC_leftBumper.WhenPressed(new PIDTurn(-180)); //-90
+	DRC_rightBumper.WhenPressed(new PIDTurn(180)); //90
 	DRC_startButton.WhenPressed (new CMG_UltrasonicAutoTest());
 	DRC_leftTrigger.WhenPressed(new CubeIntakeActuate(true));
 	DRC_leftTrigger.WhileHeld(new CubeRunIntake(1.0));
