@@ -4,6 +4,7 @@
 #include <WPILib.h>
 #include "TriggerButton.h"
 #include "ThrottleButton.h"
+#include "POVButton.h"
 
 //creates all of the inputs on the controllers
 class OI {
@@ -33,12 +34,12 @@ private:
 		JoystickButton CDR_topLeftJoystick{&coDriverController, 5};
 		JoystickButton CDR_bottomRightJoystick{&coDriverController, 4};
 		JoystickButton CDR_topRightJoystick{&coDriverController, 6};
-		JoystickButton CDR_bottomLeftBase{&coDriverController, 7};
-		JoystickButton CDR_topLeftBase{&coDriverController, 8};
-		JoystickButton CDR_bottomMiddleBase{&coDriverController, 9};
-		JoystickButton CDR_topMiddleBase{&coDriverController, 10};
+		JoystickButton CDR_bottomLeftBase{&coDriverController, 12};
 		JoystickButton CDR_bottomRightBase{&coDriverController, 11};
-		JoystickButton CDR_topRightBase{&coDriverController, 12};
+		JoystickButton CDR_middleLeftBase{&coDriverController, 9};
+		JoystickButton CDR_middleRightBase{&coDriverController, 10};
+		JoystickButton CDR_topLeftBase{&coDriverController, 7};
+		JoystickButton CDR_topRightBase{&coDriverController, 8};
 		TriggerButton CDR_zPositiveAxis{&coDriverController, 2, 0.2};
 		TriggerButton CDR_zNegativeAxis{&coDriverController, 2, -0.2};
 		ThrottleButton CDR_throttle{&coDriverController, 3};
@@ -61,6 +62,7 @@ public:
 	double GetTurn();
 	double GetMove();
 	double Desensitize(double value);
+	double GetLiftControl();
 
 };
 
