@@ -8,7 +8,7 @@ std::shared_ptr<UltrasonicSubsystem> Robot::ultrasonicSubsystem;
 std::shared_ptr<Cube> Robot::cube;
 std::shared_ptr<Climber> Robot::climber;
 std::shared_ptr<NavXPIDSource> Robot::navxPidSource;
-
+std::shared_ptr<Elevator> Robot::elevator;
 
 void Robot::RobotInit() {
 	std::cout << "Robot Init" << std::endl;
@@ -16,6 +16,7 @@ void Robot::RobotInit() {
     drivetrain.reset(new Drivetrain());
     ultrasonicSubsystem.reset(new UltrasonicSubsystem());
     navxPidSource.reset(new NavXPIDSource());
+    elevator.reset(new Elevator());
     RobotMap::navXTurnController.reset(new frc::PIDController(
     		NavXSubsystem::NAVX_P_VALUE,
 			NavXSubsystem::NAVX_I_VALUE,
@@ -28,10 +29,10 @@ void Robot::RobotInit() {
 		RobotMap::navXTurnController->SetOutputRange(-1.0, 1.0);
 		RobotMap::navXTurnController->SetAbsoluteTolerance(0.5f);
 		RobotMap::navXTurnController->SetContinuous(true);
-	oi.reset(new OI());
 	compressor.reset(new frc::Compressor());
-	cube.reset (new Cube());
+	cube.reset(new Cube());
 	climber.reset (new Climber());
+	oi.reset(new OI());
 	lw = frc::LiveWindow::GetInstance();
 //	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
@@ -50,27 +51,16 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
 
-	SmartDashboard::PutNumber("Front Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()));
-	SmartDashboard::PutNumber("Rear Ultrasonic distance", Robot::ultrasonicSubsystem->ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()));
+	SmartDashboard::PutNumber("Front Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
+	SmartDashboard::PutNumber("Rear Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
 	SmartDashboard::PutNumber("Average Distance Away", Robot::ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
-	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAverageVoltage());
-	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAverageVoltage());
+	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAnalogInput()->GetAverageVoltage());
+	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAnalogInput()->GetAverageVoltage());
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
-	SmartDashboard::PutNumber("Drivetrain Front Left" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
-	SmartDashboard::PutNumber("Drivetrain Front Right" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
-	SmartDashboard::PutNumber("Drivetrain Rear Left" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
-	SmartDashboard::PutNumber("Drivetrain Rear Right" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
-	SmartDashboard::PutNumber("Slowdown Speed", Robot::ultrasonicSubsystem->m_avgSlowdown);
-
-	SmartDashboard::PutNumber("Ending Distance", ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
-	SmartDashboard::PutNumber("Last Front", ultrasonicSubsystem->m_lastFront);
-	SmartDashboard::PutNumber("Last Rear", ultrasonicSubsystem->m_lastRear);
-	SmartDashboard::PutNumber("This Front", ultrasonicSubsystem->m_thisFront);
-    SmartDashboard::PutNumber("This Rear", ultrasonicSubsystem->m_thisRear);
-    SmartDashboard::PutNumber("Avg Dist", ultrasonicSubsystem->m_avgDist);
-    SmartDashboard::PutBoolean("Dist Away Tol", Util::IsInTolerance(ultrasonicSubsystem->m_avgDist, ultrasonicSubsystem->m_startingDistance, Util::ULTRASONIC_DISTANCE_TOLERANCE));
-    SmartDashboard::PutBoolean("Front vs Rear Tol", Util::IsInTolerance(ultrasonicSubsystem->m_frontDist, ultrasonicSubsystem->m_rearDist, Util::ULTRASONIC_ANGLE_TOLERANCE));
+	SmartDashboard::PutBoolean("Top Limit Switch" , RobotMap::elevatorTopSwitch->Get());
+	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+	SmartDashboard::PutNumber("Raw Elevator Clicks" , RobotMap::elevatorEncoder->Get());
 
 
 }

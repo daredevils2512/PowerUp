@@ -59,7 +59,7 @@ void PIDDriveStraight::Execute() {
 	//quarter steering control for PID to prevent crazy turns*/
 	double output = Robot::drivetrain->GetPIDOutput()/4;
 
-	Robot::drivetrain->DriveRobotTank(0.55-output,0.55+output); //70% besides corrections
+	Robot::drivetrain->DriveRobotTank(0.7-output,0.7+output); //70% besides corrections
 }
 
 // Make this return true when this Command no longer needs to run execute()
