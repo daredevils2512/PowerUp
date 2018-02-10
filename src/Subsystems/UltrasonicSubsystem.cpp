@@ -2,7 +2,6 @@
 #include "../RobotMap.h"
 #include "../Robot.h"
 #include "../Util.h"
-
 #include <cmath>
 
 UltrasonicSubsystem::UltrasonicSubsystem() : Subsystem("ExampleSubsystem") {
@@ -36,8 +35,8 @@ double UltrasonicSubsystem::GetAverageDistance(Util::RobotSide robotSide) {
 	double rearDistance = 0.0;
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
-		frontDistance = RobotMap::ultrasonicFrontLeft->GetDistance();
-		rearDistance = RobotMap::ultrasonicRearLeft->GetDistance();
+		frontDistance = ConvertToDistance(RobotMap::ultrasonicFrontLeft->GetAverageVoltage()); //GetVoltage
+		rearDistance = ConvertToDistance(RobotMap::ultrasonicRearLeft->GetAverageVoltage()); //GetVoltage
 		break;
 	case Util::RobotSide::rightSide:
 		break;
@@ -64,10 +63,10 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 	switch (robotSide) {
 	case Util::RobotSide::leftSide:
 		//Getting the distances the ultrasonic sensors are returning
-		frontDist = RobotMap::ultrasonicFrontLeft->GetDistance();
+     frontDist = RobotMap::ultrasonicFrontLeft->GetDistance();
 		rearDist = RobotMap::ultrasonicRearLeft->GetDistance();
 		avgDist = (frontDist + rearDist) / 2;
-
+      
 		//calculating the slow-downs
 		avgDistSlowDown = GetDifference(avgDist, startDist);
 		avgFrontVsRearSlowDown = GetDifference(frontDist, rearDist);
@@ -81,20 +80,25 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 			 Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
 			std::cout << "Driving Straight" << std::endl;
-		} else if ((avgDist > startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
-				   (frontDist > rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - avgSlowDown); //flip-flopped with right slow turn
+
+		} else if ((m_avgDist > m_startingDistance && Util::IsInTolerance(Util::ULTRASONIC_ANGLE_TOLERANCE, m_frontDist, m_rearDist)) ||
+				   (m_frontDist > m_rearDist && Util::IsInTolerance(Util::ULTRASONIC_DISTANCE_TOLERANCE, m_avgDist, m_startingDistance))) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - m_avgSlowDown); //flip-flopped with right slow turn
 			std::cout << "Turning Left Gradually" << std::endl;
-		} else if ((avgDist < startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
-				   (frontDist > rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed);
+
+		} else if ((m_avgDist < m_startingDistance && Util::IsInTolerance(Util::ULTRASONIC_ANGLE_TOLERANCE, m_frontDist, m_rearDist)) ||
+				   (m_frontDist < m_rearDist && Util::IsInTolerance(Util::ULTRASONIC_DISTANCE_TOLERANCE, m_avgDist, m_startingDistance))) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed - m_avgSlowDown, driveSpeed);
 			std::cout << "Turning Right Gradually" << std::endl;
-		} else if (avgDist > startDist && frontDist >= rearDist) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed + (avgSlowDown / 2), driveSpeed - avgSlowDown); //flip-flopped with right turn wuick
+
+		} else if (m_avgDist > m_startingDistance && m_frontDist > m_rearDist) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed + (m_avgSlowDown / 2), driveSpeed - m_avgSlowDown); //flip-flopped with right turn wuick
 			std::cout << "Turning Left Quickly" << std::endl;
-		} else if (avgDist < startDist && frontDist <= rearDist) {
-			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed + (avgSlowDown / 2));
+
+		} else if (m_avgDist < m_startingDistance && m_frontDist < m_rearDist) {
+			Robot::drivetrain->DriveRobotTank(driveSpeed - m_avgSlowDown, driveSpeed + (m_avgSlowDown / 2));
 			std::cout << "Turning Right Quickly" << std::endl;
+
 		} else {
 			std::cout << "Something is wrong. Stopping driving" << std::endl;
 			Robot::drivetrain->DriveRobotTank(0.0, 0.0);
@@ -134,6 +138,6 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 //		}
 		break;
 	default:
-		std::cout << "Sorry but that isn't an option for sides of the roobt" << std::endl;
+		std::cout << "Sorry but that isn't an option for sides of the robot" << std::endl;
 	}
 }

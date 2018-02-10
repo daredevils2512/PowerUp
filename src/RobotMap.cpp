@@ -21,8 +21,12 @@ std::shared_ptr<frc::Encoder> RobotMap::drivetrainRightEncoder;
 std::shared_ptr<AHRS> RobotMap::navX;
 std::shared_ptr<frc::PIDController> RobotMap::navXTurnController;
 
-std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeLeftMotor;
-std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeRightMotor;
+std::shared_ptr<frc::Spark> RobotMap::motor1;
+std::shared_ptr<frc::Spark> RobotMap::motor2;
+std::shared_ptr<frc::Spark> RobotMap::motor3;
+std::shared_ptr<frc::Spark> RobotMap::motor4;
+std::shared_ptr<frc::Spark> RobotMap::motor5;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeExtakeSolenoid;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::climberLeftWingMotor1;
@@ -30,14 +34,14 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::climberLeftWingMotor2;
 std::shared_ptr<WPI_TalonSRX> RobotMap::climberRightWingMotor1;
 std::shared_ptr<WPI_TalonSRX> RobotMap::climberRightWingMotor2;
 
-std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicFrontLeft;
-std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicRearLeft;
+std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicFrontLeft;
+std::shared_ptr<frc::AnalogInput> RobotMap::ultrasonicRearLeft;
+std::shared_ptr<frc::PIDController> RobotMap::ultrasonicTurnController;
 
-std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorLeftMotor;
-std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorRightMotor;
-std::shared_ptr<frc::Encoder> RobotMap::elevatorEncoder;
-std::shared_ptr<frc::DigitalInput> RobotMap::elevatorTopSwitch;
-std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
+std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay1;
+std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay2;
+std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay3;
+std::shared_ptr<frc::DigitalOutput> RobotMap::ultrasonicRelay4;
 
 void RobotMap::init() {
 	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
@@ -67,7 +71,6 @@ void RobotMap::init() {
 	//drivetrainShifter.reset (new frc::DoubleSolenoid (0,0,1));
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
-
 //	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
 //	 cubeIntakeRightMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_RIGHT_MOTOR));
 //	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 4 ,5));

@@ -12,7 +12,8 @@
 #include "Subsystems/Climber.h"
 #include "NavXPIDSource.h"
 #include "Subsystems/Elevator.h"
-
+#include "Util.h"
+#include "Commands/DrivetrainShift.h"
 #include "OI.h"
 
 
@@ -32,8 +33,6 @@ public:
 	static std::shared_ptr<Climber> climber;
 
 	static std::shared_ptr<NavXPIDSource> navxPidSource;
-
-	static std::shared_ptr<Elevator> elevator;
 
 
 	virtual void RobotInit();
