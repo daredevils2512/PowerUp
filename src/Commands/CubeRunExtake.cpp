@@ -1,34 +1,34 @@
-#include "ElevatorManualRun.h"
-#include "../Robot.h"
+#include "CubeRunExtake.h"
 
-ElevatorManualRun::ElevatorManualRun() {
+CubeRunExtake::CubeRunExtake(double speed) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires(Robot::elevator.get());
+	Requires(Robot::cube.get());
+	m_speed = speed;
 }
 
 // Called just before this Command runs the first time
-void ElevatorManualRun::Initialize() {
+void CubeRunExtake::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ElevatorManualRun::Execute() {
-	Robot::elevator->RunLift(Robot::oi->GetLiftControl());
+void CubeRunExtake::Execute() {
+Robot::cube->SetExtakeSpeed(m_speed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ElevatorManualRun::IsFinished() {
+bool CubeRunExtake::IsFinished() {
 	return false;
 }
 
 // Called once after isFinished returns true
-void ElevatorManualRun::End() {
-
+void CubeRunExtake::End() {
+	Robot::cube->SetIntakeSpeed(0.0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ElevatorManualRun::Interrupted() {
+void CubeRunExtake::Interrupted() {
 
 }
