@@ -16,14 +16,10 @@ private:
 
 
 public:
-	enum class ClimberWing {
-		leftWing,
-		rightWing
-	};
-
 	Climber();
 	void InitDefaultCommand();
-	void SetWingSpeed(ClimberWing wing, double speed);
+	void SetLeftWingSpeed (double speed);
+	void SetRightWingSpeed (double speed);
 };
 
 #endif  // Climber_H

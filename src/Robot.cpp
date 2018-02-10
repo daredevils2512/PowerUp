@@ -45,7 +45,6 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
 	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
 
-
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
@@ -76,16 +75,11 @@ void Robot::RobotPeriodic() {
 
 }
 void Robot::DisabledInit(){
-	RobotMap::ultrasonicRelay1->Set(true);
-	RobotMap::ultrasonicRelay2->Set(true);
-	RobotMap::ultrasonicRelay3->Set(true);
-	RobotMap::ultrasonicRelay4->Set(true);
 	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
 	drivetrain->SetPIDEnabled(false);
 	//drivetrain->GetPIDOutput();
-//	drivetrain->Shifter(frc::DoubleSolenoid::kForward);
 
 }
 
@@ -113,10 +107,6 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-//	std::cout << "this front value: " << ultrasonicSubsystem->m_thisFront << std::endl;
-//	std::cout << "this rear value: " << ultrasonicSubsystem->m_thisRear << std::endl;
-//	std::cout << "last front value: " << ultrasonicSubsystem->m_lastFront << std::endl;
-//	std::cout << "last rear value: " << ultrasonicSubsystem->m_lastRear << std::endl;
 	Scheduler::GetInstance()->Run();
 	}
 
