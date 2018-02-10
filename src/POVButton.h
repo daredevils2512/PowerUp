@@ -11,7 +11,7 @@
 #define SRC_POVBUTTON_H_
 
 #pragma once
-#include <Buttons\Button.h>
+#include <Buttons/Button.h>
 #include <Joystick.h>
 #include <WPILib.h>
 
