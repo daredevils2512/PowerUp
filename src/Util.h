@@ -30,8 +30,8 @@ class Util {
 		static constexpr double LEFT_INCH_PER_PULSE = (1/9.537878); //Inches per pulse for the left encoder
 		static constexpr double RIGHT_INCH_PER_PULSE = (1/9.737373); // Inches per pulse for the right encoder
 
-		static const int ULTRASONIC_FRONT_LEFT = 4; //Equivalent to NavX Analog Pin 0
-		static const int ULTRASONIC_REAR_LEFT = 5; //Equivalent to NavX Analog Pin 1
+		static const int ULTRASONIC_FRONT_LEFT = 0; //Equivalent to NavX Analog Pin 0
+		static const int ULTRASONIC_REAR_LEFT = 1; //Equivalent to NavX Analog Pin 1
 		static constexpr double SUPPLIED_VOLTAGE = 4.96; //The voltage sent through the NavX analogInput pins for converting voltage to distance
 		static constexpr double ULTRASONIC_ANGLE_TOLERANCE = 0.2; //The acceptable tolerance for comparing the two ultrasonic sensors on a side
 		static constexpr double ULTRASONIC_DIST_TOLERANCE = 3.5;
