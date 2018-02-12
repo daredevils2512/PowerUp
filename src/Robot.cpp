@@ -62,7 +62,11 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Raw Elevator Clicks" , RobotMap::elevatorEncoder->Get());
 
-
+	SmartDashboard::PutBoolean("Turning Left Q", Robot::ultrasonicSubsystem->m_turnLeftQuigly);
+	SmartDashboard::PutBoolean("Turning Left G", Robot::ultrasonicSubsystem->m_turnLeftGradual);
+	SmartDashboard::PutBoolean("Turning Right Q", Robot::ultrasonicSubsystem->m_turnRightQuigly);
+    SmartDashboard::PutBoolean("Turning Right G", Robot::ultrasonicSubsystem->m_turnRightGradual);
+	SmartDashboard::PutBoolean("Turning Staright", Robot::ultrasonicSubsystem->m_staright);
 }
 void Robot::DisabledInit(){
 	compressor->SetClosedLoopControl(false);

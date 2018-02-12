@@ -77,24 +77,49 @@ void UltrasonicSubsystem::DriveStaight(Util::RobotSide robotSide, double driveSp
 		//All the cases between the two inputs
 		if ((avgDist <= startDist && frontDist >= rearDist) ||
 			(avgDist >= startDist && frontDist <= rearDist) ||
-			(Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist) &&
-			 Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
+			(Util::IsInTolerance(Util::ULTRASONIC_ANGLE_TOLERANCE, frontDist, rearDist) &&
+			 Util::IsInTolerance(Util::ULTRASONIC_DIST_TOLERANCE, avgDist, startDist))) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed);
 			std::cout << "Driving Straight" << std::endl;
-		} else if ((avgDist > startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
-				   (frontDist > rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
+			m_turnLeftGradual = false;
+			m_turnLeftQuigly = false;
+			m_turnRightGradual = false;
+			m_turnRightQuigly = false;
+			m_staright = true;
+		} else if ((avgDist > startDist && Util::IsInTolerance(Util::ULTRASONIC_DIST_TOLERANCE, frontDist, rearDist)) ||
+				   (frontDist > rearDist && Util::IsInTolerance(Util::ULTRASONIC_ANGLE_TOLERANCE, avgDist, startDist))) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed, driveSpeed - avgSlowDown); //flip-flopped with right slow turn
 			std::cout << "Turning Left Gradually" << std::endl;
-		} else if ((avgDist < startDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, frontDist, rearDist)) ||
-				   (frontDist > rearDist && Util::IsInTolerance(Util::ULTRASONIC_TOLERANCE, avgDist, startDist))) {
+			m_turnLeftGradual = true;
+			m_turnLeftQuigly = false;
+			m_turnRightGradual = false;
+			m_turnRightQuigly = false;
+			m_staright = false;
+		} else if ((avgDist < startDist && Util::IsInTolerance(Util::ULTRASONIC_DIST_TOLERANCE, frontDist, rearDist)) ||
+				   (frontDist > rearDist && Util::IsInTolerance(Util::ULTRASONIC_ANGLE_TOLERANCE, avgDist, startDist))) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed);
-			std::cout << "Turning Right Gradually" << std::endl;
+			std::cout << "Turning Right Gradually" << std::endl;m_turnLeftGradual = true;
+			m_turnLeftQuigly = false;
+			m_turnLeftGradual = false;
+			m_turnRightGradual = true;
+			m_turnRightQuigly = false;
+			m_staright = false;
 		} else if (avgDist > startDist && frontDist >= rearDist) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed + (avgSlowDown / 2), driveSpeed - avgSlowDown); //flip-flopped with right turn wuick
 			std::cout << "Turning Left Quickly" << std::endl;
+			m_turnLeftQuigly = true;
+			m_turnLeftGradual = false;
+			m_turnRightGradual = false;
+			m_turnRightQuigly = false;
+			m_staright = false;
 		} else if (avgDist < startDist && frontDist <= rearDist) {
 			Robot::drivetrain->DriveRobotTank(driveSpeed - avgSlowDown, driveSpeed + (avgSlowDown / 2));
 			std::cout << "Turning Right Quickly" << std::endl;
+			m_turnLeftQuigly = false;
+			m_turnLeftGradual = false;
+			m_turnRightGradual = false;
+			m_turnRightQuigly = true;
+			m_staright = false;
 		} else {
 			std::cout << "Something is wrong. Stopping driving" << std::endl;
 			Robot::drivetrain->DriveRobotTank(0.0, 0.0);
