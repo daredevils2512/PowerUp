@@ -36,6 +36,8 @@ void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
 //	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
+	frc::CameraServer::GetInstance()->StartAutomaticCapture();
+	frc::CameraServer::GetInstance()->StartAutomaticCapture();
 }
 void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;
@@ -61,7 +63,8 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("Top Limit Switch" , RobotMap::elevatorTopSwitch->Get());
 	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Raw Elevator Clicks" , RobotMap::elevatorEncoder->Get());
-
+//	SmartDashboard::PutNumber("left motor current" , RobotMap::elevatorLeftMotor->GetOutputCurrent());
+//	SmartDashboard::PutNumber("right motor current" , RobotMap::elevatorRightMotor->GetOutputCurrent());
 
 }
 void Robot::DisabledInit(){

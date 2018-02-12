@@ -13,15 +13,15 @@
 class Util {
 	public:
 		//Keeping all the constants in one place
-		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 2; //1 //ports for Aries drivetrain, change for comp robot
-		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 1; //2
-		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 10; //3
-		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 6;//4
+		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 2; //1 //ports for Aries drivetrain, change for comp robot //2
+		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 1; //2 //6
+		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 10; //3 //2
+		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 6;//4 //1
 
-		static const int CLIMBER_LEFT_WING_MOTOR_1 = 0; //theoretical CAN Talong ID's
-		static const int CLIMBER_LEFT_WING_MOTOR_2 = 1;
-		static const int CLIMBER_RIGHT_WING_MOTOR_1 = 2;
-		static const int CLIMBER_RIGHT_WING_MOTOR_2 = 3;
+		static const int CLIMBER_LEFT_WING_MOTOR_1 = 11; //theoretical CAN Talong ID's
+		static const int CLIMBER_LEFT_WING_MOTOR_2 = 12;
+		static const int CLIMBER_RIGHT_WING_MOTOR_1 = 13;
+		static const int CLIMBER_RIGHT_WING_MOTOR_2 = 14;
 
 		static const int CUBE_INTAKE_LEFT_MOTOR = 5;
 		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;
@@ -36,8 +36,8 @@ class Util {
 		static constexpr double ULTRASONIC_TOLERANCE = 0.3; //The acceptable tolerance for comparing the two ultrasonic sensors on a side
 		static constexpr double ULTRASONIC_TURN_MULTIPLIER = 0.1; //The amount we reduce motor speed for ultrasonic staightDrive 0.0775//0.0975(current reliable test value)//0.0975
 
-		static const int ELEVATOR_LEFT_MOTOR = 3;
-		static const int ELEVATOR_RIGHT_MOTOR = 4;
+		static const int ELEVATOR_LEFT_MOTOR = 15;
+		static const int ELEVATOR_RIGHT_MOTOR = 16;
 		static const int ELEVATOR_TOP_LIMIT_SWITCH = 4;
 		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 5;
 		static constexpr double ELEVATOR_MAX_ENCODER_CLICKS = 5000;
