@@ -6,6 +6,7 @@
 #include <AHRS.h>
 #include "Util.h"
 #include <Encoder.h>
+#include "UltrasonicSensor.h"
 class RobotMap {
 public:
 	static std::shared_ptr<WPI_TalonSRX> drivetrainFrontLeftMotor;
@@ -20,13 +21,8 @@ public:
 	static std::shared_ptr<AHRS> navX;
 	static std::shared_ptr<frc::PIDController> navXTurnController;
 
-	static std::shared_ptr<frc::Spark> motor1; //will end up being 2 TalonSRX's for the intake on comp robot
-	static std::shared_ptr<frc::Spark> motor2;
-	static std::shared_ptr<frc::Spark> motor3;
-	static std::shared_ptr<frc::Spark> motor4;
-	static std::shared_ptr<frc::Spark> motor5;
-
-	static std::shared_ptr<frc::DoubleSolenoid> cubeExtakeSolenoid;
+	static std::shared_ptr<WPI_TalonSRX> cubeIntakeLeftMotor;
+	static std::shared_ptr<WPI_TalonSRX> cubeIntakeRightMotor;
 	static std::shared_ptr<frc::DoubleSolenoid> cubeIntakeSolenoid;
 
 	static std::shared_ptr<WPI_TalonSRX> climberLeftWingMotor1;
@@ -34,15 +30,15 @@ public:
 	static std::shared_ptr<WPI_TalonSRX> climberRightWingMotor1;
 	static std::shared_ptr<WPI_TalonSRX> climberRightWingMotor2;
 
+	static std::shared_ptr<UltrasonicSensor> ultrasonicFrontLeft;
+	static std::shared_ptr<UltrasonicSensor> ultrasonicRearLeft;
 
-	static std::shared_ptr<frc::AnalogInput> ultrasonicFrontLeft;
-	static std::shared_ptr<frc::AnalogInput> ultrasonicRearLeft;
-	static std::shared_ptr<frc::PIDController> ultrasonicTurnController;
+	static std::shared_ptr<WPI_TalonSRX> elevatorLeftMotor;
+	static std::shared_ptr<WPI_TalonSRX> elevatorRightMotor;
+	static std::shared_ptr<frc::Encoder> elevatorEncoder;
+	static std::shared_ptr<frc::DigitalInput> elevatorTopSwitch;
+	static std::shared_ptr<frc::DigitalInput> elevatorBottomSwitch;
 
-	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay1;
-	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay2;
-	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay3;
-	static std::shared_ptr<frc::DigitalOutput> ultrasonicRelay4;
 
 	static void init();
 

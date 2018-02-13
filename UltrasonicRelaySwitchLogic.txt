@@ -1,7 +1,0 @@
-SensorSwitcheroo() {
-	Rley1 -> on
-	Relay2 ->off
-	Wait(0.25)
-	Relay1 -> off
-	Relay2 -> on
-}
