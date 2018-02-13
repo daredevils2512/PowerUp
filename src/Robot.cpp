@@ -36,8 +36,6 @@ void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
 //	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
-	frc::CameraServer::GetInstance()->StartAutomaticCapture();
-	frc::CameraServer::GetInstance()->StartAutomaticCapture();
 }
 void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;
