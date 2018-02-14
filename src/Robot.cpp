@@ -62,6 +62,9 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Raw Elevator Clicks" , RobotMap::elevatorEncoder->Get());
 
+//	SmartDashboard::PutNumber("left motor current" , RobotMap::elevatorLeftMotor->GetOutputCurrent());
+//	SmartDashboard::PutNumber("right motor current" , RobotMap::elevatorRightMotor->GetOutputCurrent());
+
 	SmartDashboard::PutBoolean("Turning Left Q", Robot::ultrasonicSubsystem->m_turnLeftQuigly);
 	SmartDashboard::PutBoolean("Turning Left G", Robot::ultrasonicSubsystem->m_turnLeftGradual);
 	SmartDashboard::PutBoolean("Turning Right Q", Robot::ultrasonicSubsystem->m_turnRightQuigly);

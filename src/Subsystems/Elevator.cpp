@@ -34,11 +34,9 @@ double Elevator::GetLiftEncoder() {
 
 void Elevator::ResetLiftEncoder() {
 	return encoder->Reset();
-
 }
 
 void Elevator::RunLift(double speed) {
 	left->Set(speed);
 	right->Set(speed);
-
 }
