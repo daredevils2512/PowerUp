@@ -38,7 +38,7 @@ class Util {
 		static constexpr double ULTRASONIC_TURN_MULTIPLIER = 0.10; //The amount we reduce motor speed for ultrasonic staightDrive 0.0775//0.0975(current reliable test value)//0.0975
 
 		static const int ELEVATOR_LEFT_MOTOR = 5;
-		static const int ELEVATOR_RIGHT_MOTOR = 6;
+		static const int ELEVATOR_RIGHT_MOTOR = 7;
 		static const int ELEVATOR_TOP_LIMIT_SWITCH = 4;
 		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 5;
 		static constexpr double ELEVATOR_MAX_ENCODER_CLICKS = 5000;
