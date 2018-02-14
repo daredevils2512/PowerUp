@@ -25,12 +25,21 @@
 
 
 OI::OI() {
+	DRC_leftTrigger.WhenPressed(new CubeIntakeActuate(true));
+	DRC_leftTrigger.WhileHeld(new CubeRunIntake(1.0));
+	DRC_leftTrigger.WhenReleased(new CubeIntakeActuate(false));
+	DRC_leftTrigger.WhenReleased(new CubeRunIntake(-1.0));
 	DRC_rightTrigger.WhileHeld(new LowGear());
 	DRC_rightTrigger.WhenReleased(new HighGear());
-//	DRC_leftTrigger.WhenPressed(new CubeIntakeActuate(true));
-//	DRC_leftTrigger.WhileHeld(new CubeRunIntake(1.0));
-//	DRC_leftTrigger.WhenReleased(new CubeIntakeActuate(false));
-//	DRC_leftTrigger.WhenReleased(new CubeRunIntake(-1.0));
+
+	DRC_leftBumper.WhenPressed(new PIDTurn(-90)); //-90
+	DRC_rightBumper.WhenPressed(new PIDTurn(90)); //90
+	DRC_aButton.WhenPressed(new CMG_NavXAutoTest());
+	DRC_bButton.WhenPressed(new PIDDriveStraight(136.0));
+	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.50, 400, Util::RobotSide::leftSide)); //0.95 for straight //220 dist 206, 0.55 power curved walls and 550 for testing
+	DRC_startButton.WhenPressed (new CMG_UltrasonicAutoTest());
+
+
 
 //	CDR_bottomLeftBase.WhenPressed(new CubeIntakeActuate(true));
 //	CDR_bottomRightBase.WhenPressed(new CubeIntakeActuate(false));
