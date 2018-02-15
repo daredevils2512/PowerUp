@@ -48,5 +48,9 @@ public:
 	virtual void TestPeriodic();
 private:
 	void PickAuto();
+
+	enum class StartLocation {
+		left, center, right, unknown
+	};
 };
 #endif
