@@ -4,7 +4,9 @@
 Cube::Cube() : Subsystem("Cube") {
 intakeLeft = RobotMap::cubeIntakeLeftMotor;
 intakeRight = RobotMap::cubeIntakeRightMotor;
-cubeIntakeSolenoid = RobotMap::cubeIntakeSolenoid;
+intakeSolenoid = RobotMap::cubeIntakeSolenoid;
+grabSolenoid = RobotMap::cubeIntakeGrabberSolenoid;
+limitSwitch = RobotMap::cubeIntakeLimitSwitch;
 }
 
 void Cube::InitDefaultCommand() {
@@ -18,8 +20,15 @@ void Cube::SetIntakeSpeed(double speed) {
 }
 
 void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {
-	cubeIntakeSolenoid->Set(direction);
+	intakeSolenoid->Set(direction);
 }
 
+void Cube::ActuateGrabber(frc::DoubleSolenoid::Value direction) {
+	grabSolenoid->Set(direction);
+}
+
+bool Cube::GetLimitSwitch() {
+	return limitSwitch->Get();
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

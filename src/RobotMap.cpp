@@ -24,6 +24,8 @@ std::shared_ptr<frc::PIDController> RobotMap::navXTurnController;
 std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeRightMotor;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeGrabberSolenoid;
+std::shared_ptr<frc::DigitalInput> RobotMap::cubeIntakeLimitSwitch;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::climberLeftWingMotor1;
 std::shared_ptr<WPI_TalonSRX> RobotMap::climberLeftWingMotor2;
@@ -68,21 +70,27 @@ void RobotMap::init() {
 
 //	navX.reset(new AHRS(SPI::Port::kMXP));
 
-//	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
-//	 cubeIntakeRightMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_RIGHT_MOTOR));
-//	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 4 ,5));
+	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
+	 cubeIntakeRightMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_RIGHT_MOTOR));
+	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 4 ,5));
+	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
+	 cubeIntakeGrabberSolenoid.reset (new frc::DoubleSolenoid (0 , 6 , 7));
 
 //	climberLeftWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_1));
 //	climberLeftWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_2));
 //	climberRightWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_1));
 //	climberRightWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_2));
+
 //	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
 //
 //	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));
 
 
 	elevatorLeftMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_LEFT_MOTOR));
+		elevatorLeftMotor->GetSelectedSensorPosition(Util::ELEVATOR_LEFT_MOTOR);
 	elevatorRightMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_RIGHT_MOTOR));
+		elevatorRightMotor->Set(ControlMode::Follower, Util::ELEVATOR_LEFT_MOTOR);
+
 	elevatorTopSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_TOP_LIMIT_SWITCH));
 	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
 	elevatorEncoder.reset(new frc::Encoder(6, 7, false, frc::Encoder::k4X));

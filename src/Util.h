@@ -25,6 +25,7 @@ class Util {
 
 		static const int CUBE_INTAKE_LEFT_MOTOR = 15;
 		static const int CUBE_INTAKE_RIGHT_MOTOR = 16;
+		static const int CUBE_INTAKE_LIMIT_SWITCH = 2; //limit switch that will tell us if the cube is fully into the robot
 
 		//Drivetrain encoder clicky things for distance
 		static constexpr double LEFT_INCH_PER_PULSE = (1/9.537878); //Inches per pulse for the left encoder

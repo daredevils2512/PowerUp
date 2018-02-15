@@ -11,13 +11,17 @@ private:
 	// for methods that implement subsystem capabilities
 	std::shared_ptr <WPI_TalonSRX> intakeLeft;
 	std::shared_ptr <WPI_TalonSRX> intakeRight;
-	std::shared_ptr<frc::DoubleSolenoid> cubeIntakeSolenoid;
+	std::shared_ptr<frc::DoubleSolenoid> intakeSolenoid;
+	std::shared_ptr<frc::DoubleSolenoid> grabSolenoid;
+	std::shared_ptr<frc::DigitalInput> limitSwitch;
 
 public:
 	Cube();
 	void InitDefaultCommand();
 	void SetIntakeSpeed(double speed);
 	void ActuateIntake(frc::DoubleSolenoid::Value direction);
+	void ActuateGrabber (frc::DoubleSolenoid::Value direction);
+	bool GetLimitSwitch();
 
 };
 

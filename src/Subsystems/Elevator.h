@@ -24,6 +24,7 @@ public:
 	double GetLiftEncoder();
 	void ResetLiftEncoder();
 	void RunLift(double speed);
+	double GetLiftMagneticEncoder();
 };
 
 #endif  // Elevator_H
