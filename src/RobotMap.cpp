@@ -87,9 +87,9 @@ void RobotMap::init() {
 
 
 	elevatorLeftMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_LEFT_MOTOR));
-		elevatorLeftMotor->GetSelectedSensorPosition(Util::ELEVATOR_LEFT_MOTOR);
+		//elevatorLeftMotor->GetSelectedSensorPosition(0);
 	elevatorRightMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_RIGHT_MOTOR));
-		elevatorRightMotor->Set(ControlMode::Follower, Util::ELEVATOR_LEFT_MOTOR);
+		//elevatorRightMotor->Set(ControlMode::Follower, Util::ELEVATOR_LEFT_MOTOR);
 
 	elevatorTopSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_TOP_LIMIT_SWITCH));
 	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));

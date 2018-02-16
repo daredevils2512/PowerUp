@@ -63,7 +63,7 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("Top Limit Switch" , RobotMap::elevatorTopSwitch->Get());
 	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Raw Elevator Clicks" , RobotMap::elevatorEncoder->Get());
-	SmartDashboard::PutNumber("Raw Elevator Encoder Clicks" , RobotMap::elevatorLeftMotor->GetSelectedSensorPosition(Util::ELEVATOR_LEFT_MOTOR));
+	SmartDashboard::PutNumber("Raw Elevator Encoder Clicks" , RobotMap::elevatorLeftMotor->GetSelectedSensorPosition(0));
 
 //	SmartDashboard::PutNumber("left motor current" , RobotMap::elevatorLeftMotor->GetOutputCurrent());
 //	SmartDashboard::PutNumber("right motor current" , RobotMap::elevatorRightMotor->GetOutputCurrent());
@@ -73,7 +73,8 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("Turning Right Q", Robot::ultrasonicSubsystem->m_turnRightQuigly);
     SmartDashboard::PutBoolean("Turning Right G", Robot::ultrasonicSubsystem->m_turnRightGradual);
 	SmartDashboard::PutBoolean("Turning Staright", Robot::ultrasonicSubsystem->m_staright);
-}
+
+	}
 void Robot::DisabledInit(){
 	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
