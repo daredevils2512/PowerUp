@@ -20,11 +20,6 @@ public:
 	void DriveStaight(Util::RobotSide robotSide, double driveSpeed, double startingDistance);
 
 	double m_startingDistance = 0.0;
-	bool m_turnLeftGradual = false;
-	bool m_turnLeftQuigly = false;
-	bool m_turnRightGradual = false;
-	bool m_turnRightQuigly = false;
-	bool m_staright = false;
 };
 
 #endif  // UltrasonicSubsystem_H

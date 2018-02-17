@@ -21,15 +21,11 @@ CMG_UltrasonicAutoTest::CMG_UltrasonicAutoTest() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddSequential (new UltrasonicStraightDrive(0.65, 164, Util::RobotSide::leftSide)); //0.5 for all//276//MAX SPEED 70
-	AddSequential (new Pause(0.25));
-	AddSequential (new AutoStraightDrive (12, -0.65));//48.0
-	AddSequential (new Pause(0.25));
-	AddSequential (new PIDTurn(-180)); //180
-	AddSequential (new Pause(0.25));
-	AddSequential (new AutoStraightDrive (8.0, 0.65));
-	AddSequential (new Pause(0.25));
-	AddSequential (new UltrasonicStraightDrive(0.65, 110, Util::RobotSide::leftSide)); //196
+	AddSequential (new UltrasonicStraightDrive(0.65, 170, Util::RobotSide::rightSide)); //0.5 for all//276//MAX SPEED 70
+	AddSequential (new Pause(0.20));
+	AddSequential (new PIDTurn(180));
+	AddSequential (new Pause(0.20));
+	AddSequential (new UltrasonicStraightDrive(0.65, 170, Util::RobotSide::leftSide));
 
 
 }

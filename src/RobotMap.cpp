@@ -32,6 +32,8 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::climberRightWingMotor2;
 
 std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicFrontLeft;
 std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicRearLeft;
+std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicFrontRight;
+std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicRearRight;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorRightMotor;
@@ -80,9 +82,14 @@ void RobotMap::init() {
 //
 //	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));
 
-
+	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
+	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));
+	ultrasonicFrontRight.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_RIGHT)));
+	ultrasonicRearRight.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_RIGHT)));
+  
 	elevatorLeftMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_LEFT_MOTOR));
 	elevatorRightMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_RIGHT_MOTOR));
+
 	elevatorTopSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_TOP_LIMIT_SWITCH));
 	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
 	elevatorEncoder.reset(new frc::Encoder(6, 7, false, frc::Encoder::k4X));

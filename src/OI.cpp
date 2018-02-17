@@ -37,20 +37,19 @@ OI::OI() {
 	DRC_aButton.WhenPressed(new CMG_NavXAutoTest());
 	DRC_bButton.WhenPressed(new PIDDriveStraight(136.0));
 	DRC_yButton.WhenPressed(new UltrasonicStraightDrive(0.50, 400, Util::RobotSide::leftSide)); //0.95 for straight //220 dist 206, 0.55 power curved walls and 550 for testing
+	DRC_xButton.WhenPressed(new UltrasonicStraightDrive(0.50, 400, Util::RobotSide::rightSide));
 	DRC_startButton.WhenPressed (new CMG_UltrasonicAutoTest());
 
-
-
-//	CDR_bottomLeftBase.WhenPressed(new CubeIntakeActuate(true));
-//	CDR_bottomRightBase.WhenPressed(new CubeIntakeActuate(false));
-//	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0));
-//	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0));
-//	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0));
-//	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0));
-//	CDR_trigger.WhenPressed(new CubeIntakeActuate(true));
-//	CDR_trigger.WhileHeld(new CubeRunIntake(1.0));
-//	CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
-//	CDR_trigger.WhenReleased(new CubeIntakeActuate(false));
+	CDR_bottomLeftBase.WhenPressed(new CubeIntakeActuate(true));
+	CDR_bottomRightBase.WhenPressed(new CubeIntakeActuate(false));
+	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0));
+	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0));
+	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0));
+	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0));
+	CDR_trigger.WhenPressed(new CubeIntakeActuate(true));
+	CDR_trigger.WhileHeld(new CubeRunIntake(1.0));
+	CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
+	CDR_trigger.WhenReleased(new CubeIntakeActuate(false));
 
 	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.5, 500)); //arbitrary numbers. Need testing
 	CDB_topRed.WhenPressed(new ElevatorRunToHeight(0.5, 400)); //arbitrary numbers. Need testing

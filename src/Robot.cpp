@@ -51,8 +51,10 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
 
-	SmartDashboard::PutNumber("Front Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
-	SmartDashboard::PutNumber("Rear Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
+	SmartDashboard::PutNumber("Front Left Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
+	SmartDashboard::PutNumber("Rear Left Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
+	SmartDashboard::PutNumber("Front Right Ultrasonic distance", RobotMap::ultrasonicFrontRight->GetDistance());
+	SmartDashboard::PutNumber("Rear Right Ultrasonic distance", RobotMap::ultrasonicRearRight->GetDistance());
 	SmartDashboard::PutNumber("Average Distance Away", Robot::ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
 	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAnalogInput()->GetAverageVoltage());
 	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAnalogInput()->GetAverageVoltage());
@@ -61,15 +63,15 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("Top Limit Switch" , RobotMap::elevatorTopSwitch->Get());
 	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Raw Elevator Clicks" , RobotMap::elevatorEncoder->Get());
-
 //	SmartDashboard::PutNumber("left motor current" , RobotMap::elevatorLeftMotor->GetOutputCurrent());
 //	SmartDashboard::PutNumber("right motor current" , RobotMap::elevatorRightMotor->GetOutputCurrent());
 
 	SmartDashboard::PutBoolean("Turning Left Q", Robot::ultrasonicSubsystem->m_turnLeftQuigly);
 	SmartDashboard::PutBoolean("Turning Left G", Robot::ultrasonicSubsystem->m_turnLeftGradual);
 	SmartDashboard::PutBoolean("Turning Right Q", Robot::ultrasonicSubsystem->m_turnRightQuigly);
-    SmartDashboard::PutBoolean("Turning Right G", Robot::ultrasonicSubsystem->m_turnRightGradual);
+  SmartDashboard::PutBoolean("Turning Right G", Robot::ultrasonicSubsystem->m_turnRightGradual);
 	SmartDashboard::PutBoolean("Turning Staright", Robot::ultrasonicSubsystem->m_staright);
+
 }
 void Robot::DisabledInit(){
 	compressor->SetClosedLoopControl(false);
@@ -81,7 +83,7 @@ void Robot::DisabledInit(){
 }
 
 void Robot::DisabledPeriodic() {
-//	std::cout << "I'm Disabled!" << std::endl;
+	std::cout << "I'm Disabled!" << std::endl;
 	Scheduler::GetInstance()->Run();
 }
 
