@@ -33,6 +33,8 @@ class Util {
 
 		static const int ULTRASONIC_FRONT_LEFT = 4; //Equivalent to NavX Analog Pin 0
 		static const int ULTRASONIC_REAR_LEFT = 5; //Equivalent to NavX Analog Pin 1
+		static const int ULTRASONIC_FRONT_RIGHT = 6;
+		static const int ULTRASONIC_REAR_RIGHT = 7;
 		static constexpr double SUPPLIED_VOLTAGE = 4.96; //The voltage sent through the NavX analogInput pins for converting voltage to distance
 		static constexpr double ULTRASONIC_ANGLE_TOLERANCE = 0.2; //The acceptable tolerance for comparing the two ultrasonic sensors on a side
 		static constexpr double ULTRASONIC_DIST_TOLERANCE = 3.5;

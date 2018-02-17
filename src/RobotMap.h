@@ -34,6 +34,8 @@ public:
 
 	static std::shared_ptr<UltrasonicSensor> ultrasonicFrontLeft;
 	static std::shared_ptr<UltrasonicSensor> ultrasonicRearLeft;
+	static std::shared_ptr<UltrasonicSensor> ultrasonicFrontRight;
+	static std::shared_ptr<UltrasonicSensor> ultrasonicRearRight;
 
 	static std::shared_ptr<WPI_TalonSRX> elevatorLeftMotor;
 	static std::shared_ptr<WPI_TalonSRX> elevatorRightMotor;
