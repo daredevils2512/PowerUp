@@ -86,7 +86,7 @@ void Robot::DisabledInit(){
 }
 
 void Robot::DisabledPeriodic() {
-	std::cout << "I'm Disabled!" << std::endl;
+//	std::cout << "I'm Disabled!" << std::endl;
 	Scheduler::GetInstance()->Run();
 
 }
@@ -124,9 +124,9 @@ void Robot::PickAuto() {
 		while (lastPart[0] == ' ') {
 			lastPart = lastPart.substr(1);
 		}
-		if (!ifs.eof()) {
-			lastPart = lastPart.substr(0, lastPart.size() - 1);
-		}
+//		if (!ifs.eof()) {
+//			lastPart = lastPart.substr(0, lastPart.size() - 1);
+//		}
 		std::cout << firstPart << " - " << lastPart << std::endl;
 		//Lowering everything to lowercase to ignore case
 		std::transform(firstPart.begin(), firstPart.end(), firstPart.begin(), ::tolower);
@@ -162,67 +162,93 @@ void Robot::PickAuto() {
 			}
 		}
 	}
+	//USING THE TERTIARY CONVERTERS
 	int directionSwitch = (ourSwitch == 'L') ? -1 : 1; 		//directionSwitch equal to 1 if turning right and -1 if left
-	int directionScale = (scale == 'L') ? -1 : 1;
+	int directionScale = (scale == 'L') ? 1 : -1;			//switched values so that we turn the proper way towards the scale
+	Util::RobotSide trackingSide = (startingPosition == StartLocation::left) ? Util::RobotSide::leftSide : Util::RobotSide::rightSide;
 	//Use commands.push_back() to add commands
 	if (startingPosition == StartLocation::center) {
+		std::cout << "We're in the center!" << std::endl;
 		if (doSwitch){
-			commands.push_back(new PIDDriveStraight(50));		//drive straight to get away from the wall
+			std::cout << "Doing the easy peasy stuff" << std::endl;
+			commands.push_back(new PIDDriveStraight(50));			//drive straight to get away from the wall
 			commands.push_back(new PIDTurn(90 * directionSwitch));	//turning left or right based off of which side is ours
-			commands.push_back(new PIDDriveStraight(53));		//going places
+			commands.push_back(new PIDDriveStraight(56));			//going places
 			commands.push_back(new PIDTurn(90 * -directionSwitch));	//turning back to be aimed at the switch
-			commands.push_back(new PIDDriveStraight(54));		//running to the switch
-			commands.push_back(new CubeRunIntake(-1.0));		//bye bye cube!
+			commands.push_back(new PIDDriveStraight(54));			//running to the switch
+//			commands.push_back(new CubeRunIntake(-1.0));			//bye bye cube!
 		} else {
+			std::cout << "Just going for a drive" << std::endl;
 			commands.push_back(new PIDDriveStraight(90));		// drive forward and cross auto line
 		}
 	} else if (startingPosition == StartLocation::left || startingPosition == StartLocation::right) {
-		char sideCheck = (startingPosition == StartLocation::right) ? 'R' : 'L'; //If starting is right, sideCheck is right otherwise left
+		std::cout << "On one of the sides!" << std::endl;
+		char sideCheck = (startingPosition == StartLocation::right) ? 'R' : 'L'; //If starting pos. is right, sideCheck is right otherwise left
 		if (doSwitch && ourSwitch == sideCheck) { // If going to switch and we can actually do the switch
-			commands.push_back(new PIDDriveStraight(104));
-			commands.push_back(new CubeRunIntake(-1.0));
+			std::cout << "Doing our switch good" << std::endl;
+			commands.push_back(new PIDDriveStraight(160));	//zooming out to the middle of the switch and determinging where to go from there
 			if (doScale) {
-				commands.push_back(new PIDDriveStraight(113));
-
-				commands.push_back(new PIDTurn(90 * directionScale));
-				commands.push_back(new ElevatorRunToHeight(0.0, 0.0)); // TODO put in actual height or whatever
-				commands.push_back(new PIDDriveStraight(1.5));
-				commands.push_back(new CubeRunIntake(-1.0));
-
+				std::cout << "We're try hards and doing both" << std::endl;
 				if (scale == sideCheck) {
+					std::cout << "It's on our side thankfully" << std::endl;
 					// command group for positioning from mid-zone to the closest side of the balance, then placing
+					commands.push_back(new PIDDriveStraight(184));			//driving to the scale zone
+					commands.push_back(new PIDTurn(90 * directionScale));	////turning towards it
+					commands.push_back(new ElevatorRunToHeight(0.0, 0.0));	// TODO put in actual height or whatever
+					commands.push_back(new PIDDriveStraight(18));			//zoom into it
+//					commands.push_back(new CubeRunIntake(-1.0));			//bye bye cube
 				} else {
+					std::cout << "Darn, it's all the way over there" << std::endl;
 					// command group for moving across mid-zone to the farthest side of the balance, then placing
+					commands.push_back(new PIDDriveStraight(64));			//driving a little farther than the switch
+					commands.push_back(new PIDTurn(90 * directionScale));	//turning to go around
+					commands.push_back(new PIDDriveStraight(190));			//going down past the switch
+					commands.push_back(new PIDTurn(90 * -directionScale));	//turning the opposite way
+					commands.push_back(new PIDDriveStraight(100));			//zooming to the middle of scale
+					commands.push_back(new PIDTurn(90 * -directionScale));	//turning towards the scale
+					commands.push_back(new ElevatorRunToHeight(0.0, 0.0));	//TODO Add in correct height
+					commands.push_back(new PIDDriveStraight(17.5));			//zoom at scale
+//					commands.push_back(new CubeRunIntake(-1.0));			//bye bye cube
 				}
+			} else {
+				std::cout << "We're normal and just gonna do the easy stuff" << std::endl;
+				commands.push_back(new PIDTurn(90 * -directionSwitch));		//turning towards the switch to drop cube
+				commands.push_back(new PIDDriveStraight(48)); 				//TODO Add in correct distance
+//				commands.push_back(new CubeRunIntake(-1.0));				//bye bye cube
 			}
-//			if we aren't doing the scale, just don't move since we technically crossed the auto line anyway
+			//if we aren't doing the scale, just don't move since we technically crossed the auto line anyway
 		} else if (doScale) {
+			std::cout << "Gonna go be tall cause we ate our veggies" << std::endl;
 			//move to common baseline zone + move to mid-zone of alliance
 			if (scale == sideCheck){
+				std::cout << "Less work cause it's on our side" << std::endl;
 				// command group for positioning from mid-zone to closest side of the balance, then placing
-				commands.push_back(new PIDDriveStraight(311));
-				commands.push_back(new PIDTurn(90 * -directionScale));
-				commands.push_back(new ElevatorRunToHeight(0.0, 0.0)); // TODO put in actual height or whatever
-				commands.push_back(new PIDDriveStraight(1.5));
-				commands.push_back(new CubeRunIntake(-1.0));
+				commands.push_back(new PIDDriveStraight(24.0));
+				commands.push_back(new UltrasonicStraightDrive(0.75, 300, trackingSide));	//driving with sensros down da wall
+				commands.push_back(new PIDTurn(90 * -directionScale));						//turning towards the scale
+				commands.push_back(new ElevatorRunToHeight(0.0, 0.0)); 						// TODO put in actual height or whatever
+				commands.push_back(new PIDDriveStraight(18));								//zoom at scale
+//				commands.push_back(new CubeRunIntake(-1.0));								//bye bye cube
 			} else {
+				std::cout << "It's all the way over there....Need more veggies" << std::endl;
 				// command group for moving across mid-zone to farthest side of the balance, then placing
-				commands.push_back(new PIDDriveStraight(222));
-				commands.push_back(new PIDTurn(90 * directionScale));
-				commands.push_back(new PIDDriveStraight(236));
-				commands.push_back(new PIDTurn(90 * -directionScale));
-				commands.push_back(new PIDDriveStraight(87));
-				commands.push_back(new PIDTurn(90 * -directionScale));
-				commands.push_back(new ElevatorRunToHeight(0.0, 0.0));
-				commands.push_back(new PIDDriveStraight(1.5));
-				commands.push_back(new CubeRunIntake(-1.0));
-
+				commands.push_back(new UltrasonicStraightDrive(0.75, 222, trackingSide));	//drive with sensors down the wall
+				commands.push_back(new PIDTurn(90 * directionScale));						//turn to go across the back of switch
+				commands.push_back(new PIDDriveStraight(236));								//zoom to other side
+				commands.push_back(new PIDTurn(90 * -directionScale));						//turn to face opposite end of field
+				commands.push_back(new PIDDriveStraight(87));								//drive to null zone
+				commands.push_back(new PIDTurn(90 * -directionScale));						//turn to the scale
+				commands.push_back(new ElevatorRunToHeight(0.0, 0.0));						// TODO put in actual height or whatever
+				commands.push_back(new PIDDriveStraight(18));								//zoom at the scale
+//				commands.push_back(new CubeRunIntake(-1.0));								//bye bye cube
 			}
 		} else {
-			commands.push_back(new PIDDriveStraight(50)); //Or whatever the cross baseline distance is
+			std::cout << "One too many cookies....Gonna just go straight" << std::endl;
+			commands.push_back(new PIDDriveStraight(90)); 	//Or whatever the cross baseline distance is
 		}
 	} else {
 		std::cout << "Something went wrong. Aborting logic checking and driving straight" << std::endl;
+		commands.push_back(new PIDDriveStraight(90)); 	//Or whatever the cross baseline distance is
 	}
 	autonomousCommand.reset(new CMG_AutoGenerated(commands));
 }
