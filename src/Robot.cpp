@@ -96,9 +96,8 @@ void Robot::DisabledPeriodic() {
 void Robot::PickAuto() {
 	std::string gameMessage = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 	if (gameMessage.length() == 0) return;
-	std::vector<char> balanceStates(gameMessage.begin(), gameMessage.end());
-	char ourSwitch = balanceStates[0];
-	char scale = balanceStates[1];
+	char ourSwitch = gameMessage[0];
+	char scale = gameMessage[1];
 	//BalanceStates[2] = their switch
 
 	StartLocation startingPosition = StartLocation::unknown;
@@ -107,10 +106,6 @@ void Robot::PickAuto() {
 
 	std::vector<frc::Command*> commands;
 
-	if (balanceStates.empty()) {
-		std::cout << "There's no auto things. Go yell at the FMS. Maybe...Just maybe that'll help" << std::endl;
-	}
-
 	std::ifstream ifs("/home/lvuser/Autonomous.txt");
 	if (!ifs.good()) {
 		std::cout << "ERROR: NO AUTO FILE FOUND. GO HUDDLE IN THE CORNER AND RESEARCH IT" << std::endl;
@@ -118,7 +113,7 @@ void Robot::PickAuto() {
 		ifs.close();
 		startingPosition = StartLocation::unknown;
 	}
-	while (!ifs.eof()) {
+	while (!ifs.eof()) { //TODO look into error handling for the cases in which the file is missing or empty
 		std::string lastPart;
 		std::string firstPart;
 		std::getline(ifs, firstPart, ':');
@@ -171,7 +166,9 @@ void Robot::PickAuto() {
 	//USING THE TERTIARY CONVERTERS
 	int directionSwitch = (ourSwitch == 'L') ? -1 : 1; 		//directionSwitch equal to 1 if turning right and -1 if left
 	int directionScale = (scale == 'L') ? 1 : -1;			//switched values so that we turn the proper way towards the scale
-	Util::RobotSide trackingSide = (startingPosition == StartLocation::left) ? Util::RobotSide::leftSide : Util::RobotSide::rightSide;
+	Util::RobotSide trackingSide = (startingPosition == StartLocation::left)
+		? Util::RobotSide::leftSide
+		: Util::RobotSide::rightSide;
 	//Use commands.push_back() to add commands
 	commands.push_back(new PrintCurrentFPGATime());
 	if (startingPosition == StartLocation::center) {
@@ -278,9 +275,6 @@ void Robot::AutonomousInit() {
 }
 
 void Robot::AutonomousPeriodic() {
-	if (autonomousCommand.get() == nullptr) {
-		this->PickAuto();
-	}
 	Scheduler::GetInstance()->Run();
 
 
