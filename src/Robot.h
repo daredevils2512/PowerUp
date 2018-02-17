@@ -52,5 +52,6 @@ private:
 	enum class StartLocation {
 		left, center, right, unknown
 	};
+	double autoEndTime = 0.0;
 };
 #endif
