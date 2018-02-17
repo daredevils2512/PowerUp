@@ -15,6 +15,7 @@
 #include "Commands/PIDDriveStraight.h"
 #include "Commands/ClimberRunWing.h"
 #include "Commands/ElevatorRunToHeight.h"
+#include "Commands/ElevatorRunLift.h"
 #include "Commands/CubeIntakeActuate.h"
 #include "Commands/CubeRunIntake.h"
 #include "Commands/LowGear.h"
@@ -30,6 +31,7 @@ OI::OI() {
 	DRC_leftTrigger.WhenReleased(new CubeRunIntake(-1.0));
 	DRC_rightTrigger.WhileHeld(new LowGear());
 	DRC_rightTrigger.WhenReleased(new HighGear());
+
 	DRC_leftBumper.WhenPressed(new PIDTurn(-90)); //-90
 	DRC_rightBumper.WhenPressed(new PIDTurn(90)); //90
 	DRC_aButton.WhenPressed(new CMG_NavXAutoTest());
@@ -53,18 +55,20 @@ OI::OI() {
 	CDB_topRed.WhenPressed(new ElevatorRunToHeight(0.5, 400)); //arbitrary numbers. Need testing
 	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.5, 300)); //arbitrary numbers. Need testing
 	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.5, 0)); //arbitrary numbers. Need testing
+	CDB_bottomWhite.WhileHeld (new ElevatorRunLift (0.7));
+	CDB_bottomWhite.WhenReleased (new ElevatorRunLift (0.0));
+	CDB_bottomRed.WhileHeld(new ElevatorRunLift(-0.7));
+	CDB_bottomRed.WhenReleased(new ElevatorRunLift(0.0));
 	CDB_bigRed.WhileHeld(new ClimberRunWing (Climber::ClimberWing::leftWing, 0.8));
 	CDB_bigRed.WhenReleased(new ClimberRunWing (Climber::ClimberWing::leftWing, 0.0));
 	CDB_bigWhite.WhileHeld(new ClimberRunWing (Climber::ClimberWing::rightWing, 0.8));
 	CDB_bigWhite.WhenReleased(new ClimberRunWing (Climber::ClimberWing::rightWing, 0.0));
 
-
-
 }
 
 	double OI::GetTurn() {
 		//gets turning values
-		return Desensitize(-driverController.GetRawAxis(4));
+		return Desensitize(driverController.GetRawAxis(4));
 	}
 
 	double OI::GetMove() {
