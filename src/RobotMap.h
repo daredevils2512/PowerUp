@@ -24,6 +24,8 @@ public:
 	static std::shared_ptr<WPI_TalonSRX> cubeIntakeLeftMotor;
 	static std::shared_ptr<WPI_TalonSRX> cubeIntakeRightMotor;
 	static std::shared_ptr<frc::DoubleSolenoid> cubeIntakeSolenoid;
+	static std::shared_ptr<frc::DoubleSolenoid> cubeIntakeGrabberSolenoid;
+	static std::shared_ptr<frc::DigitalInput> cubeIntakeLimitSwitch;
 
 	static std::shared_ptr<WPI_TalonSRX> climberLeftWingMotor1;
 	static std::shared_ptr<WPI_TalonSRX> climberLeftWingMotor2;

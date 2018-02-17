@@ -7,6 +7,7 @@
 
 #include <Commands/CMG_NavXAutoTest.h>
 #include <Commands/CMG_UltrasonicAutoTest.h>
+#include <Commands/CMG_IntakeCube.h>
 #include "OI.h"
 
 #include <WPILib.h>
@@ -18,6 +19,7 @@
 #include "Commands/ElevatorRunLift.h"
 #include "Commands/CubeIntakeActuate.h"
 #include "Commands/CubeRunIntake.h"
+#include "Commands/CubeGrabberActuate.h"
 #include "Commands/LowGear.h"
 #include "Commands/HighGear.h"
 #include "Robot.h"
@@ -31,6 +33,8 @@ OI::OI() {
 	DRC_leftTrigger.WhenReleased(new CubeRunIntake(-1.0));
 	DRC_rightTrigger.WhileHeld(new LowGear());
 	DRC_rightTrigger.WhenReleased(new HighGear());
+//	DRC_leftBumper.WhenPressed(new PIDTurn(-90)); //-90
+//	DRC_rightBumper.WhenPressed(new PIDTurn(90)); //90
 
 	DRC_leftBumper.WhenPressed(new PIDTurn(-90)); //-90
 	DRC_rightBumper.WhenPressed(new PIDTurn(90)); //90

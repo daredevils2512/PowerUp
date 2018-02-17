@@ -24,6 +24,9 @@ public:
 	double GetLiftEncoder();
 	void ResetLiftEncoder();
 	void RunLift(double speed);
+	double GetLiftMagneticEncoder();
+
+	double sensorUnitsPerRotation = 1024; // arbitrary number
 };
 
 #endif  // Elevator_H

@@ -40,3 +40,7 @@ void Elevator::RunLift(double speed) {
 	left->Set(speed);
 	right->Set(speed);
 }
+
+double Elevator::GetLiftMagneticEncoder() {
+	return RobotMap::elevatorLeftMotor->GetSelectedSensorPosition(0) * (1/sensorUnitsPerRotation);
+}
