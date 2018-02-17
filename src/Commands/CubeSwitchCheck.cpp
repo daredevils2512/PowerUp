@@ -11,23 +11,21 @@
 CubeSwitchCheck::CubeSwitchCheck() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires (Robot::cube.get());
+	Requires(Robot::cube.get());
 }
 
 // Called just before this Command runs the first time
 void CubeSwitchCheck::Initialize() {
-	if (Robot::cube->GetLimitSwitch()) {
-		Robot::cube->ActuateGrabber(frc::DoubleSolenoid::kForward);
-	}
-	else {
-		Robot::cube->ActuateGrabber(frc::DoubleSolenoid::kReverse);
 
-	}
 }
 
 // Called repeatedly when this Command is scheduled to run
 void CubeSwitchCheck::Execute() {
-
+	if (Robot::cube->GetLimitSwitch()) {
+		Robot::cube->ActuateGrabber(frc::DoubleSolenoid::kForward);
+	} else {
+		Robot::cube->ActuateGrabber(frc::DoubleSolenoid::kReverse);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
