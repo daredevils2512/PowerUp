@@ -17,7 +17,7 @@ Drivetrain::Drivetrain() : Subsystem("Drivetrain") {
 }
 
 void Drivetrain::PIDWrite(double output) {
-	std::cout<<"Writing Drivetrain PID: " << output <<std::endl;
+//	std::cout<<"Writing Drivetrain PID: " << output <<std::endl;
 	pidOutput = output;
 }
 
@@ -73,7 +73,7 @@ void Drivetrain::SetPIDEnabled(bool enabled){
 }
 
 double Drivetrain::GetPIDOutput() {
-	std::cout << "Gettting drivetrain pid output: " << pidOutput << std::endl;
+//	std::cout << "Gettting drivetrain pid output: " << pidOutput << std::endl;
 	if(!this->IsPIDEnabled()){
 		Util::ReportError("Accessing PID Output while PID is disabled!");
 	}
