@@ -4,8 +4,9 @@
 
 Elevator::Elevator() :
 		Subsystem("Elevator") {
-	left = RobotMap::elevatorLeftMotor;
-	right = RobotMap::elevatorRightMotor;
+//	left = RobotMap::elevatorLeftMotor;
+//	right = RobotMap::elevatorRightMotor;
+	motor = RobotMap::elevatorMotor;
 	top = RobotMap::elevatorTopSwitch;
 	bottom = RobotMap::elevatorBottomSwitch;
 	encoder = RobotMap::elevatorEncoder;
@@ -37,10 +38,11 @@ void Elevator::ResetLiftEncoder() {
 }
 
 void Elevator::RunLift(double speed) {
-	left->Set(speed);
-	right->Set(speed);
+//	left->Set(speed);
+//	right->Set(speed);
+	motor->Set(speed);
 }
 
 double Elevator::GetLiftMagneticEncoder() {
-	return RobotMap::elevatorLeftMotor->GetSelectedSensorPosition(0) * (1/sensorUnitsPerRotation);
+	return RobotMap::elevatorMotor->GetSelectedSensorPosition(0) * (1/sensorUnitsPerRotation);
 }

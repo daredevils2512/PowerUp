@@ -13,6 +13,7 @@
 #include "Commands/PIDDriveStraight.h"
 #include "Commands/UltrasonicStraightDrive.h"
 #include "Commands/PrintCurrentFPGATime.h"
+#include "Commands/Pause.h"
 
 std::shared_ptr<Drivetrain> Robot::drivetrain;
 std::unique_ptr<OI> Robot::oi;
@@ -53,55 +54,62 @@ void Robot::RobotInit() {
 }
 void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;
-	SmartDashboard::PutBoolean("Is Connected",RobotMap::navX->IsConnected());
-	SmartDashboard::PutBoolean("Is Moving",RobotMap::navX->IsMoving());
-	SmartDashboard::PutBoolean("Is Rotating",RobotMap::navX->IsRotating());
-	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
-	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
-	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+
+//TODO comment printouts back in once robot is complete, only commented out because ICC will be sketchy
+
+//	SmartDashboard::PutBoolean("Is Connected",RobotMap::navX->IsConnected());
+//	SmartDashboard::PutBoolean("Is Moving",RobotMap::navX->IsMoving());
+//	SmartDashboard::PutBoolean("Is Rotating",RobotMap::navX->IsRotating());
+//	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
+//	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
+//	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
 
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
 
+//	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 
-	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
+//	SmartDashboard::PutNumber("Front Left Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
+//	SmartDashboard::PutNumber("Rear Left Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
+//	SmartDashboard::PutNumber("Front Right Ultrasonic distance", RobotMap::ultrasonicFrontRight->GetDistance());
+//	SmartDashboard::PutNumber("Rear Right Ultrasonic distance", RobotMap::ultrasonicRearRight->GetDistance());
+//	SmartDashboard::PutNumber("Average Distance Away", Robot::ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
+//	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAnalogInput()->GetAverageVoltage());
+//	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAnalogInput()->GetAverageVoltage());
+//	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
-	SmartDashboard::PutNumber("Front Left Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
-	SmartDashboard::PutNumber("Rear Left Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
-	SmartDashboard::PutNumber("Front Right Ultrasonic distance", RobotMap::ultrasonicFrontRight->GetDistance());
-	SmartDashboard::PutNumber("Rear Right Ultrasonic distance", RobotMap::ultrasonicRearRight->GetDistance());
-	SmartDashboard::PutNumber("Average Distance Away", Robot::ultrasonicSubsystem->GetAverageDistance(Util::RobotSide::leftSide));
-	SmartDashboard::PutNumber ("Voltage Returned Front", RobotMap::ultrasonicFrontLeft->GetAnalogInput()->GetAverageVoltage());
-	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAnalogInput()->GetAverageVoltage());
-	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
-
-	SmartDashboard::PutBoolean("Top Limit Switch" , RobotMap::elevatorTopSwitch->Get());
-	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
-	SmartDashboard::PutNumber("Raw Elevator Clicks" , RobotMap::elevatorEncoder->Get());
-	SmartDashboard::PutNumber("Raw Elevator Encoder Clicks" , RobotMap::elevatorLeftMotor->GetSelectedSensorPosition(0));
+//	SmartDashboard::PutBoolean("Top Limit Switch" , RobotMap::elevatorTopSwitch->Get());
+//	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+//	SmartDashboard::PutNumber("Raw Elevator Clicks" , RobotMap::elevatorEncoder->Get());
+//	SmartDashboard::PutNumber("Raw Elevator Encoder Clicks" , RobotMap::elevatorLeftMotor->GetSelectedSensorPosition(0));
 
 //	SmartDashboard::PutNumber("left motor current" , RobotMap::elevatorLeftMotor->GetOutputCurrent());
 //	SmartDashboard::PutNumber("right motor current" , RobotMap::elevatorRightMotor->GetOutputCurrent());
 
 	}
 void Robot::DisabledInit(){
+	std::cout << "Let's start being disabled" << std::endl;
 	compressor->SetClosedLoopControl(false);
-	RobotMap::navX->Reset();
-	RobotMap::navX->ResetDisplacement();
-	drivetrain->SetPIDEnabled(false);
+
+//TODO comment back in after ICC
+
+//	RobotMap::navX->Reset();
+//	RobotMap::navX->ResetDisplacement();
+//	drivetrain->SetPIDEnabled(false);
 	//drivetrain->GetPIDOutput();
 	autonomousCommand.release(); // Make auto command null again.
 }
 
 void Robot::DisabledPeriodic() {
-	std::cout << "I'm Disabled!" << std::endl;
+//	std::cout << "I'm Disabled!" << std::endl;
 	Scheduler::GetInstance()->Run();
 
 }
 
 void Robot::PickAuto() {
+	std::cout << "Picking Auto..." << std::endl;
 	std::string gameMessage = frc::DriverStation::GetInstance().GetGameSpecificMessage();
 	if (gameMessage.length() == 0) return;
 	char ourSwitch = gameMessage[0];
@@ -193,7 +201,7 @@ void Robot::PickAuto() {
 			//with 45 degree turns
 			commands.push_back(new PIDDriveStraight(30));
 			commands.push_back(new PIDTurn(45 * directionSwitch));
-			commands.push_back(new PIDDriveStraight(68));
+			commands.push_back(new PIDDriveStraight(71)); //68
 			commands.push_back(new PIDTurn(45 * -directionSwitch));
 			commands.push_back(new PIDDriveStraight(36));
 		} else {
@@ -205,7 +213,7 @@ void Robot::PickAuto() {
 		char sideCheck = (startingPosition == StartLocation::right) ? 'R' : 'L'; //If starting pos. is right, sideCheck is right otherwise left
 		if (doSwitch && ourSwitch == sideCheck) { // If going to switch and we can actually do the switch
 			std::cout << "Doing our switch good" << std::endl;
-			commands.push_back(new PIDDriveStraight(160));	//zooming out to the middle of the switch and determinging where to go from there
+			commands.push_back(new PIDDriveStraight(155.275));	//zooming out to the middle of the switch and determinging where to go from there
 			if (doScale) {
 				std::cout << "We're try hards and doing both" << std::endl;
 				if (scale == sideCheck) {
@@ -213,8 +221,8 @@ void Robot::PickAuto() {
 					// command group for positioning from mid-zone to the closest side of the balance, then placing
 					commands.push_back(new PIDDriveStraight(184));			//driving to the scale zone
 					commands.push_back(new PIDTurn(90 * directionScale));	////turning towards it
-					commands.push_back(new ElevatorRunToHeight(0.0, 0.0));	// TODO put in actual height or whatever
-					commands.push_back(new PIDDriveStraight(18));			//zoom into it
+					//commands.push_back(new ElevatorRunToHeight(0.0, 0.0));	// TODO put in actual height or whatever
+					commands.push_back(new PIDDriveStraight(12));			//zoom into it
 //					commands.push_back(new CubeRunIntake(-1.0));			//bye bye cube
 				} else {
 					std::cout << "Darn, it's all the way over there" << std::endl;
@@ -225,17 +233,27 @@ void Robot::PickAuto() {
 					commands.push_back(new PIDTurn(90 * -directionScale));	//turning the opposite way
 					commands.push_back(new PIDDriveStraight(100));			//zooming to the middle of scale
 					commands.push_back(new PIDTurn(90 * -directionScale));	//turning towards the scale
-					commands.push_back(new ElevatorRunToHeight(0.0, 0.0));	//TODO Add in correct height
+					//commands.push_back(new ElevatorRunToHeight(0.0, 0.0));//TODO Add in correct height
 					commands.push_back(new PIDDriveStraight(17.5));			//zoom at scale
 //					commands.push_back(new CubeRunIntake(-1.0));			//bye bye cube
 				}
 			} else {
 				std::cout << "We're normal and just gonna do the easy stuff" << std::endl;
 				commands.push_back(new PIDTurn(90 * -directionSwitch));		//turning towards the switch to drop cube
-				commands.push_back(new PIDDriveStraight(48)); 				//TODO Add in correct distance
+				commands.push_back(new PIDDriveStraight(24)); 				//TODO Add in correct distance
 //				commands.push_back(new CubeRunIntake(-1.0));				//bye bye cube
 			}
 			//if we aren't doing the scale, just don't move since we technically crossed the auto line anyway
+		} else if (doSwitch && ourSwitch != sideCheck) {
+			std::cout << "Doing our switch good" << std::endl;
+			commands.push_back(new PIDDriveStraight(220));			//driving out past the switch so we can go around
+			commands.push_back(new PIDTurn(90 * directionSwitch));	//turning to go around
+			commands.push_back(new PIDDriveStraight(230));			//zomming arround back
+			commands.push_back(new PIDTurn(90 * directionSwitch));	//turning again
+			commands.push_back(new PIDDriveStraight(66));			//zooming onto side
+			commands.push_back(new Pause(0.2));
+			commands.push_back(new PIDTurn(90 * directionSwitch));	//and again....
+			commands.push_back(new PIDDriveStraight(34));			//zooming into it
 		} else if (doScale) {
 			std::cout << "Gonna go be tall cause we ate our veggies" << std::endl;
 			//move to common baseline zone + move to mid-zone of alliance
@@ -244,10 +262,10 @@ void Robot::PickAuto() {
 				std::cout << "Less work cause it's on our side" << std::endl;
 				// command group for positioning from mid-zone to closest side of the balance, then placing
 				commands.push_back(new PIDDriveStraight(24.0));
-				commands.push_back(new UltrasonicStraightDrive(0.75, 294, trackingSide));	//driving with sensros down da wall
+				commands.push_back(new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
 				commands.push_back(new PIDTurn(90 * directionScale));						//turning towards the scale
-				commands.push_back(new ElevatorRunToHeight(0.0, 0.0)); 						// TODO put in actual height or whatever
-				commands.push_back(new PIDDriveStraight(18));								//zoom at scale
+				//commands.push_back(new ElevatorRunToHeight(0.0, 0.0)); 						// TODO put in actual height or whatever
+				commands.push_back(new PIDDriveStraight(12));	//18							//zoom at scale
 //				commands.push_back(new CubeRunIntake(-1.0));								//bye bye cube
 			} else {
 				std::cout << "It's all the way over there....Need more veggies" << std::endl;
@@ -258,7 +276,7 @@ void Robot::PickAuto() {
 				commands.push_back(new PIDTurn(90 * -directionScale));						//turn to face opposite end of field
 				commands.push_back(new PIDDriveStraight(87));								//drive to null zone
 				commands.push_back(new PIDTurn(90 * -directionScale));						//turn to the scale
-				commands.push_back(new ElevatorRunToHeight(0.0, 0.0));						// TODO put in actual height or whatever
+				//commands.push_back(new ElevatorRunToHeight(0.0, 0.0));						// TODO put in actual height or whatever
 				commands.push_back(new PIDDriveStraight(18));								//zoom at the scale
 //				commands.push_back(new CubeRunIntake(-1.0));								//bye bye cube
 			}
@@ -275,6 +293,7 @@ void Robot::PickAuto() {
 }
 
 void Robot::AutonomousInit() {
+	std::cout << "Starting auto..." << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	this->PickAuto();
 	if (autonomousCommand.get() != nullptr) {
@@ -283,12 +302,14 @@ void Robot::AutonomousInit() {
 }
 
 void Robot::AutonomousPeriodic() {
+//	std::cout << "I'm in auto!" << std::endl;
 	Scheduler::GetInstance()->Run();
 
 
 }
 
 void Robot::TeleopInit() {
+	std::cout << "Let's start teleop" << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	compressor->SetClosedLoopControl(true);
 	if (autonomousCommand.get() != nullptr) {
@@ -297,6 +318,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
+//	std::cout << "I'm telopeed!" << std::endl;
 	Scheduler::GetInstance()->Run();
 	}
 

@@ -13,10 +13,10 @@
 class Util {
 	public:
 		//Keeping all the constants in one place
-		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 1; //1 //ports for Aries drivetrain, change for comp robot //2
-		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 2; //2 //6
-		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 3; //3 //2
-		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 4;//4 //1
+		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 2; //10
+		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 1; //6
+		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 10; //2
+		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 6; //1
 
 		static const int CLIMBER_LEFT_WING_MOTOR_1 = 11; //theoretical CAN Talong ID's
 		static const int CLIMBER_LEFT_WING_MOTOR_2 = 12;
@@ -40,8 +40,9 @@ class Util {
 		static constexpr double ULTRASONIC_DIST_TOLERANCE = 3.5;
 		static constexpr double ULTRASONIC_TURN_MULTIPLIER = 0.10; //The amount we reduce motor speed for ultrasonic staightDrive 0.0775//0.0975(current reliable test value)//0.0975
 
-		static const int ELEVATOR_LEFT_MOTOR = 5;
-		static const int ELEVATOR_RIGHT_MOTOR = 7;
+		//static const int ELEVATOR_LEFT_MOTOR = 5;
+		//static const int ELEVATOR_RIGHT_MOTOR = 7;
+		static const int ELEVATOR_MOTOR = 5;
 		static const int ELEVATOR_TOP_LIMIT_SWITCH = 4;
 		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 5;
 		static constexpr double ELEVATOR_MAX_ENCODER_CLICKS = 5000;
