@@ -1,6 +1,7 @@
 #include "Elevator.h"
 #include "../Commands/ElevatorManualRun.h"
 #include "../RobotMap.h"
+#include "../Robot.h"
 
 Elevator::Elevator() :
 		Subsystem("Elevator") {
@@ -16,7 +17,7 @@ Elevator::Elevator() :
 void Elevator::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
-	//SetDefaultCommand(new ElevatorManualRun());
+	SetDefaultCommand(new ElevatorManualRun());
 }
 
 // Put methods for controlling this subsystem
@@ -45,4 +46,9 @@ void Elevator::RunLift(double speed) {
 
 double Elevator::GetLiftMagneticEncoder() {
 	return RobotMap::elevatorMotor->GetSelectedSensorPosition(0) * (1/sensorUnitsPerRotation);
+}
+
+double Elevator::ResetMagneticEncoder() {
+	// will finish later
+	return Robot::elevator->GetLiftMagneticEncoder();
 }

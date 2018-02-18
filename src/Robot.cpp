@@ -70,6 +70,7 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
+	SmartDashboard::PutNumber("Elevator Encoder...Maybe Idk" , Robot::elevator->GetLiftMagneticEncoder());
 
 //	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 

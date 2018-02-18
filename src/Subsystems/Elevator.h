@@ -26,6 +26,7 @@ public:
 	void ResetLiftEncoder();
 	void RunLift(double speed);
 	double GetLiftMagneticEncoder();
+	double ResetMagneticEncoder();
 
 	double sensorUnitsPerRotation = 1024; // arbitrary number
 };

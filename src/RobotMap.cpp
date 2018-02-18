@@ -50,6 +50,7 @@ void RobotMap::init() {
 	drivetrainFrontRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_RIGHT_MOTOR));
 	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
 
+
 	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
 	//drivetrainRearLeftMotor->SetInverted(true); //only need to be inverted on Aries
 
@@ -63,19 +64,19 @@ void RobotMap::init() {
 		drivetrainChassis->SetMaxOutput(1.0);
 
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X)); //theoretical a and b channels
-		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE); //took the circumference of 12.5663 and divided by the 128 internal encoder clicks
-		//drivetrainLeftEncoder->SetReverseDirection(true); //only needed for Aries
+		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE); //took the circumference of 12.5663 and divided by the 128 internal encoder click
+		drivetrainLeftEncoder->SetReverseDirection(true); //invert both encoers on real bot
 
 	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
-
+		drivetrainRightEncoder->SetReverseDirection(true);
 	drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4 , 5));
 
 	navX.reset(new AHRS(SPI::Port::kMXP));
 
 	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
 	 cubeIntakeRightMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_RIGHT_MOTOR));
-	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 6 , 7));
+	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 6 ,7));
 //	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
 	 //cubeIntakeGrabberSolenoid.reset (new frc::DoubleSolenoid (0 , 6 , 7));
 
