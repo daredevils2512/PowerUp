@@ -24,7 +24,7 @@ bool ElevatorRunLift::IsFinished() {
 //		End();
 //	}
 	//TODO comment back in once limit switches are added on
-	return true;
+	return false;
 }
 
 // Called once after isFinished returns true

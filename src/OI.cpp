@@ -28,23 +28,23 @@
 
 
 OI::OI() {
-	DRC_leftTrigger.WhenPressed(new CubeIntakeActuate(true)); //pull cube into robot
-	DRC_leftTrigger.WhileHeld(new CubeRunIntake(1.0));
-	DRC_leftTrigger.WhenReleased(new CubeIntakeActuate(false));
-	DRC_leftTrigger.WhenReleased(new CubeRunIntake(-1.0));
+	DRC_leftTrigger.WhileHeld(new CMG_IntakeCubeNoCheck());
+		DRC_leftTrigger.WhenReleased (new CubeIntakeActuate(false));
+		DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
 	DRC_rightTrigger.WhileHeld(new LowGear()); //drop a gear
 	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
 //	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
 //	DRC_rightBumper.WhenPressed(new PIDTurn(90));
 
-	CDR_trigger.WhenPressed(new CubeIntakeActuate(true)); //pull cube into robot
-	CDR_trigger.WhileHeld(new CubeRunIntake(1.0));
-	CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
-	CDR_trigger.WhenReleased(new CubeIntakeActuate(false));
-	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(-1.0)); //run intake wheels in reverse to spit cube out
-	CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0)); //stop intake wheels
-	CDR_topLeftJoystick.WhenPressed(new CubeGrabberActuate(true)); //actuate grabbers to pinch the cube
-	CDR_bottomLeftJoystick.WhenPressed(new CubeGrabberActuate(false)); //retract the grabbers to let go of cube
+	CDR_trigger.WhileHeld(new CMG_IntakeCubeNoCheck());
+		CDR_trigger.WhenReleased(new CubeIntakeActuate(false));
+		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
+//	CDR_topLeftJoystick.WhenPressed(new CubeGrabberActuate(true)); //actuate grabbers to pinch the cube
+//	CDR_bottomLeftJoystick.WhenPressed(new CubeGrabberActuate(false)); //retract the grabbers to let go of cube
+	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(1.0)); //manual run intake
+	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
+	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(-1.0)); //run intake wheels in reverse to spit cube out
+	CDR_bottomLeftJoystick.WhenReleased(new CubeRunIntake(0.0)); //stop intake wheels
 	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuate(true)); //actuate intake arms in
 	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuate(false)); //actuate intake arms out
 
@@ -55,9 +55,9 @@ OI::OI() {
 	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0));
 	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0));
 
-	CDB_bigRed.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
+	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
 	CDB_bigRed.WhenReleased(new ElevatorRunLift(0.0)); //stop lift
-	CDB_bigWhite.WhileHeld(new ElevatorRunLift (-0.7)); //run lift down
+	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
 	CDB_bigWhite.WhenReleased(new ElevatorRunLift(0.0)); //stop lift
 
 //	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.5, 500)); //arbitrary numbers. Need testing
@@ -82,7 +82,7 @@ OI::OI() {
 
 	double OI::GetMove() {
 		//gets forward/backward values
-		return Desensitize(-driverController.GetRawAxis(1));
+		return Desensitize(driverController.GetRawAxis(1));
 	}
 
 	double OI::Desensitize(double value) {
