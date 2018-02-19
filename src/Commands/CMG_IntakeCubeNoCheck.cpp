@@ -5,15 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "CMG_IntakeCube.h"
+#include "CMG_IntakeCubeNoCheck.h"
 #include "../Robot.h"
-#include "CubeGrabberActuate.h"
 #include "CubeIntakeActuate.h"
 #include "CubeRunIntake.h"
-#include "CubeSwitchCheck.h"
 #include "Pause.h"
 
-CMG_IntakeCube::CMG_IntakeCube() {
+CMG_IntakeCubeNoCheck::CMG_IntakeCubeNoCheck() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
@@ -30,9 +28,7 @@ CMG_IntakeCube::CMG_IntakeCube() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddSequential (new CubeRunIntake(1.0));
-	AddSequential (new Pause(0.5));
-	AddSequential (new CubeIntakeActuate(true));
-	AddSequential (new Pause(0.5));
-	AddSequential (new CubeSwitchCheck());
+	AddSequential(new CubeRunIntake(1.0));
+	AddSequential(new Pause(0.5)); //0.25
+	AddSequential(new CubeIntakeActuate(true));
 }

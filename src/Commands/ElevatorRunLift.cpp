@@ -19,11 +19,12 @@ void ElevatorRunLift::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorRunLift::IsFinished() {
-	if (Robot::elevator->GetTopSwitch() || Robot::elevator->GetBottomSwitch() ||
-			Robot::elevator->GetLiftEncoder() >= Util::ELEVATOR_MAX_ENCODER_CLICKS) {
+	if (Robot::elevator->GetBottomSwitch() ||
+		Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_CLICKS) {
 		End();
 	}
-	return true;
+	//TODO comment back in once limit switches are added on
+	return false;
 }
 
 // Called once after isFinished returns true
