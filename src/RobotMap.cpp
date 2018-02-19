@@ -38,10 +38,6 @@ std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicFrontRight;
 std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicRearRight;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorMotor;
-std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorLeftMotor;
-std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorRightMotor;
-std::shared_ptr<frc::Encoder> RobotMap::elevatorEncoder;
-std::shared_ptr<frc::DigitalInput> RobotMap::elevatorTopSwitch;
 std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
 
 void RobotMap::init() {
@@ -50,12 +46,11 @@ void RobotMap::init() {
 	drivetrainFrontRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_RIGHT_MOTOR));
 	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
 
-
 	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
 	//drivetrainRearLeftMotor->SetInverted(true); //only need to be inverted on Aries
 
 	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
-	//drivetrainRearRightMotor->SetInverted(true);
+	//drivetrainRearRightMotor->SetInverted(true); //only needed on Aries
 
 	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 
@@ -63,22 +58,23 @@ void RobotMap::init() {
 		drivetrainChassis->SetExpiration(0.5);
 		drivetrainChassis->SetMaxOutput(1.0);
 
-	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X)); //theoretical a and b channels
-		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE); //took the circumference of 12.5663 and divided by the 128 internal encoder click
-		drivetrainLeftEncoder->SetReverseDirection(true); //invert both encoers on real bot
+	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X));
+		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE);
+		drivetrainLeftEncoder->SetReverseDirection(true); //invert both encoders on comp bot
 
 	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
 		drivetrainRightEncoder->SetReverseDirection(true);
+
 	drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4 , 5));
 
-	navX.reset(new AHRS(SPI::Port::kMXP));
+	 navX.reset(new AHRS(SPI::Port::kMXP));
 
 	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
 	 cubeIntakeRightMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_RIGHT_MOTOR));
 	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 6 ,7));
+//	 cubeIntakeGrabberSolenoid.reset (new frc::DoubleSolenoid (0 , 7 , 8));
 //	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
-	 //cubeIntakeGrabberSolenoid.reset (new frc::DoubleSolenoid (0 , 6 , 7));
 
 //	climberLeftWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_1));
 //	climberLeftWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_2));
@@ -91,13 +87,6 @@ void RobotMap::init() {
 //	ultrasonicRearRight.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_RIGHT)));
 
 	elevatorMotor.reset(new WPI_TalonSRX (Util::ELEVATOR_MOTOR));
-
-//	elevatorLeftMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_LEFT_MOTOR));
-//		//elevatorLeftMotor->GetSelectedSensorPosition(0);
-//	elevatorRightMotor.reset(new WPI_TalonSRX(Util::ELEVATOR_RIGHT_MOTOR));
-//		//elevatorRightMotor->Set(ControlMode::Follower, Util::ELEVATOR_LEFT_MOTOR);
-//
-//	elevatorTopSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_TOP_LIMIT_SWITCH));
 //	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
-//	elevatorEncoder.reset(new frc::Encoder(6, 7, false, frc::Encoder::k4X));
+
 }

@@ -21,8 +21,7 @@ void ElevatorRunToHeight::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorRunToHeight::IsFinished() {
-	return (Robot::elevator->GetLiftMagneticEncoder() >= m_encPos) || //GetLiftEncoder
-			Robot::elevator->GetTopSwitch() 			   ||
+	return (Robot::elevator->GetLiftMagneticEncoder() >= m_encPos) ||
 			Robot::elevator->GetBottomSwitch();
 }
 
