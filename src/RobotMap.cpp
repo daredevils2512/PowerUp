@@ -38,7 +38,7 @@ std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicFrontRight;
 std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicRearRight;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorMotor;
-std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
+//std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
 
 void RobotMap::init() {
 	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));

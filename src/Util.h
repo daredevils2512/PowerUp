@@ -13,18 +13,18 @@
 class Util {
 	public:
 		//Keeping all the constants in one place
-		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 8; //2
-		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 12; //1
-		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 6; //10
-		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 1; //6
+		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 1; //2
+		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 2; //1
+		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 3; //10
+		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 4; //6
 
-		static const int CLIMBER_LEFT_WING_MOTOR_1 = 7; //theoretical CAN Talon ID's
+		static const int CLIMBER_LEFT_WING_MOTOR_1 = 8; //theoretical CAN Talon ID's
 		static const int CLIMBER_LEFT_WING_MOTOR_2 = 9;
-		static const int CLIMBER_RIGHT_WING_MOTOR_1 = 13;
-		static const int CLIMBER_RIGHT_WING_MOTOR_2 = 14;
+		static const int CLIMBER_RIGHT_WING_MOTOR_1 = 10;
+		static const int CLIMBER_RIGHT_WING_MOTOR_2 = 11;
 
-		static const int CUBE_INTAKE_LEFT_MOTOR = 3;
-		static const int CUBE_INTAKE_RIGHT_MOTOR = 10;
+		static const int CUBE_INTAKE_LEFT_MOTOR = 6;
+		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;
 		static const int CUBE_INTAKE_LIMIT_SWITCH = 12; //limit switch that will tell us if the cube is fully into the robot
 
 		//Drivetrain encoder clicks per real world inch

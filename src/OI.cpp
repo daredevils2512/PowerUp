@@ -33,8 +33,8 @@ OI::OI() {
 		DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
 	DRC_rightTrigger.WhileHeld(new LowGear()); //drop a gear
 	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
-//	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
-//	DRC_rightBumper.WhenPressed(new PIDTurn(90));
+	DRC_leftBumper.WhenPressed(new PIDTurn(-90));
+	DRC_rightBumper.WhenPressed(new PIDTurn(90));
 
 	CDR_trigger.WhileHeld(new CMG_IntakeCubeNoCheck());
 		CDR_trigger.WhenReleased(new CubeIntakeActuate(false));

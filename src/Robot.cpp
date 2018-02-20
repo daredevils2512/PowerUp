@@ -51,7 +51,7 @@ void Robot::RobotInit() {
 	climber.reset (new Climber());
 	oi.reset(new OI());
 	lw = frc::LiveWindow::GetInstance();
-//	lw->Add(RobotMap::navXTurnController);
+	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
 }
 void Robot::RobotPeriodic() {
@@ -59,12 +59,12 @@ void Robot::RobotPeriodic() {
 
 //TODO comment printouts back in once robot is complete, only commented out because ICC will be sketchy
 
-//	SmartDashboard::PutBoolean("Is Connected",RobotMap::navX->IsConnected());
-//	SmartDashboard::PutBoolean("Is Moving",RobotMap::navX->IsMoving());
-//	SmartDashboard::PutBoolean("Is Rotating",RobotMap::navX->IsRotating());
-//	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
-//	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
-//	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+	SmartDashboard::PutBoolean("Is Connected",RobotMap::navX->IsConnected());
+	SmartDashboard::PutBoolean("Is Moving",RobotMap::navX->IsMoving());
+	SmartDashboard::PutBoolean("Is Rotating",RobotMap::navX->IsRotating());
+	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
+	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
+	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
 
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
@@ -96,10 +96,10 @@ void Robot::DisabledInit(){
 
 //TODO comment back in after ICC
 
-//	RobotMap::navX->Reset();
-//	RobotMap::navX->ResetDisplacement();
-//	drivetrain->SetPIDEnabled(false);
-	//drivetrain->GetPIDOutput();
+	RobotMap::navX->Reset();
+	RobotMap::navX->ResetDisplacement();
+	drivetrain->SetPIDEnabled(false);
+	drivetrain->GetPIDOutput();
 	autonomousCommand.release(); // Make auto command null again.
 }
 

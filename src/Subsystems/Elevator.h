@@ -9,7 +9,7 @@ private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 std::shared_ptr<WPI_TalonSRX> motor;
-std::shared_ptr<frc::DigitalInput> bottom;
+//std::shared_ptr<frc::DigitalInput> bottom;
 
 
 public:
@@ -20,7 +20,7 @@ public:
 	double GetLiftMagneticEncoder();
 	double ResetMagneticEncoder();
 
-	double sensorUnitsPerRotation = 1024; // arbitrary number
+	double sensorUnitsPerRotation = 256;//1024
 	double sensorUnitsReset = 0.0;
 };
 
