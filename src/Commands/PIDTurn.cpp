@@ -35,7 +35,7 @@ void PIDTurn::Initialize() {
 	double FVal = 0.00;
 	switch(m_settings){
 		case PIDSettings::CARPET90:
-			PVal = 0.055;
+			PVal = 0.06;
 			IVal = 0.00001;
 			DVal = 0.045;
 			FVal = 0.00;

@@ -28,14 +28,14 @@ class Util {
 		static const int CUBE_INTAKE_LIMIT_SWITCH = 12; //limit switch that will tell us if the cube is fully into the robot
 
 		//Drivetrain encoder clicks per real world inch
-		static constexpr double LEFT_INCH_PER_PULSE = 0.0349059176; //Inches per pulse for the left encoder //(1/9.537878)
-		static constexpr double RIGHT_INCH_PER_PULSE = 0.0349059176; // Inches per pulse for the right encoder //(1/9.737373)
+		static constexpr double LEFT_INCH_PER_PULSE = 0.0236065636; //Inches per pulse for the left encoder //(1/9.537878)
+		static constexpr double RIGHT_INCH_PER_PULSE = 0.0236065636; // Inches per pulse for the right encoder //(1/9.737373)
 
 		static const int ULTRASONIC_FRONT_LEFT = 4; //Equivalent to NavX Analog Pin 0
 		static const int ULTRASONIC_REAR_LEFT = 5; //Equivalent to NavX Analog Pin 1
 		static const int ULTRASONIC_FRONT_RIGHT = 6; //Analog Pin 2
 		static const int ULTRASONIC_REAR_RIGHT = 7; //Analog Pin 3
-		static constexpr double SUPPLIED_VOLTAGE = 4.96; //The voltage sent through the NavX analogInput pins for converting voltage to distance
+		static constexpr double SUPPLIED_VOLTAGE = 4.94; //The voltage sent through the NavX analogInput pins for converting voltage to distance //4.96
 		static constexpr double ULTRASONIC_ANGLE_TOLERANCE = 0.2; //The acceptable tolerance for comparing the two ultrasonic sensors on a side
 		static constexpr double ULTRASONIC_DIST_TOLERANCE = 3.5;
 		static constexpr double ULTRASONIC_TURN_MULTIPLIER = 0.10; //The amount we reduce motor speed for ultrasonic staightDrive 0.0775//0.0975(current reliable test value)//0.0975

@@ -30,7 +30,7 @@ void Elevator::RunLift(double speed) {
 }
 
 double Elevator::GetLiftMagneticEncoder() {
-	return -(RobotMap::elevatorMotor->GetSelectedSensorPosition(0) * (1/sensorUnitsPerRotation));
+	return -RobotMap::elevatorMotor->GetSelectedSensorPosition(0) * (1/sensorUnitsPerRotation); //this returns it in feet
 }
 
 double Elevator::ResetMagneticEncoder() {

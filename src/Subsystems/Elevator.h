@@ -20,7 +20,7 @@ public:
 	double GetLiftMagneticEncoder();
 	double ResetMagneticEncoder();
 
-	double sensorUnitsPerRotation = 256;//1024
+	double sensorUnitsPerRotation = 3944;//1024
 	double sensorUnitsReset = 0.0;
 };
 
