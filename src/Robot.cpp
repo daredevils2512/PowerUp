@@ -70,7 +70,12 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
-	SmartDashboard::PutNumber("Elevator Encoder...Maybe Idk" , Robot::elevator->GetLiftMagneticEncoder());
+	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
+
+	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Front Right Current" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
 
 //	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 
@@ -84,10 +89,7 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
 //	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
-//	SmartDashboard::PutNumber("Raw Elevator Encoder Clicks" , RobotMap::elevatorLeftMotor->GetSelectedSensorPosition(0));
-
-//	SmartDashboard::PutNumber("left motor current" , RobotMap::elevatorLeftMotor->GetOutputCurrent());
-//	SmartDashboard::PutNumber("right motor current" , RobotMap::elevatorRightMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
 
 	}
 void Robot::DisabledInit(){
@@ -298,6 +300,7 @@ void Robot::PickAuto() {
 void Robot::AutonomousInit() {
 	std::cout << "Starting auto..." << std::endl;
 	Robot::drivetrain->ResetEncoders();
+	Robot::elevator->ResetMagneticEncoder();
 	this->PickAuto();
 	if (autonomousCommand.get() != nullptr) {
 		autonomousCommand->Start();
