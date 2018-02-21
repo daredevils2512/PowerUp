@@ -17,6 +17,8 @@
 #include "Commands/AutoTimedDrive.h"
 #include "Commands/AutoStraightDrive.h"
 
+#include "FileAutonomousSource.h"
+
 std::shared_ptr<Drivetrain> Robot::drivetrain;
 std::unique_ptr<OI> Robot::oi;
 std::shared_ptr<frc::Compressor> Robot::compressor;
@@ -117,69 +119,13 @@ void Robot::PickAuto() {
 	char scale = gameMessage[1];
 	//BalanceStates[2] = their switch
 
-	StartLocation startingPosition = StartLocation::unknown;
-	bool doSwitch = false;
-	bool doScale = false;
+	FileAutonomousSource fileAutonomousSource("/home/lvuser/Autonomous.txt");
+	StartLocation startingPosition = fileAutonomousSource.GetStartLocation();
+	bool doSwitch = fileAutonomousSource.IsDoSwitch();
+	bool doScale = fileAutonomousSource.IsDoScale();
 
 	std::vector<frc::Command*> commands;
 
-	std::ifstream ifs("/home/lvuser/Autonomous.txt");
-	if (!ifs.good()) {
-		std::cout << "ERROR: NO AUTO FILE FOUND. GO HUDDLE IN THE CORNER AND RESEARCH IT" << std::endl;
-		std::cout << "So I'm gonna drive straight and get you some points anyway" << std::endl;
-		ifs.close();
-		startingPosition = StartLocation::unknown;
-	}
-	while (!ifs.eof()) { //TODO look into error handling for the cases in which the file is missing or empty
-		std::string lastPart;
-		std::string firstPart;
-		std::getline(ifs, firstPart, ':');
-		std::getline(ifs, lastPart);
-		while (lastPart[0] == ' ') {
-			lastPart = lastPart.substr(1);
-		}
-//		if (!ifs.eof()) {
-//			lastPart = lastPart.substr(0, lastPart.size() - 1);
-//		}
-		std::cout << firstPart << " - " << lastPart << std::endl;
-		//Lowering everything to lowercase to ignore case
-		std::transform(firstPart.begin(), firstPart.end(), firstPart.begin(), ::tolower);
-		std::transform(lastPart.begin(), lastPart.end(), lastPart.begin(), ::tolower);
-		if (firstPart == "startposition") {
-			if (lastPart == "left") {
-				startingPosition = StartLocation::left;
-			} else if (lastPart == "center") {
-				startingPosition = StartLocation::center;
-			} else if (lastPart == "right") {
-				startingPosition = StartLocation::right;
-			} else {
-				std::cout << "That's not an option for starting positions. Don't feel like doing anything now" << std::endl;
-				startingPosition = StartLocation::unknown;
-			}
-		} else if (firstPart == "doswitch") {
-			if (lastPart == "true") {
-				std::cout << "Doing the switch" << std::endl;
-				doSwitch = true;
-			} else if (lastPart == "false") {
-				std::cout << "No switch for us" << std::endl;
-				doSwitch = false;
-			} else {
-				std::cout << "That's not an option for doing the switch. Need more zip-ties to accomplish anything" << std::endl;
-				doSwitch = false;
-			}
-		} else if (firstPart == "doscale") {
-			if (lastPart == "true") {
-				std::cout << "Doing the scale" << std::endl;
-				doScale = true;
-			} else if (lastPart == "false") {
-				std::cout << "No scale for us" << std::endl;
-				doScale = false;
-			} else {
-				std::cout << "That's not an option for doing the scale. Is everything plugged in?" << std::endl;
-				doScale = false;
-			}
-		}
-	}
 	//USING THE TERTIARY CONVERTERS
 	int directionSwitch = (ourSwitch == 'L') ? -1 : 1; 		//directionSwitch equal to 1 if turning right and -1 if left
 	int directionScale = (scale == 'L') ? 1 : -1;			//switched values so that we turn the proper way towards the scale
