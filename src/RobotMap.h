@@ -38,11 +38,7 @@ public:
 	static std::shared_ptr<UltrasonicSensor> ultrasonicRearRight;
 
 	static std::shared_ptr<WPI_TalonSRX> elevatorMotor;
-	static std::shared_ptr<WPI_TalonSRX> elevatorLeftMotor;
-	static std::shared_ptr<WPI_TalonSRX> elevatorRightMotor;
-	static std::shared_ptr<frc::Encoder> elevatorEncoder;
-	static std::shared_ptr<frc::DigitalInput> elevatorTopSwitch;
-	static std::shared_ptr<frc::DigitalInput> elevatorBottomSwitch;
+	//static std::shared_ptr<frc::DigitalInput> elevatorBottomSwitch;
 
 
 	static void init();

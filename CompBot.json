@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.11366006256517205,
+  "dividerPosition": 0.007820646506777894,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -11,9 +11,9 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "5,0": {
+          "11,3": {
             "size": [
-              3,
+              2,
               1
             ],
             "content": {
@@ -22,9 +22,9 @@
               "_title": "Raw Right Encoder"
             }
           },
-          "1,0": {
+          "6,3": {
             "size": [
-              3,
+              2,
               1
             ],
             "content": {
@@ -33,9 +33,9 @@
               "_title": "Raw Left Encoder"
             }
           },
-          "1,1": {
+          "6,2": {
             "size": [
-              3,
+              2,
               1
             ],
             "content": {
@@ -44,9 +44,9 @@
               "_title": "Subsystem Get Left Encoder"
             }
           },
-          "5,1": {
+          "11,2": {
             "size": [
-              3,
+              2,
               1
             ],
             "content": {
@@ -55,7 +55,7 @@
               "_title": "Subsystem Get Right Encoder"
             }
           },
-          "3,2": {
+          "0,0": {
             "size": [
               3,
               1
@@ -64,6 +64,234 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Elevator Encoder...Maybe Idk",
               "_title": "Elevator Encoder...Maybe Idk"
+            }
+          },
+          "10,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Is Rotating",
+              "_title": "Is Rotating",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "11,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/GetPitch",
+              "_title": "GetPitch"
+            }
+          },
+          "12,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Is Moving",
+              "_title": "Is Moving",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "12,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/GetRoll",
+              "_title": "GetRoll"
+            }
+          },
+          "11,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Is Connected",
+              "_title": "Is Connected",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "10,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/GetYaw",
+              "_title": "GetYaw"
+            }
+          },
+          "4,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Voltage Returned Rear",
+              "_title": "Voltage Returned Rear"
+            }
+          },
+          "0,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Rear Left Ultrasonic distance",
+              "_title": "Rear Left Ultrasonic distance"
+            }
+          },
+          "0,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Front Left Ultrasonic distance",
+              "_title": "Front Left Ultrasonic distance"
+            }
+          },
+          "2,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Average Distance Away",
+              "_title": "Average Distance Away"
+            }
+          },
+          "4,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Front Right Ultrasonic distance",
+              "_title": "Front Right Ultrasonic distance"
+            }
+          },
+          "4,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Rear Right Ultrasonic distance",
+              "_title": "Rear Right Ultrasonic distance"
+            }
+          },
+          "0,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Voltage Returned Front",
+              "_title": "Voltage Returned Front"
+            }
+          },
+          "2,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Starting Distance",
+              "_title": "Starting Distance"
+            }
+          },
+          "8,2": {
+            "size": [
+              3,
+              4
+            ],
+            "content": {
+              "_type": "Differential Drivebase",
+              "_title": "",
+              "numberOfWheels": 4,
+              "wheelDiameter": 80.0,
+              "showVectors": true
+            }
+          },
+          "6,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drivetrain Rear Left Current",
+              "_title": "Drivetrain Rear Left Current"
+            }
+          },
+          "0,1": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator Current",
+              "_title": "Elevator Current"
+            }
+          },
+          "6,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drivetrain Front Right Current",
+              "_title": "Drivetrain Front Right Current"
+            }
+          },
+          "11,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drivetrain Front Left Current",
+              "_title": "Drivetrain Front Left Current"
+            }
+          },
+          "11,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drivetrain Rear Right Current",
+              "_title": "Drivetrain Rear Right Current"
             }
           }
         }
@@ -79,7 +307,7 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "0,0": {
+          "2,0": {
             "size": [
               2,
               4
@@ -90,16 +318,14 @@
               "_title": "Ungrouped",
               "_children": [
                 {
-                  "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [8]",
-                  "_title": "Talon SRX [8]",
-                  "controllable": false,
-                  "orientation": "HORIZONTAL"
+                  "_type": "PID Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[1]",
+                  "_title": "PIDController[1]"
                 },
                 {
                   "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [1]",
-                  "_title": "Talon SRX [1]",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [4]",
+                  "_title": "Talon SRX [4]",
                   "controllable": false,
                   "orientation": "HORIZONTAL"
                 },
@@ -112,8 +338,8 @@
                 },
                 {
                   "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [5]",
-                  "_title": "Talon SRX [5]",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [1]",
+                  "_title": "Talon SRX [1]",
                   "controllable": false,
                   "orientation": "HORIZONTAL"
                 },
@@ -131,30 +357,58 @@
                   "showVectors": true
                 },
                 {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[0,6]/Value",
-                  "_title": "DoubleSolenoid[0,6]/Value"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Pressure switch",
-                  "_title": "Compressor[0]/Pressure switch",
-                  "colorWhenTrue": "#7CFC00FF",
-                  "colorWhenFalse": "#8B0000FF"
+                  "_type": "Voltage View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[6]",
+                  "_title": "AnalogInput[6]",
+                  "min": 0.0,
+                  "max": 5.0,
+                  "center": 0.0,
+                  "orientation": "HORIZONTAL",
+                  "numTickMarks": 5.0
                 },
                 {
                   "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [10]",
-                  "_title": "Talon SRX [10]",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [2]",
+                  "_title": "Talon SRX [2]",
                   "controllable": false,
                   "orientation": "HORIZONTAL"
                 },
                 {
+                  "_type": "Voltage View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[7]",
+                  "_title": "AnalogInput[7]",
+                  "min": 0.0,
+                  "max": 5.0,
+                  "center": 0.0,
+                  "orientation": "HORIZONTAL",
+                  "numTickMarks": 5.0
+                },
+                {
                   "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [12]",
-                  "_title": "Talon SRX [12]",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [7]",
+                  "_title": "Talon SRX [7]",
                   "controllable": false,
                   "orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Voltage View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[5]",
+                  "_title": "AnalogInput[5]",
+                  "min": 0.0,
+                  "max": 5.0,
+                  "center": 0.0,
+                  "orientation": "HORIZONTAL",
+                  "numTickMarks": 5.0
+                },
+                {
+                  "_type": "Voltage View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[4]",
+                  "_title": "AnalogInput[4]",
+                  "min": 0.0,
+                  "max": 5.0,
+                  "center": 0.0,
+                  "orientation": "HORIZONTAL",
+                  "numTickMarks": 5.0
                 },
                 {
                   "_type": "Encoder",
@@ -167,6 +421,25 @@
                   "_title": "Talon SRX [6]",
                   "controllable": false,
                   "orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [5]",
+                  "_title": "Talon SRX [5]",
+                  "controllable": false,
+                  "orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Pressure switch",
+                  "_title": "Compressor[0]/Pressure switch",
+                  "colorWhenTrue": "#7CFC00FF",
+                  "colorWhenFalse": "#8B0000FF"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[0,6]/Value",
+                  "_title": "DoubleSolenoid[0,6]/Value"
                 },
                 {
                   "_type": "Text View",
@@ -183,7 +456,7 @@
               ]
             }
           },
-          "2,0": {
+          "4,0": {
             "size": [
               2,
               4
@@ -195,7 +468,7 @@
               "_children": []
             }
           },
-          "4,0": {
+          "6,0": {
             "size": [
               2,
               4
@@ -207,9 +480,9 @@
               "_children": []
             }
           },
-          "6,0": {
+          "8,0": {
             "size": [
-              2,
+              1,
               4
             ],
             "content": {
@@ -219,7 +492,19 @@
               "_children": []
             }
           },
-          "8,0": {
+          "0,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Drivetrain",
+              "_title": "Drivetrain",
+              "_children": []
+            }
+          },
+          "9,0": {
             "size": [
               2,
               4
