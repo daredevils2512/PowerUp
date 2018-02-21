@@ -62,9 +62,7 @@ OI::OI() {
 //	CDR_bottomRightBase.WhenReleased(new ClimberRunWing (Climber::ClimberWing::rightWing, 0.0)); //right wing stop
 
 	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
-	CDB_bigRed.WhenReleased(new ElevatorRunLift(0.0)); //stop lift
 	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
-	CDB_bigWhite.WhenReleased(new ElevatorRunLift(0.0)); //stop lift
 	CDB_green.WhileHeld(new ElevatorRunLift(0.07)); //minute adjustment up
 	CDB_yellow.WhileHeld(new ElevatorRunLift(-0.06)); //minute adjustment down
 	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.7, 6.5)); //Top scale

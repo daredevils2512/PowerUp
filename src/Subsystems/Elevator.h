@@ -21,7 +21,7 @@ public:
 	double ResetMagneticEncoder();
 	double CalculatePSpeed(double startingEncPos, double pValue);
 
-	double sensorUnitsPerRotation = 3944;//1024
+	double sensorUnitsPerRotation = 3944;
 	double sensorUnitsReset = 0.0;
 
 	static constexpr double pValue = 0.01;
