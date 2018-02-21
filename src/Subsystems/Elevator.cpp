@@ -34,5 +34,5 @@ double Elevator::GetLiftMagneticEncoder() {
 }
 
 double Elevator::ResetMagneticEncoder() {
-	return RobotMap::elevatorMotor->GetSelectedSensorPosition(0) * (sensorUnitsReset);
+	return RobotMap::elevatorMotor->SetSelectedSensorPosition(0, 0, 0);
 }

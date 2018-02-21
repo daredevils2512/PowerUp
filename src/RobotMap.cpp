@@ -86,6 +86,7 @@ void RobotMap::init() {
 	ultrasonicRearRight.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_RIGHT)));
 
 	elevatorMotor.reset(new WPI_TalonSRX (Util::ELEVATOR_MOTOR));
+		elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 0);
 //	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
 
 }

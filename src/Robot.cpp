@@ -314,6 +314,7 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {
 	std::cout << "Let's start teleop" << std::endl;
 	Robot::drivetrain->ResetEncoders();
+	Robot::elevator->ResetMagneticEncoder();
 	compressor->SetClosedLoopControl(true);
 	if (autonomousCommand.get() != nullptr) {
 			autonomousCommand->Cancel();

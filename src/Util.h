@@ -42,7 +42,7 @@ class Util {
 
 		static const int ELEVATOR_MOTOR = 5;
 		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 14;
-		static constexpr double ELEVATOR_MAX_ENCODER_CLICKS = 5000;
+		static constexpr double ELEVATOR_MAX_ENCODER_HEIGHT = 7.2; //In feet
 
 		enum class RobotSide {
 			unknown,

@@ -35,10 +35,11 @@ void PIDTurn::Initialize() {
 	double FVal = 0.00;
 	switch(m_settings){
 		case PIDSettings::CARPET90:
-			PVal = 0.06;
-			IVal = 0.00001;
-			DVal = 0.045;
-			FVal = 0.00;
+			//PID settings work
+			PVal = 0.66; //0.0775
+			IVal = 0.0002; //0.00001
+			DVal = 0.64; //The D is the perfect size (0.65245). DON"T MAKE IT BIGGER
+			FVal = 0.0;
 			break;
 	}
 	//reset navX, set pid values, activate pid

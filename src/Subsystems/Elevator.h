@@ -19,9 +19,12 @@ public:
 	void RunLift(double speed);
 	double GetLiftMagneticEncoder();
 	double ResetMagneticEncoder();
+	double CalculatePSpeed(double startingEncPos, double pValue);
 
 	double sensorUnitsPerRotation = 3944;//1024
 	double sensorUnitsReset = 0.0;
+
+	static constexpr double pValue = 0.01;
 };
 
 #endif  // Elevator_H
