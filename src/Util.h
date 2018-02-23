@@ -25,7 +25,7 @@ class Util {
 
 		static const int CUBE_INTAKE_LEFT_MOTOR = 6;
 		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;
-		static const int CUBE_INTAKE_LIMIT_SWITCH = 12; //limit switch that will tell us if the cube is fully into the robot
+		static const int CUBE_INTAKE_LIMIT_SWITCH = 5; //limit switch that will tell us if the cube is fully into the robot
 
 		//Drivetrain encoder clicks per real world inch
 		static constexpr double LEFT_INCH_PER_PULSE = 0.0236065636; //Inches per pulse for the left encoder //(1/9.537878)
@@ -41,7 +41,7 @@ class Util {
 		static constexpr double ULTRASONIC_TURN_MULTIPLIER = 0.10; //The amount we reduce motor speed for ultrasonic staightDrive 0.0775//0.0975(current reliable test value)//0.0975
 
 		static const int ELEVATOR_MOTOR = 5;
-		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 14;
+		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 4;
 		static constexpr double ELEVATOR_MAX_ENCODER_HEIGHT = 7.2; //In feet
 
 		enum class RobotSide {

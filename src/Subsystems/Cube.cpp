@@ -28,7 +28,11 @@ void Cube::ActuateGrabber(frc::DoubleSolenoid::Value direction) {
 }
 
 bool Cube::GetLimitSwitch() {
-	return limitSwitch->Get();
+	if (limitSwitch->Get()) {
+		return true;
+	}else{
+		return false;
+	}
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
