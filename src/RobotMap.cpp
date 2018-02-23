@@ -27,10 +27,8 @@ std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeGrabberSolenoid;
 std::shared_ptr<frc::DigitalInput> RobotMap::cubeIntakeLimitSwitch;
 
-std::shared_ptr<WPI_TalonSRX> RobotMap::climberLeftWingMotor1;
-std::shared_ptr<WPI_TalonSRX> RobotMap::climberLeftWingMotor2;
-std::shared_ptr<WPI_TalonSRX> RobotMap::climberRightWingMotor1;
-std::shared_ptr<WPI_TalonSRX> RobotMap::climberRightWingMotor2;
+std::shared_ptr<WPI_TalonSRX> RobotMap::climberLeftWingMotor;
+std::shared_ptr<WPI_TalonSRX> RobotMap::climberRightWingMotor;
 
 std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicFrontLeft;
 std::shared_ptr<UltrasonicSensor> RobotMap::ultrasonicRearLeft;
@@ -72,10 +70,8 @@ void RobotMap::init() {
 //	 cubeIntakeGrabberSolenoid.reset (new frc::DoubleSolenoid (0 , 7 , 8));
 //	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
 
-//	climberLeftWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_1));
-//	climberLeftWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR_2));
-//	climberRightWingMotor1.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_1));
-//	climberRightWingMotor2.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR_2));
+	climberLeftWingMotor.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR));
+	climberRightWingMotor.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR));
 
 	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
 	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));

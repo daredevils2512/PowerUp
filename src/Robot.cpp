@@ -108,7 +108,6 @@ void Robot::DisabledInit(){
 void Robot::DisabledPeriodic() {
 //	std::cout << "I'm Disabled!" << std::endl;
 	Scheduler::GetInstance()->Run();
-
 }
 
 void Robot::PickAuto() {
