@@ -13,36 +13,36 @@
 class Util {
 	public:
 		//Keeping all the constants in one place
-		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 8; //2
-		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 12; //1
-		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 6; //10
-		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 1; //6
+		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 1; //2
+		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 2; //1
+		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 3; //10
+		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 4; //6
 
-		static const int CLIMBER_LEFT_WING_MOTOR_1 = 7; //theoretical CAN Talon ID's
+		static const int CLIMBER_LEFT_WING_MOTOR_1 = 8; //theoretical CAN Talon ID's
 		static const int CLIMBER_LEFT_WING_MOTOR_2 = 9;
-		static const int CLIMBER_RIGHT_WING_MOTOR_1 = 13;
-		static const int CLIMBER_RIGHT_WING_MOTOR_2 = 14;
+		static const int CLIMBER_RIGHT_WING_MOTOR_1 = 10;
+		static const int CLIMBER_RIGHT_WING_MOTOR_2 = 11;
 
-		static const int CUBE_INTAKE_LEFT_MOTOR = 3;
-		static const int CUBE_INTAKE_RIGHT_MOTOR = 10;
+		static const int CUBE_INTAKE_LEFT_MOTOR = 6;
+		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;
 		static const int CUBE_INTAKE_LIMIT_SWITCH = 12; //limit switch that will tell us if the cube is fully into the robot
 
 		//Drivetrain encoder clicks per real world inch
-		static constexpr double LEFT_INCH_PER_PULSE = 0.0349059176; //Inches per pulse for the left encoder //(1/9.537878)
-		static constexpr double RIGHT_INCH_PER_PULSE = 0.0349059176; // Inches per pulse for the right encoder //(1/9.737373)
+		static constexpr double LEFT_INCH_PER_PULSE = 0.0236065636; //Inches per pulse for the left encoder //(1/9.537878)
+		static constexpr double RIGHT_INCH_PER_PULSE = 0.0236065636; // Inches per pulse for the right encoder //(1/9.737373)
 
 		static const int ULTRASONIC_FRONT_LEFT = 4; //Equivalent to NavX Analog Pin 0
 		static const int ULTRASONIC_REAR_LEFT = 5; //Equivalent to NavX Analog Pin 1
 		static const int ULTRASONIC_FRONT_RIGHT = 6; //Analog Pin 2
 		static const int ULTRASONIC_REAR_RIGHT = 7; //Analog Pin 3
-		static constexpr double SUPPLIED_VOLTAGE = 4.96; //The voltage sent through the NavX analogInput pins for converting voltage to distance
+		static constexpr double SUPPLIED_VOLTAGE = 4.94; //The voltage sent through the NavX analogInput pins for converting voltage to distance //4.96
 		static constexpr double ULTRASONIC_ANGLE_TOLERANCE = 0.2; //The acceptable tolerance for comparing the two ultrasonic sensors on a side
 		static constexpr double ULTRASONIC_DIST_TOLERANCE = 3.5;
 		static constexpr double ULTRASONIC_TURN_MULTIPLIER = 0.10; //The amount we reduce motor speed for ultrasonic staightDrive 0.0775//0.0975(current reliable test value)//0.0975
 
 		static const int ELEVATOR_MOTOR = 5;
 		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 14;
-		static constexpr double ELEVATOR_MAX_ENCODER_CLICKS = 5000;
+		static constexpr double ELEVATOR_MAX_ENCODER_HEIGHT = 7.2; //In feet
 
 		enum class RobotSide {
 			unknown,

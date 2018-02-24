@@ -14,22 +14,22 @@ void ElevatorRunLift::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorRunLift::Execute() {
-	Robot::elevator->RunLift(m_speed);
+	if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT) {
+		Robot::elevator->RunLift(0.0);
+	} else if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT - 1.0) {
+		Robot::elevator->RunLift(m_speed * (2/3));
+	} else {
+		Robot::elevator->RunLift(m_speed);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorRunLift::IsFinished() {
-	if (Robot::elevator->GetBottomSwitch() ||
-		Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_CLICKS) {
-		End();
-	}
-	//TODO comment back in once limit switches are added on
-	return false;
+	return true;
 }
 
 // Called once after isFinished returns true
 void ElevatorRunLift::End() {
-	Robot::elevator->RunLift(0.0);
 }
 
 // Called when another command which requires one or more of the same

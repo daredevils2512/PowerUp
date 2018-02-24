@@ -14,7 +14,19 @@ void ElevatorManualRun::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorManualRun::Execute() {
-	Robot::elevator->RunLift(Robot::oi->GetLiftControl());
+	//unless we're using the joystick, just apply a constant 5% power if higher than 3 ft
+	//Doing this to correct backdriving of lift motor
+	if (Robot::oi->GetLiftControl() == 0 && Robot::elevator->GetLiftMagneticEncoder() >= 3.1) {
+		Robot::elevator->RunLift(0.05);
+	//if lift is at the top or bottom don't let it run
+	} else if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT) {
+		Robot::elevator->RunLift(0.0);
+	//run off joystick
+	} else if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT - 1.0) {
+		Robot::elevator->RunLift(Robot::oi->GetLiftControl() * (2/3));
+	} else {
+		Robot::elevator->RunLift(Robot::oi->GetLiftControl());
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -24,7 +36,6 @@ bool ElevatorManualRun::IsFinished() {
 
 // Called once after isFinished returns true
 void ElevatorManualRun::End() {
-
 }
 
 // Called when another command which requires one or more of the same
