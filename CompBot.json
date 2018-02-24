@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.007820646506777894,
+  "dividerPosition": 0.007894736842105263,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -55,17 +55,6 @@
               "_title": "Subsystem Get Right Encoder"
             }
           },
-          "0,0": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator Encoder...Maybe Idk",
-              "_title": "Elevator Encoder...Maybe Idk"
-            }
-          },
           "10,0": {
             "size": [
               1,
@@ -79,7 +68,7 @@
               "colorWhenFalse": "#8B0000FF"
             }
           },
-          "11,1": {
+          "10,1": {
             "size": [
               1,
               1
@@ -103,7 +92,7 @@
               "colorWhenFalse": "#8B0000FF"
             }
           },
-          "12,1": {
+          "11,1": {
             "size": [
               1,
               1
@@ -127,7 +116,7 @@
               "colorWhenFalse": "#8B0000FF"
             }
           },
-          "10,1": {
+          "12,1": {
             "size": [
               1,
               1
@@ -292,6 +281,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Drivetrain Rear Right Current",
               "_title": "Drivetrain Rear Right Current"
+            }
+          },
+          "0,0": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator Encoder",
+              "_title": "Elevator Encoder"
             }
           }
         }
