@@ -20,7 +20,7 @@ FileAutonomousSource::FileAutonomousSource(std::string filename) {
 		ifs.close();
 		startingPosition = Robot::StartLocation::unknown;
 	}
-	while (!ifs.eof()) { //TODO look into error handling for the cases in which the file is missing or empty
+	while (!ifs.eof() && !ifs.good()) { //TODO look into error handling for the cases in which the file is missing or empty
 		std::string lastPart;
 		std::string firstPart;
 		std::getline(ifs, firstPart, ':');
