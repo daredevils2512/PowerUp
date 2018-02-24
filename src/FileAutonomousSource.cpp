@@ -80,6 +80,10 @@ FileAutonomousSource::FileAutonomousSource(std::string filename) {
 	}
 }
 
+FileAutonomousSource::~FileAutonomousSource(){
+
+}
+
 bool FileAutonomousSource::IsDoSwitch() {
 	return doSwitch;
 }

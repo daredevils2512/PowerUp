@@ -11,6 +11,7 @@
 #include "Robot.h"
 
 class AutonomousSource {
+public:
 	virtual bool IsDoSwitch() = 0;
 	virtual bool IsDoScale() = 0;
 	virtual Robot::StartLocation GetStartLocation() = 0;
