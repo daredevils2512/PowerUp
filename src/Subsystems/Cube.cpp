@@ -15,7 +15,7 @@ void Cube::InitDefaultCommand() {
 }
 
 void Cube::SetIntakeSpeed(double speed) {
-	intakeLeft->Set(-speed); //motor is wired in reverse
+	intakeLeft->Set(-speed); //TODO make inverted on Alea
 	intakeRight->Set(speed);
 }
 

@@ -60,18 +60,18 @@ void RobotMap::init() {
 	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
 		drivetrainRightEncoder->SetReverseDirection(true);
-	drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4 , 5));
+	drivetrainShifter.reset (new frc::DoubleSolenoid (0,6,7)); //TODO change back to 4,5 for Alea
 
 	 navX.reset(new AHRS(SPI::Port::kMXP));
 
 	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
 	 cubeIntakeRightMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_RIGHT_MOTOR));
-	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0, 6 ,7));
+	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0,4,5)); //TODO change back to 6,7 for Alea
 //	 cubeIntakeGrabberSolenoid.reset (new frc::DoubleSolenoid (0 , 7 , 8));
 //	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
 
-	climberLeftWingMotor.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR));
-	climberRightWingMotor.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR));
+//	climberLeftWingMotor.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR));
+//	climberRightWingMotor.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR));
 
 	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
 	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));
