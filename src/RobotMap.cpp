@@ -48,11 +48,11 @@ void RobotMap::init() {
 
 	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
 #ifdef ARIES
-	drivetrainRearLeftMotor->SetInverted(true);
+	drivetrainFrontLeftMotor->SetInverted(true);
 #endif
 	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
 #ifdef ARIES
-	drivetrainRearRightMotor->SetInverted(true);
+	drivetrainFrontRightMotor->SetInverted(true);
 #endif
 
 	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
