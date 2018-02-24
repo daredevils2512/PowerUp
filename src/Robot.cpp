@@ -29,6 +29,7 @@ std::shared_ptr<Elevator> Robot::elevator;
 
 void Robot::RobotInit() {
 	std::cout << "Robot Init" << std::endl;
+	dashboard.reset(new DareDashboard());
 	RobotMap::init();
     drivetrain.reset(new Drivetrain());
     ultrasonicSubsystem.reset(new UltrasonicSubsystem());
@@ -53,6 +54,7 @@ void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
+	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;
