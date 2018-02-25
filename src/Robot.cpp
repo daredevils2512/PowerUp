@@ -26,6 +26,7 @@ std::shared_ptr<Cube> Robot::cube;
 std::shared_ptr<Climber> Robot::climber;
 std::shared_ptr<NavXPIDSource> Robot::navxPidSource;
 std::shared_ptr<Elevator> Robot::elevator;
+std::shared_ptr<DareDashboard> Robot::dashboard;
 
 void Robot::RobotInit() {
 	std::cout << "Robot Init" << std::endl;

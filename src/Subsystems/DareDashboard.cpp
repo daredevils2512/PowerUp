@@ -3,7 +3,7 @@
 #include "../RobotMap.h"
 
 DareDashboard::DareDashboard() : Subsystem("DaredevilDashboard") {
-	frames["driverstation"] = new DriverstationFrame("driverstation")
+	frames["driverstation"] = new DriverstationFrame("driverstation");
 	frames["match"] = new MatchFrame("match");
 	SocketClient::SetConnection("127.0.0.1",5055);
 	//connection->Connect();
