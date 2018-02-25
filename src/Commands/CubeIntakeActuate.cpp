@@ -10,10 +10,10 @@ CubeIntakeActuate::CubeIntakeActuate(bool direction) {
 // Called just before this Command runs the first time
 void CubeIntakeActuate::Initialize() {
 if (m_direction) {
-	Robot::cube->ActuateIntake(frc::DoubleSolenoid::kForward);
+	Robot::cube->ActuateIntake(frc::DoubleSolenoid::kReverse);
 }
 else {
-	Robot::cube->ActuateIntake(frc::DoubleSolenoid::kReverse);
+	Robot::cube->ActuateIntake(frc::DoubleSolenoid::kForward);
 
 }
 

@@ -30,9 +30,9 @@ CMG_IntakeCube::CMG_IntakeCube() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddSequential (new CubeRunIntake(1.0));
-	AddSequential (new Pause(0.5));
+	AddParallel (new CubeRunIntake(1.0));
+	AddSequential (new Pause(1.0));
 	AddSequential (new CubeIntakeActuate(true));
-	AddSequential (new Pause(0.5));
+	AddSequential (new Pause(1.0));
 	AddSequential (new CubeSwitchCheck());
 }

@@ -29,7 +29,7 @@
 
 OI::OI() {
 	DRC_leftTrigger.WhileHeld(new CMG_IntakeCubeNoCheck()); //intake cube
-		DRC_leftTrigger.WhenReleased (new CubeIntakeActuate(false));
+//		DRC_leftTrigger.WhenReleased (new CubeIntakeActuate(false));
 		DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
 	DRC_rightTrigger.WhileHeld(new LowGear()); //drop a gear
 	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
@@ -41,16 +41,16 @@ OI::OI() {
 //	DRC_bButton.WhenReleased(new ClimberRunWing (Climber::ClimberWing::rightWing , 0.0)); //stop right wing
 
 	CDR_trigger.WhileHeld(new CMG_IntakeCubeNoCheck()); //intake cube
-		//CDR_trigger.WhenReleased(new CubeIntakeActuate(false));
+//		CDR_trigger.WhenReleased(new CubeIntakeActuate(false));
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
 //	CDR_topLeftJoystick.WhenPressed(new CubeGrabberActuate(true)); //actuate grabbers to pinch the cube
 //	CDR_bottomLeftJoystick.WhenPressed(new CubeGrabberActuate(false)); //retract the grabbers to let go of cube
-	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(1.0)); //run cube out
+	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(1.0)); //run cube in
 	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
-	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(-1.0)); //run cube in
+	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(-1.0)); //run cube out
 	CDR_bottomLeftJoystick.WhenReleased(new CubeRunIntake(0.0)); //stop intake
-	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuate(true)); //actuate intake arms out
-	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuate(false)); //actuate intake arms in
+	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuate(true)); //actuate intake arms in
+	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuate(false)); //actuate intake arms out
 
 	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0)); //alt run cube out
 	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake

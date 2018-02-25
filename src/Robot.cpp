@@ -55,6 +55,7 @@ void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
+	std::thread(SocketClient::recv).detach();
 	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
@@ -93,6 +94,7 @@ void Robot::RobotPeriodic() {
 
 //	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
+	dashboard->Update();
 
 	}
 void Robot::DisabledInit(){
