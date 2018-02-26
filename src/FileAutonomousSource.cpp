@@ -6,6 +6,8 @@
  */
 
 #include <fstream>
+#include <algorithm>
+#include <iostream>
 #include "FileAutonomousSource.h"
 
 FileAutonomousSource::FileAutonomousSource(std::string filename) {
