@@ -100,9 +100,6 @@ void Robot::RobotPeriodic() {
 void Robot::DisabledInit(){
 	std::cout << "Let's start being disabled" << std::endl;
 	compressor->SetClosedLoopControl(false);
-
-//TODO comment back in after ICC
-
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
 	drivetrain->SetPIDEnabled(false);
@@ -136,7 +133,7 @@ void Robot::PickAuto() {
 		ifs.close();
 		startingPosition = StartLocation::unknown;
 	}
-	while (!ifs.eof()) { //TODO look into error handling for the cases in which the file is missing or empty
+	while (!ifs.eof() && ifs.good()) { //TODO look into error handling for the cases in which the file is missing or empty
 		std::string lastPart;
 		std::string firstPart;
 		std::getline(ifs, firstPart, ':');
@@ -208,9 +205,10 @@ void Robot::PickAuto() {
 			//with 45 degree turns
 			commands.push_back(new PIDDriveStraight(30));
 			commands.push_back(new PIDTurn(45 * directionSwitch));
-			commands.push_back(new PIDDriveStraight(71)); //68
+			commands.push_back(new PIDDriveStraight(60)); //68
 			commands.push_back(new PIDTurn(45 * -directionSwitch));
-			commands.push_back(new PIDDriveStraight(36));
+			commands.push_back(new PIDDriveStraight(28)); //36
+			commands.push_back(new CubeRunIntake(-1.0));
 		} else {
 			std::cout << "Just going for a drive" << std::endl;
 			commands.push_back(new PIDDriveStraight(90));		// drive forward and cross auto line
@@ -303,9 +301,9 @@ void Robot::AutonomousInit() {
 	std::cout << "Starting auto..." << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
+	this->PickAuto();
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);
-	this->PickAuto();
 	if (autonomousCommand.get() != nullptr) {
 		autonomousCommand->Start();
 	}
@@ -322,6 +320,7 @@ void Robot::TeleopInit() {
 	std::cout << "Let's start teleop" << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
+	cube->SetIntakeSpeed(0.0);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
 	compressor->SetClosedLoopControl(true);

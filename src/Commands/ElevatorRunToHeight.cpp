@@ -20,17 +20,19 @@ void ElevatorRunToHeight::Execute() {
 		Robot::elevator->RunLift(m_speed);
 	} else if (Robot::elevator->GetLiftMagneticEncoder() >= m_encPos) {
 		Robot::elevator->RunLift(-0.5);
-	} else if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT - 1.0) {
-		Robot::elevator->RunLift(m_speed * (2/3));
 	}
+//	else if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT - 1.0) {
+//		Robot::elevator->RunLift(m_speed * (5/6));
+//	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorRunToHeight::IsFinished() {
 	return (Util::IsInTolerance(0.08, Robot::elevator->GetLiftMagneticEncoder(), m_encPos) ||
 			Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT ||
-			Robot::elevator->GetLiftMagneticEncoder() < 0 ||
-			Robot::elevator->GetBottomSwitch());
+			Robot::elevator->GetLiftMagneticEncoder() < 0);
+//			||
+//			Robot::elevator->GetBottomSwitch());
 }
 
 // Called once after isFinished returns true

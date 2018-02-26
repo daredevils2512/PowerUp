@@ -113,21 +113,27 @@ void TalonSRXFrame::Update(){
 	}
 	if(controlMode != this->talon->GetControlMode()){//TODO mark everything as dirty when it is.
 		controlMode = this->talon->GetControlMode();
+		controlMode_dirty = true;
 	}
 	if(value != this->talon->Get()){
 		value = this->talon->Get();
+		value_dirty = true;
 	}
 	if(safetyEnabled != this->talon->IsSafetyEnabled()){
 		safetyEnabled = this->talon->IsSafetyEnabled();
+		safetyEnabled_dirty = true;
 	}
 	if(outputCurrent != this->talon->GetOutputCurrent()){
 		outputCurrent = this->talon->GetOutputCurrent();
+		outputCurrent_dirty = true;
 	}
 	if(temperature != this->talon->GetTemperature()){
 		temperature = this->talon->GetTemperature();
+		temperature_dirty = true;
 	}
 	if(version != this->talon->GetFirmwareVersion()){
 		version = this->talon->GetFirmwareVersion();
+		version_dirty = true;
 	}
 	Faults* localFaults = new Faults();
 	this->talon->GetFaults(*localFaults);

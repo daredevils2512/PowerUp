@@ -515,6 +515,18 @@
               "_title": "ExampleSubsystem",
               "_children": []
             }
+          },
+          "11,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/DaredevilDashboard",
+              "_title": "DaredevilDashboard",
+              "_children": []
+            }
           }
         }
       }
