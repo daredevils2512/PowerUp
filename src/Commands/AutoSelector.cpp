@@ -158,6 +158,3 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 void AutoSelector::OutsideStraightScale() {
 
 }
- void AutoSelector::OutsideStraightScale() {
-
-}
