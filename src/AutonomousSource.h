@@ -12,9 +12,15 @@
 
 class AutonomousSource {
 public:
-	virtual bool IsDoSwitch() = 0;
-	virtual bool IsDoScale() = 0;
-	virtual Robot::StartLocation GetStartLocation() = 0;
+	virtual bool IsDoSwitch();
+	virtual bool IsDoScale();
+	virtual Robot::StartLocation GetStartLocation();
+	virtual ~AutonomousSource() {};
+
+protected:
+	bool doSwitch = false;
+	bool doScale = false;
+	Robot::StartLocation startingPosition = Robot::StartLocation::unknown;
 };
 
 #endif /* SRC_AUTONOMOUSSOURCE_H_ */

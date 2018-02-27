@@ -84,15 +84,3 @@ FileAutonomousSource::FileAutonomousSource(std::string filename) {
 FileAutonomousSource::~FileAutonomousSource(){
 
 }
-
-bool FileAutonomousSource::IsDoSwitch() {
-	return doSwitch;
-}
-
-bool FileAutonomousSource::IsDoScale() {
-	return doScale;
-}
-
-Robot::StartLocation FileAutonomousSource::GetStartLocation() {
-	return startingPosition;
-}

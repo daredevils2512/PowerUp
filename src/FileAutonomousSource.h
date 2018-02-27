@@ -15,14 +15,6 @@ class FileAutonomousSource :  public AutonomousSource {
 public:
 	FileAutonomousSource(std::string filename);
 	virtual ~FileAutonomousSource();
-	virtual bool IsDoSwitch();
-	virtual bool IsDoScale();
-	virtual Robot::StartLocation GetStartLocation();
-
-private:
-	bool doSwitch = false;
-	bool doScale = false;
-	Robot::StartLocation startingPosition = Robot::StartLocation::unknown;
 };
 
 #endif /* SRC_FILEAUTONOMOUSSOURCE_H_ */
