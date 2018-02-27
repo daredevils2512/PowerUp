@@ -66,6 +66,11 @@ class Util {
 		static void ReportError(std::string errorMessage);
 		static void ReportWarning(std::string warningMessage);
 		static bool IsInTolerance(double tolerance, double firstValue, double secondValue);
+
+		static inline std::string &ltrim(std::string &s) {
+		    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int c) {return !std::isspace(c);});
+		    return s;
+		}
 };
 
 #endif /* SRC_UTIL_H_ */

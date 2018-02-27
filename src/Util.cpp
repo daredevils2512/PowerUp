@@ -21,3 +21,5 @@ bool Util::IsInTolerance(double tolerance, double firstObject, double secondObje
 	double tol = tolerance / 2;
 	return (firstObject - tol <= secondObject && firstObject + tol >= secondObject) && (secondObject - tol <= firstObject && secondObject + tol >= firstObject);
 }
+
+
