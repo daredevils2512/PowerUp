@@ -75,7 +75,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 					// command group for positioning from mid-zone to the closest side of the balance, then placing
 					AddSequential(new PIDDriveStraight(184));//driving to the scale zone
 					AddSequential(new PIDTurn(90 * -directionScale));////turning towards it
-					AddParallel(new ElevatorRunToHeight(0.7, 6.0));	// TODO put in actual height or whatever
+					AddParallel(new ElevatorRunToHeight(0.7, scaleHeight));	//Gonna be talller thane the scale
 					AddSequential(new PIDDriveStraight(12));	//zoom into it
 					AddSequential(new CubeRunIntake(-1.0));			//bye bye cube
 				} else {
@@ -85,14 +85,14 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 					AddSequential(new PIDTurn(90 * -directionScale));//turning to go around
 					AddSequential(new PIDDriveStraight(190));//going down past the switch
 					AddSequential(new PIDTurn(90 * directionScale));//turning the opposite way
-					AddParallel(new ElevatorRunToHeight(0.7, 6.0)); //running to 6 ft
+					AddParallel(new ElevatorRunToHeight(0.7, scaleHeight)); //Gonna be talller thane the scale
 					AddSequential(new PIDDriveStraight(17.5));	//zoom at scale
 					AddSequential(new CubeRunIntake(-1.0));			//bye bye cube
 				}
 			} else {
 				std::cout << "We're normal and just gonna do the easy stuff" << std::endl;
 				AddSequential(new PIDTurn(90 * directionSwitch));//turning towards the switch to drop cube
-				AddSequential(new PIDDriveStraight(24)); //running to 6 ft
+				AddSequential(new PIDDriveStraight(24));
 				AddSequential(new CubeRunIntake(-1.0));				//bye bye cube
 			}
 			//if we aren't doing the scale, just don't move since we technically crossed the auto line anyway
@@ -116,10 +116,9 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				std::cout << "Less work cause it's on our side" << std::endl;
 				// command group for positioning from mid-zone to closest side of the balance, then placing
 				AddSequential(new PIDDriveStraight(24.0));
-				AddSequential(
-						new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
-				AddSequential(new PIDTurn(90 * directionScale));//turning towards the scale
-				AddParallel(new ElevatorRunToHeight(0.7, 6.0));  //running to 6 ft
+				AddSequential(new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
+				AddSequential(new PIDTurn(90 * -directionScale));//turning towards the scale
+				AddParallel(new ElevatorRunToHeight(0.7, scaleHeight));  //Gonna be talller thane the scale
 				AddSequential(new PIDDriveStraight(12)); //18 //zoom at scale
 				AddSequential(new CubeRunIntake(-1.0));	//bye bye cube
 			} else {
@@ -132,7 +131,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				AddSequential(new PIDTurn(90 * directionScale));//turn to face opposite end of field
 				AddSequential(new PIDDriveStraight(87));	//drive to null zone
 				AddSequential(new PIDTurn(90 * directionScale));//turn to the scale
-				AddSequential(new ElevatorRunToHeight(0.7, 6.0)); //running to 6 ft
+				AddSequential(new ElevatorRunToHeight(0.7, scaleHeight)); //Gonna be talller thane the scale
 				AddSequential(new PIDDriveStraight(18));	//zoom at the scale
 				AddSequential(new CubeRunIntake(-1.0));								//bye bye cube
 			}

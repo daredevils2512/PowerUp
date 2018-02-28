@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <iostream>
 #include "FileAutonomousSource.h"
+#include "Util.h"
 
 FileAutonomousSource::FileAutonomousSource(std::string filename) {
 	std::ifstream ifs(filename);
@@ -22,7 +23,8 @@ FileAutonomousSource::FileAutonomousSource(std::string filename) {
 			firstPart = line.substr(0, line.find(":"));
 			lastPart = line.substr(line.find(":") + 1, line.length());
 			//TODO: trim string of whitspacing
-
+			Util::trim(firstPart);
+			Util::trim(lastPart);
 			//Lowering everything to lowercase to ignore case
 			std::transform(firstPart.begin(), firstPart.end(), firstPart.begin(), ::tolower);
 			std::transform(lastPart.begin(), lastPart.end(), lastPart.begin(), ::tolower);

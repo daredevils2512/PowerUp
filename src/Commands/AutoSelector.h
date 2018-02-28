@@ -17,5 +17,8 @@ public:
 	void OutsideStraightScale();
 	void OutsideOppositeScale();
 	//TODO Add in functions for doing alternate switch autos
+
+private:
+	static constexpr double scaleHeight = 6.0;
 };
 

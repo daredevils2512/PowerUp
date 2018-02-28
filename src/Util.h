@@ -9,6 +9,9 @@
 #define SRC_UTIL_H_
 
 #include <string>
+#include <algorithm>
+#include <locale>
+#include <cctype>
 
 class Util {
 	public:
@@ -67,10 +70,10 @@ class Util {
 		static void ReportWarning(std::string warningMessage);
 		static bool IsInTolerance(double tolerance, double firstValue, double secondValue);
 
-//		static inline std::string &ltrim(std::string &s) {
-//		    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int c) {return !std::isspace(c);});
-//		    return s;
-//		}
+		static void ltrim(std::string &s);
+		static void rtrim(std::string &s);
+		static void trim(std::string &s);
+
 };
 
 #endif /* SRC_UTIL_H_ */
