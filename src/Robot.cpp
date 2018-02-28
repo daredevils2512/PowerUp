@@ -102,6 +102,7 @@ void Robot::DisabledInit(){
 	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
+	elevator->RunLift(0.1);
 	drivetrain->SetPIDEnabled(false);
 	drivetrain->GetPIDOutput();
 	autonomousCommand.release(); // Make auto command null again.
@@ -203,9 +204,9 @@ void Robot::PickAuto() {
 //			commands.push_back(new PIDDriveStraight(54));			//running to the switch
 //			commands.push_back(new CubeRunIntake(-1.0));			//bye bye cube!
 			//with 45 degree turns
-			commands.push_back(new PIDDriveStraight(30));
+			commands.push_back(new PIDDriveStraight(32));
 			commands.push_back(new PIDTurn(45 * directionSwitch));
-			commands.push_back(new PIDDriveStraight(60)); //68
+			commands.push_back(new PIDDriveStraight(61)); //68
 			commands.push_back(new PIDTurn(45 * -directionSwitch));
 			commands.push_back(new PIDDriveStraight(28)); //36
 			commands.push_back(new CubeRunIntake(-1.0));

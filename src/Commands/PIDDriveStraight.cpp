@@ -33,9 +33,9 @@ void PIDDriveStraight::Initialize() {
 	double FVal = 0.00;
 	switch(m_settings){
 		case PIDSettings::CARPET90: // settings known to work well for 90 deg turns on carpet
-			PVal = 0.615;
-			IVal = 0.0002;
-			DVal = 0.6;
+			PVal = 0.60;
+			IVal = 0.00001;
+			DVal = 0.555;
 			FVal = 0.00;
 			break;
 	}
@@ -59,7 +59,7 @@ void PIDDriveStraight::Execute() {
 	//quarter steering control for PID to prevent crazy turns*/
 	double output = Robot::drivetrain->GetPIDOutput()/4;
 
-	Robot::drivetrain->DriveRobotTank(-0.55-output,-0.55+output); //70% besides corrections
+	Robot::drivetrain->DriveRobotTank(-0.6-output,-0.6+output); //70% besides corrections
 }
 
 // Make this return true when this Command no longer needs to run execute()
