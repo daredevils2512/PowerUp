@@ -16,6 +16,8 @@ void ElevatorRunLift::Initialize() {
 void ElevatorRunLift::Execute() {
 	if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT) {
 		Robot::elevator->RunLift(0.0);
+	} else if (Robot::elevator->GetBottomSwitch() == true) {
+		Robot::elevator->RunLift(0.0);
 	}
 //	else if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT - 1.0) {
 //		Robot::elevator->RunLift(m_speed * (5/6));

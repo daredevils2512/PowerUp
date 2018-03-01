@@ -21,23 +21,18 @@ void CubeSwitchCheck::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void CubeSwitchCheck::Execute() {
-	if (Robot::cube->GetLimitSwitch() == true) {
-		Robot::cube->SetIntakeSpeed(0.0);
-		//Robot::cube->ActuateGrabber(frc::DoubleSolenoid::kForward); //TODO add in once build actually puts this solenoid on
-	}
-//	else { //TODO add in if the solenoid exists
-//		//Robot::cube->ActuateGrabber(frc::DoubleSolenoid::kReverse);
-//	}
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool CubeSwitchCheck::IsFinished() {
-	return true;
+	std::cout << "Limit status: " << Robot::cube->GetLimitSwitch() << std::endl;
+	return Robot::cube->GetLimitSwitch();
 }
 
 // Called once after isFinished returns true
 void CubeSwitchCheck::End() {
-
+	Robot::cube->SetIntakeSpeed(0.0);
 }
 
 // Called when another command which requires one or more of the same

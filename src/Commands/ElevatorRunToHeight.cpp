@@ -30,9 +30,8 @@ void ElevatorRunToHeight::Execute() {
 bool ElevatorRunToHeight::IsFinished() {
 	return (Util::IsInTolerance(0.08, Robot::elevator->GetLiftMagneticEncoder(), m_encPos) ||
 			Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT ||
-			Robot::elevator->GetLiftMagneticEncoder() < 0);
-//			||
-//			Robot::elevator->GetBottomSwitch());
+			Robot::elevator->GetLiftMagneticEncoder() < 0 ||
+			Robot::elevator->GetBottomSwitch());
 }
 
 // Called once after isFinished returns true

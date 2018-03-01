@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.007894736842105263,
+  "dividerPosition": 0.0032017075773745998,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -33,7 +33,7 @@
               "_title": "Raw Left Encoder"
             }
           },
-          "6,2": {
+          "4,1": {
             "size": [
               2,
               1
@@ -293,6 +293,32 @@
               "_source0": "network_table:///SmartDashboard/Elevator Encoder",
               "_title": "Elevator Encoder"
             }
+          },
+          "4,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Intake Limit Switch",
+              "_title": "Intake Limit Switch",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "0,2": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Bottom Limit Switch",
+              "_title": "Bottom Limit Switch",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
           }
         }
       }
@@ -450,6 +476,20 @@
                   "_type": "Boolean Box",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Compressor[0]/Enabled",
                   "_title": "Compressor[0]/Enabled",
+                  "colorWhenTrue": "#7CFC00FF",
+                  "colorWhenFalse": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[4]/Value",
+                  "_title": "DigitalInput[4]/Value",
+                  "colorWhenTrue": "#7CFC00FF",
+                  "colorWhenFalse": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[5]/Value",
+                  "_title": "DigitalInput[5]/Value",
                   "colorWhenTrue": "#7CFC00FF",
                   "colorWhenFalse": "#8B0000FF"
                 }

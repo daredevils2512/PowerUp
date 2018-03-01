@@ -19,7 +19,8 @@ void CubeRunIntake::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool CubeRunIntake::IsFinished() {
-	return false;
+	std::cout << "Limit status: " << Robot::cube->GetLimitSwitch() << std::endl;
+	return Robot::cube->GetLimitSwitch();
 }
 
 // Called once after isFinished returns true

@@ -29,7 +29,7 @@
 
 
 OI::OI() {
-	DRC_leftTrigger.WhileHeld(new CMG_IntakeCubeNoCheck()); //intake cube
+	DRC_leftTrigger.WhileHeld(new CMG_IntakeCube()); //intake cube
 		DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
 	DRC_rightTrigger.WhileHeld(new LowGear()); //drop a gear
 	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
@@ -40,7 +40,7 @@ OI::OI() {
 //	DRC_bButton.WhileHeld(new ClimberRunWing (Climber::ClimberWing::rightWing , 0.8)); //Kahl right wing up
 //	DRC_bButton.WhenReleased(new ClimberRunWing (Climber::ClimberWing::rightWing , 0.0)); //stop right wing
 
-	CDR_trigger.WhileHeld(new CMG_IntakeCubeNoCheck()); //intake cube
+	CDR_trigger.WhileHeld(new CMG_IntakeCube()); //intake cube
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
 	CDR_sideJoystickButton.WhileHeld(new CMG_ExtakeCube()); //goodbye cube
 		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));

@@ -62,10 +62,6 @@ void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;
 
 //TODO comment printouts back in once robot is complete, only commented out because ICC will be sketchy
-
-	SmartDashboard::PutBoolean("Is Connected",RobotMap::navX->IsConnected());
-	SmartDashboard::PutBoolean("Is Moving",RobotMap::navX->IsMoving());
-	SmartDashboard::PutBoolean("Is Rotating",RobotMap::navX->IsRotating());
 	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
 	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
 	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
@@ -81,7 +77,7 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
 	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
 
-//	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
+	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 
 	SmartDashboard::PutNumber("Front Left Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
 	SmartDashboard::PutNumber("Rear Left Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
@@ -92,7 +88,7 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAnalogInput()->GetAverageVoltage());
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
-//	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
 	dashboard->Update();
 
@@ -204,6 +200,7 @@ void Robot::PickAuto() {
 //			commands.push_back(new PIDDriveStraight(54));			//running to the switch
 //			commands.push_back(new CubeRunIntake(-1.0));			//bye bye cube!
 			//with 45 degree turns
+			commands.push_back(new ElevatorRunToHeight(0.75, 2.3));
 			commands.push_back(new PIDDriveStraight(32));
 			commands.push_back(new PIDTurn(45 * directionSwitch));
 			commands.push_back(new PIDDriveStraight(61)); //68
@@ -313,7 +310,6 @@ void Robot::AutonomousInit() {
 void Robot::AutonomousPeriodic() {
 //	std::cout << "I'm in auto!" << std::endl;
 	Scheduler::GetInstance()->Run();
-
 
 }
 
