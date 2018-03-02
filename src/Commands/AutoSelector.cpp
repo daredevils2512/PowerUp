@@ -97,7 +97,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			}
 			//if we aren't doing the scale, just don't move since we technically crossed the auto line anyway
 		} else if (doSwitch && ourSwitch != sideCheck) {
-			std::cout << "Doing our switch good" << std::endl;
+			std::cout << "Doing our switch good over there" << std::endl;
 			AddSequential(new PIDDriveStraight(220));//driving out past the switch so we can go around
 			AddSequential(new PIDTurn(90 * -directionSwitch));//turning to go around
 			AddSequential(new PIDDriveStraight(230));	//zomming arround back
@@ -136,10 +136,8 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				AddSequential(new CubeRunIntake(-1.0));								//bye bye cube
 			}
 		} else {
-			std::cout << "One too many cookies....Gonna just go straight"
-					<< std::endl;
+			std::cout << "One too many cookies....Gonna just go straight" << std::endl;
 			AddSequential(new PIDDriveStraight(90)); 	//Or whatever the cross baseline distance is
-//			AddSequential(new AutoTimedDrive(4.0));
 		}
 	} else {
 		std::cout
