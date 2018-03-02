@@ -143,8 +143,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 		std::cout
 				<< "Something went wrong. Aborting logic checking and driving straight"
 				<< std::endl;
-		//AddSequential(new PIDDriveStraight(90)); 	//Or whatever the cross baseline distance is
-		AddSequential(new AutoTimedDrive(4.0));
+		AddSequential(new PIDDriveStraight(90)); 	//Or whatever the cross baseline distance is
 	}
 	AddSequential(new PrintCurrentFPGATime());
 }
