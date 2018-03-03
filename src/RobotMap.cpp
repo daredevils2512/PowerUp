@@ -53,7 +53,13 @@ void RobotMap::init() {
 
 
 	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
+#ifdef ARIES
+	drivetrainFrontLeftMotor->SetInverted(true);
+#endif
 	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
+#ifdef ARIES
+	drivetrainFrontRightMotor->SetInverted(true);
+#endif
 
 	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 
@@ -63,18 +69,27 @@ void RobotMap::init() {
 
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X));//TODO: util.h constants
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE);
-		drivetrainLeftEncoder->SetReverseDirection(false);
-		Robot::dashboard->RegisterEncoder("drivetrain.encoders.left",drivetrainLeftEncoder.get(),0,1);
 
-	drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));//TODO: ulti.h constants
+#ifdef ARIES
+		drivetrainLeftEncoder->SetReverseDirection(true);
+#else
+		drivetrainLeftEncoder->SetReverseDirection(false);
+#endif
+
+		Robot::dashboard->RegisterEncoder("drivetrain.encoders.left",drivetrainLeftEncoder.get(),0,1);
+		drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));//TODO: ulti.h constants>>>>>>> master
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
+
+#ifdef ARIES
+		drivetrainRightEncoder->SetReverseDirection(false);
+#else
 		drivetrainRightEncoder->SetReverseDirection(true);
-		Robot::dashboard->RegisterEncoder("drivetrain.encoders.right",drivetrainRightEncoder.get(),2,3);
+#endif
 
 	drivetrainShifter.reset (new frc::DoubleSolenoid (0,6,7)); //TODO change back to 4,5 for Alea & USE UTIL CONSTANTS!!!
 		Robot::dashboard->RegisterDoubleSolenoid("drivetrain.shifter",drivetrainShifter.get(),6,7);
 
-
+	drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4 , 5));
 	 navX.reset(new AHRS(SPI::Port::kMXP));
 
 	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
