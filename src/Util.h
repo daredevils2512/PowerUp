@@ -9,14 +9,25 @@
 #define SRC_UTIL_H_
 
 #include <string>
+#include <algorithm>
+#include <locale>
+#include <cctype>
 
 class Util {
 	public:
+#ifdef ARIES
+		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 2;
+		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 1;
+		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 10;
+		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 6;
+
+#else
 		//Keeping all the constants in one place
 		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 1; //2
-		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 2; //1
+		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 2; //
 		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 3; //10
 		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 4; //6
+#endif
 
 		static const int CLIMBER_LEFT_WING_MOTOR_1 = 8; //theoretical CAN Talon ID's
 		static const int CLIMBER_LEFT_WING_MOTOR_2 = 9;
@@ -28,9 +39,13 @@ class Util {
 		static const int CUBE_INTAKE_LIMIT_SWITCH = 12; //limit switch that will tell us if the cube is fully into the robot
 
 		//Drivetrain encoder clicks per real world inch
+#ifdef ARIES
+		static constexpr double LEFT_INCH_PER_PULSE = (1/9.537878);
+		static constexpr double RIGHT_INCH_PER_PULSE = (1/9.737373);
+#else
 		static constexpr double LEFT_INCH_PER_PULSE = 0.0236065636; //Inches per pulse for the left encoder //(1/9.537878)
 		static constexpr double RIGHT_INCH_PER_PULSE = 0.0236065636; // Inches per pulse for the right encoder //(1/9.737373)
-
+#endif
 		static const int ULTRASONIC_FRONT_LEFT = 4; //Equivalent to NavX Analog Pin 0
 		static const int ULTRASONIC_REAR_LEFT = 5; //Equivalent to NavX Analog Pin 1
 		static const int ULTRASONIC_FRONT_RIGHT = 6; //Analog Pin 2
@@ -54,6 +69,11 @@ class Util {
 		static void ReportError(std::string errorMessage);
 		static void ReportWarning(std::string warningMessage);
 		static bool IsInTolerance(double tolerance, double firstValue, double secondValue);
+
+		static void ltrim(std::string &s);
+		static void rtrim(std::string &s);
+		static void trim(std::string &s);
+
 };
 
 #endif /* SRC_UTIL_H_ */

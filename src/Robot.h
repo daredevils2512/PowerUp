@@ -46,12 +46,14 @@ public:
 	virtual void TeleopPeriodic();
 	virtual void TestInit();
 	virtual void TestPeriodic();
-private:
-	void PickAuto();
 
 	enum class StartLocation {
 		left, center, right, unknown
 	};
+
+private:
+	void PickAuto();
+
 	double autoEndTime = 0.0;
 };
 #endif
