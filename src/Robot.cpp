@@ -80,6 +80,7 @@ void Robot::RobotPeriodic() {
 
 	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
 
 	}
 void Robot::DisabledInit(){
@@ -106,6 +107,7 @@ void Robot::AutonomousInit() {
 	std::cout << "Starting auto..." << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
+	Robot::elevator->GetBottomSwitch();
 	this->PickAuto();
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);

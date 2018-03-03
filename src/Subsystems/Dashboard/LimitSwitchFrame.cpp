@@ -27,7 +27,7 @@ LimitSwitchFrame::~LimitSwitchFrame(){
 
 void LimitSwitchFrame::Broadcast(){
 	if(activated_dirty){
-		SocketClient::SendIntData(path + ".activated",activated);
+		SocketClient::SendBoolData(path + ".activated",activated);
 		activated_dirty = false;
 	}
 

@@ -7,11 +7,12 @@ ElevatorRunToHeight::ElevatorRunToHeight(double speed, double encPos) {
 	Requires(Robot::elevator.get());
 	m_speed = speed;
 	m_encPos = encPos;
+	m_runDown = false;
 }
 
 // Called just before this Command runs the first time
 void ElevatorRunToHeight::Initialize() {
-
+	m_runDown = Robot::elevator->GetLiftMagneticEncoder() > m_encPos;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -30,9 +31,8 @@ void ElevatorRunToHeight::Execute() {
 bool ElevatorRunToHeight::IsFinished() {
 	return (Util::IsInTolerance(0.08, Robot::elevator->GetLiftMagneticEncoder(), m_encPos) ||
 			Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT ||
-			Robot::elevator->GetLiftMagneticEncoder() < 0);
-//			||
-//			Robot::elevator->GetBottomSwitch());
+			Robot::elevator->GetLiftMagneticEncoder() < 0 ||
+			(Robot::elevator->GetBottomSwitch() && m_runDown) ) ;
 }
 
 // Called once after isFinished returns true

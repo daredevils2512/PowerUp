@@ -19,7 +19,8 @@ FileAutonomousSource::FileAutonomousSource(std::string filename) {
 		std::string lastPart;
 		std::string firstPart;
 		std::string line;
-		while (std::getline(ifs, line) && !ifs.eof()) {
+		while (!ifs.eof() && std::getline(ifs, line)) {
+			//TODO: we need an extra new line for the scale to be read. this shouldn't be the case. hm.
 			firstPart = line.substr(0, line.find(":"));
 			lastPart = line.substr(line.find(":") + 1, line.length());
 			//TODO: trim string of whitspacing
