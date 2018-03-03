@@ -9,7 +9,6 @@
 #include <WPILib.h>
 #include <unistd.h>
 #include <sstream>
-#include <cstring>
 
 
 
@@ -21,7 +20,7 @@ int SocketClient::sock;
 sockaddr_in SocketClient::server;
 std::string SocketClient::DataDivider;
 
-std::vector<std::string> SocketClient::pendingFrames;
+ThreadSafeQueue<std::string> SocketClient::pendingFrames;
 
 void SocketClient::SetConnection(std::string host, int port) {
 	SocketClient::_shouldBeConnected=false;
@@ -76,7 +75,7 @@ void SocketClient::recv(){
 						std::this_thread::sleep_for(std::chrono::milliseconds(100)); // wait 100 ms for connection to complete before finishing
 					}
 				}else{ // CONNECTED //
-					SendData("ping"); // run ping
+					pendingFrames.push("ping" + DataDivider);
 					std::string str = "";
 					if(pendingFrames.size() > 0){
 						//std::cout << pendingFrames.size() << std::endl;
@@ -109,7 +108,6 @@ void SocketClient::recv(){
 							move++;
 						}
 						if(connected){
-
 							pendingFrames.clear();
 						}
 					}else{
@@ -171,7 +169,6 @@ void SocketClient::SendStringData(std::string path, std::string value){
 
 void SocketClient::SendData(std::string data){
 	// MAIN DATA SEND MECHANISM FOR COMMS XD
-	std::string g = data + DataDivider;
-	pendingFrames.push_back( g.c_str() );
+	pendingFrames.push_back(data + DataDivider);
 	//std::cout << "frame data pushed" << std::endl;
 }
