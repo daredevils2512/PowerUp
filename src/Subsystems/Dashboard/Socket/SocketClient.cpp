@@ -75,63 +75,41 @@ void SocketClient::recv(){
 						std::this_thread::sleep_for(std::chrono::milliseconds(100)); // wait 100 ms for connection to complete before finishing
 					}
 				}else{ // CONNECTED //
-					pendingFrames.push("ping" + DataDivider);
-					std::string str = "";
-					if(pendingFrames.size() > 0){
-						//std::cout << pendingFrames.size() << std::endl;
-						size_t move = 0;
-						while(move < pendingFrames.size() && connected){
-							str += pendingFrames[move];
-							//std::cout << "packet " << str << std::endl;
-							if(str.length() > 0){
-								if(send( sock, str.c_str(), str.length(), 0 ) == -1){
-									if(errno == 32 || errno == 104){
-										connected = false;
-										sock = -1;
-										std::cout << "Connection Lost: ";
-										if(errno == 104){
-											std::cout << "Dropped by server" << std::endl;
-										}else{
-											std::cout << "Broken Pipe" << std::endl;
-										}
+					std::string packet = "ping" + DataDivider;
+					int result = pendingFrames.pop(packet);
 
-									}else{
-										connected = false;
-										close(sock);
-										sock = -1;
-										std::cout <<"ERR:" << errno << std::endl << "Disconnected." << std::endl;
-									}
-								}
-								//std::this_thread::sleep_for(std::chrono::milliseconds(1));
-								str = "";
-							}
-							move++;
-						}
-						if(connected){
-							pendingFrames.clear();
-						}
+					if(result == pendingFrames.OK){
+						std::cout << "result: OK" << std::endl;
 					}else{
-
-						/*if(send(sock,str.c_str(),sizeof(str.c_str()),0) == -1){
-							if(errno == 32 || errno == 104){
-								connected = false;
-								sock = -1;
-								std::cout << "Connection Lost: ";
-								if(errno == 104){
-									std::cout << "Dropped by server" << std::endl;
-								}else{
-									std::cout << "Broken Pipe" << std::endl;
-								}
-
-							}
-						}*/
-
+						std::cout << "result: CLOSED" << std::endl;
 					}
+					std::cout << "packet: " << packet << std::endl;
+					if(send( sock, packet.c_str(), packet.length(), 0 ) == -1){
+						if(errno == 32 || errno == 104){
+							connected = false;
+							sock = -1;
+							std::cout << "Connection Lost: ";
+							if(errno == 104){
+								std::cout << "Dropped by server" << std::endl;
+							}else{
+								std::cout << "Broken Pipe" << std::endl;
+							}
+						}else{
+							connected = false;
+							close(sock);
+							sock = -1;
+							std::cout <<"ERR:" << errno << std::endl << "Disconnected." << std::endl;
+						}
+						pendingFrames.push(packet);
+					}
+							//std::this_thread::sleep_for(std::chrono::milliseconds(1));
 				}
 
+
 			}
+
 		}else{
-			//disconnect
+			//if shouldn't be connected, disconnect if not already
 			if(sock > -1){
 				close(sock);
 				sock = -1;
@@ -169,6 +147,6 @@ void SocketClient::SendStringData(std::string path, std::string value){
 
 void SocketClient::SendData(std::string data){
 	// MAIN DATA SEND MECHANISM FOR COMMS XD
-	pendingFrames.push_back(data + DataDivider);
+	pendingFrames.push(data + DataDivider);
 	//std::cout << "frame data pushed" << std::endl;
 }
