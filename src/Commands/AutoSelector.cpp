@@ -12,6 +12,7 @@
 #include "Commands/CubeIntakeActuate.h"
 #include "Commands/CubeRunIntake.h"
 #include "Commands/ElevatorRunToHeight.h"
+#include "Commands/ElevatorRunLift.h"
 #include "Commands/PIDTurn.h"
 #include "Commands/PIDDriveStraight.h"
 #include "Commands/UltrasonicStraightDrive.h"
@@ -52,11 +53,14 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 //			AddSequential(new PIDDriveStraight(54));			//running to the switch
 //			AddSequential(new CubeRunIntake(-1.0));			//bye bye cube!
 			//with 45 degree turns
-			AddSequential(new PIDDriveStraight(30));
+			AddSequential(new ElevatorRunToHeight(0.75 , 2.6));
+			AddParallel(new ElevatorRunLift(0.1));
+			AddSequential(new PIDDriveStraight(32));
 			AddSequential(new PIDTurn(45 * directionSwitch));
-			AddSequential(new PIDDriveStraight(71)); //68
+			AddSequential(new PIDDriveStraight(76)); //68
 			AddSequential(new PIDTurn(45 * -directionSwitch));
-			AddSequential(new PIDDriveStraight(36));
+			AddSequential(new PIDDriveStraight(14));
+			AddSequential(new CubeRunIntake(-1.0));
 		} else {
 			std::cout << "Just going for a drive" << std::endl;
 			AddSequential(new PIDDriveStraight(90));// drive forward and cross auto line
