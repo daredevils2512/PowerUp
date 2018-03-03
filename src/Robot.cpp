@@ -80,7 +80,6 @@ void Robot::RobotPeriodic() {
 
 	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
-	dashboard->Update();
 
 	}
 void Robot::DisabledInit(){

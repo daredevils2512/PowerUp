@@ -6,6 +6,7 @@
  */
 
 #include "SocketClient.h"
+#include <Robot.h>
 #include <WPILib.h>
 #include <unistd.h>
 #include <sstream>
@@ -47,6 +48,7 @@ void SocketClient::Disconnect() {
 
 void SocketClient::recv(){
 	while(true) {
+		Robot::dashboard->Update();
 		//std::cout << (frc::RobotController::GetFPGATime() / 1000000) <<((_shouldBeConnected)?"should be connected":"dont be connected.")<<std::endl;
 		if(_shouldBeConnected){
 			if(sock == -1){
