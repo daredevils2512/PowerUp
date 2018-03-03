@@ -14,13 +14,20 @@ void CubeRunIntake::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void CubeRunIntake::Execute() {
-	Robot::cube->SetIntakeSpeed(m_speed);
+	if (Robot::cube->GetLimitSwitch() == true) {
+		if (m_speed >= 0) {
+			Robot::cube->SetIntakeSpeed(0.0);
+		} else {
+			Robot::cube->SetIntakeSpeed(m_speed);
+		}
+	} else {
+		Robot::cube->SetIntakeSpeed(m_speed);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool CubeRunIntake::IsFinished() {
-	std::cout << "Limit status: " << Robot::cube->GetLimitSwitch() << std::endl;
-	return Robot::cube->GetLimitSwitch();
+	return false;
 }
 
 // Called once after isFinished returns true

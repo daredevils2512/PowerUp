@@ -21,13 +21,16 @@ void CubeSwitchCheck::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void CubeSwitchCheck::Execute() {
-
+	if (Robot::cube->GetLimitSwitch() == true) {
+		Robot::cube->SetIntakeSpeed(0.0);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool CubeSwitchCheck::IsFinished() {
 	std::cout << "Limit status: " << Robot::cube->GetLimitSwitch() << std::endl;
-	return Robot::cube->GetLimitSwitch();
+//	return Robot::cube->GetLimitSwitch();
+	return true;
 }
 
 // Called once after isFinished returns true

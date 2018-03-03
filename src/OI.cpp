@@ -35,6 +35,8 @@ OI::OI() {
 	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
 	DRC_leftBumper.WhenPressed(new PIDTurn(-90)); //left 90
 	DRC_rightBumper.WhenPressed(new PIDTurn(90)); //right 90
+
+	DRC_startButton.WhenPressed(new PIDDriveStraight(75.0));
 //	DRC_xButton.WhileHeld(new ClimberRunWing (Climber::ClimberWing::leftWing , 0.8)); //Kahl left wing up
 //	DRC_xButton.WhenReleased(new ClimberRunWing (Climber::ClimberWing::leftWing , 0.0)); //stop left wing
 //	DRC_bButton.WhileHeld(new ClimberRunWing (Climber::ClimberWing::rightWing , 0.8)); //Kahl right wing up

@@ -200,13 +200,14 @@ void Robot::PickAuto() {
 //			commands.push_back(new PIDDriveStraight(54));			//running to the switch
 //			commands.push_back(new CubeRunIntake(-1.0));			//bye bye cube!
 			//with 45 degree turns
-			commands.push_back(new ElevatorRunToHeight(0.75, 2.3));
+			commands.push_back(new ElevatorRunToHeight(0.75, 3.0));
 			commands.push_back(new PIDDriveStraight(32));
 			commands.push_back(new PIDTurn(45 * directionSwitch));
-			commands.push_back(new PIDDriveStraight(61)); //68
+			commands.push_back(new PIDDriveStraight(76)); //68 84
 			commands.push_back(new PIDTurn(45 * -directionSwitch));
-			commands.push_back(new PIDDriveStraight(28)); //36
+			commands.push_back(new PIDDriveStraight(14)); //28
 			commands.push_back(new CubeRunIntake(-1.0));
+//			commands.push_back(new CubeIntakeActuate(false));
 		} else {
 			std::cout << "Just going for a drive" << std::endl;
 			commands.push_back(new PIDDriveStraight(90));		// drive forward and cross auto line
@@ -222,7 +223,7 @@ void Robot::PickAuto() {
 				if (scale == sideCheck) {
 					std::cout << "It's on our side thankfully" << std::endl;
 					// command group for positioning from mid-zone to the closest side of the balance, then placing
-					commands.push_back(new PIDDriveStraight(184));			//driving to the scale zone
+					commands.push_back(new PIDDriveStraight(156));			//driving to the scale zone
 					commands.push_back(new PIDTurn(90 * directionScale));	////turning towards it
 					//commands.push_back(new ElevatorRunToHeight(0.0, 0.0));	// TODO put in actual height or whatever
 					commands.push_back(new PIDDriveStraight(12));			//zoom into it
@@ -264,12 +265,12 @@ void Robot::PickAuto() {
 			if (scale == sideCheck){
 				std::cout << "Less work cause it's on our side" << std::endl;
 				// command group for positioning from mid-zone to closest side of the balance, then placing
-				commands.push_back(new PIDDriveStraight(24.0));
-				commands.push_back(new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
-				commands.push_back(new PIDTurn(90 * directionScale));						//turning towards the scale
-				//commands.push_back(new ElevatorRunToHeight(0.0, 0.0)); 						// TODO put in actual height or whatever
-				commands.push_back(new PIDDriveStraight(12));	//18							//zoom at scale
-//				commands.push_back(new CubeRunIntake(-1.0));								//bye bye cube
+				commands.push_back(new PIDDriveStraight(246)); //280
+//				commands.push_back(new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
+//				commands.push_back(new PIDTurn(90 * directionScale));						//turning towards the scale
+				commands.push_back(new ElevatorRunToHeight(0.75, 4.8)); 						// TODO put in actual height or whatever
+//				commands.push_back(new PIDDriveStraight(12));	//18							//zoom at scale
+				commands.push_back(new CubeRunIntake(-1.0));								//bye bye cube
 			} else {
 				std::cout << "It's all the way over there....Need more veggies" << std::endl;
 				// command group for moving across mid-zone to farthest side of the balance, then placing
@@ -310,7 +311,6 @@ void Robot::AutonomousInit() {
 void Robot::AutonomousPeriodic() {
 //	std::cout << "I'm in auto!" << std::endl;
 	Scheduler::GetInstance()->Run();
-
 }
 
 void Robot::TeleopInit() {

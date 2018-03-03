@@ -9,6 +9,7 @@
 #include <WPILib.h>
 #include <unistd.h>
 #include <sstream>
+#include <cstring>
 
 
 
@@ -75,7 +76,7 @@ void SocketClient::recv(){
 						std::this_thread::sleep_for(std::chrono::milliseconds(100)); // wait 100 ms for connection to complete before finishing
 					}
 				}else{ // CONNECTED //
-					pendingFrames.push_back("ping" + DataDivider);
+					SendData("ping"); // run ping
 					std::string str = "";
 					if(pendingFrames.size() > 0){
 						//std::cout << pendingFrames.size() << std::endl;
@@ -108,6 +109,7 @@ void SocketClient::recv(){
 							move++;
 						}
 						if(connected){
+
 							pendingFrames.clear();
 						}
 					}else{
@@ -169,6 +171,7 @@ void SocketClient::SendStringData(std::string path, std::string value){
 
 void SocketClient::SendData(std::string data){
 	// MAIN DATA SEND MECHANISM FOR COMMS XD
-	pendingFrames.push_back(data + DataDivider);
+	std::string g = data + DataDivider;
+	pendingFrames.push_back( g.c_str() );
 	//std::cout << "frame data pushed" << std::endl;
 }
