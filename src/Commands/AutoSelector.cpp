@@ -20,6 +20,7 @@
 #include "Commands/Pause.h"
 #include "Commands/AutoTimedDrive.h"
 #include "Commands/AutoStraightDrive.h"
+#include "Commands/ElevatorSafety.h"
 
 AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	std::string gameMessage =
@@ -41,6 +42,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 		Util::RobotSide::leftSide : Util::RobotSide::rightSide;
 
 	AddSequential(new PrintCurrentFPGATime());
+	AddSequential(new ElevatorSafety());
 	if (startingPosition == Robot::StartLocation::center) {
 		std::cout << "We're in the center!" << std::endl;
 		if (doSwitch) {
