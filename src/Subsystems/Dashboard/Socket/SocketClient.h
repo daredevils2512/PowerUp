@@ -16,7 +16,7 @@
 #include <sys/socket.h>    //socket
 #include <arpa/inet.h> //inet_addr
 #include <netdb.h> //hostent
-#include "ThreadSafeQueue.cpp"
+#include <queue>
 
 class SocketClient {
 public:
@@ -47,7 +47,7 @@ private:
 	static bool _shouldBeConnected;
 	static bool connected;
 
-	static ThreadSafeQueue<std::string> pendingFrames;
+	static std::queue<std::string> pendingFrames;
 };
 
 #endif /* SRC_SUBSYSTEMS_DASHBOARD_SOCKET_SOCKETCLIENT_H_ */

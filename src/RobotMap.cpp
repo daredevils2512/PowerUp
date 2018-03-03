@@ -75,8 +75,8 @@ void RobotMap::init() {
 #else
 		drivetrainLeftEncoder->SetReverseDirection(false);
 #endif
-
 		Robot::dashboard->RegisterEncoder("drivetrain.encoders.left",drivetrainLeftEncoder.get(),0,1);
+
 		drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));//TODO: ulti.h constants>>>>>>> master
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
 
@@ -85,11 +85,11 @@ void RobotMap::init() {
 #else
 		drivetrainRightEncoder->SetReverseDirection(true);
 #endif
+		Robot::dashboard->RegisterEncoder("drivetrain.encoders.right",drivetrainRightEncoder.get(),2,3);
 
 	drivetrainShifter.reset (new frc::DoubleSolenoid (0,6,7)); //TODO change back to 4,5 for Alea & USE UTIL CONSTANTS!!!
 		Robot::dashboard->RegisterDoubleSolenoid("drivetrain.shifter",drivetrainShifter.get(),6,7);
 
-	drivetrainShifter.reset (new frc::DoubleSolenoid (0, 4 , 5));
 	 navX.reset(new AHRS(SPI::Port::kMXP));
 
 	 cubeIntakeLeftMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_LEFT_MOTOR));
@@ -104,6 +104,7 @@ void RobotMap::init() {
 	 	 //TODO: implement dashboard registers for commented methods
 //	 cubeIntakeGrabberSolenoid.reset (new frc::DoubleSolenoid (0 , 7 , 8));
 	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
+	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
 
 //	climberLeftWingMotor.reset (new WPI_TalonSRX (Util::CLIMBER_LEFT_WING_MOTOR));
 //	climberRightWingMotor.reset (new WPI_TalonSRX (Util::CLIMBER_RIGHT_WING_MOTOR));
@@ -117,5 +118,5 @@ void RobotMap::init() {
 		elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 0);
 		Robot::dashboard->RegisterTalonSRX("cube.elevatorMotor",elevatorMotor.get());
 	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
-
+		Robot::dashboard->RegisterLimitSwitch("cube.elevatorBottomSwitch", elevatorBottomSwitch.get());
 }
