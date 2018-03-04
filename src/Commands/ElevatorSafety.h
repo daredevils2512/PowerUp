@@ -15,6 +15,7 @@ public:
 private:
 	bool shouldFix;
 	bool done;
+	bool checked;
 };
 
 #endif  // ElevatorSafety_H

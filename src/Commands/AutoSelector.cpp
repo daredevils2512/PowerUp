@@ -122,17 +122,18 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			if (scale == sideCheck) {
 				std::cout << "Less work cause it's on our side" << std::endl;
 				// command group for positioning from mid-zone to closest side of the balance, then placing
-				AddSequential(new PIDDriveStraight(283));
+				AddSequential(new PIDDriveStraight(263));
 				AddSequential(new Pause(0.2));
 //				AddSequential(new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
-				AddSequential(new PIDTurn(90 * -directionScale));//turning towards the scale
+				AddSequential(new PIDTurn(45 * -directionScale));//turning towards the scale
 				AddSequential(new Pause(0.2));
 				AddSequential(new AutoStraightDrive(7.5,0.7)); //backing up
 				AddSequential(new Pause(0.2));
 				AddSequential(new ElevatorRunToHeight(1.0, scaleHeight));  //Gonna be talller thane the scale
+				AddSequential(new Pause(0.2));
 //				AddSequential(new PIDDriveStraight(12)); //18 //zoom at scale
 				AddSequential(new CubeRunIntake(-1.0,1));	//bye bye cube
-				AddParallel(new ElevatorRunToHeight(0.5, 0.08));
+				AddSequential(new ElevatorRunToHeight(0.3, 0.08));
 				AddSequential(new AutoStraightDrive(7.5,0.5)); //backing up more
 
 			} else {

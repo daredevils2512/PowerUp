@@ -68,7 +68,7 @@ void PIDDriveStraight::Execute() {
 	if(m_reverse){
 		Robot::drivetrain->DriveRobotTank(0.7+output,0.7-output);
 	}else{
-		Robot::drivetrain->DriveRobotTank(-0.7-output,-0.7+output); //70% besides corrections //0.6
+		Robot::drivetrain->DriveRobotTank(-0.7-output,-0.7+output); //80% besides corrections //0.6
 	}
 }
 
