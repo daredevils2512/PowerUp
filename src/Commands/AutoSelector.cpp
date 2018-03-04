@@ -63,7 +63,13 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			AddSequential(new PIDDriveStraight(70)); //68
 			AddSequential(new PIDTurn(45 * -directionSwitch));
 			AddSequential(new PIDDriveStraight(18));
-			AddSequential(new CubeRunIntake(-1.0));
+			AddSequential(new CubeRunIntake(-1.0,0.5));
+			AddSequential(new AutoStraightDrive(4,-0.5));
+			AddSequential(new PIDTurn(80 * -directionSwitch));
+			AddSequential(new ElevatorRunToHeight(0.5 , 0.08));
+			AddSequential(new AutoStraightDrive(24,0.7));
+			AddParallel(new CubeRunIntake(1.0));
+
 		} else {
 			std::cout << "Just going for a drive" << std::endl;
 			AddSequential(new PIDDriveStraight(90));// drive forward and cross auto line
@@ -134,24 +140,30 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 //				AddSequential(new PIDDriveStraight(12)); //18 //zoom at scale
 				AddSequential(new CubeRunIntake(-1.0,1));	//bye bye cube
 				AddSequential(new ElevatorRunToHeight(0.3, 0.08));
-				AddSequential(new AutoStraightDrive(7.5,0.5)); //backing up more
+				//AddSequential(new AutoStraightDrive(7.5,0.5)); //backing up more
+				AddSequential(new PIDTurn(82 * -directionScale));
+				AddSequential(new AutoStraightDrive(48,-0.6));
 
 			} else {
 				std::cout << "It's all the way over there....Need more veggies"
 						<< std::endl;
 				// command group for moving across mid-zone to farthest side of the balance, then placing
 //				AddSequential(new UltrasonicStraightDrive(0.75, 222, trackingSide));//drive with sensors down the wall
-				AddSequential(new PIDDriveStraight(176));	//zoom to other side
-				AddSequential(new Pause(0.2));
-				AddSequential(new PIDTurn(90 * -directionScale));//turn to go across the back of switch
-				AddSequential(new Pause(0.2));
-				AddSequential(new PIDDriveStraight(196));	//zoom to other side
-				AddSequential(new Pause(0.2));
-				AddSequential(new PIDTurn(90 * directionScale));//turn to face opposite end of field
+				AddSequential(new PIDDriveStraight(188));	//zoom to other side
+				AddSequential(new Pause(0.4));
+				AddSequential(new PIDTurn(90 * directionScale));//turn to go across the back of switch
+				AddSequential(new Pause(0.4));
+				AddSequential(new PIDDriveStraight(160));	//zoom to other side
+				AddSequential(new Pause(0.4));
+				AddSequential(new PIDTurn(110 * -directionScale));//turn to face opposite end of field
+				AddSequential(new Pause(0.4));
+				//AddSequential(new AutoStraightDrive(7,-0.6));
+				//AddSequential(new Pause(0.4));
 //				AddSequential(new PIDDriveStraight(87));	//drive to null zone
 //				AddSequential(new PIDTurn(90 * directionScale));//turn to the scale
 				AddSequential(new ElevatorRunToHeight(1.0, scaleHeight)); //Gonna be talller thane the scale
-				AddSequential(new PIDDriveStraight(18));	//zoom at the scale
+				AddSequential(new AutoStraightDrive(18,-0.5));	//zoom at the scale
+				AddSequential(new Pause(0.4));
 				AddSequential(new CubeRunIntake(-1.0,1));							//bye bye cube
 				AddParallel(new ElevatorRunToHeight(0.5, 0.08));
 			}
