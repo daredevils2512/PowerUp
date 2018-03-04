@@ -7,6 +7,12 @@ CubeRunIntake::CubeRunIntake(double speed) {
 	m_speed = speed;
 }
 
+CubeRunIntake::CubeRunIntake(double speed, double timeout){
+	Requires (Robot::cube.get());
+	m_speed = speed;
+	SetTimeout(timeout);
+}
+
 // Called just before this Command runs the first time
 void CubeRunIntake::Initialize() {
 
@@ -27,7 +33,7 @@ void CubeRunIntake::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool CubeRunIntake::IsFinished() {
-	return false;
+	return Robot::cube->GetLimitSwitch() && m_speed >= 0 || IsTimedOut();
 }
 
 // Called once after isFinished returns true

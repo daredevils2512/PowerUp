@@ -19,6 +19,6 @@ public:
 	//TODO Add in functions for doing alternate switch autos
 
 private:
-	static constexpr double scaleHeight = 6.6;
+	static constexpr double scaleHeight = 6.8;
 };
 

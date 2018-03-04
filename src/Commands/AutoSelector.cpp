@@ -55,7 +55,8 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 //			AddSequential(new PIDDriveStraight(54));			//running to the switch
 //			AddSequential(new CubeRunIntake(-1.0));			//bye bye cube!
 			//with 45 degree turns
-			AddParallel(new ElevatorRunToHeight(0.75 , 3.1));
+			AddParallel(new ElevatorRunToHeight(0.75 , 2.6));
+			AddSequential(new Pause(0.2));
 			AddSequential(new PIDDriveStraight(32));
 			AddParallel(new ElevatorRunLift(0.1));
 			AddSequential(new PIDTurn(45 * directionSwitch));
@@ -122,29 +123,36 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				std::cout << "Less work cause it's on our side" << std::endl;
 				// command group for positioning from mid-zone to closest side of the balance, then placing
 				AddSequential(new PIDDriveStraight(283));
-				AddSequential(new Pause(0.3));
+				AddSequential(new Pause(0.2));
 //				AddSequential(new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
 				AddSequential(new PIDTurn(90 * -directionScale));//turning towards the scale
-				AddSequential(new Pause(0.3));
-				AddSequential(new AutoStraightDrive(6,0.5));
-				AddSequential(new Pause(0.3));
-				AddSequential(new ElevatorRunToHeight(0.75, scaleHeight));  //Gonna be talller thane the scale
+				AddSequential(new Pause(0.2));
+				AddSequential(new AutoStraightDrive(7.5,0.7)); //backing up
+				AddSequential(new Pause(0.2));
+				AddSequential(new ElevatorRunToHeight(1.0, scaleHeight));  //Gonna be talller thane the scale
 //				AddSequential(new PIDDriveStraight(12)); //18 //zoom at scale
-				AddSequential(new CubeRunIntake(-1.0));	//bye bye cube
-				AddParallel(new ElevatorRunLift(0.1));
+				AddSequential(new CubeRunIntake(-1.0,1));	//bye bye cube
+				AddParallel(new ElevatorRunToHeight(0.5, 0.08));
+				AddSequential(new AutoStraightDrive(7.5,0.5)); //backing up more
+
 			} else {
 				std::cout << "It's all the way over there....Need more veggies"
 						<< std::endl;
 				// command group for moving across mid-zone to farthest side of the balance, then placing
-				AddSequential(new UltrasonicStraightDrive(0.75, 222, trackingSide));//drive with sensors down the wall
+//				AddSequential(new UltrasonicStraightDrive(0.75, 222, trackingSide));//drive with sensors down the wall
+				AddSequential(new PIDDriveStraight(176));	//zoom to other side
+				AddSequential(new Pause(0.2));
 				AddSequential(new PIDTurn(90 * -directionScale));//turn to go across the back of switch
-				AddSequential(new PIDDriveStraight(236));	//zoom to other side
+				AddSequential(new Pause(0.2));
+				AddSequential(new PIDDriveStraight(196));	//zoom to other side
+				AddSequential(new Pause(0.2));
 				AddSequential(new PIDTurn(90 * directionScale));//turn to face opposite end of field
-				AddSequential(new PIDDriveStraight(87));	//drive to null zone
-				AddSequential(new PIDTurn(90 * directionScale));//turn to the scale
-				AddSequential(new ElevatorRunToHeight(0.7, scaleHeight)); //Gonna be talller thane the scale
+//				AddSequential(new PIDDriveStraight(87));	//drive to null zone
+//				AddSequential(new PIDTurn(90 * directionScale));//turn to the scale
+				AddSequential(new ElevatorRunToHeight(1.0, scaleHeight)); //Gonna be talller thane the scale
 				AddSequential(new PIDDriveStraight(18));	//zoom at the scale
-				AddSequential(new CubeRunIntake(-1.0));								//bye bye cube
+				AddSequential(new CubeRunIntake(-1.0,1));							//bye bye cube
+				AddParallel(new ElevatorRunToHeight(0.5, 0.08));
 			}
 		} else {
 			std::cout << "One too many cookies....Gonna just go straight" << std::endl;
