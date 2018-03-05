@@ -21,7 +21,7 @@ void CubeSwitchCheck::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void CubeSwitchCheck::Execute() {
-	if (Robot::cube->GetLimitSwitch() == true) {
+	if (Robot::cube->GetLimitSwitch()) {
 		Robot::cube->SetIntakeSpeed(0.0);
 	}
 }

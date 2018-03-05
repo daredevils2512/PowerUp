@@ -24,7 +24,7 @@ void ElevatorManualRun::Execute() {
 	//run off joystick
 //	else if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT - 1.0) {
 //		Robot::elevator->RunLift(Robot::oi->GetLiftControl() * (5/6));
-	} else if (Robot::elevator->GetBottomSwitch() == true) {
+	} else if (Robot::elevator->GetBottomSwitch()) {
 		if (Robot::oi->GetLiftControl() > 0) {
 			Robot::elevator->RunLift(Robot::oi->GetLiftControl());
 		} else {
