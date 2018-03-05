@@ -43,6 +43,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 
 	AddSequential(new PrintCurrentFPGATime());
 	AddSequential(new ElevatorSafety());
+
 	if (startingPosition == Robot::StartLocation::center) {
 		std::cout << "We're in the center!" << std::endl;
 		if (doSwitch) {
@@ -69,7 +70,6 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			AddSequential(new ElevatorRunToHeight(0.5 , 0.08));
 			AddSequential(new AutoStraightDrive(24,0.7));
 			AddParallel(new CubeRunIntake(1.0));
-
 		} else {
 			std::cout << "Just going for a drive" << std::endl;
 			AddSequential(new PIDDriveStraight(90));// drive forward and cross auto line
@@ -143,7 +143,6 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				//AddSequential(new AutoStraightDrive(7.5,0.5)); //backing up more
 				AddSequential(new PIDTurn(82 * -directionScale));
 				AddSequential(new AutoStraightDrive(48,-0.6));
-
 			} else {
 				std::cout << "It's all the way over there....Need more veggies"
 						<< std::endl;

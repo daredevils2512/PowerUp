@@ -69,7 +69,6 @@ void RobotMap::init() {
 
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X));//TODO: util.h constants
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE);
-
 #ifdef ARIES
 		drivetrainLeftEncoder->SetReverseDirection(true);
 #else
@@ -77,9 +76,8 @@ void RobotMap::init() {
 #endif
 		Robot::dashboard->RegisterEncoder("drivetrain.encoders.left",drivetrainLeftEncoder.get(),0,1);
 
-		drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));//TODO: ulti.h constants>>>>>>> master
+		drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));//TODO: ulti.h constants
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
-
 #ifdef ARIES
 		drivetrainRightEncoder->SetReverseDirection(false);
 #else
