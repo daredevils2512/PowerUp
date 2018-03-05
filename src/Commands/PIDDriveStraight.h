@@ -18,6 +18,7 @@ public:
 private:
 	PIDSettings m_settings;
 	double m_distance;
+	bool m_reverse;
 	double navXDistance;
 	long lastTime;
 	double lastVelX;

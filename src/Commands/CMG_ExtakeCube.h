@@ -8,17 +8,9 @@
 #pragma once
 
 #include <Commands/CommandGroup.h>
-#include "AutonomousSource.h"
 
-class AutoSelector : public frc::CommandGroup {
+class CMG_ExtakeCube : public frc::CommandGroup {
 public:
-	AutoSelector(AutonomousSource* autonomousSource);
-	void CenterSwitch();
-	void OutsideStraightScale();
-	void OutsideOppositeScale();
-	//TODO Add in functions for doing alternate switch autos
-
-private:
-	static constexpr double scaleHeight = 6.8;
+	CMG_ExtakeCube();
 };
 

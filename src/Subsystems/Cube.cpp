@@ -15,7 +15,7 @@ void Cube::InitDefaultCommand() {
 }
 
 void Cube::SetIntakeSpeed(double speed) {
-	intakeLeft->Set(-speed); //motor is wired in reverse
+	intakeLeft->Set(speed); //TODO make inverted on Alea
 	intakeRight->Set(speed);
 }
 
@@ -28,7 +28,11 @@ void Cube::ActuateGrabber(frc::DoubleSolenoid::Value direction) {
 }
 
 bool Cube::GetLimitSwitch() {
-	return limitSwitch->Get();
+	if (limitSwitch->Get()) {
+		return true;
+	}else{
+		return false;
+	}
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

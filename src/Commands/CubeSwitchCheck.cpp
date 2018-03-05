@@ -22,20 +22,20 @@ void CubeSwitchCheck::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void CubeSwitchCheck::Execute() {
 	if (Robot::cube->GetLimitSwitch()) {
-		Robot::cube->ActuateGrabber(frc::DoubleSolenoid::kForward);
-	} else {
-		Robot::cube->ActuateGrabber(frc::DoubleSolenoid::kReverse);
+		Robot::cube->SetIntakeSpeed(0.0);
 	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool CubeSwitchCheck::IsFinished() {
+	std::cout << "Limit status: " << Robot::cube->GetLimitSwitch() << std::endl;
+//	return Robot::cube->GetLimitSwitch();
 	return true;
 }
 
 // Called once after isFinished returns true
 void CubeSwitchCheck::End() {
-
+	Robot::cube->SetIntakeSpeed(0.0);
 }
 
 // Called when another command which requires one or more of the same

@@ -8,6 +8,7 @@
 #include <Commands/CMG_NavXAutoTest.h>
 #include <Commands/CMG_UltrasonicAutoTest.h>
 #include <Commands/CMG_IntakeCube.h>
+#include <Commands/CMG_ExtakeCube.h>
 #include <Commands/CMG_IntakeCubeNoCheck.h>
 #include "OI.h"
 
@@ -28,30 +29,32 @@
 
 
 OI::OI() {
-	DRC_leftTrigger.WhileHeld(new CMG_IntakeCubeNoCheck()); //intake cube
-		DRC_leftTrigger.WhenReleased (new CubeIntakeActuate(false));
+	DRC_leftTrigger.WhileHeld(new CMG_IntakeCube()); //intake cube
 		DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
 	DRC_rightTrigger.WhileHeld(new LowGear()); //drop a gear
 	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
 	DRC_leftBumper.WhenPressed(new PIDTurn(-90)); //left 90
 	DRC_rightBumper.WhenPressed(new PIDTurn(90)); //right 90
+
+	DRC_startButton.WhenPressed(new PIDDriveStraight(75.0));
 //	DRC_xButton.WhileHeld(new ClimberRunWing (Climber::ClimberWing::leftWing , 0.8)); //Kahl left wing up
 //	DRC_xButton.WhenReleased(new ClimberRunWing (Climber::ClimberWing::leftWing , 0.0)); //stop left wing
 //	DRC_bButton.WhileHeld(new ClimberRunWing (Climber::ClimberWing::rightWing , 0.8)); //Kahl right wing up
 //	DRC_bButton.WhenReleased(new ClimberRunWing (Climber::ClimberWing::rightWing , 0.0)); //stop right wing
 
-	CDR_trigger.WhileHeld(new CMG_IntakeCubeNoCheck()); //intake cube
-		CDR_trigger.WhenReleased(new CubeIntakeActuate(false));
+	CDR_trigger.WhileHeld(new CMG_IntakeCube()); //intake cube
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
-//	CDR_topLeftJoystick.WhenPressed(new CubeGrabberActuate(true)); //actuate grabbers to pinch the cube
-//	CDR_bottomLeftJoystick.WhenPressed(new CubeGrabberActuate(false)); //retract the grabbers to let go of cube
+	CDR_sideJoystickButton.WhileHeld(new CMG_ExtakeCube()); //goodbye cube
+		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));
 	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(1.0)); //run cube in
 	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
-	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(-1.0)); //spit cube out
+	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(-1.0)); //run cube out
 	CDR_bottomLeftJoystick.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuate(true)); //actuate intake arms in
 	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuate(false)); //actuate intake arms out
 
+//	CDR_topLeftBase.WhenPressed(new CubeGrabberActuate(true)); //actuate grabbers to pinch the cube
+//	CDR_topRightBase.WhenPressed(new CubeGrabberActuate(false)); //retract the grabbers to let go of cube
 	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0)); //alt run cube out
 	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0)); //alt run cube in
@@ -61,8 +64,8 @@ OI::OI() {
 //	CDR_bottomRightBase.WhileHeld(new ClimberRunWing (Climber::ClimberWing::rightWing, 0.8)); //Dawson right wing up
 //	CDR_bottomRightBase.WhenReleased(new ClimberRunWing (Climber::ClimberWing::rightWing, 0.0)); //right wing stop
 
-	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
 	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
+	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
 	CDB_green.WhileHeld(new ElevatorRunLift(0.07)); //minute adjustment up
 	CDB_yellow.WhileHeld(new ElevatorRunLift(-0.06)); //minute adjustment down
 	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.7, 6.5)); //Top scale
@@ -71,7 +74,6 @@ OI::OI() {
 	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.7, 2)); //switch
 	CDB_bottomWhite.WhenPressed(new ElevatorRunToHeight(0.7, 1.3)); //portal
 	CDB_bottomRed.WhenPressed(new ElevatorRunToHeight(0.7, 0.15)); //bottom
-
 }
 
 	double OI::GetTurn() {

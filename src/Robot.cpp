@@ -16,9 +16,11 @@ std::shared_ptr<Cube> Robot::cube;
 std::shared_ptr<Climber> Robot::climber;
 std::shared_ptr<NavXPIDSource> Robot::navxPidSource;
 std::shared_ptr<Elevator> Robot::elevator;
+std::shared_ptr<DareDashboard> Robot::dashboard;
 
 void Robot::RobotInit() {
 	std::cout << "Robot Init" << std::endl;
+	dashboard.reset(new DareDashboard());
 	RobotMap::init();
     drivetrain.reset(new Drivetrain());
     ultrasonicSubsystem.reset(new UltrasonicSubsystem());
@@ -43,15 +45,13 @@ void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
+	std::thread(SocketClient::recv).detach();
+	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;
 
 //TODO comment printouts back in once robot is complete, only commented out because ICC will be sketchy
-
-	SmartDashboard::PutBoolean("Is Connected",RobotMap::navX->IsConnected());
-	SmartDashboard::PutBoolean("Is Moving",RobotMap::navX->IsMoving());
-	SmartDashboard::PutBoolean("Is Rotating",RobotMap::navX->IsRotating());
 	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
 	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
 	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
@@ -67,7 +67,7 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
 	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
 
-//	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
+	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 
 	SmartDashboard::PutNumber("Front Left Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
 	SmartDashboard::PutNumber("Rear Left Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
@@ -78,18 +78,17 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAnalogInput()->GetAverageVoltage());
 	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
-//	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
 
 	}
 void Robot::DisabledInit(){
 	std::cout << "Let's start being disabled" << std::endl;
 	compressor->SetClosedLoopControl(false);
-
-//TODO comment back in after ICC
-
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
+	elevator->RunLift(0.1);
 	drivetrain->SetPIDEnabled(false);
 	drivetrain->GetPIDOutput();
 }
@@ -97,20 +96,21 @@ void Robot::DisabledInit(){
 void Robot::DisabledPeriodic() {
 //	std::cout << "I'm Disabled!" << std::endl;
 	Scheduler::GetInstance()->Run();
-
 }
 
 void Robot::PickAuto() {
 	std::cout << "Picking Auto..." << std::endl;
 	FileAutonomousSource fileAutonomousSource("/home/lvuser/Autonomous.txt");
 	autonomousCommand.reset(new AutoSelector(&fileAutonomousSource));
-
 }
 void Robot::AutonomousInit() {
 	std::cout << "Starting auto..." << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
+	Robot::elevator->GetBottomSwitch();
 	this->PickAuto();
+	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
+	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);
 	if (autonomousCommand.get() != nullptr) {
 		autonomousCommand->Start();
 	}
@@ -119,14 +119,15 @@ void Robot::AutonomousInit() {
 void Robot::AutonomousPeriodic() {
 //	std::cout << "I'm in auto!" << std::endl;
 	Scheduler::GetInstance()->Run();
-
-
 }
 
 void Robot::TeleopInit() {
 	std::cout << "Let's start teleop" << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
+	cube->SetIntakeSpeed(0.0);
+	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
+	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
 	compressor->SetClosedLoopControl(true);
 	if (autonomousCommand.get() != nullptr) {
 			autonomousCommand->Cancel();

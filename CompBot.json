@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.007820646506777894,
+  "dividerPosition": 0.007894736842105263,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -11,7 +11,7 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "11,3": {
+          "11,4": {
             "size": [
               2,
               1
@@ -22,7 +22,7 @@
               "_title": "Raw Right Encoder"
             }
           },
-          "6,3": {
+          "6,4": {
             "size": [
               2,
               1
@@ -33,7 +33,7 @@
               "_title": "Raw Left Encoder"
             }
           },
-          "6,2": {
+          "4,1": {
             "size": [
               2,
               1
@@ -44,7 +44,7 @@
               "_title": "Subsystem Get Left Encoder"
             }
           },
-          "11,2": {
+          "6,1": {
             "size": [
               2,
               1
@@ -55,31 +55,7 @@
               "_title": "Subsystem Get Right Encoder"
             }
           },
-          "0,0": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator Encoder...Maybe Idk",
-              "_title": "Elevator Encoder...Maybe Idk"
-            }
-          },
           "10,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Is Rotating",
-              "_title": "Is Rotating",
-              "colorWhenTrue": "#7CFC00FF",
-              "colorWhenFalse": "#8B0000FF"
-            }
-          },
-          "11,1": {
             "size": [
               1,
               1
@@ -90,20 +66,7 @@
               "_title": "GetPitch"
             }
           },
-          "12,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Is Moving",
-              "_title": "Is Moving",
-              "colorWhenTrue": "#7CFC00FF",
-              "colorWhenFalse": "#8B0000FF"
-            }
-          },
-          "12,1": {
+          "11,0": {
             "size": [
               1,
               1
@@ -114,20 +77,7 @@
               "_title": "GetRoll"
             }
           },
-          "11,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Is Connected",
-              "_title": "Is Connected",
-              "colorWhenTrue": "#7CFC00FF",
-              "colorWhenFalse": "#8B0000FF"
-            }
-          },
-          "10,1": {
+          "12,0": {
             "size": [
               1,
               1
@@ -239,7 +189,7 @@
               "showVectors": true
             }
           },
-          "6,5": {
+          "6,3": {
             "size": [
               2,
               1
@@ -261,7 +211,7 @@
               "_title": "Elevator Current"
             }
           },
-          "6,4": {
+          "11,2": {
             "size": [
               2,
               1
@@ -272,7 +222,7 @@
               "_title": "Drivetrain Front Right Current"
             }
           },
-          "11,4": {
+          "6,2": {
             "size": [
               2,
               1
@@ -283,7 +233,7 @@
               "_title": "Drivetrain Front Left Current"
             }
           },
-          "11,5": {
+          "11,3": {
             "size": [
               2,
               1
@@ -292,6 +242,54 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Drivetrain Rear Right Current",
               "_title": "Drivetrain Rear Right Current"
+            }
+          },
+          "0,0": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator Encoder",
+              "_title": "Elevator Encoder"
+            }
+          },
+          "4,0": {
+            "size": [
+              4,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Intake Limit Switch",
+              "_title": "Intake Limit Switch",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "0,2": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Bottom Limit Switch",
+              "_title": "Bottom Limit Switch",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "3,2": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Drivetrain PID",
+              "_title": "Drivetrain PID"
             }
           }
         }
@@ -309,7 +307,7 @@
         "tiles": {
           "2,0": {
             "size": [
-              2,
+              6,
               4
             ],
             "content": {
@@ -452,32 +450,22 @@
                   "_title": "Compressor[0]/Enabled",
                   "colorWhenTrue": "#7CFC00FF",
                   "colorWhenFalse": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[4]/Value",
+                  "_title": "DigitalInput[4]/Value",
+                  "colorWhenTrue": "#7CFC00FF",
+                  "colorWhenFalse": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[5]/Value",
+                  "_title": "DigitalInput[5]/Value",
+                  "colorWhenTrue": "#7CFC00FF",
+                  "colorWhenFalse": "#8B0000FF"
                 }
               ]
-            }
-          },
-          "4,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Climber",
-              "_title": "Climber",
-              "_children": []
-            }
-          },
-          "6,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Elevator",
-              "_title": "Elevator",
-              "_children": []
             }
           },
           "8,0": {
@@ -513,6 +501,18 @@
               "_type": "Subsystem Layout",
               "_source0": "network_table:///LiveWindow/ExampleSubsystem",
               "_title": "ExampleSubsystem",
+              "_children": []
+            }
+          },
+          "11,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/DaredevilDashboard",
+              "_title": "DaredevilDashboard",
               "_children": []
             }
           }

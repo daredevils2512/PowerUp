@@ -9,6 +9,7 @@
 class CubeRunIntake : public frc::Command {
 public:
 	CubeRunIntake(double speed);
+	CubeRunIntake(double speed, double timeout);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

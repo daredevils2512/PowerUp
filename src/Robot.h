@@ -10,6 +10,7 @@
 #include "Subsystems/UltrasonicSubsystem.h"
 #include "Subsystems/Cube.h"
 #include "Subsystems/Climber.h"
+#include "Subsystems/DareDashboard.h"
 #include "NavXPIDSource.h"
 #include "Subsystems/Elevator.h"
 
@@ -30,6 +31,8 @@ public:
 	static std::shared_ptr<UltrasonicSubsystem> ultrasonicSubsystem;
 	static std::shared_ptr<Cube> cube;
 	static std::shared_ptr<Climber> climber;
+
+	static std::shared_ptr<DareDashboard> dashboard;
 
 	static std::shared_ptr<NavXPIDSource> navxPidSource;
 

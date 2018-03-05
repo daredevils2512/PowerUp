@@ -15,6 +15,7 @@ public:
 private:
 	double m_speed = 0.0;
 	double m_encPos = 0.0;
+	bool m_runDown;
 };
 
 #endif  // ElavatorRunToHeight_H

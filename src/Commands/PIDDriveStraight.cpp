@@ -5,9 +5,16 @@ PIDDriveStraight::PIDDriveStraight(double goalDistance, PIDDriveStraight::PIDSet
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::drivetrain.get());
+	SetTimeout(5.0); //subject to change
 	m_settings = settings;
 	// GOAL DISTANCE IS IN INCHES
-	m_distance = (goalDistance) - 12;
+	if(goalDistance < 0){
+		m_distance = goalDistance;
+		m_reverse = true;
+	}else{
+		m_distance = (goalDistance) - 12;
+		m_reverse = false;
+	}
 	lastTime = 0;
 	navXDistance = 0;
 	lastVelX = 0;
@@ -57,15 +64,19 @@ void PIDDriveStraight::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void PIDDriveStraight::Execute() {
 	//quarter steering control for PID to prevent crazy turns*/
-	double output = Robot::drivetrain->GetPIDOutput()/4;
-
-	Robot::drivetrain->DriveRobotTank(0.7-output,0.7+output); //70% besides corrections
+	double output = Robot::drivetrain->GetPIDOutput()/2;
+	if(m_reverse){
+		Robot::drivetrain->DriveRobotTank(0.7+output,0.7-output);
+	}else{
+		Robot::drivetrain->DriveRobotTank(-0.7-output,-0.7+output); //80% besides corrections //0.6
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool PIDDriveStraight::IsFinished() {
 	//get average encoder distance in inches, compare to mdist (scaled to feet)
-	return Robot::drivetrain->GetLeftEncoder() /*( ( Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder() )/2 )*/ >= m_distance;
+	//return Robot::drivetrain->GetLeftEncoder() /*( ( Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder() )/2 )*/ >= m_distance;
+	return abs((Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder()) /2) >= m_distance;
 }
 
 // Called once after isFinished returns true

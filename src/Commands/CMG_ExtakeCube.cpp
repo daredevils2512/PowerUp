@@ -5,13 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "CMG_IntakeCubeNoCheck.h"
-#include "../Robot.h"
+#include "CMG_ExtakeCube.h"
 #include "CubeIntakeActuate.h"
 #include "CubeRunIntake.h"
 #include "Pause.h"
 
-CMG_IntakeCubeNoCheck::CMG_IntakeCubeNoCheck() {
+CMG_ExtakeCube::CMG_ExtakeCube() {
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
 	//      AddSequential(new Command2());
@@ -28,7 +27,7 @@ CMG_IntakeCubeNoCheck::CMG_IntakeCubeNoCheck() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddParallel(new CubeRunIntake(1.0));
-	AddSequential(new Pause(0.5)); //1.0
-	AddSequential(new CubeIntakeActuate(true));
+	AddParallel(new CubeRunIntake(-1)); //intake uses too much sauce, gonna dial it back
+	AddSequential(new Pause (0.25));
+	AddSequential(new CubeIntakeActuate(false));
 }

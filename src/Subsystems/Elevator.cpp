@@ -8,7 +8,7 @@ Elevator::Elevator() :
 //	left = RobotMap::elevatorLeftMotor;
 //	right = RobotMap::elevatorRightMotor;
 	motor = RobotMap::elevatorMotor;
-	//bottom = RobotMap::elevatorBottomSwitch;
+	bottom = RobotMap::elevatorBottomSwitch;
 }
 
 void Elevator::InitDefaultCommand() {
@@ -21,8 +21,11 @@ void Elevator::InitDefaultCommand() {
 // here. Call these from Commands.
 
 bool Elevator::GetBottomSwitch() {
-	//return bottom->Get();
-	return false;
+	if (bottom->Get()) {
+		return true;
+	}else{
+		return false;
+	}
 }
 
 void Elevator::RunLift(double speed) {
@@ -30,7 +33,7 @@ void Elevator::RunLift(double speed) {
 }
 
 double Elevator::GetLiftMagneticEncoder() {
-	return -RobotMap::elevatorMotor->GetSelectedSensorPosition(0) * (1/sensorUnitsPerRotation); //this returns it in feet
+	return -RobotMap::elevatorMotor->GetSelectedSensorPosition(0)* (1 / sensorUnitsPerRotation); //this returns it in feet
 }
 
 double Elevator::ResetMagneticEncoder() {
