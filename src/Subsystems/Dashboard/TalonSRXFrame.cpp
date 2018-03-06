@@ -59,7 +59,7 @@ void TalonSRXFrame::Broadcast(){
 			case ControlMode::Disabled: controlModeRep="Disabled"; break;
 			case ControlMode::Follower: controlModeRep="Follower"; break;
 			case ControlMode::MotionMagic: controlModeRep="MotionMagic"; break;
-			case ControlMode::MotionMagicArc: controlModeRep="MotionMagicArc"; break;
+			//case ControlMode::MotionMagicArc: controlModeRep="MotionMagicArc"; break;
 			case ControlMode::MotionProfile: controlModeRep="MotionProfile"; break;
 			case ControlMode::MotionProfileArc: controlModeRep="MotionProfileArc"; break;
 			case ControlMode::PercentOutput: controlModeRep="PercentOutput"; break;

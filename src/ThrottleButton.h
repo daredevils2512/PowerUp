@@ -2,7 +2,11 @@
 #define SRC_THROTTLEBUTTON_H_
 
 #pragma once
+#ifndef __GNUC__
 #include <Buttons\Button.h>
+#else
+#include <Buttons/Button.h>
+#endif
 #include <Joystick.h>
 #include <WPILib.h>
 
