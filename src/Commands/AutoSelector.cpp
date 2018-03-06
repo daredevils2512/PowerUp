@@ -147,7 +147,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				AddSequential(new ElevatorRunToHeight(0.3, 0.08));
 				//AddSequential(new AutoStraightDrive(7.5,0.5)); //backing up more
 				AddSequential(new PIDTurn(82 * -directionScale));
-				AddSequential(new AutoStraightDriveForward(48,-0.6));
+				AddSequential(new AutoStraightDriveForward(48,0.6));
 			} else {
 				std::cout << "It's all the way over there....Need more veggies"
 						<< std::endl;
