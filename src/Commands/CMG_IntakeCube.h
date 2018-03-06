@@ -8,6 +8,11 @@
 #pragma once
 
 #include <Commands/CommandGroup.h>
+#include "../Robot.h"
+#include "CubeIntakeActuateClose.h"
+#include "CubeRunIntake.h"
+#include "CubeSwitchCheck.h"
+#include "Pause.h"
 
 class CMG_IntakeCube : public frc::CommandGroup {
 public:

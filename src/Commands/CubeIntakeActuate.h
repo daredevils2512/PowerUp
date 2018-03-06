@@ -7,15 +7,17 @@
 
 class CubeIntakeActuate : public frc::Command {
 public:
-	CubeIntakeActuate(bool direction);
-	void Initialize();
+	void Initialize(){};
 	void Execute();
 	bool IsFinished();
-	void End();
+	void End(){};
 	void Interrupted();
 
-private:
-	bool m_direction;
+protected:
+	CubeIntakeActuate();
+	virtual ~CubeIntakeActuate(){};
+
+	virtual frc::DoubleSolenoid::Value getDirection() = 0;
 };
 
 #endif  // CubeIntakeActuate_H

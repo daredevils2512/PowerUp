@@ -6,9 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "CMG_ExtakeCube.h"
-#include "CubeIntakeActuate.h"
-#include "CubeRunIntake.h"
-#include "Pause.h"
 
 CMG_ExtakeCube::CMG_ExtakeCube() {
 	// Add Commands here:
@@ -27,7 +24,7 @@ CMG_ExtakeCube::CMG_ExtakeCube() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddParallel(new CubeRunIntake(-1)); //intake uses too much sauce, gonna dial it back
+	AddParallel(new CubeRunIntake(-0.85)); //intake uses too much sauce, gonna dial it back
 	AddSequential(new Pause (0.25));
-	AddSequential(new CubeIntakeActuate(false));
+	AddSequential(new CubeIntakeActuateOpen());
 }

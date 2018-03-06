@@ -30,5 +30,5 @@ CMG_IntakeCubeNoCheck::CMG_IntakeCubeNoCheck() {
 	// arm.
 	AddParallel(new CubeRunIntake(1.0));
 	AddSequential(new Pause(0.5)); //1.0
-	AddSequential(new CubeIntakeActuate(true));
+//	AddSequential(new CubeIntakeActuate(true));
 }

@@ -1,6 +1,6 @@
+#include <Commands/AutoStraightDriveForward.h>
 #include <Commands/CMG_UltrasonicAutoTest.h>
 #include "UltrasonicStraightDrive.h"
-#include "AutoStraightDrive.h"
 #include "PIDTurn.h"
 #include "Pause.h"
 

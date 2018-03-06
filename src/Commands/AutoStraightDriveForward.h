@@ -1,20 +1,21 @@
-#ifndef AutoStraightDrive_H
-#define AutoStraightDrive_H
+#ifndef AutoStraightDriveForward_H
+#define AutoStraightDriveForward_H
 
 #include <Commands/Command.h>
 
-class AutoStraightDrive : public frc::Command {
+class AutoStraightDriveForward : public frc::Command {
 public:
-	AutoStraightDrive(double targetFeet, double speed);
+	AutoStraightDriveForward(double targetFeet, double speed);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
 	void End();
 	void Interrupted();
 
-private:
+protected:
 	double m_targetFeet;
 	double m_speed;
+	
 };
 
 #endif  // AutoStraightDrive_H
