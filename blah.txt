@@ -1,0 +1,3 @@
+StartPosition:Left
+DoSwitch:true
+DoScale:true
