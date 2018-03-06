@@ -30,7 +30,7 @@
 
 OI::OI() {
 	DRC_leftTrigger.WhileHeld(new CMG_IntakeCube()); //intake cube
-		DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
+	DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
 	DRC_rightTrigger.WhileHeld(new LowGear()); //drop a gear
 	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
 	DRC_leftBumper.WhenPressed(new PIDTurn(-90)); //left 90
@@ -50,8 +50,8 @@ OI::OI() {
 	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
 	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(-1.0)); //run cube out
 	CDR_bottomLeftJoystick.WhenReleased(new CubeRunIntake(0.0)); //stop intake
-	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuate(true)); //actuate intake arms in
-	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuate(false)); //actuate intake arms out
+	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuateClose()); //actuate intake arms in
+	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuateOpen()); //actuate intake arms out
 
 //	CDR_topLeftBase.WhenPressed(new CubeGrabberActuate(true)); //actuate grabbers to pinch the cube
 //	CDR_topRightBase.WhenPressed(new CubeGrabberActuate(false)); //retract the grabbers to let go of cube

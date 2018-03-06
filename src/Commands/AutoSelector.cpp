@@ -4,6 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
+#include <Commands/AutoStraightDriveForward.h>
 #include <iostream>
 
 #include "AutoSelector.h"
@@ -19,8 +20,8 @@
 #include "Commands/PrintCurrentFPGATime.h"
 #include "Commands/Pause.h"
 #include "Commands/AutoTimedDrive.h"
-#include "Commands/AutoStraightDrive.h"
 #include "Commands/ElevatorSafety.h"
+#include "Commands/AutoStraightDriveBackward.h"
 
 AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	std::string gameMessage =
@@ -65,10 +66,10 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			AddSequential(new PIDTurn(45 * -directionSwitch));
 			AddSequential(new PIDDriveStraight(18));
 			AddSequential(new CubeRunIntake(-1.0,0.5));
-			AddSequential(new AutoStraightDrive(4,-0.5));
+			AddSequential(new AutoStraightDriveForward(4,0.5));
 			AddSequential(new PIDTurn(80 * -directionSwitch));
 			AddSequential(new ElevatorRunToHeight(0.5 , 0.08));
-			AddSequential(new AutoStraightDrive(24,0.7));
+			AddSequential(new AutoStraightDriveBackward(24,0.7));
 			AddParallel(new CubeRunIntake(1.0));
 		} else {
 			std::cout << "Just going for a drive" << std::endl;
@@ -133,7 +134,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 //				AddSequential(new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
 				AddSequential(new PIDTurn(45 * -directionScale));//turning towards the scale
 				AddSequential(new Pause(0.2));
-				AddSequential(new AutoStraightDrive(7.5,0.7)); //backing up
+				AddSequential(new AutoStraightDriveForward(7.5,0.7)); //backing up
 				AddSequential(new Pause(0.2));
 				AddSequential(new ElevatorRunToHeight(1.0, scaleHeight));  //Gonna be talller thane the scale
 				AddSequential(new Pause(0.2));
@@ -142,7 +143,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				AddSequential(new ElevatorRunToHeight(0.3, 0.08));
 				//AddSequential(new AutoStraightDrive(7.5,0.5)); //backing up more
 				AddSequential(new PIDTurn(82 * -directionScale));
-				AddSequential(new AutoStraightDrive(48,-0.6));
+				AddSequential(new AutoStraightDriveForward(48,-0.6));
 			} else {
 				std::cout << "It's all the way over there....Need more veggies"
 						<< std::endl;
@@ -161,7 +162,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 //				AddSequential(new PIDDriveStraight(87));	//drive to null zone
 //				AddSequential(new PIDTurn(90 * directionScale));//turn to the scale
 				AddSequential(new ElevatorRunToHeight(1.0, scaleHeight)); //Gonna be talller thane the scale
-				AddSequential(new AutoStraightDrive(18,-0.5));	//zoom at the scale
+				AddSequential(new AutoStraightDriveForward(18,0.5));	//zoom at the scale
 				AddSequential(new Pause(0.4));
 				AddSequential(new CubeRunIntake(-1.0,1));							//bye bye cube
 				AddParallel(new ElevatorRunToHeight(0.5, 0.08));
