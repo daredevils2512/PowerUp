@@ -7,8 +7,8 @@ AutoStraightDriveForward::AutoStraightDriveForward(double targetFeet, double spe
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::drivetrain.get());
 	//FORWARD IS NEGATIVE
-	m_targetFeet = -1*abs(targetFeet);
-	m_speed = speed;
+	m_targetFeet = targetFeet;
+	m_speed = -1.0 * (fabs(speed)); //abs returns an integer which messed with driving logic, float absolute value works though
 	//setting a timeout in case it doesn't move so it doesn't keep trying forever
 //	SetTimeout(2.5);
 }
@@ -31,7 +31,7 @@ bool AutoStraightDriveForward::IsFinished() {
 	//determines if the robot is done driving based off of encoders or if it timed out
 	double leftDistance = abs(Robot::drivetrain->GetLeftEncoder());
 	double rightDistance = abs(Robot::drivetrain->GetRightEncoder());
-	if(abs(leftDistance - rightDistance) > 6) {
+	if(fabs(leftDistance - rightDistance) > 6) {
 		//set lagging encoder to value of other encoder
 		if(leftDistance > rightDistance) {
 			rightDistance = leftDistance;

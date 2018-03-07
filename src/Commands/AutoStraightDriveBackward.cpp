@@ -9,7 +9,7 @@
 
 AutoStraightDriveBackward::AutoStraightDriveBackward(double targetFeet, double speed) : AutoStraightDriveForward(targetFeet, speed){
 	//since we are supering to forward, we have to be positive
-	this->m_speed = abs(speed);
+	this->m_speed = fabs(speed);
 }
 
 AutoStraightDriveBackward::~AutoStraightDriveBackward() {

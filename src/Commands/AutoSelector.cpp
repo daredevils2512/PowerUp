@@ -57,23 +57,34 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 //			AddSequential(new PIDDriveStraight(54));			//running to the switch
 //			AddSequential(new CubeRunIntake(-1.0));			//bye bye cube!
 			//with 45 degree turns
-			AddSequential(new PIDDriveStraight(16));
-			AddSequential(new Pause(0.25));
-			AddParallel(new ElevatorRunToHeight(0.7 , 2.6));
-			AddSequential(new PIDDriveStraight(16));
-			AddParallel(new ElevatorRunLift(0.1));
-			AddSequential(new PIDTurn(45 * directionSwitch));
-			AddSequential(new PIDDriveStraight(70)); //68
-			AddSequential(new PIDTurn(45 * -directionSwitch));
 			AddSequential(new PIDDriveStraight(18));
-			AddSequential(new CubeRunIntake(-1.0,0.5));
-			AddSequential(new AutoStraightDriveBackward(6,0.5)); //backing up
-			AddSequential(new PIDTurn(80 * -directionSwitch));
+			AddSequential(new Pause(0.3));
+			AddParallel(new ElevatorRunToHeight(0.7 , 2.6));
+			AddSequential(new PIDDriveStraight(18));
+			AddSequential(new Pause(0.4));
+//			AddParallel(new ElevatorRunLift(0.1));
+			AddSequential(new PIDTurn(45 * directionSwitch));
+			AddSequential(new Pause(0.3));
+			AddSequential(new PIDDriveStraight(70)); //68
+			AddSequential(new Pause(0.3));
+			AddSequential(new PIDTurn(45 * -directionSwitch));
+			AddSequential(new Pause(0.1));
+			AddSequential(new PIDDriveStraight(18)); //18
+			AddSequential(new CubeRunIntake(-0.8,0.5));
+			AddSequential(new AutoStraightDriveBackward(6,0.6)); //backing up
+			AddSequential(new Pause(0.3));
+			AddSequential(new PIDTurn(77.5 * -directionSwitch));
+			AddSequential(new Pause(0.3));
 			AddSequential(new ElevatorRunToHeight(0.5 , 0.08));
-			AddSequential(new AutoStraightDriveForward(24,0.7));
-			AddParallel(new CubeRunIntake(1.0));
-			AddSequential(new AutoStraightDriveBackward(26,0.7));
-			AddSequential(new PIDTurn(80 * -directionSwitch));
+			AddParallel(new CubeRunIntake(1.0,3));
+			AddSequential(new AutoStraightDriveForward(26,0.6));
+			AddSequential(new Pause(0.3));
+			AddSequential(new AutoStraightDriveBackward(27,0.7));
+			AddSequential(new PIDTurn(72.5 * directionSwitch));
+			AddSequential(new Pause(0.3));
+			AddSequential(new ElevatorRunToHeight(0.75 , 2.6));
+			AddSequential(new Pause(0.3));
+			AddSequential(new PIDDriveStraight(15));
 			AddSequential(new CubeRunIntake(-1.0,0.5));
 		} else {
 			std::cout << "Just going for a drive" << std::endl;
@@ -133,12 +144,12 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			if (scale == sideCheck) {
 				std::cout << "Less work cause it's on our side" << std::endl;
 				// command group for positioning from mid-zone to closest side of the balance, then placing
-				AddSequential(new PIDDriveStraight(263));
+				AddSequential(new PIDDriveStraight(258));
 				AddSequential(new Pause(0.2));
 //				AddSequential(new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
 				AddSequential(new PIDTurn(45 * -directionScale));//turning towards the scale
 				AddSequential(new Pause(0.2));
-				AddSequential(new AutoStraightDriveBackward(7.5,0.7)); //backing up
+				AddSequential(new AutoStraightDriveBackward(9.5,0.7)); //backing up //7.5
 				AddSequential(new Pause(0.2));
 				AddSequential(new ElevatorRunToHeight(1.0, scaleHeight));  //Gonna be talller thane the scale
 				AddSequential(new Pause(0.2));

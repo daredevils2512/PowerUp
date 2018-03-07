@@ -23,6 +23,8 @@
 #include "Commands/CubeRunIntake.h"
 #include "Commands/LowGear.h"
 #include "Commands/HighGear.h"
+#include "Commands/AutoStraightDriveForward.h"
+#include "Commands/AutoStraightDriveBackward.h"
 #include "Robot.h"
 #include "Util.h"
 
