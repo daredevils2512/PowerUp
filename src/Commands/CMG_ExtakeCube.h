@@ -8,6 +8,10 @@
 #pragma once
 
 #include <Commands/CommandGroup.h>
+#include "CubeIntakeActuateOpen.h"
+#include "CubeRunIntake.h"
+#include "Pause.h"
+
 
 class CMG_ExtakeCube : public frc::CommandGroup {
 public:

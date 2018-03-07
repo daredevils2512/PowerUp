@@ -6,12 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "CMG_IntakeCube.h"
-#include "../Robot.h"
-#include "CubeGrabberActuate.h"
-#include "CubeIntakeActuate.h"
-#include "CubeRunIntake.h"
-#include "CubeSwitchCheck.h"
-#include "Pause.h"
+
 
 CMG_IntakeCube::CMG_IntakeCube() {
 	// Add Commands here:
@@ -33,7 +28,7 @@ CMG_IntakeCube::CMG_IntakeCube() {
 
 	AddSequential (new CubeRunIntake(1.0));
 	AddSequential (new Pause(0.1));
-	AddSequential (new CubeIntakeActuate(true));
+	AddSequential (new CubeIntakeActuateClose());
 
 
 }
