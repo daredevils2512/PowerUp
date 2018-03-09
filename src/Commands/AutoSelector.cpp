@@ -70,13 +70,13 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			AddSequential(new PIDTurn(45 * -directionSwitch));
 			AddSequential(new Pause(0.1));
 			AddSequential(new PIDDriveStraight(18)); //18
-			AddSequential(new CubeRunIntake(-0.8,0.5));
+			AddSequential(new CubeRunIntake(0.8,0.5));
 			AddSequential(new AutoStraightDriveBackward(6,0.6)); //backing up
 			AddSequential(new Pause(0.3));
 			AddSequential(new PIDTurn(77.5 * -directionSwitch));
 			AddSequential(new Pause(0.3));
 			AddSequential(new ElevatorRunToHeight(0.5 , 0.08));
-			AddParallel(new CubeRunIntake(1.0,3));
+			AddParallel(new CubeRunIntake(-1.0,3));
 			AddSequential(new AutoStraightDriveForward(26,0.6));
 			AddSequential(new Pause(0.3));
 			AddSequential(new AutoStraightDriveBackward(27,0.7));
@@ -84,8 +84,8 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			AddSequential(new Pause(0.3));
 			AddSequential(new ElevatorRunToHeight(0.75 , 2.6));
 			AddSequential(new Pause(0.3));
-			AddSequential(new PIDDriveStraight(15));
-			AddSequential(new CubeRunIntake(-1.0,0.5));
+			AddSequential(new PIDDriveStraight(18)); //15
+			AddSequential(new CubeRunIntake(1.0,0.5));
 		} else {
 			std::cout << "Just going for a drive" << std::endl;
 			AddSequential(new PIDDriveStraight(90));// drive forward and cross auto line
@@ -154,7 +154,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				AddSequential(new ElevatorRunToHeight(1.0, scaleHeight));  //Gonna be talller thane the scale
 				AddSequential(new Pause(0.2));
 //				AddSequential(new PIDDriveStraight(12)); //18 //zoom at scale
-				AddSequential(new CubeRunIntake(-1.0,1));	//bye bye cube
+				AddSequential(new CubeRunIntake(1.0,1));	//bye bye cube
 				AddSequential(new ElevatorRunToHeight(0.3, 0.08));
 				//AddSequential(new AutoStraightDrive(7.5,0.5)); //backing up more
 				AddSequential(new PIDTurn(82 * -directionScale));
@@ -179,7 +179,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				AddSequential(new ElevatorRunToHeight(1.0, scaleHeight)); //Gonna be talller thane the scale
 				AddSequential(new AutoStraightDriveForward(18,0.5));	//zoom at the scale
 				AddSequential(new Pause(0.4));
-				AddSequential(new CubeRunIntake(-1.0,1));							//bye bye cube
+				AddSequential(new CubeRunIntake(1.0,1));							//bye bye cube
 				AddParallel(new ElevatorRunToHeight(0.5, 0.08));
 			}
 		} else {

@@ -26,7 +26,7 @@ CMG_IntakeCube::CMG_IntakeCube() {
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
 
-	AddSequential (new CubeRunIntake(1.0));
+	AddSequential (new CubeRunIntake(-1.0)); //1.0
 	AddSequential (new Pause(0.1));
 	AddSequential (new CubeIntakeActuateClose());
 

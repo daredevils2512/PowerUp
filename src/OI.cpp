@@ -45,9 +45,9 @@ OI::OI() {
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
 	CDR_sideJoystickButton.WhileHeld(new CMG_IntakeCube()); //intake cube
 		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));
-	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(1.0)); //run cube in
+	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(-1.0)); //run cube in //1.0
 	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
-	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(-1.0)); //run cube out
+	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(1.0)); //run cube out //-1.0
 	CDR_bottomLeftJoystick.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuateClose()); //actuate intake arms in
 	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuateOpen()); //actuate intake arms out
@@ -88,7 +88,7 @@ OI::OI() {
 	double OI::Desensitize(double value) {
 		//set threshold so tiny values on the joystick don't register,
 		//sometimes resting value of joystick is not 0
-		if (fabs(value) < 0.25) value = 0; //0.3
+		if (fabs(value) < 0.25) value = 0; //0.25
 		return value;
 	}
 

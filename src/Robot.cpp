@@ -82,6 +82,8 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
 	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
 
+	SmartDashboard::PutNumber("Y-Axis", Robot::oi->GetMove());
+	SmartDashboard::PutNumber("X-Axis", Robot::oi->GetTurn());
 	}
 void Robot::DisabledInit(){
 	std::cout << "Let's start being disabled" << std::endl;

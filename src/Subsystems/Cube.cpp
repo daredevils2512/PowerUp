@@ -15,8 +15,8 @@ void Cube::InitDefaultCommand() {
 }
 
 void Cube::SetIntakeSpeed(double speed) {
-	intakeLeft->Set(speed); //TODO make inverted on Alea
-	intakeRight->Set(speed);
+	intakeLeft->Set(speed *-1); //TODO make inverted on Alea
+	intakeRight->Set(speed *-1);
 }
 
 void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {
