@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.007820646506777894,
+  "dividerPosition": 0.007894736842105263,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -224,6 +224,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/X-Axis",
               "_title": "X-Axis"
+            }
+          },
+          "3,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "ComboBox Chooser",
+              "_source0": "network_table:///SmartDashboard/Auto Modes",
+              "_title": "Auto Modes"
             }
           }
         }

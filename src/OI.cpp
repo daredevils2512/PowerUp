@@ -30,20 +30,22 @@
 
 
 OI::OI() {
-	DRC_leftTrigger.WhileHeld(new CMG_IntakeCube()); //intake cube
-	DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
+	DRC_leftTrigger.WhileHeld(new CubeRunIntake(-1.0)); //pull cube in
+		DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
 	DRC_rightTrigger.WhileHeld(new LowGear()); //drop a gear
 	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
-	DRC_leftBumper.WhenPressed(new PIDTurn(-90)); //left 90
-	DRC_rightBumper.WhenPressed(new PIDTurn(90)); //right 90
+	DRC_leftBumper.WhenPressed(new CubeIntakeActuateOpen()); //open
+	DRC_rightBumper.WhenPressed(new CubeIntakeActuateClose()); //retract
+	DRC_xButton.WhileHeld(new CubeRunIntake(1.0)); //thanks for flying air 2512
+		DRC_xButton.WhenReleased(new CubeRunIntake(0.0));
 //	DRC_xButton.WhileHeld(new ClimberRunWing (Climber::ClimberWing::leftWing , 0.8)); //Kahl left wing up
 //	DRC_xButton.WhenReleased(new ClimberRunWing (Climber::ClimberWing::leftWing , 0.0)); //stop left wing
 //	DRC_bButton.WhileHeld(new ClimberRunWing (Climber::ClimberWing::rightWing , 0.8)); //Kahl right wing up
 //	DRC_bButton.WhenReleased(new ClimberRunWing (Climber::ClimberWing::rightWing , 0.0)); //stop right wing
 
-	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //goodbye cube
+	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //full send out
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
-	CDR_sideJoystickButton.WhileHeld(new CMG_IntakeCube()); //intake cube
+	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.65)); //minimal cube out
 		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));
 	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(-1.0)); //run cube in //1.0
 	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
@@ -54,9 +56,9 @@ OI::OI() {
 
 //	CDR_topLeftBase.WhenPressed(new CubeGrabberActuate(true)); //actuate grabbers to pinch the cube
 //	CDR_topRightBase.WhenPressed(new CubeGrabberActuate(false)); //retract the grabbers to let go of cube
-	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0)); //alt run cube out
+	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0)); //alt run cube in
 	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
-	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0)); //alt run cube in
+	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0)); //alt run cube out
 	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 //	CDR_bottomLeftBase.WhileHeld(new ClimberRunWing (Climber::ClimberWing::leftWing, 0.8)); //Dawson left wing up
 //	CDR_bottomLeftBase.WhenReleased(new ClimberRunWing (Climber::ClimberWing::leftWing, 0.0)); //stop left wing

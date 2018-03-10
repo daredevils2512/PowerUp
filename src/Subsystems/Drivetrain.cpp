@@ -75,7 +75,7 @@ void Drivetrain::SetPIDEnabled(bool enabled){
 double Drivetrain::GetPIDOutput() {
 //	std::cout << "Gettting drivetrain pid output: " << pidOutput << std::endl;
 	if(!this->IsPIDEnabled()){
-		Util::ReportError("Accessing PID Output while PID is disabled!");
+		//Util::ReportError("Accessing PID Output while PID is disabled!");
 	}
 	return pidOutput;
 }

@@ -76,7 +76,8 @@ void PIDDriveStraight::Execute() {
 bool PIDDriveStraight::IsFinished() {
 	//get average encoder distance in inches, compare to mdist (scaled to feet)
 	//return Robot::drivetrain->GetLeftEncoder() /*( ( Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder() )/2 )*/ >= m_distance;
-	return abs((Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder()) /2) >= m_distance;
+	return (abs((Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder()) /2) >= m_distance) ||
+			IsTimedOut();
 }
 
 // Called once after isFinished returns true

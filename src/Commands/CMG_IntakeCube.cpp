@@ -27,8 +27,8 @@ CMG_IntakeCube::CMG_IntakeCube() {
 	// arm.
 
 	AddSequential (new CubeRunIntake(-1.0)); //1.0
-	AddSequential (new Pause(0.1));
-	AddSequential (new CubeIntakeActuateClose());
+//	AddSequential (new Pause(0.1));
+//	AddSequential (new CubeIntakeActuateClose());
 
 
 }

@@ -25,6 +25,6 @@ CMG_ExtakeCube::CMG_ExtakeCube() {
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
 	AddParallel(new CubeRunIntake(0.85)); //intake uses too much sauce, gonna dial it back //-0.85
-	AddSequential(new Pause (0.25));
-	AddSequential(new CubeIntakeActuateOpen());
+//	AddSequential(new Pause (0.25));
+//	AddSequential(new CubeIntakeActuateOpen());
 }

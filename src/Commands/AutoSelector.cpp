@@ -58,33 +58,42 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 //			AddSequential(new CubeRunIntake(-1.0));			//bye bye cube!
 			//with 45 degree turns
 			AddSequential(new PIDDriveStraight(18));
-			AddSequential(new Pause(0.3));
+			AddSequential(new Pause(0.3));//t
 			AddParallel(new ElevatorRunToHeight(0.7 , 2.6));
 			AddSequential(new PIDDriveStraight(18));
 			AddSequential(new Pause(0.4));
 //			AddParallel(new ElevatorRunLift(0.1));
 			AddSequential(new PIDTurn(45 * directionSwitch));
 			AddSequential(new Pause(0.3));
-			AddSequential(new PIDDriveStraight(70)); //68
+			if (ourSwitch == 'L') {
+				AddSequential(new PIDDriveStraight(66));
+			} else {
+				AddSequential(new PIDDriveStraight(54));
+			}
 			AddSequential(new Pause(0.3));
 			AddSequential(new PIDTurn(45 * -directionSwitch));
-			AddSequential(new Pause(0.1));
-			AddSequential(new PIDDriveStraight(18)); //18
+			AddSequential(new Pause(0.2));
+			AddSequential(new PIDDriveStraight(13)); //18
 			AddSequential(new CubeRunIntake(0.8,0.5));
-			AddSequential(new AutoStraightDriveBackward(6,0.6)); //backing up
+			AddSequential(new AutoStraightDriveBackward(9,0.6)); //backing up
 			AddSequential(new Pause(0.3));
 			AddSequential(new PIDTurn(77.5 * -directionSwitch));
 			AddSequential(new Pause(0.3));
 			AddSequential(new ElevatorRunToHeight(0.5 , 0.08));
 			AddParallel(new CubeRunIntake(-1.0,3));
-			AddSequential(new AutoStraightDriveForward(26,0.6));
+			AddSequential(new AutoStraightDriveForward(34,0.6));
 			AddSequential(new Pause(0.3));
-			AddSequential(new AutoStraightDriveBackward(27,0.7));
+			AddSequential(new AutoStraightDriveBackward(35,0.7));
 			AddSequential(new PIDTurn(72.5 * directionSwitch));
 			AddSequential(new Pause(0.3));
 			AddSequential(new ElevatorRunToHeight(0.75 , 2.6));
 			AddSequential(new Pause(0.3));
-			AddSequential(new PIDDriveStraight(18)); //15
+			AddSequential(new PIDDriveStraight(25)); //18
+//			if (ourSwitch == 'L') {
+//				AddSequential(new PIDDriveStraight(17));
+//			} else {
+//				AddSequential(new PIDDriveStraight(26));
+//			}
 			AddSequential(new CubeRunIntake(1.0,0.5));
 		} else {
 			std::cout << "Just going for a drive" << std::endl;
