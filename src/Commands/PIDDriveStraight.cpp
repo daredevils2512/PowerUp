@@ -5,7 +5,7 @@ PIDDriveStraight::PIDDriveStraight(double goalDistance, PIDDriveStraight::PIDSet
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::drivetrain.get());
-	SetTimeout(5.0); //subject to change
+	SetTimeout(7.5); //subject to change
 	m_settings = settings;
 	// GOAL DISTANCE IS IN INCHES
 	if(goalDistance < 0){

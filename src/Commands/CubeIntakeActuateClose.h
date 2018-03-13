@@ -16,7 +16,7 @@ public:
 	virtual ~CubeIntakeActuateClose();
 
 protected:
-	virtual frc::DoubleSolenoid::Value getDirection(){return frc::DoubleSolenoid::kForward;}
+	virtual frc::DoubleSolenoid::Value getDirection(){return frc::DoubleSolenoid::kReverse;} //forward on atlas
 };
 
 #endif /* SRC_COMMANDS_CUBEINTAKEACTUATECLOSE_H_ */

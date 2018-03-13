@@ -31,7 +31,11 @@ void ElevatorManualRun::Execute() {
 			Robot::elevator->RunLift(0.0);
 		}
 	} else {
-		Robot::elevator->RunLift(Robot::oi->GetLiftControl());
+		if (Robot::oi->GetLiftControl() < -0.5) {
+			Robot::elevator->RunLift(Robot::oi->GetLiftControl() * 0.5);
+		} else {
+			Robot::elevator->RunLift(Robot::oi->GetLiftControl());
+		}
 	}
 }
 

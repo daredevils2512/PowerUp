@@ -73,9 +73,9 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			AddSequential(new Pause(0.3));
 			AddSequential(new PIDTurn(45 * -directionSwitch));
 			AddSequential(new Pause(0.2));
-			AddSequential(new PIDDriveStraight(13)); //18
+			AddSequential(new PIDDriveStraight(17)); //18
 			AddSequential(new CubeRunIntake(0.8,0.5));
-			AddSequential(new AutoStraightDriveBackward(9,0.6)); //backing up
+			AddSequential(new AutoStraightDriveBackward(5,0.6)); //backing up
 			AddSequential(new Pause(0.3));
 			AddSequential(new PIDTurn(77.5 * -directionSwitch));
 			AddSequential(new Pause(0.3));
@@ -88,7 +88,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			AddSequential(new Pause(0.3));
 			AddSequential(new ElevatorRunToHeight(0.75 , 2.6));
 			AddSequential(new Pause(0.3));
-			AddSequential(new PIDDriveStraight(25)); //18
+			AddSequential(new PIDDriveStraight(30)); //18 //25
 //			if (ourSwitch == 'L') {
 //				AddSequential(new PIDDriveStraight(17));
 //			} else {
@@ -164,15 +164,16 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				AddSequential(new Pause(0.2));
 //				AddSequential(new PIDDriveStraight(12)); //18 //zoom at scale
 				AddSequential(new CubeRunIntake(1.0,1));	//bye bye cube
-				AddSequential(new ElevatorRunToHeight(0.3, 0.08));
+				AddSequential(new ElevatorRunToHeight(0.3, 0.08)); //0.3
 				//AddSequential(new AutoStraightDrive(7.5,0.5)); //backing up more
-				AddSequential(new PIDTurn(82 * -directionScale));
+				AddSequential(new PIDTurn(76 * -directionScale)); //82
 				AddSequential(new AutoStraightDriveForward(48,0.6));
 			} else {
 				std::cout << "It's all the way over there....Need more veggies"
 						<< std::endl;
 				// command group for moving across mid-zone to farthest side of the balance, then placing
 //				AddSequential(new UltrasonicStraightDrive(0.75, 222, trackingSide));//drive with sensors down the wall
+
 				AddSequential(new PIDDriveStraight(188));	//zoom to other side
 				AddSequential(new Pause(0.4));
 				AddSequential(new PIDTurn(90 * directionScale));//turn to go across the back of switch
@@ -190,16 +191,17 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				AddSequential(new Pause(0.4));
 				AddSequential(new CubeRunIntake(1.0,1));							//bye bye cube
 				AddParallel(new ElevatorRunToHeight(0.5, 0.08));
+
 			}
 		} else {
 			std::cout << "One too many cookies....Gonna just go straight" << std::endl;
-			AddSequential(new PIDDriveStraight(90)); 	//Or whatever the cross baseline distance is
+			AddSequential(new PIDDriveStraight(104)); 	//Or whatever the cross baseline distance is
 		}
 	} else {
 		std::cout
 				<< "Something went wrong. Aborting logic checking and driving straight"
 				<< std::endl;
-		AddSequential(new PIDDriveStraight(90)); 	//Or whatever the cross baseline distance is
+		AddSequential(new PIDDriveStraight(104)); 	//Or whatever the cross baseline distance is
 	}
 	AddSequential(new PrintCurrentFPGATime());
 }
