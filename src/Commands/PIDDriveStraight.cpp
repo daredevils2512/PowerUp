@@ -5,7 +5,7 @@ PIDDriveStraight::PIDDriveStraight(double goalDistance, PIDDriveStraight::PIDSet
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::drivetrain.get());
-	SetTimeout(5.0); //subject to change
+	SetTimeout(7.5); //subject to change
 	m_settings = settings;
 	// GOAL DISTANCE IS IN INCHES
 	if(goalDistance < 0){
@@ -76,7 +76,8 @@ void PIDDriveStraight::Execute() {
 bool PIDDriveStraight::IsFinished() {
 	//get average encoder distance in inches, compare to mdist (scaled to feet)
 	//return Robot::drivetrain->GetLeftEncoder() /*( ( Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder() )/2 )*/ >= m_distance;
-	return abs((Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder()) /2) >= m_distance;
+	return (abs((Robot::drivetrain->GetLeftEncoder() + Robot::drivetrain->GetRightEncoder()) /2) >= m_distance) ||
+			IsTimedOut();
 }
 
 // Called once after isFinished returns true

@@ -12,12 +12,14 @@ PIDTurn::PIDTurn(PIDTurn::PIDSettings settings, double goalAngle) {
 	Requires(Robot::drivetrain.get());
 	m_settings = settings;
 	m_angle = goalAngle;
+	SetTimeout(1.5);
 }
 
 PIDTurn::PIDTurn(double goalAngle){
 	Requires(Robot::drivetrain.get());
 	m_settings = PIDSettings::CARPET90;
 	m_angle = goalAngle;
+	SetTimeout(1.5);
 }
 
 // Called just before this Command runs the first time
@@ -62,7 +64,7 @@ void PIDTurn::Execute() {
 bool PIDTurn::IsFinished() {
 	//PIDGet returns yaw, or whatever implementation now represents
 	//Turn robot until acceptance threshold met (0.5 deg)
-	return abs(m_angle - Robot::navxPidSource->PIDGet()) <= 0.5;
+	return ( abs(m_angle - Robot::navxPidSource->PIDGet()) <= 0.5 ) || IsTimedOut();
 }
 
 // Called once after isFinished returns true

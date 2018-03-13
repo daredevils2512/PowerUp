@@ -15,7 +15,7 @@ public:
 	CubeIntakeActuateOpen();
 	virtual ~CubeIntakeActuateOpen();
 protected:
-	virtual frc::DoubleSolenoid::Value getDirection(){return frc::DoubleSolenoid::kReverse;}
+	virtual frc::DoubleSolenoid::Value getDirection(){return frc::DoubleSolenoid::kForward;} //reverse on atlas
 };
 
 #endif /* SRC_COMMANDS_CUBEINTAKEACTUATEOPEN_H_ */
