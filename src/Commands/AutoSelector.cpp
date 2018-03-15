@@ -39,8 +39,8 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	int directionSwitch = (ourSwitch == 'L') ? -1 : 1; //directionSwitch equal to 1 if turning right and -1 if left
 	int directionScale = (scale == 'L') ? -1 : 1;		//switched values so that -1 is always left
 
-	Util::RobotSide trackingSide = (startingPosition == Robot::StartLocation::left) ?
-		Util::RobotSide::leftSide : Util::RobotSide::rightSide;
+//	Util::RobotSide trackingSide = (startingPosition == Robot::StartLocation::left) ?
+//		Util::RobotSide::leftSide : Util::RobotSide::rightSide;
 
 	AddSequential(new PrintCurrentFPGATime());
 	AddSequential(new ElevatorSafety());
@@ -73,7 +73,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			AddSequential(new Pause(0.3));
 			AddSequential(new PIDTurn(45 * -directionSwitch));
 			AddSequential(new Pause(0.2));
-			AddSequential(new PIDDriveStraight(17)); //18
+			AddSequential(new PIDDriveStraight(17, 2.0)); //18
 			AddSequential(new CubeRunIntake(0.8,0.5));
 			AddSequential(new AutoStraightDriveBackward(5,0.6)); //backing up
 			AddSequential(new Pause(0.3));
@@ -153,7 +153,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 			if (scale == sideCheck) {
 				std::cout << "Less work cause it's on our side" << std::endl;
 				// command group for positioning from mid-zone to closest side of the balance, then placing
-				AddSequential(new PIDDriveStraight(258));
+				AddSequential(new PIDDriveStraight(258, 7.5));
 				AddSequential(new Pause(0.2));
 //				AddSequential(new UltrasonicStraightDrive(0.75, 290, trackingSide)); //294	//driving with sensros down da wall
 				AddSequential(new PIDTurn(45 * -directionScale));//turning towards the scale
@@ -178,7 +178,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 				AddSequential(new Pause(0.4));
 				AddSequential(new PIDTurn(90 * directionScale));//turn to go across the back of switch
 				AddSequential(new Pause(0.4));
-				AddSequential(new PIDDriveStraight(160));	//zoom to other side
+				AddSequential(new PIDDriveStraight(160, 5.5));	//zoom to other side
 				AddSequential(new Pause(0.4));
 				AddSequential(new PIDTurn(110 * -directionScale));//turn to face opposite end of field
 				AddSequential(new Pause(0.4));

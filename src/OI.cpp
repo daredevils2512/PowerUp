@@ -5,11 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include <Commands/CMG_NavXAutoTest.h>
-#include <Commands/CMG_UltrasonicAutoTest.h>
 #include <Commands/CMG_IntakeCube.h>
 #include <Commands/CMG_ExtakeCube.h>
-#include <Commands/CMG_IntakeCubeNoCheck.h>
 #include "OI.h"
 
 #include <WPILib.h>
