@@ -46,7 +46,7 @@ OI::OI() {
 		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));
 	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(-1.0)); //run cube in //1.0
 	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
-	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(1.0)); //run cube out //-1.0
+	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(0.4)); //run cube out //-1.0
 	CDR_bottomLeftJoystick.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuateClose()); //actuate intake arms in
 	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuateOpen()); //actuate intake arms out
