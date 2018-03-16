@@ -13,12 +13,20 @@
 class AutoSelector : public frc::CommandGroup {
 public:
 	AutoSelector(AutonomousSource* autonomousSource);
-	void CenterSwitch();
+	void SwitchY();
+	void SameOutsideSwitch();
+	void OppositeOutsideSwitch();
 	void OutsideStraightScale();
 	void OutsideOppositeScale();
 	//TODO Add in functions for doing alternate switch autos
 
 private:
 	static constexpr double scaleHeight = 6.8;
+	bool doScale = false;
+	bool doSwitch = false;
+	int directionSwitch = 1;
+	int directionScale = 0;
+	char scale = ' ';
+	char ourSwitch = ' ';
 };
 
