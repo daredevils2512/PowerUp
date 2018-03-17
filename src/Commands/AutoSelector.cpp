@@ -131,7 +131,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	 AddSequential(new PIDDriveStraight(220));//driving out past the switch so we can go around
 	AddSequential(new PIDTurn(90 * -directionSwitch));//turning to go around
 	AddSequential(new PIDDriveStraight(194));	//zomming arround back
-	AddSequential(new ElevatorRunToHeight(3.0));
+	AddSequential(new ElevatorRunToHeight(1.0, 3.0));
 	AddSequential(new PIDTurn(90 * -directionSwitch));	//turning again
 	AddSequential(new PIDDriveStraight(12));		//zooming onto side
 	AddSequential(new CubeRunIntake(-0.6));
@@ -155,7 +155,7 @@ void AutoSelector::OutsideStraightScale() {
 	AddSequential(new CubeRunIntake(1.0, 1));
 	if (ourSwitch == scale) {
 		std::cout << "She getting crunk in the club I mean she work" << std::endl;
-		AddSequential(new ElevatorRunToHeight(3.0));
+		AddSequential(new ElevatorRunToHeight(1.0, 3.0));
 		AddSequential(new CubeRunIntake(-0.6, 1.0));
 	}
 }
@@ -184,7 +184,7 @@ void AutoSelector::OutsideOppositeScale() {
 	AddSequential(new CubeRunIntake(1.0, 1));
 	if (ourSwitch == scale) {
 		std::cout << "It's so much pressure...and it's all in a day's work" << std::endl;
-		AddSequential(new ElevatorRunToHeight(3.0));
+		AddSequential(new ElevatorRunToHeight(1.0, 3.0));
 		AddSequential(new CubeRunIntake(-0.6, 1.0));
 	}
 }
