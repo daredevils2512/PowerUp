@@ -185,4 +185,4 @@ void Robot::TestPeriodic() {
 	//lw->Run();
 }
 
-START_ROBOT_CLASS(Robot);
+START_ROBOT_CLASS(Robot)
