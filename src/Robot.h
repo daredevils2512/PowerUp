@@ -56,7 +56,9 @@ public:
 
 private:
 	void PickAuto();
+	void PrintFaults(WPI_TalonSRX * talonPtr, std::string name);
 
 	double autoEndTime = 0.0;
+
 };
 #endif
