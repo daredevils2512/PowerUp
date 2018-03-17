@@ -18,7 +18,7 @@ void Cube::SetIntakeSpeed(double speed) {
 //	intakeLeft->Set(speed *-1); //needed for Alea
 	intakeLeft->Set(speed);
 //	intakeRight->Set(speed);
-	intakeRight->Set(speed * -1); //might be needed for Atlas
+	intakeRight->Set(speed); //might be needed for Atlas
 }
 
 void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {

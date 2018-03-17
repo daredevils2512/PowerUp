@@ -45,13 +45,11 @@ void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
-	std::thread(SocketClient::recv).detach();
-	SocketClient::Connect();
+//	std::thread(SocketClient::recv).detach();
+//	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;
-
-//TODO comment printouts back in once robot is complete, only commented out because ICC will be sketchy
 	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
 	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
 	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());

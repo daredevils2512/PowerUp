@@ -184,7 +184,7 @@ void AutoSelector::OutsideOppositeScale() {
 	AddSequential(new CubeRunIntake(1.0, 1));
 	if (ourSwitch == scale) {
 		std::cout << "It's so much pressure...and it's all in a day's work" << std::endl;
-		AddSequential(new ElevatorRunToHeight(3.0));
+		AddSequential(new ElevatorRunToHeight(0.3,3.0));
 		AddSequential(new CubeRunIntake(-0.6, 1.0));
 	}
 }
