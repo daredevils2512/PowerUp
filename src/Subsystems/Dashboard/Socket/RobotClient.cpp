@@ -51,7 +51,7 @@ void RobotClient::recv(){
 		//std::cout << (frc::RobotController::GetFPGATime() / 1000000) <<((_shouldBeConnected)?"should be connected":"dont be connected.")<<std::endl;
 		if(_shouldBeConnected){
 			if(pipe == -1 || !connected){
-				pipe = open("/home/admin/pipe", O_WRONLY);
+				pipe = open("/home/lvuser/pipe", O_WRONLY);
 				if(pipe == -1){
 					std::cout << "ERR! Fail to open pipe" << std::endl;
 					connected = false;
@@ -74,7 +74,7 @@ void RobotClient::recv(){
 							if(write( pipe, str.c_str(), str.length() ) == -1){
 								connected = false;
 								close(pipe);
-								unlink("/home/admin/pipe");
+								unlink("/home/lvuser/pipe");
 								pipe = -1;
 								std::cout <<"ERR:" << errno << std::endl << "Disconnected." << std::endl;
 
@@ -94,7 +94,7 @@ void RobotClient::recv(){
 			//disconnect
 			if(pipe > -1){
 				close(pipe);
-				unlink("/home/admin/pipe");
+				unlink("/home/lvuser/pipe");
 				pipe = -1;
 				connected = false;
 				std::cout<< "Disconnected as per request." << std::endl;
