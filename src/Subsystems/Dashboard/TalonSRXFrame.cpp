@@ -19,8 +19,7 @@ TalonSRXFrame::TalonSRXFrame(std::string path, WPI_TalonSRX* talonSRX) {
 	outputCurrent = this->talon->GetOutputCurrent();
 	temperature = this->talon->GetTemperature();
 	version = this->talon->GetFirmwareVersion();
-	faults = new Faults();
-	this->talon->GetFaults(*faults);
+	faults = "";
 
 	MarkAllDirty();
 }
@@ -97,9 +96,17 @@ void TalonSRXFrame::Broadcast(){
 	}
 
 	if(faults_dirty){
-		//TODO: fault emit
+		SocketClient::SendStringData(path + ".faults",faults);
 		faults_dirty = false;
 	}
+}
+
+std::string TalonSRXFrame::GetFaultString() {
+	Faults localFaults;
+	this->talon->GetFaults(localFaults);
+	StickyFaults localSFaults;
+	this->talon->GetStickyFaults(localSFaults);
+	return "|REGULAR|" + localFaults.ToString() + " |STICKY|" + localSFaults.ToString();
 }
 
 void TalonSRXFrame::Update(){
@@ -131,14 +138,15 @@ void TalonSRXFrame::Update(){
 		temperature = this->talon->GetTemperature();
 		temperature_dirty = true;
 	}
+
 	if(version != this->talon->GetFirmwareVersion()){
 		version = this->talon->GetFirmwareVersion();
 		version_dirty = true;
 	}
-	Faults* localFaults = new Faults();
-	this->talon->GetFaults(*localFaults);
-	if(localFaults != faults){
-		this->talon->GetFaults(*faults);
+
+	std::string faultStr = GetFaultString();
+	if(faultStr != faults){
+		faults = faultStr;
 		faults_dirty = true;
 	}
 
