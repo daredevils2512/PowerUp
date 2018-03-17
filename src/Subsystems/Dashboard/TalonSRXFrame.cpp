@@ -19,8 +19,7 @@ TalonSRXFrame::TalonSRXFrame(std::string path, WPI_TalonSRX* talonSRX) {
 	outputCurrent = this->talon->GetOutputCurrent();
 	temperature = this->talon->GetTemperature();
 	version = this->talon->GetFirmwareVersion();
-	faults = new Faults();
-	this->talon->GetFaults(*faults);
+	faults = "";
 
 	MarkAllDirty();
 }
@@ -43,12 +42,12 @@ TalonSRXFrame::~TalonSRXFrame(){
 
 void TalonSRXFrame::Broadcast(){
 	if(id_dirty){
-		SocketClient::SendIntData(path + ".id", id);
+		RobotClient::SendIntData(path + ".id", id);
 		id_dirty = false;
 	}
 
 	if(alive_dirty){
-		SocketClient::SendBoolData(path + ".alive", id);
+		RobotClient::SendBoolData(path + ".alive", id);
 		alive_dirty = false;
 	}
 
@@ -67,39 +66,47 @@ void TalonSRXFrame::Broadcast(){
 			case ControlMode::Velocity: controlModeRep="Velocity"; break;
 			default: controlModeRep="Unknown"; break;
 		}
-		SocketClient::SendStringData(path + ".controlMode", controlModeRep);
+		RobotClient::SendStringData(path + ".controlMode", controlModeRep);
 		controlMode_dirty = false;
 	}
 
 	if(value_dirty){
-		SocketClient::SendDoubleData(path + ".value",value);
+		RobotClient::SendDoubleData(path + ".value",value);
 		value_dirty = false;
 	}
 
 	if(safetyEnabled_dirty){
-		SocketClient::SendBoolData(path + ".safetyEnabled",value);
+		RobotClient::SendBoolData(path + ".safetyEnabled",value);
 		safetyEnabled_dirty = false;
 	}
 
 	if(outputCurrent_dirty){
-		SocketClient::SendDoubleData(path + ".outputCurrent", outputCurrent);
+		RobotClient::SendDoubleData(path + ".outputCurrent", outputCurrent);
 		outputCurrent_dirty = false;
 	}
 
 	if(temperature_dirty){
-		SocketClient::SendDoubleData(path + ".temperature",temperature);
+		RobotClient::SendDoubleData(path + ".temperature",temperature);
 		temperature_dirty = false;
 	}
 
 	if(version_dirty){
-		SocketClient::SendDoubleData(path + ".firmwareVersion",version);
+		RobotClient::SendDoubleData(path + ".firmwareVersion",version);
 		version_dirty = false;
 	}
 
 	if(faults_dirty){
-		//TODO: fault emit
+		RobotClient::SendStringData(path + ".faults",faults);
 		faults_dirty = false;
 	}
+}
+
+std::string TalonSRXFrame::GetFaultString() {
+	Faults localFaults;
+	this->talon->GetFaults(localFaults);
+	StickyFaults localSFaults;
+	this->talon->GetStickyFaults(localSFaults);
+	return "|REGULAR|" + localFaults.ToString() + " |STICKY|" + localSFaults.ToString();
 }
 
 void TalonSRXFrame::Update(){
@@ -131,14 +138,15 @@ void TalonSRXFrame::Update(){
 		temperature = this->talon->GetTemperature();
 		temperature_dirty = true;
 	}
+
 	if(version != this->talon->GetFirmwareVersion()){
 		version = this->talon->GetFirmwareVersion();
 		version_dirty = true;
 	}
-	Faults* localFaults = new Faults();
-	this->talon->GetFaults(*localFaults);
-	if(localFaults != faults){
-		this->talon->GetFaults(*faults);
+
+	std::string faultStr = GetFaultString();
+	if(faultStr != faults){
+		faults = faultStr;
 		faults_dirty = true;
 	}
 

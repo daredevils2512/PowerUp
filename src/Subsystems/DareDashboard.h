@@ -10,6 +10,7 @@
 #include <Commands/Subsystem.h>
 #include <WPILib.h>
 #include <ctre/Phoenix.h>
+#include <Subsystems/Dashboard/Socket/RobotClient.h>
 
 #include <map>
 
@@ -20,7 +21,6 @@
 #include "Dashboard/DriverstationFrame.h"
 #include "Dashboard/MatchFrame.h"
 
-#include "Dashboard/Socket/SocketClient.h"
 
 class DareDashboard : public frc::Subsystem {
 private:

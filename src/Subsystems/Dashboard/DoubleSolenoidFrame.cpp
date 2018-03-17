@@ -42,17 +42,17 @@ DoubleSolenoidFrame::~DoubleSolenoidFrame(){
 
 void DoubleSolenoidFrame::Broadcast(){
 	if(forwardChannel_dirty){
-		SocketClient::SendIntData(path + ".forwardChannel",forwardChannel);
+		RobotClient::SendIntData(path + ".forwardChannel",forwardChannel);
 		forwardChannel_dirty = false;
 	}
 
 	if(reverseChannel_dirty){
-		SocketClient::SendIntData(path + ".reverseChannel",reverseChannel);
+		RobotClient::SendIntData(path + ".reverseChannel",reverseChannel);
 		reverseChannel_dirty = false;
 	}
 
 	if(value_dirty){
-		SocketClient::SendStringData(path + ".value",value);
+		RobotClient::SendStringData(path + ".value",value);
 		value_dirty = false;
 	}
 }

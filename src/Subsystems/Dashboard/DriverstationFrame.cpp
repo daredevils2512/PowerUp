@@ -71,32 +71,32 @@ void DriverstationFrame::Broadcast(){
 			"batteryVoltage":12.5
 		 */
 	if(enabled_dirty){
-		SocketClient::SendBoolData(path + ".enabled",enabled);
+		RobotClient::SendBoolData(path + ".enabled",enabled);
 		enabled_dirty = false;
 	}
 
 	if(estopped_dirty){
-		SocketClient::SendBoolData(path + ".estopped", estopped);
+		RobotClient::SendBoolData(path + ".estopped", estopped);
 		estopped_dirty = false;
 	}
 
 	if(mode_dirty){
-		SocketClient::SendStringData(path + ".mode",mode);
+		RobotClient::SendStringData(path + ".mode",mode);
 		mode_dirty = false;
 	}
 
 	if(dsAttached_dirty){
-		SocketClient::SendBoolData(path + ".dsAttached",dsAttached);
+		RobotClient::SendBoolData(path + ".dsAttached",dsAttached);
 		dsAttached_dirty = false;
 	}
 
 	if(fmsAttached_dirty){
-		SocketClient::SendBoolData(path + ".fmsAttached",fmsAttached);
+		RobotClient::SendBoolData(path + ".fmsAttached",fmsAttached);
 		fmsAttached_dirty = false;
 	}
 
 	if(batteryVoltage_dirty){
-		SocketClient::SendDoubleData(path + ".batteryVoltage",batteryVoltage);
+		RobotClient::SendDoubleData(path + ".batteryVoltage",batteryVoltage);
 		batteryVoltage_dirty = false;
 	}
 }
