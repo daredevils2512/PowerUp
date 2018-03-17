@@ -11,7 +11,7 @@
 
 #include <WPILib.h>
 #include <ctre/Phoenix.h>
-#include "Socket/SocketClient.h"
+#include "Socket/RobotClient.h"
 
 class Frame {
 public:

@@ -92,42 +92,42 @@ void MatchFrame::Broadcast(){
 			"startTime":-1, // in millis
 		 */
 	if(eventName_dirty){
-		SocketClient::SendStringData(path + ".eventName", eventName);
+		RobotClient::SendStringData(path + ".eventName", eventName);
 		eventName_dirty = false;
 	}
 
 	if(gameMessage_dirty){
-		SocketClient::SendStringData(path + ".gameMessage", gameMessage);
+		RobotClient::SendStringData(path + ".gameMessage", gameMessage);
 		gameMessage_dirty = false;
 	}
 
 	if(type_dirty){
-		SocketClient::SendStringData(path + ".type", type);
+		RobotClient::SendStringData(path + ".type", type);
 		type_dirty = false;
 	}
 
 	if(number_dirty){
-		SocketClient::SendIntData(path + ".number", number);
+		RobotClient::SendIntData(path + ".number", number);
 		number_dirty = false;
 	}
 
 	if(replay_dirty){
-		SocketClient::SendIntData(path + ".replay", replay);
+		RobotClient::SendIntData(path + ".replay", replay);
 		replay_dirty = false;
 	}
 
 	if(alliance_dirty){
-		SocketClient::SendStringData(path + ".alliance", alliance);
+		RobotClient::SendStringData(path + ".alliance", alliance);
 		alliance_dirty = false;
 	}
 
 	if(dslocation_dirty){
-		SocketClient::SendIntData(path + ".dslocation", dslocation);
+		RobotClient::SendIntData(path + ".dslocation", dslocation);
 		dslocation_dirty = false;
 	}
 
 	if(startTime_dirty){
-		SocketClient::SendLongData(path + ".startTime", startTime);
+		RobotClient::SendLongData(path + ".startTime", startTime);
 		startTime_dirty = false;
 	}
 }
