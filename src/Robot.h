@@ -38,7 +38,6 @@ public:
 
 	static std::shared_ptr<Elevator> elevator;
 
-
 	virtual void RobotInit();
 	virtual void RobotPeriodic();
 	virtual void DisabledInit();

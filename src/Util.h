@@ -29,8 +29,7 @@ class Util {
 		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 4; //6
 #endif
 
-		static const int CLIMBER_LEFT_WING_MOTOR = 8; //theoretical CAN Talon ID's
-		static const int CLIMBER_RIGHT_WING_MOTOR = 9;
+		static const int CLIMBER = 8;
 
 		static const int CUBE_INTAKE_LEFT_MOTOR = 6;
 		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;
