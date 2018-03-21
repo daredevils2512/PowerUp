@@ -18,6 +18,19 @@ std::shared_ptr<NavXPIDSource> Robot::navxPidSource;
 std::shared_ptr<Elevator> Robot::elevator;
 std::shared_ptr<DareDashboard> Robot::dashboard;
 
+void Robot::PrintFaults(WPI_TalonSRX * talonPtr, std::string name) {
+	Faults faults;
+	ErrorCode errorCode;
+
+	errorCode = talonPtr->GetFaults(faults);
+	if (faults.HasAnyFault()) {
+		std::cout << name << ": " << faults.ToString() << std::endl;
+	}
+	if (errorCode != OKAY) {
+		std::cout << name << " error code: " << errorCode << std::endl;
+	}
+}
+
 void Robot::RobotInit() {
 	std::cout << "Robot Init" << std::endl;
 	dashboard.reset(new DareDashboard());
@@ -45,8 +58,8 @@ void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
-	//std::thread(SocketClient::recv).detach();
-	//SocketClient::Connect();
+	std::thread(RobotClient::recv).detach();
+	RobotClient::Connect();
 }
 void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;
@@ -62,12 +75,19 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
 	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
 
-//	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
-//	SmartDashboard::PutNumber("Drivetrain Front Right Current" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
-//	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
-//	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
+	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Front Right Current" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
 
-	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
+	PrintFaults(RobotMap::drivetrainFrontLeftMotor.get(), "FL");
+	PrintFaults(RobotMap::drivetrainFrontRightMotor.get(), "FR");
+	PrintFaults(RobotMap::drivetrainRearLeftMotor.get(), "RL");
+	PrintFaults(RobotMap::drivetrainRearRightMotor.get(), "RR");
+	PrintFaults(RobotMap::elevatorMotor.get(), "elevator");
+	PrintFaults(RobotMap::cubeIntakeLeftMotor.get(), "IL");
+	PrintFaults(RobotMap::cubeIntakeRightMotor.get(), "IR");
 
 //	SmartDashboard::PutNumber("Front Left Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
 //	SmartDashboard::PutNumber("Rear Left Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
@@ -80,7 +100,8 @@ void Robot::RobotPeriodic() {
 
 	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 //	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
-	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
+
+	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 
 	SmartDashboard::PutNumber("Y-Axis", Robot::oi->GetMove());
 	SmartDashboard::PutNumber("X-Axis", Robot::oi->GetTurn());
@@ -164,4 +185,4 @@ void Robot::TestPeriodic() {
 	//lw->Run();
 }
 
-START_ROBOT_CLASS(Robot);
+START_ROBOT_CLASS(Robot)

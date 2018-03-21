@@ -5,11 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include <Commands/CMG_NavXAutoTest.h>
-#include <Commands/CMG_UltrasonicAutoTest.h>
 #include <Commands/CMG_IntakeCube.h>
 #include <Commands/CMG_ExtakeCube.h>
-#include <Commands/CMG_IntakeCubeNoCheck.h>
 #include "OI.h"
 
 #include <WPILib.h>
@@ -45,11 +42,11 @@ OI::OI() {
 
 	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //full send out
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
-	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.65)); //minimal cube out
+	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.55)); //medium cube out
 		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));
 	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(-1.0)); //run cube in //1.0
 	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
-	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(1.0)); //run cube out //-1.0
+	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(0.4)); //run cube out //-1.0
 	CDR_bottomLeftJoystick.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuateClose()); //actuate intake arms in
 	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuateOpen()); //actuate intake arms out

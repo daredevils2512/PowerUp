@@ -8,7 +8,7 @@
 #include "TriggerButton.h"
 
 bool TriggerButton::Get(){
-	float axisValue = stick->GetRawAxis(axis); //get trigger value
+	double axisValue = stick->GetRawAxis(axis); //get trigger value
 	bool pressed = false;
 	//determines if axis is -1 to 0 or 0 to 1
 	if(threshold > 0){

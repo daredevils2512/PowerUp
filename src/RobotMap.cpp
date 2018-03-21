@@ -39,6 +39,7 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorMotor;
 std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
 
 void RobotMap::init() {
+	//TODO PCM ID is 60 on Atlas, change this on Alea when you can
 	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
 		Robot::dashboard->RegisterTalonSRX("drivetrain.motorControllers.frontLeft",drivetrainFrontLeftMotor.get());
 
@@ -51,16 +52,8 @@ void RobotMap::init() {
 	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
 		Robot::dashboard->RegisterTalonSRX("drivetrain.motorControllers.rearRight",drivetrainRearRightMotor.get());
 
-
 	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
-#ifdef ARIES
-	drivetrainFrontLeftMotor->SetInverted(true);
-#endif
 	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
-#ifdef ARIES
-	drivetrainFrontRightMotor->SetInverted(true);
-#endif
-
 	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 
 	drivetrainChassis->SetSafetyEnabled(false);
@@ -69,20 +62,14 @@ void RobotMap::init() {
 
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X));//TODO: util.h constants
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE);
-#ifdef ARIES
-		drivetrainLeftEncoder->SetReverseDirection(true);
-#else
 		drivetrainLeftEncoder->SetReverseDirection(false);
-#endif
+
 		Robot::dashboard->RegisterEncoder("drivetrain.encoders.left",drivetrainLeftEncoder.get(),0,1);
 
 		drivetrainRightEncoder.reset (new frc::Encoder (2, 3, false, frc::Encoder::k4X));//TODO: ulti.h constants
 		drivetrainRightEncoder->SetDistancePerPulse(Util::RIGHT_INCH_PER_PULSE);
-#ifdef ARIES
-		drivetrainRightEncoder->SetReverseDirection(false);
-#else
 		drivetrainRightEncoder->SetReverseDirection(true);
-#endif
+
 		Robot::dashboard->RegisterEncoder("drivetrain.encoders.right",drivetrainRightEncoder.get(),2,3);
 
 	drivetrainShifter.reset (new frc::DoubleSolenoid (0,4,5)); //TODO change back to 4,5 for Alea & USE UTIL CONSTANTS!!!

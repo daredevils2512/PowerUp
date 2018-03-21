@@ -31,7 +31,9 @@ private:
 	double outputCurrent;
 	double temperature;
 	int version;
-	Faults* faults;
+	std::string faults;
+
+	std::string GetFaultString();
 
 	bool id_dirty;
 	bool alive_dirty;
