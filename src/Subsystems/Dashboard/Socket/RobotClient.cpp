@@ -53,7 +53,7 @@ void RobotClient::recv(){
 			if(pipe == -1 || !connected){
 				pipe = open("/home/lvuser/pipe", O_WRONLY);
 				if(pipe == -1){
-					std::cout << "ERR! Fail to open pipe" << std::endl;
+//					std::cout << "ERR! Fail to open pipe" << std::endl;
 					connected = false;
 				}else{
 					std::cout << "Pipe opened" << std::endl;

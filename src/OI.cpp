@@ -42,7 +42,7 @@ OI::OI() {
 
 	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //full send out
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
-	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.65)); //minimal cube out
+	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.55)); //medium cube out
 		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));
 	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(-1.0)); //run cube in //1.0
 	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake

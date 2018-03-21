@@ -15,10 +15,11 @@ void Cube::InitDefaultCommand() {
 }
 
 void Cube::SetIntakeSpeed(double speed) {
-//	intakeLeft->Set(speed *-1); //needed for Alea
-	intakeLeft->Set(speed);
-//	intakeRight->Set(speed);
-	intakeRight->Set(speed); //might be needed for Atlas
+	//TODO change these directions for the mini apple loss regional
+//	intakeLeft->Set(speed *-1); //Alea
+	intakeLeft->Set(speed * -1); //Atlas
+//	intakeRight->Set(speed); //Alea
+	intakeRight->Set(speed * -1); //Atlas
 }
 
 void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {

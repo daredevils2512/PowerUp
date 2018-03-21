@@ -72,7 +72,7 @@ void RobotMap::init() {
 
 		Robot::dashboard->RegisterEncoder("drivetrain.encoders.right",drivetrainRightEncoder.get(),2,3);
 
-	drivetrainShifter.reset (new frc::DoubleSolenoid (60,4,5)); //TODO change back to 4,5 for Alea & USE UTIL CONSTANTS!!!
+	drivetrainShifter.reset (new frc::DoubleSolenoid (0,4,5)); //TODO change back to 4,5 for Alea & USE UTIL CONSTANTS!!!
 		Robot::dashboard->RegisterDoubleSolenoid("drivetrain.shifter",drivetrainShifter.get(),4,5);
 
 	 navX.reset(new AHRS(SPI::Port::kMXP));
@@ -83,7 +83,7 @@ void RobotMap::init() {
 	 cubeIntakeRightMotor.reset (new WPI_TalonSRX (Util::CUBE_INTAKE_RIGHT_MOTOR));
 	 	 Robot::dashboard->RegisterTalonSRX("cube.intake.rightMotor",cubeIntakeRightMotor.get());
 
-	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (60,6,7)); //TODO change back to 6,7 for Alea
+	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0,6,7)); //TODO change back to 6,7 for Alea
 	 	 Robot::dashboard->RegisterDoubleSolenoid("cube.intake.grabberSolenoid",cubeIntakeSolenoid.get(),6,7);
 
 	 	 //TODO: implement dashboard registers for commented methods
