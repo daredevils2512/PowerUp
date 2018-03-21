@@ -30,6 +30,8 @@ class Util {
 #endif
 
 		static const int CLIMBER = 8;
+		static const int CLIMBSERVO1 = 0; //Servos are PWM
+		static const int CLIMBSERVO2 = 1;
 
 		static const int CUBE_INTAKE_LEFT_MOTOR = 6;
 		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;

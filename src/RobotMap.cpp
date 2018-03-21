@@ -107,6 +107,9 @@ void RobotMap::init() {
 	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
 
 	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
+	climbServo1.reset(new frc::Servo(Util::CLIMBSERVO1));
+	climbServo2.reset(new frc::Servo(Util::CLIMBSERVO2));
+	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
 
 //	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
 //	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));
