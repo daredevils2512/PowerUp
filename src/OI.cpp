@@ -87,7 +87,7 @@ OI::OI() {
 	double OI::Desensitize(double value) {
 		//set threshold so tiny values on the joystick don't register,
 		//sometimes resting value of joystick is not 0
-		if (fabs(value) < 0.25) value = 0; //0.25
+		if (fabs(value) < 0.25) value = 0;
 		return value;
 	}
 

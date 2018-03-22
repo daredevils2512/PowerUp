@@ -12,14 +12,14 @@ PIDTurn::PIDTurn(PIDTurn::PIDSettings settings, double goalAngle) {
 	Requires(Robot::drivetrain.get());
 	m_settings = settings;
 	m_angle = goalAngle;
-	SetTimeout(1.5);
+	SetTimeout(3.0); //1.5
 }
 
 PIDTurn::PIDTurn(double goalAngle){
 	Requires(Robot::drivetrain.get());
 	m_settings = PIDSettings::CARPET90;
 	m_angle = goalAngle;
-	SetTimeout(1.5);
+	SetTimeout(3.0);
 }
 
 // Called just before this Command runs the first time

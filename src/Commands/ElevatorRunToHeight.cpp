@@ -20,9 +20,7 @@ void ElevatorRunToHeight::Execute() {
 	if (Robot::elevator->GetLiftMagneticEncoder() <= m_encPos) {
 		Robot::elevator->RunLift(m_speed);
 	} else if (Robot::elevator->GetLiftMagneticEncoder() >= m_encPos) {
-		Robot::elevator->RunLift(-0.4
-
-		); //-0.5
+		Robot::elevator->RunLift(-0.5); //-0.4
 	}
 //	else if (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT - 1.0) {
 //		Robot::elevator->RunLift(m_speed * (5/6));
