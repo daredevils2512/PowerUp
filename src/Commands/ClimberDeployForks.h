@@ -20,6 +20,6 @@ public:
 	void Interrupted() override;
 
 private:
-	Climber::ForkDirection m_direction = Climber::ForkDirection::up;
+	Climber::ForkDirection m_direction = Climber::ForkDirection::fUp;
 };
 

@@ -12,18 +12,20 @@ private:
 
 public:
 	enum ForkDirection {
-		up,
-		down
+		fUp,
+		fDown
+	};
+
+	enum ClawsDirection {
+		cUp,
+		cDown
 	};
 
 	Climber();
 	void InitDefaultCommand();
 	void SetClimbSpeed(double speed);
-	void SetServoPos(double pos, frc::Servo * name);
-	void SetServoAngle(double angle, frc::Servo * name);
-	double GetServoPos(frc::Servo * name);
-	double GetServoAngle(frc::Servo * name);
 	void SetForkDirection(ForkDirection direction);
+	void SetClawsDirection(ClawsDirection direction);
 };
 
 #endif  // Climber_H

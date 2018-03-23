@@ -14,30 +14,18 @@ void Climber::SetClimbSpeed(double speed) {
 	RobotMap::climber->Set(speed);
 }
 
-void Climber::SetServoPos(double pos, Servo * name) {
-	//0.0 = full left
-	//1.0 = full right
-	name->Set(pos);
-}
-
-void Climber::SetServoAngle(double angle, Servo * name) {
-	name->SetAngle(angle);
-}
-
-double Climber::GetServoPos(Servo * name) {
-	//0.0 = full left
-	//1.0 = full right
-	return(name->Get());
-}
-
-double Climber::GetServoAngle(Servo * name) {
-	return(name->GetAngle());
-}
-
 void Climber::SetForkDirection(ForkDirection direction) {
-	if (direction == ForkDirection::down) {
+	if (direction == ForkDirection::fDown) {
 		RobotMap::climberFork->Set(frc::DoubleSolenoid::Value::kForward);
 	} else {
 		RobotMap::climberFork->Set(frc::DoubleSolenoid::Value::kReverse);
+	}
+}
+
+void Climber::SetClawsDirection(ClawsDirection direction) {
+	if (direction == ClawsDirection::cDown) {
+		RobotMap::climberClaws->Set(frc::DoubleSolenoid::Value::kForward);
+	} else {
+		RobotMap::climberClaws->Set(frc::DoubleSolenoid::Value::kReverse);
 	}
 }

@@ -7,7 +7,6 @@
 
 #include "CMG_EndgameAscension.h"
 #include "ClimberRunWinch.h"
-#include "ClimberPutAtAngle.h"
 #include "ElevatorRunLift.h"
 
 CMG_EndgameAscension::CMG_EndgameAscension() {
@@ -27,7 +26,6 @@ CMG_EndgameAscension::CMG_EndgameAscension() {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
-	AddSequential(new ClimberPutAtAngle(90));
-	AddSequential(new ClimberRunWinch(1.0));
-	AddParallel(new ElevatorRunLift(-0.3));
+	AddSequential(new ClimberRunWinch(0.7));
+	AddParallel(new ElevatorRunLift(-1.0));
 }
