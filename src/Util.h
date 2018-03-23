@@ -22,8 +22,8 @@ class Util {
 		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 3;
 		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 4;
 
-		static const int CLIMBER_LEFT_WING_MOTOR = 8; //theoretical CAN Talon ID's
-		static const int CLIMBER_RIGHT_WING_MOTOR = 9;
+		static const int CLIMBER_LEFT_WING_MOTOR = 9; //theoretical CAN Talon ID's
+		static const int CLIMBER_RIGHT_WING_MOTOR = 10;
 
 		static const int CUBE_INTAKE_LEFT_MOTOR = 6;
 		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;
@@ -43,6 +43,7 @@ class Util {
 		static constexpr double ULTRASONIC_TURN_MULTIPLIER = 0.10; //The amount we reduce motor speed for ultrasonic staightDrive 0.0775//0.0975(current reliable test value)//0.0975
 
 		static const int ELEVATOR_MOTOR = 5;
+		static const int ELEVATOR_BACK_MOTOR = 8;
 		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 4;
 		static constexpr double ELEVATOR_MAX_ENCODER_HEIGHT = 7.2; //In feet
 

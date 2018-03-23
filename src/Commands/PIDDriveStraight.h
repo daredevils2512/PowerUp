@@ -9,7 +9,7 @@ public:
 		CARPET90
 	};
 
-	PIDDriveStraight(double goalDistance, double timeout = 5.0, PIDSettings settings = PIDSettings::CARPET90);
+	PIDDriveStraight(double goalDistance, double timeout = 5.0, double speed = 0.70, PIDSettings settings = PIDSettings::CARPET90);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -25,6 +25,7 @@ private:
 	double lastVelY;
 	long lastTimeDiff;
 	long cumlTime;
+	double m_speed;
 };
 
 #endif  // PIDDriveStraight_H
