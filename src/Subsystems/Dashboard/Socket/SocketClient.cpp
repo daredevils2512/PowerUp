@@ -75,7 +75,7 @@ void SocketClient::recv(){
 					}else{
 						connected = true;
 						std::cout << "Connection established." << std::endl;
-						std::this_thread::sleep_for(std::chrono::milliseconds(100)); // wait 100 ms for connection to complete before finishing
+						std::this_thread::sleep_for(std::chrono::milliseconds(30)); // wait 100 ms for connection to complete before finishing
 					}
 				}else{ // CONNECTED //
 					SendData("ping"); // run ping
