@@ -148,25 +148,28 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
  }
 
 void AutoSelector::OutsideStraightScale() {
-	AddSequential(new PIDDriveStraight(190,4.0,0.9)); //258, 6.0 timeout //208 inches at 80
-	AddSequential(new Pause(0.35)); //0.2
-	AddSequential(new PIDTurn(37 * -directionScale, 0.65));//turning towards the scale //45 deg
+	AddSequential(new PIDDriveStraight(185,4.5,0.9)); //258, 6.0 timeout //208 inches at 80
+	AddSequential(new Pause(0.4)); //0.2
+	AddSequential(new PIDTurn(37 * -directionScale, 0.6));//turning towards the scale //45 deg
 //	AddSequential(new Pause(0.2));
 //	AddSequential(new AutoStraightDriveBackward(8,0.7)); //backing up //7.5
 	AddSequential(new Pause(0.2));
 	AddSequential(new ElevatorRunToHeight(1.0, scaleHeight));  //Gonna be talller thane the scale
 	AddSequential(new Pause(0.2));
 	AddSequential(new CubeRunIntake(1.0,0.5));	//bye bye cube
+	AddSequential(new Pause(0.2));
 	AddSequential(new ElevatorRunToHeight(0.3, 0.08)); //0.3
 	AddSequential(new Pause(0.2));
-	AddSequential(new PIDTurn(100 * -directionScale , 0.85)); //76
-	AddParallel(new CubeRunIntake(-1.0, 3.5)); //3 second intake
-	AddSequential(new AutoStraightDriveForward(52,0.75)); //0.6
+	AddSequential(new PIDTurn(105 * -directionScale , 0.8)); //76
+	AddSequential(new Pause(0.25));
+	AddParallel(new CubeRunIntake(-1.0, 3)); //3 second intake
+	AddSequential(new AutoStraightDriveForward(39,0.75)); //0.6
 	if (ourSwitch == scale) {
 		std::cout << "She getting crunk in the club I mean she work" << std::endl;
-		AddSequential(new Pause(0.2));
+		AddSequential(new Pause(0.3));
 		AddSequential(new ElevatorRunToHeight(0.7, 2.6));
-		AddSequential(new CubeRunIntake(0.6, 1.0));
+		AddSequential(new Pause(0.2));
+		AddSequential(new CubeRunIntake(0.7, 1.0));
 	}
 }
 
