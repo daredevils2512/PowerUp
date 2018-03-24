@@ -58,8 +58,8 @@ void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
-	std::thread(RobotClient::recv).detach();
-	RobotClient::Connect();
+	std::thread(SocketClient::recv).detach();
+	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
 //	std::cout << "Robto Periodic" << std::endl;

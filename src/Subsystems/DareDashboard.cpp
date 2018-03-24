@@ -5,7 +5,7 @@
 DareDashboard::DareDashboard() : Subsystem("DaredevilDashboard") {
 	frames["driverstation"] = new DriverstationFrame("driverstation");
 	frames["match"] = new MatchFrame("match");
-	RobotClient::Init();
+	SocketClient::SetConnection("127.0.0.1",5055);
 	//connection->Connect();
 }
 
@@ -43,7 +43,7 @@ void DareDashboard::Update() {
 }
 
 bool DareDashboard::IsConnected(){
-	return RobotClient::IsConnected();
+	return SocketClient::IsConnected();
 }
 
 void DareDashboard::RegisterTalonSRX(std::string path, WPI_TalonSRX* talon){

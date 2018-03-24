@@ -45,57 +45,57 @@ EncoderFrame::~EncoderFrame(){
 
 void EncoderFrame::Broadcast(){
 	if(aChannel_dirty){
-		RobotClient::SendIntData(path + ".aChannel",aChannel);
+		SocketClient::SendIntData(path + ".aChannel",aChannel);
 		aChannel_dirty = false;
 	}
 
 	if(bChannel_dirty){
-		RobotClient::SendIntData(path + ".bChannel",bChannel);
+		SocketClient::SendIntData(path + ".bChannel",bChannel);
 		bChannel_dirty = false;
 	}
 
 	if(count_dirty){
-		RobotClient::SendIntData(path + ".count",count);
+		SocketClient::SendIntData(path + ".count",count);
 		count_dirty = false;
 	}
 
 	if(rawValue_dirty){
-		RobotClient::SendIntData(path + ".rawValue",rawValue);
+		SocketClient::SendIntData(path + ".rawValue",rawValue);
 		rawValue_dirty = false;
 	}
 
 	if(period_dirty){
-		RobotClient::SendIntData(path + ".period", period);
+		SocketClient::SendIntData(path + ".period", period);
 		period_dirty = false;
 	}
 
 	if(encodingScale_dirty){
-		RobotClient::SendIntData(path + ".encodingScale",encodingScale);
+		SocketClient::SendIntData(path + ".encodingScale",encodingScale);
 		encodingScale_dirty = false;
 	}
 
 	if(distancePerPulse_dirty){
-		RobotClient::SendDoubleData(path + ".distancePerPulse",distancePerPulse);
+		SocketClient::SendDoubleData(path + ".distancePerPulse",distancePerPulse);
 		distancePerPulse_dirty = false;
 	}
 
 	if(direction_dirty){
-		RobotClient::SendBoolData(path + ".direction",direction);
+		SocketClient::SendBoolData(path + ".direction",direction);
 		direction_dirty = false;
 	}
 
 	if(distance_dirty){
-		RobotClient::SendDoubleData(path + ".distance", distance);
+		SocketClient::SendDoubleData(path + ".distance", distance);
 		distance_dirty = false;
 	}
 
 	if(rate_dirty){
-		RobotClient::SendDoubleData(path + ".rate",rate);
+		SocketClient::SendDoubleData(path + ".rate",rate);
 		rate_dirty = false;
 	}
 
 	if(samplesToAverage_dirty){
-		RobotClient::SendIntData(path + ".samplesToAverage",samplesToAverage);
+		SocketClient::SendIntData(path + ".samplesToAverage",samplesToAverage);
 		samplesToAverage_dirty = false;
 	}
 
