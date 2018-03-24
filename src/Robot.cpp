@@ -147,7 +147,11 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {
 	std::cout << "Let's start teleop" << std::endl;
 	Robot::drivetrain->ResetEncoders();
-	Robot::elevator->ResetMagneticEncoder();
+	if (Robot::elevator->GetLiftMagneticEncoder() > 0.25) {
+		return;
+	}else{
+		Robot::elevator->ResetMagneticEncoder();
+	}
 	cube->SetIntakeSpeed(0.0);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);

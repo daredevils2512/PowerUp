@@ -69,9 +69,9 @@ OI::OI() {
 	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.7, 6.5)); //Top scale
 	CDB_topRed.WhenPressed(new ElevatorRunToHeight(0.7, 5.5)); //mid scale
 	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.7, 4.3)); //bottom scale
-	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.7, 2)); //switch
-	CDB_bottomWhite.WhenPressed(new ElevatorRunToHeight(0.7, 1.3)); //portal
-	CDB_bottomRed.WhenPressed(new ElevatorRunToHeight(0.7, 0.15)); //bottom
+	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.7, 2.6)); //switch
+	CDB_bottomWhite.WhenPressed(new ElevatorRunToHeight(0.7, 1.42)); //portal
+	CDB_bottomRed.WhenPressed(new ElevatorRunToHeight(0.7, 0.08)); //bottom
 }
 
 	double OI::GetTurn() {

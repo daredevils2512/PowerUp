@@ -45,7 +45,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	if (startingPosition == Robot::StartLocation::center) {
 		std::cout << "The pleasures of a journey to the center of the mind..." << std::endl;
 		if (doSwitch) {
-			std::cout << "Y.?" << std::endl;
+			std::cout << "no u" << std::endl;
 			SwitchY();
 		} else {
 			std::cout << "I need you in my life, please don't go switching sides" << std::endl;
@@ -93,9 +93,9 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	AddSequential(new PIDTurn(45 * directionSwitch));
 	AddSequential(new Pause(0.25)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new PIDDriveStraight(69)); //66
+		AddSequential(new PIDDriveStraight(67)); //66
 	}else{
-		AddSequential(new PIDDriveStraight(50)); //54
+		AddSequential(new PIDDriveStraight(51)); //54
 	}
 	AddSequential(new Pause(0.25)); //0.3
 	AddSequential(new PIDTurn(45 * -directionSwitch));
@@ -115,9 +115,9 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	AddSequential(new AutoStraightDriveForward(34,0.6));
 	AddSequential(new Pause(0.3)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new AutoStraightDriveBackward(26,0.8)); //35
+		AddSequential(new AutoStraightDriveBackward(25,0.8)); //35
 	}else{
-		AddSequential(new AutoStraightDriveBackward(21,0.8)); //26
+		AddSequential(new AutoStraightDriveBackward(19,0.8)); //26
 	}
 	AddSequential(new Pause(0.1));
 	AddSequential(new PIDTurn(72.5 * directionSwitch));
