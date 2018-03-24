@@ -62,9 +62,6 @@ void Robot::RobotInit() {
 	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
-//	std::cout << "Robto Periodic" << std::endl;
-
-//TODO comment printouts back in once robot is complete, only commented out because ICC will be sketchy
 	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
 	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
 	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
@@ -111,13 +108,11 @@ void Robot::DisabledInit(){
 	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
-	elevator->RunLift(0.1);
 	drivetrain->SetPIDEnabled(false);
 	drivetrain->GetPIDOutput();
 }
 
 void Robot::DisabledPeriodic() {
-//	std::cout << "I'm Disabled!" << std::endl;
 	Scheduler::GetInstance()->Run();
 }
 
@@ -140,7 +135,6 @@ void Robot::AutonomousInit() {
 }
 
 void Robot::AutonomousPeriodic() {
-//	std::cout << "I'm in auto!" << std::endl;
 	Scheduler::GetInstance()->Run();
 }
 
@@ -162,7 +156,6 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-//	std::cout << "I'm telopeed!" << std::endl;
 	Scheduler::GetInstance()->Run();
 	}
 

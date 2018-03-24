@@ -174,23 +174,25 @@ void AutoSelector::OutsideStraightScale() {
 }
 
 void AutoSelector::OutsideOppositeScale() {
-	AddSequential(new PIDDriveStraight(160,5.0,0.9));	//zoom to other side
+	AddSequential(new PIDDriveStraight(160,4.0,0.9));	//zoom to other side
 	AddSequential(new Pause(0.4));
 	AddSequential(new PIDTurn(90 * directionScale));//turn to go across the back of switch
 	AddSequential(new Pause(0.4));
-	AddSequential(new PIDDriveStraight(160, 5.5));	//zoom to other side
+	AddSequential(new PIDDriveStraight(140, 4.0,0.9));	//zoom to other side //160
 	AddSequential(new Pause(0.4));
 	AddSequential(new PIDTurn(110 * -directionScale));//turn to face opposite end of field
 	AddSequential(new Pause(0.4));
 	AddSequential(new ElevatorRunToHeight(1.0, scaleHeight)); //Gonna be talller thane the scale
-	AddSequential(new AutoStraightDriveForward(18,0.5));	//zoom at the scale
-	AddSequential(new Pause(0.4));
-	AddSequential(new CubeRunIntake(1.0,1));							//bye bye cube
+	AddSequential(new AutoStraightDriveForward(12,0.5));	//zoom at the scale
+	AddSequential(new Pause(0.3));
+	AddSequential(new CubeRunIntake(1.0,0.5));							//bye bye cube
 	AddSequential(new ElevatorRunToHeight(0.5, 0.08));
-	AddSequential(new AutoStraightDriveBackward(24, 1.5));
+	AddSequential(new Pause(0.2));
+	AddSequential(new AutoStraightDriveBackward(24, 0.8));
+	AddSequential(new Pause(0.2));
 	AddSequential(new PIDTurn(180)); //82
 	AddSequential(new AutoStraightDriveForward(24,0.6));
-	AddSequential(new CubeRunIntake(1.0, 1));
+	AddSequential(new CubeRunIntake(-1.0, 1.5)); //1 second timeout
 	if (ourSwitch == scale) {
 		std::cout << "It's so much pressure...and it's all in a day's work" << std::endl;
 		AddSequential(new Pause(0.2));
