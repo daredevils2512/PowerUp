@@ -2,8 +2,6 @@
 #include "../RobotMap.h"
 
 Climber::Climber() : Subsystem("Climber") {
-leftMotor = RobotMap::climberLeftWingMotor;
-rightMotor = RobotMap::climberRightWingMotor;
 
 }
 
@@ -12,16 +10,22 @@ void Climber::InitDefaultCommand() {
 	// SetDefaultCommand(new MySpecialCommand());
 }
 
-void Climber::SetWingSpeed(ClimberWing wing, double speed) {
-	switch (wing){
-	case ClimberWing::leftWing:
-		leftMotor->Set(speed);
-		break;
-	case ClimberWing::rightWing:
-		rightMotor->Set(speed);
-		break;
-	default:
-		std::cout << "Sorry, that isn't a climber side" << std::endl;
-	}
+void Climber::SetClimbSpeed(double speed) {
+	RobotMap::climber->Set(speed);
+}
 
+void Climber::SetForkDirection(ForkDirection direction) {
+	if (direction == ForkDirection::fDown) {
+		RobotMap::climberFork->Set(frc::DoubleSolenoid::Value::kForward);
+	} else {
+		RobotMap::climberFork->Set(frc::DoubleSolenoid::Value::kReverse);
+	}
+}
+
+void Climber::SetClawsDirection(ClawsDirection direction) {
+	if (direction == ClawsDirection::cDown) {
+		RobotMap::climberClaws->Set(frc::DoubleSolenoid::Value::kForward);
+	} else {
+		RobotMap::climberClaws->Set(frc::DoubleSolenoid::Value::kReverse);
+	}
 }

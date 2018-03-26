@@ -36,8 +36,11 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	doSwitch = autonomousSource->IsDoSwitch();
 	doScale = autonomousSource->IsDoScale();
 
-	directionSwitch = (ourSwitch == 'L') ? -1 : 1; //directionSwitch equal to 1 if turning right and -1 if left
-	directionScale = (scale == 'L') ? -1 : 1;		//switched values so that -1 is always left
+	int directionSwitch = (ourSwitch == 'L') ? -1 : 1; //directionSwitch equal to 1 if turning right and -1 if left
+	int directionScale = (scale == 'L') ? -1 : 1;		//switched values so that -1 is always left
+
+//	Util::RobotSide trackingSide = (startingPosition == Robot::StartLocation::left) ?
+//		Util::RobotSide::leftSide : Util::RobotSide::rightSide;
 
 	AddSequential(new PrintCurrentFPGATime());
 	AddSequential(new ElevatorSafety());
