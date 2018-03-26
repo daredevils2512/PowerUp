@@ -9,18 +9,23 @@ class Climber : public frc::Subsystem {
 private:
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
-	std::shared_ptr <WPI_TalonSRX> leftMotor;
-	std::shared_ptr <WPI_TalonSRX> rightMotor;
 
 public:
-	enum class ClimberWing {
-		leftWing,
-		rightWing
+	enum ForkDirection {
+		fUp,
+		fDown
+	};
+
+	enum ClawsDirection {
+		cUp,
+		cDown
 	};
 
 	Climber();
 	void InitDefaultCommand();
-	void SetWingSpeed(ClimberWing wing, double speed);
+	void SetClimbSpeed(double speed);
+	void SetForkDirection(ForkDirection direction);
+	void SetClawsDirection(ClawsDirection direction);
 };
 
 #endif  // Climber_H
