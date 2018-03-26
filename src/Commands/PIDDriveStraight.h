@@ -9,7 +9,7 @@ public:
 		CARPET90
 	};
 
-	PIDDriveStraight(double goalDistance , PIDSettings settings = PIDSettings::CARPET90);
+	PIDDriveStraight(double goalDistance, double timeout = 5.0, PIDSettings settings = PIDSettings::CARPET90);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

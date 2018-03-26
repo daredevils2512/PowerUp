@@ -1,11 +1,11 @@
 #include "PIDDriveStraight.h"
 #include "Robot.h"
 
-PIDDriveStraight::PIDDriveStraight(double goalDistance, PIDDriveStraight::PIDSettings settings) {
+PIDDriveStraight::PIDDriveStraight(double goalDistance, double timeout, PIDDriveStraight::PIDSettings settings) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::drivetrain.get());
-	SetTimeout(7.5); //subject to change
+	SetTimeout(timeout);
 	m_settings = settings;
 	// GOAL DISTANCE IS IN INCHES
 	if(goalDistance < 0){
