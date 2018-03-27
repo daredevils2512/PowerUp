@@ -13,37 +13,14 @@
 
 class TalonSRXFrame: public Frame {
 public:
-	TalonSRXFrame(std::string path, WPI_TalonSRX* talonSRX);
+	TalonSRXFrame(const std::string& path, WPI_TalonSRX* talonSRX);
 	virtual ~TalonSRXFrame();
-	void Update();
 	void Broadcast();
-	void MarkAllDirty();
 private:
 	WPI_TalonSRX* talon;
-
-	std::string path;
-
-	int id;
-	bool alive;
-	ControlMode controlMode;
-	double value;
-	bool safetyEnabled;
-	double outputCurrent;
-	double temperature;
-	int version;
-	std::string faults;
-
 	std::string GetFaultString();
 
-	bool id_dirty;
-	bool alive_dirty;
-	bool controlMode_dirty;
-	bool value_dirty;
-	bool safetyEnabled_dirty;
-	bool outputCurrent_dirty;
-	bool temperature_dirty;
-	bool version_dirty;
-	bool faults_dirty;
+
 	/*
 	    "id":0,
 		"alive":true,

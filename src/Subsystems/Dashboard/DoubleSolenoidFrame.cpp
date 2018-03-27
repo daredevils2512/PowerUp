@@ -7,15 +7,9 @@
 
 #include "DoubleSolenoidFrame.h"
 
-DoubleSolenoidFrame::DoubleSolenoidFrame(std::string path, frc::DoubleSolenoid* doubleSolenoid, int forwardChannel, int reverseChannel) {
+DoubleSolenoidFrame::DoubleSolenoidFrame(const std::string& path, frc::DoubleSolenoid* doubleSolenoid, int forwardChannel, int reverseChannel) : Frame(path){
 	this->doubleSolenoid = doubleSolenoid;
 	this->path = path;
-
-	this->forwardChannel = forwardChannel;
-	this->reverseChannel = reverseChannel;
-	value = GetValue();
-
-	MarkAllDirty();
 }
 
 std::string DoubleSolenoidFrame::GetValue(){
@@ -31,36 +25,10 @@ std::string DoubleSolenoidFrame::GetValue(){
 	}
 }
 
-void DoubleSolenoidFrame::MarkAllDirty(){
-	forwardChannel_dirty = true;
-	reverseChannel_dirty = true;
-	value_dirty = true;
-}
 DoubleSolenoidFrame::~DoubleSolenoidFrame(){
 	// no thanks :(
 }
 
 void DoubleSolenoidFrame::Broadcast(){
-	if(forwardChannel_dirty){
-		Connection::SendData(path + ".forwardChannel",to_string(forwardChannel));
-		forwardChannel_dirty = false;
-	}
-
-	if(reverseChannel_dirty){
-//		Connection::SendData(path + ".reverseChannel",to_string(reverseChannel));
-		reverseChannel_dirty = false;
-	}
-
-	if(value_dirty){
-		Connection::SendData(path + ".value", value);
-		value_dirty = false;
-	}
+		Connection::SendData(path + ".value", GetValue());
 }
-
-void DoubleSolenoidFrame::Update(){
-	if(value != GetValue()){
-		value = GetValue();
-		value_dirty = true;
-	}
-}
-

@@ -32,11 +32,8 @@ void DareDashboard::Update() {
 
 	// Talon Frames
 	for( auto const& kvs : frames){
-		kvs.second->Update();
 		if(IsConnected()){
 			kvs.second->Broadcast();
-		}else{
-			kvs.second->MarkAllDirty();
 		}
 	}
 

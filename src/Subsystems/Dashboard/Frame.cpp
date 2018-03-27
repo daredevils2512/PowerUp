@@ -1,17 +1,13 @@
 #include "Frame.h"
 
+Frame::Frame(const std::string& path){
+	this->path = path;
+
+}
 Frame::~Frame(){
 	//NA
 }
 
 void Frame::Broadcast(){
-	//replace with implementation
-}
-
-void Frame::Update(){
-	//replace with implementation
-}
-
-void Frame::MarkAllDirty(){
 	//replace with implementation
 }

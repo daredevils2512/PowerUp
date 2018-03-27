@@ -12,33 +12,16 @@
 
 class DriverstationFrame: public Frame {
 public:
-	DriverstationFrame(std::string path);
+	DriverstationFrame(const std::string& path);
 	virtual ~DriverstationFrame();
-	void Update();
 	void Broadcast();
-	void MarkAllDirty();
+
 private:
 	std::string GetMode();
+	frc::DriverStation& ds;
+	HAL_ControlWord w;
 
-	std::string path;
 
-	bool enabled;
-	bool enabled_dirty;
-
-	bool estopped;
-	bool estopped_dirty;
-
-	std::string mode;
-	bool mode_dirty;
-
-	bool dsAttached;
-	bool dsAttached_dirty;
-
-	bool fmsAttached;
-	bool fmsAttached_dirty;
-
-	double batteryVoltage;
-	bool batteryVoltage_dirty;
 
 	/*
 		"enabled":false, // put example of type (boolean = true, number = 1, etc)

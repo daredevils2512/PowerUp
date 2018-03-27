@@ -13,25 +13,13 @@
 
 class LimitSwitchFrame: public Frame {
 public:
-	LimitSwitchFrame(std::string path, frc::DigitalInput* limitSwitch);
+	LimitSwitchFrame(const std::string& path, frc::DigitalInput* limitSwitch);
 	virtual ~LimitSwitchFrame();
-	void Update();
+
 	void Broadcast();
-	void MarkAllDirty();
+
 private:
 	frc::DigitalInput* limitSwitch;
-
-	std::string path;
-
-	bool activated;
-	bool activated_dirty;
-
-	int channel;
-	bool channel_dirty;
-
-	/*
-
-	 */
 };
 
 #endif /* SRC_COMM_FRAMES_LimitSwitchFrame_H_ */

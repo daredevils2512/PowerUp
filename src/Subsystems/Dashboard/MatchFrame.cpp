@@ -8,43 +8,12 @@
 #include "MatchFrame.h"
 #include <chrono>
 
-MatchFrame::MatchFrame(std::string path) {
-	this->path = path;
-
-	frc::DriverStation& ds = frc::DriverStation::GetInstance();
-
-	eventName = ds.GetEventName();
-
-	gameMessage = ds.GetGameSpecificMessage();
-
-	type = GetMatchType(); //match type
-
-	number = ds.GetMatchNumber(); //match number
-
-	replay = ds.GetReplayNumber();
-
-	alliance = GetAlliance();
-
-	dslocation = ds.GetLocation();
-
-	startTime = GetMatchStartTime();
-
-	MarkAllDirty();
-}
-
-void MatchFrame::MarkAllDirty(){
-	eventName_dirty = true;
-	gameMessage_dirty = true;
-	type_dirty = true;
-	number_dirty = true;
-	replay_dirty = true;
-	alliance_dirty = true;
-	dslocation_dirty = true;
-	startTime_dirty = true;
+MatchFrame::MatchFrame(const std::string& path) : Frame(path) {
+	this->ds = frc::DriverStation::GetInstance();
 }
 
 std::string MatchFrame::GetMatchType(){
-	switch(frc::DriverStation::GetInstance().GetMatchType()){
+	switch(ds.GetMatchType()){
 		case frc::DriverStation::MatchType::kElimination: return "elimination";
 		case frc::DriverStation::MatchType::kQualification: return "qualification";
 		case frc::DriverStation::MatchType::kPractice: return "practice";
@@ -54,7 +23,7 @@ std::string MatchFrame::GetMatchType(){
 }
 
 std::string MatchFrame::GetAlliance() {
-	switch (frc::DriverStation::GetInstance().GetAlliance()){
+	switch (ds.GetAlliance()){
 		case frc::DriverStation::Alliance::kBlue:
 			return "blue";
 		case frc::DriverStation::Alliance::kRed:
@@ -65,7 +34,6 @@ std::string MatchFrame::GetAlliance() {
 }
 
 long MatchFrame::GetMatchStartTime(){
-	frc::DriverStation& ds = frc::DriverStation::GetInstance();
 	if(  (ds.GetMatchTime() > 0 && ds.IsFMSAttached()) || (ds.IsEnabled() && !ds.IsFMSAttached()) ){
 		if(startTime == -1){
 			return 1; //1 equals epoch serverside.
@@ -80,109 +48,25 @@ MatchFrame::~MatchFrame(){
 	// no thanks :(
 }
 
+/*
+	"eventName":"Daredevils",
+	"gameMessage":"RRR",
+	"type":"none",
+	"number":1,
+	"replay":0,
+	"alliance":"red",
+	"dslocation":1,
+	"startTime":-1, // in millis
+ */
 void MatchFrame::Broadcast(){
-	/*
-			"eventName":"Daredevils",
-			"gameMessage":"RRR",
-			"type":"none",
-			"number":1,
-			"replay":0,
-			"alliance":"red",
-			"dslocation":1,
-			"startTime":-1, // in millis
-		 */
-	if(eventName_dirty){
-		Connection::SendData(path + ".eventName", eventName);
-		eventName_dirty = false;
-	}
 
-	if(gameMessage_dirty){
-		Connection::SendData(path + ".gameMessage", gameMessage);
-		gameMessage_dirty = false;
-	}
-
-	if(type_dirty){
-		Connection::SendData(path + ".type", type);
-		type_dirty = false;
-	}
-
-	if(number_dirty){
-		Connection::SendData(path + ".number", number);
-		number_dirty = false;
-	}
-
-	if(replay_dirty){
-		Connection::SendData(path + ".replay", replay);
-		replay_dirty = false;
-	}
-
-	if(alliance_dirty){
-		Connection::SendData(path + ".alliance", alliance);
-		alliance_dirty = false;
-	}
-
-	if(dslocation_dirty){
-		Connection::SendData(path + ".dslocation", dslocation);
-		dslocation_dirty = false;
-	}
-
-	if(startTime_dirty){
-		Connection::SendData(path + ".startTime", startTime);
-		startTime_dirty = false;
-	}
+	Connection::SendData(path + ".eventName", ds.GetEventName());
+	Connection::SendData(path + ".gameMessage",  ds.GetGameSpecificMessage());
+	Connection::SendData(path + ".type", GetMatchType());
+	Connection::SendData(path + ".number", to_string(ds.GetMatchNumber()));
+	Connection::SendData(path + ".number", to_string(number));
+	Connection::SendData(path + ".replay", to_string(ds.GetReplayNumber()));
+	Connection::SendData(path + ".alliance", alliance);
+	Connection::SendData(path + ".dslocation", to_string(ds.GetLocation()));
+	Connection::SendData(path + ".startTime", to_string(startTime));
 }
-
-void MatchFrame::Update(){
-	/*
-		"eventName":"Daredevils",
-		"gameMessage":"RRR",
-		"type":"none",
-		"number":1,
-		"replay":0,
-		"alliance":"red",
-		"dslocation":1,
-		"startTime":-1, // in millis
-	 */
-	frc::DriverStation& ds = frc::DriverStation::GetInstance();
-
-	if(eventName != ds.GetEventName()){
-		eventName = ds.GetEventName();
-		eventName_dirty = true;
-	}
-
-	if(gameMessage != ds.GetGameSpecificMessage()){
-		gameMessage = ds.GetGameSpecificMessage();
-		gameMessage_dirty = true;
-	}
-
-	if(type != GetMatchType()){
-		type = GetMatchType(); //match type
-		type_dirty = true;
-	}
-
-	if(number != ds.GetMatchNumber()){
-		number = ds.GetMatchNumber(); //match number
-		number_dirty = true;
-	}
-
-	if(replay != ds.GetReplayNumber()){
-		replay = ds.GetReplayNumber();
-		replay_dirty = true;
-	}
-
-	if(alliance != GetAlliance()){
-		alliance = GetAlliance();
-		alliance_dirty = true;
-	}
-
-	if(dslocation != ds.GetLocation()){
-		dslocation = ds.GetLocation();
-		dslocation_dirty = true;
-	}
-
-	if(startTime != GetMatchStartTime()){
-		startTime = GetMatchStartTime();
-		startTime_dirty = true;
-	}
-}
-

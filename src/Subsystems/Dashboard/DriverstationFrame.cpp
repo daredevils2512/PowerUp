@@ -8,36 +8,10 @@
 #include "DriverstationFrame.h"
 #include <HAL/HAL.h>
 
-DriverstationFrame::DriverstationFrame(std::string path) {
+DriverstationFrame::DriverstationFrame(const std::string& path) : Frame(path) {
 
-	this->path = path;
-
-	frc::DriverStation& ds = frc::DriverStation::GetInstance();
-	HAL_ControlWord w;
+	this->ds = frc::DriverStation::GetInstance();
 	HAL_GetControlWord(&w);
-
-	enabled = ds.IsEnabled();
-
-	estopped = w.eStop;
-
-	mode = GetMode();
-
-	dsAttached = ds.IsDSAttached();
-
-	fmsAttached = ds.IsFMSAttached();
-
-	batteryVoltage = ds.GetBatteryVoltage();
-
-	MarkAllDirty();
-}
-
-void DriverstationFrame::MarkAllDirty(){
-	enabled_dirty = true;
-	estopped_dirty = true;
-	mode_dirty = true;
-	dsAttached_dirty = true;
-	fmsAttached_dirty = true;
-	batteryVoltage_dirty = true;
 }
 
 std::string DriverstationFrame::GetMode(){
@@ -70,70 +44,13 @@ void DriverstationFrame::Broadcast(){
 			"fmsAttached":false,
 			"batteryVoltage":12.5
 		 */
-	if(enabled_dirty){
-		Connection::SendData(path + ".enabled", enabled);
-		enabled_dirty = false;
-	}
+		Connection::SendData(path + ".enabled", ds.IsEnabled());
+		Connection::SendData(path + ".estopped", to_string(w.eStop));
+		Connection::SendData(path + ".mode",GetMode());
+		Connection::SendData(path + ".dsAttached", ds.IsDSAttached());
+		Connection::SendData(path + ".fmsAttached", ds.IsFMSAttached());
+		Connection::SendData(path + ".batteryVoltage",to_string(ds.GetBatteryVoltage()));
 
-	if(estopped_dirty){
-		Connection::SendData(path + ".estopped", estopped);
-		estopped_dirty = false;
-	}
-
-	if(mode_dirty){
-		Connection::SendData(path + ".mode",mode);
-		mode_dirty = false;
-	}
-
-	if(dsAttached_dirty){
-		Connection::SendData(path + ".dsAttached", dsAttached);
-		dsAttached_dirty = false;
-	}
-
-	if(fmsAttached_dirty){
-		Connection::SendData(path + ".fmsAttached", fmsAttached);
-		fmsAttached_dirty = false;
-	}
-
-	if(batteryVoltage_dirty){
-		Connection::SendData(path + ".batteryVoltage",to_string(batteryVoltage));
-		batteryVoltage_dirty = false;
-	}
 }
 
-void DriverstationFrame::Update(){
-	frc::DriverStation& ds = frc::DriverStation::GetInstance();
-	HAL_ControlWord w;
-	HAL_GetControlWord(&w);
-
-	if(enabled != ds.IsEnabled()){
-		enabled = ds.IsEnabled();
-		enabled_dirty = true;
-	}
-
-	if(estopped != w.eStop){
-		estopped = w.eStop;
-		estopped_dirty = true;
-	}
-
-	if(GetMode() != mode){
-		mode = GetMode();
-		mode_dirty = true;
-	}
-
-	if(dsAttached != ds.IsDSAttached()){
-		dsAttached = ds.IsDSAttached();
-		dsAttached_dirty = true;
-	}
-
-	if(fmsAttached != ds.IsFMSAttached()){
-		fmsAttached = ds.IsFMSAttached();
-		fmsAttached_dirty = true;
-	}
-
-	if(batteryVoltage != ds.GetBatteryVoltage()){
-		batteryVoltage = ds.GetBatteryVoltage();
-		batteryVoltage_dirty = true;
-	}
-}
 

@@ -13,30 +13,16 @@
 
 class DoubleSolenoidFrame: public Frame {
 public:
-	DoubleSolenoidFrame(std::string path, frc::DoubleSolenoid* doubleSolenoid, int forwardChannel, int reverseChannel);
+	DoubleSolenoidFrame(const std::string& path, frc::DoubleSolenoid* doubleSolenoid, int forwardChannel, int reverseChannel);
 	virtual ~DoubleSolenoidFrame();
-	void Update();
 	void Broadcast();
-	void MarkAllDirty();
+
 private:
 
 	std::string GetValue();
 
 	frc::DoubleSolenoid* doubleSolenoid;
 
-	std::string path;
-
-	int forwardChannel;
-	int reverseChannel;
-	std::string value;
-
-	bool forwardChannel_dirty;
-	bool reverseChannel_dirty;
-	bool value_dirty;
-
-	/*
-
-	 */
 };
 
 #endif /* SRC_COMM_FRAMES_DoubleSolenoidFrame_H_ */

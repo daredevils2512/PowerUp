@@ -21,8 +21,6 @@ public:
 private:
 	frc::Encoder* encoder;
 
-	std::string path;
-
 	int aChannel;
 	int bChannel;
 
@@ -39,17 +37,7 @@ private:
 
 	int samplesToAverage;
 
-	bool aChannel_dirty;
-	bool bChannel_dirty;
-	bool count_dirty;
-	bool rawValue_dirty;
-	bool period_dirty;
-	bool encodingScale_dirty;
-	bool distancePerPulse_dirty;
-	bool direction_dirty;
-	bool distance_dirty;
-	bool rate_dirty;
-	bool samplesToAverage_dirty;
+
 
 
 	/*

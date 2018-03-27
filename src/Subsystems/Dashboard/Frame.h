@@ -14,11 +14,15 @@
 #include "Socket/Connection.h"
 class Frame {
 public:
-	virtual ~Frame();
 
-	virtual void Update();
+	Frame(const std::string& path);
+	virtual ~Frame();
 	virtual void Broadcast();
-	virtual void MarkAllDirty();
+
+protected:
+	std::string path;
+
+
 };
 
 #endif /* SRC_COMM_FRAME_H_ */

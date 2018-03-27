@@ -13,7 +13,7 @@
 
 class MatchFrame: public Frame {
 public:
-	MatchFrame(std::string path);
+	MatchFrame(const std::string& path);
 	virtual ~MatchFrame();
 	void Update();
 	void Broadcast();
@@ -23,32 +23,23 @@ private:
 	std::string GetMatchType();
 	std::string GetAlliance();
 	long GetMatchStartTime();
-
-	std::string path;
+	frc::DriverStation& ds;
 
 	std::string eventName;
-	bool eventName_dirty;
 
 	std::string gameMessage;
-	bool gameMessage_dirty;
 
 	std::string type; //match type
-	bool type_dirty;
 
 	int number; //match number
-	bool number_dirty;
 
 	int replay;
-	bool replay_dirty;
 
 	std::string alliance;
-	bool alliance_dirty;
 
 	int dslocation;
-	bool dslocation_dirty;
 
 	long startTime;
-	bool startTime_dirty;
 
 	/*
 		"eventName":"Daredevils",
