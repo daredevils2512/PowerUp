@@ -14,43 +14,31 @@
 
 
 
-bool SocketClient::_shouldBeConnected;
-bool SocketClient::connected;
 std::string SocketClient::host;
 int SocketClient::port;
 int SocketClient::sock;
 sockaddr_in SocketClient::server;
-std::string SocketClient::DataDivider;
 
-std::queue<std::string> SocketClient::pendingFrames;
+SocketClient::SocketClient(const std::string& host, const int port) : Connection(){
+	this->SetConnection(host,port);
 
-void SocketClient::SetConnection(std::string host, int port) {
-	SocketClient::_shouldBeConnected=false;
-	SocketClient::connected = false;
+}
+
+void SocketClient::SetConnection(const std::string& host, int port) {
+
 	SocketClient::host = host;
 	SocketClient::port = port;
 	SocketClient::sock = -1;
-	SocketClient::DataDivider = ":2512:";
+
 }
 
-void SocketClient::Connect(){
-	_shouldBeConnected = true;
-	std::cout << "Connection started" << std::endl;
-}
-
-bool SocketClient::IsConnected(){
-	return connected;
-}
-
-void SocketClient::Disconnect() {
-	_shouldBeConnected = false;
-}
 
 void SocketClient::recv(){
 	while(true) {
+
 		Robot::dashboard->Update();
 		//std::cout << (frc::RobotController::GetFPGATime() / 1000000) <<((_shouldBeConnected)?"should be connected":"dont be connected.")<<std::endl;
-		if(_shouldBeConnected){
+		if(this->_shouldBeConnected){
 			if(sock == -1){
 				sock = socket( AF_INET, SOCK_STREAM, 0);
 				if(sock == -1){
@@ -78,7 +66,7 @@ void SocketClient::recv(){
 						std::this_thread::sleep_for(std::chrono::milliseconds(30)); // wait 100 ms for connection to complete before finishing
 					}
 				}else{ // CONNECTED //
-					SendData("ping"); // run ping
+					SendData("ping",""); // run ping
 					std::string str = "";
 
 					//std::cout << pendingFrames.size() << std::endl;
@@ -125,33 +113,4 @@ void SocketClient::recv(){
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 	//TODO disconnect websocket
-}
-void SocketClient::SendBoolData(std::string path,bool value){
-	std::stringstream stream;
-	stream << "[\"" + path + "\"," <<  ((value)?"true":"false") << "]";
-	SendData(stream.str());
-}
-void SocketClient::SendLongData(std::string path, long value){
-	std::stringstream stream;
-	stream << "[\"" + path + "\"," <<  value << "]";
-	SendData(stream.str());
-}
-void SocketClient::SendIntData(std::string path, int value){
-	std::stringstream stream;
-	stream << "[\"" + path + "\"," <<  value << "]";
-	SendData(stream.str());
-}
-void SocketClient::SendDoubleData(std::string path, double value){
-	std::stringstream stream;
-	stream << "[\"" + path + "\"," <<  value << "]";
-	SendData(stream.str());
-}
-void SocketClient::SendStringData(std::string path, std::string value){
-	SendData("[\"" + path + "\",\"" + value + "\"]");
-}
-
-void SocketClient::SendData(std::string data){
-	// MAIN DATA SEND MECHANISM FOR COMMS XD
-	pendingFrames.push( data + DataDivider );
-	//std::cout << "frame data pushed" << std::endl;
 }

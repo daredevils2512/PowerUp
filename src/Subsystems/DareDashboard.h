@@ -19,12 +19,13 @@
 #include "Dashboard/DoubleSolenoidFrame.h"
 #include "Dashboard/DriverstationFrame.h"
 #include "Dashboard/MatchFrame.h"
-
-#include "Dashboard/Socket/SocketClient.h"
+#include "Dashboard/Socket/Connection.h"
 
 class DareDashboard : public frc::Subsystem {
 private:
 	std::map<std::string, Frame*> frames;
+
+
 public:
 	DareDashboard();
 	void InitDefaultCommand() override;

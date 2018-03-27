@@ -11,8 +11,7 @@
 
 #include <WPILib.h>
 #include <ctre/Phoenix.h>
-#include "Socket/SocketClient.h"
-
+#include "Socket/Connection.h"
 class Frame {
 public:
 	virtual ~Frame();

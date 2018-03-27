@@ -45,57 +45,57 @@ EncoderFrame::~EncoderFrame(){
 
 void EncoderFrame::Broadcast(){
 	if(aChannel_dirty){
-		SocketClient::SendIntData(path + ".aChannel",aChannel);
+		Connection::SendData(path + ".aChannel", aChannel);
 		aChannel_dirty = false;
 	}
 
 	if(bChannel_dirty){
-		SocketClient::SendIntData(path + ".bChannel",bChannel);
+		Connection::SendData(path + ".bChannel",bChannel);
 		bChannel_dirty = false;
 	}
 
 	if(count_dirty){
-		SocketClient::SendIntData(path + ".count",count);
+		Connection::SendData(path + ".count",count);
 		count_dirty = false;
 	}
 
 	if(rawValue_dirty){
-		SocketClient::SendIntData(path + ".rawValue",rawValue);
+		Connection::SendData(path + ".rawValue",rawValue);
 		rawValue_dirty = false;
 	}
 
 	if(period_dirty){
-		SocketClient::SendIntData(path + ".period", period);
+		Connection::SendData(path + ".period", period);
 		period_dirty = false;
 	}
 
 	if(encodingScale_dirty){
-		SocketClient::SendIntData(path + ".encodingScale",encodingScale);
+		Connection::SendData(path + ".encodingScale",encodingScale);
 		encodingScale_dirty = false;
 	}
 
 	if(distancePerPulse_dirty){
-		SocketClient::SendDoubleData(path + ".distancePerPulse",distancePerPulse);
+		Connection::SendData(path + ".distancePerPulse",to_string(distancePerPulse));
 		distancePerPulse_dirty = false;
 	}
 
 	if(direction_dirty){
-		SocketClient::SendBoolData(path + ".direction",direction);
+		Connection::SendData(path + ".direction",direction);
 		direction_dirty = false;
 	}
 
 	if(distance_dirty){
-		SocketClient::SendDoubleData(path + ".distance", distance);
+		Connection::SendData(path + ".distance", to_string(distance));
 		distance_dirty = false;
 	}
 
 	if(rate_dirty){
-		SocketClient::SendDoubleData(path + ".rate",rate);
+		Connection::SendData(path + ".rate", to_string(rate));
 		rate_dirty = false;
 	}
 
 	if(samplesToAverage_dirty){
-		SocketClient::SendIntData(path + ".samplesToAverage",samplesToAverage);
+		Connection::SendData(path + ".samplesToAverage", to_string(samplesToAverage));
 		samplesToAverage_dirty = false;
 	}
 

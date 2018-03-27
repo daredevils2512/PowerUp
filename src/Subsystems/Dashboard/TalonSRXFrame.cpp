@@ -42,12 +42,12 @@ TalonSRXFrame::~TalonSRXFrame(){
 
 void TalonSRXFrame::Broadcast(){
 	if(id_dirty){
-		SocketClient::SendIntData(path + ".id", id);
+		Connection::SendData(path + ".id", to_string(id));
 		id_dirty = false;
 	}
 
 	if(alive_dirty){
-		SocketClient::SendBoolData(path + ".alive", id);
+		Connection::SendData(path + ".alive", to_string(id));
 		alive_dirty = false;
 	}
 
@@ -66,37 +66,37 @@ void TalonSRXFrame::Broadcast(){
 			case ControlMode::Velocity: controlModeRep="Velocity"; break;
 			default: controlModeRep="Unknown"; break;
 		}
-		SocketClient::SendStringData(path + ".controlMode", controlModeRep);
+		Connection::SendData(path + ".controlMode", controlModeRep);
 		controlMode_dirty = false;
 	}
 
 	if(value_dirty){
-		SocketClient::SendDoubleData(path + ".value",value);
+		Connection::SendData(path + ".value",value);
 		value_dirty = false;
 	}
 
 	if(safetyEnabled_dirty){
-		SocketClient::SendBoolData(path + ".safetyEnabled",value);
+		Connection::SendData(path + ".safetyEnabled",value);
 		safetyEnabled_dirty = false;
 	}
 
 	if(outputCurrent_dirty){
-		SocketClient::SendDoubleData(path + ".outputCurrent", outputCurrent);
+		Connection::SendData(path + ".outputCurrent", outputCurrent);
 		outputCurrent_dirty = false;
 	}
 
 	if(temperature_dirty){
-		SocketClient::SendDoubleData(path + ".temperature",temperature);
+		Connection::SendData(path + ".temperature", to_string(temperature));
 		temperature_dirty = false;
 	}
 
 	if(version_dirty){
-		SocketClient::SendDoubleData(path + ".firmwareVersion",version);
+		Connection::SendData(path + ".firmwareVersion",version);
 		version_dirty = false;
 	}
 
 	if(faults_dirty){
-		SocketClient::SendStringData(path + ".faults",faults);
+		Connection::SendData(path + ".faults",faults);
 		faults_dirty = false;
 	}
 }

@@ -92,42 +92,42 @@ void MatchFrame::Broadcast(){
 			"startTime":-1, // in millis
 		 */
 	if(eventName_dirty){
-		SocketClient::SendStringData(path + ".eventName", eventName);
+		Connection::SendData(path + ".eventName", eventName);
 		eventName_dirty = false;
 	}
 
 	if(gameMessage_dirty){
-		SocketClient::SendStringData(path + ".gameMessage", gameMessage);
+		Connection::SendData(path + ".gameMessage", gameMessage);
 		gameMessage_dirty = false;
 	}
 
 	if(type_dirty){
-		SocketClient::SendStringData(path + ".type", type);
+		Connection::SendData(path + ".type", type);
 		type_dirty = false;
 	}
 
 	if(number_dirty){
-		SocketClient::SendIntData(path + ".number", number);
+		Connection::SendData(path + ".number", number);
 		number_dirty = false;
 	}
 
 	if(replay_dirty){
-		SocketClient::SendIntData(path + ".replay", replay);
+		Connection::SendData(path + ".replay", replay);
 		replay_dirty = false;
 	}
 
 	if(alliance_dirty){
-		SocketClient::SendStringData(path + ".alliance", alliance);
+		Connection::SendData(path + ".alliance", alliance);
 		alliance_dirty = false;
 	}
 
 	if(dslocation_dirty){
-		SocketClient::SendIntData(path + ".dslocation", dslocation);
+		Connection::SendData(path + ".dslocation", dslocation);
 		dslocation_dirty = false;
 	}
 
 	if(startTime_dirty){
-		SocketClient::SendLongData(path + ".startTime", startTime);
+		Connection::SendData(path + ".startTime", startTime);
 		startTime_dirty = false;
 	}
 }
