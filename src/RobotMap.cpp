@@ -24,7 +24,6 @@ std::shared_ptr<frc::PIDController> RobotMap::navXTurnController;
 std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeRightMotor;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
-std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeGrabberSolenoid;
 std::shared_ptr<frc::DigitalInput> RobotMap::cubeIntakeLimitSwitch;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::climber;
@@ -88,14 +87,12 @@ void RobotMap::init() {
 	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0,6,7)); //TODO change back to 6,7 for Alea
 	 	 Robot::dashboard->RegisterDoubleSolenoid("cube.intake.grabberSolenoid",cubeIntakeSolenoid.get(),6,7);
 
-	 	 //TODO: implement dashboard registers for commented methods
-//	 cubeIntakeGrabberSolenoid.reset (new frc::DoubleSolenoid (0 , 7 , 8));
 	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
 	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
 
-	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
-	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
-	climberClaws.reset(new frc::DoubleSolenoid(0, 10, 11));
+//	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
+//	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
+//	climberClaws.reset(new frc::DoubleSolenoid(0, 10, 11));
 
 //	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
 //	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));
