@@ -5,8 +5,8 @@
  *      Author: Programming
  */
 
-#ifndef SRC_SUBSYSTEMS_DASHBOARD_SOCKET_ROBOTCLIENT_H_
-#define SRC_SUBSYSTEMS_DASHBOARD_SOCKET_ROBOTCLIENT_H_
+#ifndef SRC_SUBSYSTEMS_DASHBOARD_SOCKET_SOCKETCLIENT_H_
+#define SRC_SUBSYSTEMS_DASHBOARD_SOCKET_SOCKETCLIENT_H_
 
 #include <thread>
 #include <string>
@@ -18,11 +18,12 @@
 #include <netdb.h> //hostent
 #include <queue>
 
-class RobotClient {
+class SocketClient {
 public:
+	static void SetConnection(std::string host, int port);
+
 	static void Connect();
 	static void Disconnect();
-	static void Init();
 
 	static void SendBoolData(std::string path,bool value);
 	static void SendIntData(std::string path, int value);
@@ -36,8 +37,12 @@ public:
 	static void recv();
 	static std::string DataDivider;
 private:
+	static std::string host;
+	static int port;
 
-	static int pipe;
+	static int sock;
+
+	static struct sockaddr_in server;
 
 	static bool _shouldBeConnected;
 	static bool connected;
@@ -45,4 +50,4 @@ private:
 	static std::queue<std::string> pendingFrames;
 };
 
-#endif /* SRC_SUBSYSTEMS_DASHBOARD_SOCKET_ROBOTCLIENT_H_ */
+#endif /* SRC_SUBSYSTEMS_DASHBOARD_SOCKET_SOCKETCLIENT_H_ */

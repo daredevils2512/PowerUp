@@ -58,36 +58,33 @@ void Robot::RobotInit() {
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
-	std::thread(RobotClient::recv).detach();
-	RobotClient::Connect();
+//	std::thread(SocketClient::recv).detach();
+//	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
-//	std::cout << "Robto Periodic" << std::endl;
+//	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
+//	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
+//	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+//
+//	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
+//	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
+//	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
+//	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
+//	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
 
-//TODO comment printouts back in once robot is complete, only commented out because ICC will be sketchy
-	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
-	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
-	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+//	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
+//	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
+//	SmartDashboard::PutNumber("Drivetrain Front Right Current" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
+//	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
+//	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
 
-	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
-	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
-	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
-	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
-	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
-
-	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
-	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
-	SmartDashboard::PutNumber("Drivetrain Front Right Current" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
-	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
-	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
-
-	PrintFaults(RobotMap::drivetrainFrontLeftMotor.get(), "FL");
-	PrintFaults(RobotMap::drivetrainFrontRightMotor.get(), "FR");
-	PrintFaults(RobotMap::drivetrainRearLeftMotor.get(), "RL");
-	PrintFaults(RobotMap::drivetrainRearRightMotor.get(), "RR");
-	PrintFaults(RobotMap::elevatorMotor.get(), "elevator");
-	PrintFaults(RobotMap::cubeIntakeLeftMotor.get(), "IL");
-	PrintFaults(RobotMap::cubeIntakeRightMotor.get(), "IR");
+//	PrintFaults(RobotMap::drivetrainFrontLeftMotor.get(), "FL");
+//	PrintFaults(RobotMap::drivetrainFrontRightMotor.get(), "FR");
+//	PrintFaults(RobotMap::drivetrainRearLeftMotor.get(), "RL");
+//	PrintFaults(RobotMap::drivetrainRearRightMotor.get(), "RR");
+//	PrintFaults(RobotMap::elevatorMotor.get(), "elevator");
+//	PrintFaults(RobotMap::cubeIntakeLeftMotor.get(), "IL");
+//	PrintFaults(RobotMap::cubeIntakeRightMotor.get(), "IR");
 
 //	SmartDashboard::PutNumber("Front Left Ultrasonic distance", RobotMap::ultrasonicFrontLeft->GetDistance());
 //	SmartDashboard::PutNumber("Rear Left Ultrasonic distance", RobotMap::ultrasonicRearLeft->GetDistance());
@@ -98,26 +95,24 @@ void Robot::RobotPeriodic() {
 //	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAnalogInput()->GetAverageVoltage());
 //	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
-	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+//	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 //	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
-
-	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
-
-	SmartDashboard::PutNumber("Y-Axis", Robot::oi->GetMove());
-	SmartDashboard::PutNumber("X-Axis", Robot::oi->GetTurn());
+//
+//	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
+//
+//	SmartDashboard::PutNumber("Y-Axis", Robot::oi->GetMove());
+//	SmartDashboard::PutNumber("X-Axis", Robot::oi->GetTurn());
 	}
 void Robot::DisabledInit(){
 	std::cout << "Let's start being disabled" << std::endl;
 	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
-	elevator->RunLift(0.1);
 	drivetrain->SetPIDEnabled(false);
 	drivetrain->GetPIDOutput();
 }
 
 void Robot::DisabledPeriodic() {
-//	std::cout << "I'm Disabled!" << std::endl;
 	Scheduler::GetInstance()->Run();
 }
 
@@ -140,14 +135,17 @@ void Robot::AutonomousInit() {
 }
 
 void Robot::AutonomousPeriodic() {
-//	std::cout << "I'm in auto!" << std::endl;
 	Scheduler::GetInstance()->Run();
 }
 
 void Robot::TeleopInit() {
 	std::cout << "Let's start teleop" << std::endl;
 	Robot::drivetrain->ResetEncoders();
-	Robot::elevator->ResetMagneticEncoder();
+	if (Robot::elevator->GetLiftMagneticEncoder() > 0.25) {
+		return;
+	}else{
+		Robot::elevator->ResetMagneticEncoder();
+	}
 	cube->SetIntakeSpeed(0.0);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
@@ -158,7 +156,6 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-//	std::cout << "I'm telopeed!" << std::endl;
 	Scheduler::GetInstance()->Run();
 	}
 

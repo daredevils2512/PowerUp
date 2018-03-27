@@ -6,20 +6,22 @@
  * TODO: TEST, COMMAND IS UNTESTED AND EXPERIMENTAL
  ****/
 
-PIDTurn::PIDTurn(PIDTurn::PIDSettings settings, double goalAngle) {
+PIDTurn::PIDTurn(PIDTurn::PIDSettings settings, double goalAngle, double maxOutput) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg.
 	Requires(Robot::drivetrain.get());
 	m_settings = settings;
 	m_angle = goalAngle;
-	SetTimeout(1.5);
+	m_maxoutput = maxOutput;
+	SetTimeout(3.0); //1.5
 }
 
-PIDTurn::PIDTurn(double goalAngle){
+PIDTurn::PIDTurn(double goalAngle , double maxOutput){
 	Requires(Robot::drivetrain.get());
 	m_settings = PIDSettings::CARPET90;
 	m_angle = goalAngle;
-	SetTimeout(1.5);
+	m_maxoutput = maxOutput;
+	SetTimeout(3.0);
 }
 
 // Called just before this Command runs the first time
@@ -55,7 +57,7 @@ void PIDTurn::Initialize() {
 void PIDTurn::Execute() {
 
 	//apply pid values to motors to turn robot (dime spin)
-	double maxOutput = 0.75; //0.75 //0.70
+	double maxOutput = m_maxoutput; //0.75
 	double output = std::max(-maxOutput,std::min(maxOutput,Robot::drivetrain->GetPIDOutput()));
 	Robot::drivetrain->DriveRobotTank(-output,output);
 }

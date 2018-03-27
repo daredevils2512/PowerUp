@@ -42,12 +42,12 @@ TalonSRXFrame::~TalonSRXFrame(){
 
 void TalonSRXFrame::Broadcast(){
 	if(id_dirty){
-		RobotClient::SendIntData(path + ".id", id);
+		SocketClient::SendIntData(path + ".id", id);
 		id_dirty = false;
 	}
 
 	if(alive_dirty){
-		RobotClient::SendBoolData(path + ".alive", id);
+		SocketClient::SendBoolData(path + ".alive", id);
 		alive_dirty = false;
 	}
 
@@ -66,37 +66,37 @@ void TalonSRXFrame::Broadcast(){
 			case ControlMode::Velocity: controlModeRep="Velocity"; break;
 			default: controlModeRep="Unknown"; break;
 		}
-		RobotClient::SendStringData(path + ".controlMode", controlModeRep);
+		SocketClient::SendStringData(path + ".controlMode", controlModeRep);
 		controlMode_dirty = false;
 	}
 
 	if(value_dirty){
-		RobotClient::SendDoubleData(path + ".value",value);
+		SocketClient::SendDoubleData(path + ".value",value);
 		value_dirty = false;
 	}
 
 	if(safetyEnabled_dirty){
-		RobotClient::SendBoolData(path + ".safetyEnabled",value);
+		SocketClient::SendBoolData(path + ".safetyEnabled",value);
 		safetyEnabled_dirty = false;
 	}
 
 	if(outputCurrent_dirty){
-		RobotClient::SendDoubleData(path + ".outputCurrent", outputCurrent);
+		SocketClient::SendDoubleData(path + ".outputCurrent", outputCurrent);
 		outputCurrent_dirty = false;
 	}
 
 	if(temperature_dirty){
-		RobotClient::SendDoubleData(path + ".temperature",temperature);
+		SocketClient::SendDoubleData(path + ".temperature",temperature);
 		temperature_dirty = false;
 	}
 
 	if(version_dirty){
-		RobotClient::SendDoubleData(path + ".firmwareVersion",version);
+		SocketClient::SendDoubleData(path + ".firmwareVersion",version);
 		version_dirty = false;
 	}
 
 	if(faults_dirty){
-		RobotClient::SendStringData(path + ".faults",faults);
+		SocketClient::SendStringData(path + ".faults",faults);
 		faults_dirty = false;
 	}
 }

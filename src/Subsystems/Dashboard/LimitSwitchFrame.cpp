@@ -27,12 +27,12 @@ LimitSwitchFrame::~LimitSwitchFrame(){
 
 void LimitSwitchFrame::Broadcast(){
 	if(activated_dirty){
-		RobotClient::SendBoolData(path + ".activated",activated);
+		SocketClient::SendBoolData(path + ".activated",activated);
 		activated_dirty = false;
 	}
 
 	if(channel_dirty){
-		RobotClient::SendIntData(path + ".channel",channel);
+		SocketClient::SendIntData(path + ".channel",channel);
 		channel_dirty = false;
 	}
 }

@@ -10,7 +10,7 @@ AutoStraightDriveForward::AutoStraightDriveForward(double targetFeet, double spe
 	m_targetFeet = targetFeet;
 	m_speed = -1.0 * (fabs(speed)); //abs returns an integer which messed with driving logic, float absolute value works though
 	//setting a timeout in case it doesn't move so it doesn't keep trying forever
-//	SetTimeout(2.5);
+	SetTimeout(2.5);
 }
 
 // Called just before this Command runs the first time

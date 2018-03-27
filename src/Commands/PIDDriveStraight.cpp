@@ -1,7 +1,7 @@
 #include "PIDDriveStraight.h"
 #include "Robot.h"
 
-PIDDriveStraight::PIDDriveStraight(double goalDistance, double timeout, PIDDriveStraight::PIDSettings settings) {
+PIDDriveStraight::PIDDriveStraight(double goalDistance, double timeout, double speed, PIDDriveStraight::PIDSettings settings) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::drivetrain.get());
@@ -15,6 +15,7 @@ PIDDriveStraight::PIDDriveStraight(double goalDistance, double timeout, PIDDrive
 		m_distance = (goalDistance) - 12;
 		m_reverse = false;
 	}
+	m_speed = speed;
 	lastTime = 0;
 	navXDistance = 0;
 	lastVelX = 0;
@@ -66,9 +67,9 @@ void PIDDriveStraight::Execute() {
 	//quarter steering control for PID to prevent crazy turns*/
 	double output = Robot::drivetrain->GetPIDOutput()/2;
 	if(m_reverse){
-		Robot::drivetrain->DriveRobotTank(0.7+output,0.7-output);
+		Robot::drivetrain->DriveRobotTank(m_speed+output,m_speed-output);
 	}else{
-		Robot::drivetrain->DriveRobotTank(-0.7-output,-0.7+output); //80% besides corrections //0.6
+		Robot::drivetrain->DriveRobotTank(-m_speed-output,-m_speed+output); //80% besides corrections //0.7
 	}
 }
 

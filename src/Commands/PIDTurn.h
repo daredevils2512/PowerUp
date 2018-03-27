@@ -10,8 +10,8 @@ public:
 		CARPET90
 	};
 
-	PIDTurn(PIDSettings settings, double goalAngle);
-	PIDTurn(double goalAngle);
+	PIDTurn(PIDSettings settings, double goalAngle , double maxOutput);
+	PIDTurn(double goalAngle, double maxOutput = 0.75);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
@@ -20,6 +20,7 @@ public:
 private:
 	PIDSettings m_settings;
 	double m_angle;
+	double m_maxoutput;
 
 };
 
