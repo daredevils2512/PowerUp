@@ -102,9 +102,11 @@ void RobotMap::init() {
 	elevatorMotor.reset(new WPI_TalonSRX (Util::ELEVATOR_MOTOR));
 		elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 0);
 		Robot::dashboard->RegisterTalonSRX("cube.elevatorMotor",elevatorMotor.get());
-//	elevatorBackMotor.reset(new WPI_TalonSRX (Util::ELEVATOR_BACK_MOTOR));
+
+	elevatorBackMotor.reset(new WPI_TalonSRX (Util::ELEVATOR_BACK_MOTOR));
 //		elevatorBackMotor->Set(ControlMode::Follower , Util::ELEVATOR_MOTOR);
-//		elevatorBackMotor->SetInverted(true);
+		elevatorBackMotor->SetInverted(true);
+
 	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
 		Robot::dashboard->RegisterLimitSwitch("cube.elevatorBottomSwitch", elevatorBottomSwitch.get());
 }

@@ -55,7 +55,7 @@ OI::OI() {
 	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
 	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
 	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder in-case something goes wrong
-	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.7, 6.5)); //Top scale
+	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.7, 6.8)); //Top scale
 	CDB_topRed.WhenPressed(new ElevatorRunToHeight(0.7, 5.5)); //mid scale
 	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.7, 4.3)); //bottom scale
 	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.7, 2.6)); //switch
