@@ -8,6 +8,7 @@
 #include <Subsystems/Dashboard/Socket/Connection.h>
 
 #include <Subsystems/Dashboard/Socket/SocketClient.h>
+#include <Subsystems/Dashboard/Socket/PipeClient.h>
 
 Connection* Connection::connection  = nullptr;
 
@@ -22,7 +23,11 @@ Connection::~Connection() {
 
 Connection* Connection::getInstance(){
 	if (connection == nullptr){
+#ifdef USE_SOCKET
 		connection = new SocketClient("127.0.0.1", 5335);
+#else
+		connection = new PipeClient();
+#endif
 	}
 	return connection;
 }

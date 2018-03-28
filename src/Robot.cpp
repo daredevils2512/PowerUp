@@ -59,10 +59,18 @@ void Robot::RobotInit() {
 	lw->Add(RobotMap::navXTurnController);
 	lw->Add(RobotMap::drivetrainChassis);
 
+#ifdef USE_SOCKET
+
 //	std::thread(SocketClient::recv).detach();
 //	SocketClient::Connect();
+#endif
 }
 void Robot::RobotPeriodic() {
+#ifndef USE_SOCKET
+	Robot::dashboard->Update();
+	Connection::getInstance()->transmit();
+#endif
+
 //	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
 //	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
 //	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());

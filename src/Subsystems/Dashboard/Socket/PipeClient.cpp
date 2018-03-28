@@ -20,7 +20,7 @@ void PipeClient::transmit(){
 	pipe = open(pipeName.c_str(), O_WRONLY);
 	std::string frame;
 	while(!pendingFrames.empty()){
-		frame = pendingFrames.pop();
+		frame = pendingFrames.front();
 		write(pipe, frame.c_str(), sizeof(frame.c_str()));
 	}
 	close(pipe);
