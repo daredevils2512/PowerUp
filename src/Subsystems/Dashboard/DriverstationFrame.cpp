@@ -9,8 +9,6 @@
 #include <HAL/HAL.h>
 
 DriverstationFrame::DriverstationFrame(const std::string& path) : Frame(path) {
-
-	this->ds = frc::DriverStation::GetInstance();
 	HAL_GetControlWord(&w);
 }
 
@@ -44,6 +42,8 @@ void DriverstationFrame::Broadcast(){
 			"fmsAttached":false,
 			"batteryVoltage":12.5
 		 */
+	frc::DriverStation& ds = frc::DriverStation::GetInstance();
+
 		Connection::SendData(path + ".enabled", ds.IsEnabled());
 		Connection::SendData(path + ".estopped", to_string(w.eStop));
 		Connection::SendData(path + ".mode",GetMode());

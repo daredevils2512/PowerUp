@@ -15,15 +15,14 @@ class MatchFrame: public Frame {
 public:
 	MatchFrame(const std::string& path);
 	virtual ~MatchFrame();
-	void Update();
+
 	void Broadcast();
-	void MarkAllDirty();
 private:
 
 	std::string GetMatchType();
 	std::string GetAlliance();
 	long GetMatchStartTime();
-	frc::DriverStation& ds;
+
 
 	std::string eventName;
 

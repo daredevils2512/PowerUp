@@ -18,7 +18,6 @@ public:
 
 private:
 	std::string GetMode();
-	frc::DriverStation& ds;
 	HAL_ControlWord w;
 
 

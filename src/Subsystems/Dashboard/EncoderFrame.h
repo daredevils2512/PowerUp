@@ -13,36 +13,16 @@
 
 class EncoderFrame: public Frame {
 public:
-	EncoderFrame(std::string path, frc::Encoder* encoder, int aChannel, int bChannel);
+	EncoderFrame(const std::string& path, frc::Encoder* encoder, int aChannel, int bChannel);
 	virtual ~EncoderFrame();
-	void Update();
 	void Broadcast();
-	void MarkAllDirty();
+
 private:
 	frc::Encoder* encoder;
 
 	int aChannel;
 	int bChannel;
 
-	int count;
-	int rawValue;
-	double period;
-
-	int encodingScale;
-	double distancePerPulse;
-
-	bool direction;
-	double distance;
-	double rate;
-
-	int samplesToAverage;
-
-
-
-
-	/*
-
-	 */
 };
 
 #endif /* SRC_COMM_FRAMES_EncoderFrame_H_ */
