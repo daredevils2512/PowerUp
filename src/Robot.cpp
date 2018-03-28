@@ -70,7 +70,7 @@ void Robot::RobotPeriodic() {
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 //	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 //	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
-//	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
+	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
 
 //	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
 //	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
@@ -141,11 +141,12 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {
 	std::cout << "Let's start teleop" << std::endl;
 	Robot::drivetrain->ResetEncoders();
-	if (Robot::elevator->GetLiftMagneticEncoder() > 0.25) {
-		return;
-	}else{
-		Robot::elevator->ResetMagneticEncoder();
-	}
+//	if (Robot::elevator->GetLiftMagneticEncoder() > 0.25) {
+//		return;
+//	}else{
+//		Robot::elevator->ResetMagneticEncoder();
+//	}
+	Robot::elevator->ResetMagneticEncoder();
 	cube->SetIntakeSpeed(0.0);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
