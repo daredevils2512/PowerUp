@@ -19,7 +19,7 @@ public:
 	void SetConnection(const std::string& host, int port);
 
 	SocketClient(const std::string& host, const int port);
-
+	virtual void transmit() {}; // DOES NOTHING SINCE WE HAVE A THREAD HERE
 	void recv();
 
 private:

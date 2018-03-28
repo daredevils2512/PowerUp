@@ -2,10 +2,10 @@
 #include <iostream>
 #include "../RobotMap.h"
 
-DareDashboard::DareDashboard() : Subsystem("DaredevilDashboard") {
+DareDashboard::DareDashboard() :
+		Subsystem("DaredevilDashboard") {
 	frames["driverstation"] = new DriverstationFrame("driverstation");
 	frames["match"] = new MatchFrame("match");
-
 
 	//connection->Connect();
 }
@@ -13,7 +13,6 @@ DareDashboard::DareDashboard() : Subsystem("DaredevilDashboard") {
 void DareDashboard::InitDefaultCommand() {
 
 }
-
 
 void DareDashboard::Update() {
 	/*
@@ -31,34 +30,39 @@ void DareDashboard::Update() {
 	 */
 
 	// Talon Frames
-	for( auto const& kvs : frames){
-		if(IsConnected()){
+	if (IsConnected()) {
+		for (auto const& kvs : frames) {
 			kvs.second->Broadcast();
 		}
 	}
 
 }
 
-bool DareDashboard::IsConnected(){
+bool DareDashboard::IsConnected() {
 	return Connection::getInstance()->IsConnected();
 }
 
-void DareDashboard::RegisterTalonSRX(std::string path, WPI_TalonSRX* talon){
+void DareDashboard::RegisterTalonSRX(std::string path, WPI_TalonSRX* talon) {
 	frames[path] = new TalonSRXFrame(path, talon);
 }
 
-void DareDashboard::RegisterLimitSwitch(std::string path, frc::DigitalInput* limitSwitch){
+void DareDashboard::RegisterLimitSwitch(std::string path,
+		frc::DigitalInput* limitSwitch) {
 	frames[path] = new LimitSwitchFrame(path, limitSwitch);
 }
 
 //void RegisterUltrasonics(std::string path, UltrasonicSubsystem ultrasonicSubsystem);
 
 //Reminder to associate path with talon
-void DareDashboard::RegisterEncoder(std::string path, frc::Encoder* encoder, int aChannel, int bChannel){
+void DareDashboard::RegisterEncoder(std::string path, frc::Encoder* encoder,
+		int aChannel, int bChannel) {
 	frames[path] = new EncoderFrame(path, encoder, aChannel, bChannel);
 
 }
 
-void DareDashboard::RegisterDoubleSolenoid(std::string path, frc::DoubleSolenoid* doubleSolenoid, int forwardChannel, int reverseChannel){
-	frames[path] = new DoubleSolenoidFrame(path,doubleSolenoid,forwardChannel,reverseChannel);
+void DareDashboard::RegisterDoubleSolenoid(std::string path,
+		frc::DoubleSolenoid* doubleSolenoid, int forwardChannel,
+		int reverseChannel) {
+	frames[path] = new DoubleSolenoidFrame(path, doubleSolenoid, forwardChannel,
+			reverseChannel);
 }

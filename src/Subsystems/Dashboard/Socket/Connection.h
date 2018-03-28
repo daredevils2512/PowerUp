@@ -38,6 +38,7 @@ public:
 	void Disconnect();
 	bool IsConnected();
 
+	virtual void transmit() = 0;
 
 	static Connection* getInstance();
 
