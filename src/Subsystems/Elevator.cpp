@@ -28,7 +28,7 @@ bool Elevator::GetBottomSwitch() {
 
 void Elevator::RunLift(double speed) {
 	motor->Set(speed);
-//	backmotor->Set(speed);
+	backmotor->Set(speed);
 }
 
 double Elevator::GetLiftMagneticEncoder() {
