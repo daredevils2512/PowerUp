@@ -13,7 +13,7 @@ PIDTurn::PIDTurn(PIDTurn::PIDSettings settings, double goalAngle, double maxOutp
 	m_settings = settings;
 	m_angle = goalAngle;
 	m_maxoutput = maxOutput;
-	SetTimeout(3.0); //1.5
+	SetTimeout(4.0); //3.0
 }
 
 PIDTurn::PIDTurn(double goalAngle , double maxOutput){
@@ -21,7 +21,7 @@ PIDTurn::PIDTurn(double goalAngle , double maxOutput){
 	m_settings = PIDSettings::CARPET90;
 	m_angle = goalAngle;
 	m_maxoutput = maxOutput;
-	SetTimeout(3.0);
+	SetTimeout(4.0); //3.0
 }
 
 // Called just before this Command runs the first time

@@ -62,15 +62,18 @@ void Robot::RobotInit() {
 //	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
-//	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
-//	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
-//	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
+	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
+	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+	SmartDashboard::PutBoolean("connected?" , RobotMap::navX->IsConnected());
+	SmartDashboard::PutBoolean("moving?" , RobotMap::navX->IsMoving());
+	SmartDashboard::PutBoolean("rotating?" , RobotMap::navX->IsRotating());;
 
-//	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
+	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
-//	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
+	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
 //	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
-//	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
+	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
 
 //	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
 //	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
@@ -95,10 +98,10 @@ void Robot::RobotPeriodic() {
 //	SmartDashboard::PutNumber ("Voltage Returned Rear", RobotMap::ultrasonicRearLeft->GetAnalogInput()->GetAverageVoltage());
 //	SmartDashboard::PutNumber("Starting Distance", Robot::ultrasonicSubsystem->m_startingDistance);
 
-//	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 //	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
 //
-//	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
+	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 //
 //	SmartDashboard::PutNumber("Y-Axis", Robot::oi->GetMove());
 //	SmartDashboard::PutNumber("X-Axis", Robot::oi->GetTurn());
@@ -153,13 +156,13 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 	Scheduler::GetInstance()->Run();
-	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
-	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
-	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
-	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
-	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
-	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
-	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+//	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
+//	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
+//	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
+//	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
+//	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
+//	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
+//	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	}
 
 void Robot::TestInit() {

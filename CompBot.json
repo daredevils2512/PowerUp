@@ -214,6 +214,45 @@
               "_source0": "network_table:///SmartDashboard/X-Axis",
               "_title": "X-Axis"
             }
+          },
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/connected?",
+              "_title": "connected?",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/rotating?",
+              "_title": "rotating?",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/moving?",
+              "_title": "moving?",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
           }
         }
       }
@@ -397,6 +436,13 @@
                   "_type": "Text View",
                   "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[60,4]/Value",
                   "_title": "DoubleSolenoid[60,4]/Value"
+                },
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [8]",
+                  "_title": "Talon SRX [8]",
+                  "controllable": false,
+                  "orientation": "HORIZONTAL"
                 }
               ]
             }
