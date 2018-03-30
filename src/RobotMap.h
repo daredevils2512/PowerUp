@@ -13,7 +13,8 @@ public:
 	static std::shared_ptr<WPI_TalonSRX> drivetrainRearLeftMotor;
 	static std::shared_ptr<WPI_TalonSRX> drivetrainFrontRightMotor;
 	static std::shared_ptr<WPI_TalonSRX> drivetrainRearRightMotor;
-	static std::shared_ptr<frc::DifferentialDrive> drivetrainChassis;
+	static std::shared_ptr<frc::DifferentialDrive> drivetrainChassisFront;
+	static std::shared_ptr<frc::DifferentialDrive> drivetrainChassisRear;
 	static std::shared_ptr<frc::DoubleSolenoid> drivetrainShifter;
 	static std::shared_ptr<frc::Encoder> drivetrainLeftEncoder;
 	static std::shared_ptr<frc::Encoder> drivetrainRightEncoder;

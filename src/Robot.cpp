@@ -57,17 +57,19 @@ void Robot::RobotInit() {
 	oi.reset(new OI());
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
-	lw->Add(RobotMap::drivetrainChassis);
+	lw->Add(RobotMap::drivetrainChassisFront);
+	lw->Add(RobotMap::drivetrainChassisRear);
 //	std::thread(SocketClient::recv).detach();
 //	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
-	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
-	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
-	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
-	SmartDashboard::PutBoolean("connected?" , RobotMap::navX->IsConnected());
-	SmartDashboard::PutBoolean("moving?" , RobotMap::navX->IsMoving());
-	SmartDashboard::PutBoolean("rotating?" , RobotMap::navX->IsRotating());;
+//	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
+//	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
+//	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+//	SmartDashboard::PutBoolean("connected?" , RobotMap::navX->IsConnected());
+//	SmartDashboard::PutBoolean("moving?" , RobotMap::navX->IsMoving());
+//	SmartDashboard::PutBoolean("rotating?" , RobotMap::navX->IsRotating());
+
 
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
@@ -128,6 +130,9 @@ void Robot::AutonomousInit() {
 	std::cout << "Starting auto..." << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
+
+	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kForward);
+
 	Robot::elevator->GetBottomSwitch();
 	this->PickAuto();
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
@@ -145,6 +150,9 @@ void Robot::TeleopInit() {
 	std::cout << "Let's start teleop" << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
+
+	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kReverse);
+
 	cube->SetIntakeSpeed(0.0);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);

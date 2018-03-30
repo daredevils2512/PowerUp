@@ -7,7 +7,8 @@
 Drivetrain::Drivetrain() : Subsystem("Drivetrain") {
 
     DriveTrainShift = RobotMap::drivetrainShifter;
-    Chassis = RobotMap::drivetrainChassis;
+    ChassisFront = RobotMap::drivetrainChassisFront;
+    ChassisRear = RobotMap::drivetrainChassisRear;
 
     leftEncoder = RobotMap::drivetrainLeftEncoder;
     rightEncoder = RobotMap::drivetrainRightEncoder;
@@ -26,12 +27,14 @@ void Drivetrain::InitDefaultCommand() {
 }
 void Drivetrain::DriveRobotArcade(double speed, double rotation) {
 	//drives robot in arcade mode from specified values (TELEOP)
-	Chassis->ArcadeDrive(speed, rotation);
+	ChassisFront->ArcadeDrive(speed, rotation);
+	ChassisRear->ArcadeDrive(speed, rotation);
 }
 
 void Drivetrain::DriveRobotTank(double leftSpeed, double rightSpeed) {
 	//Needed for the auton driving
-	Chassis->TankDrive(leftSpeed, rightSpeed);
+	ChassisFront->TankDrive(leftSpeed, rightSpeed);
+	ChassisRear->TankDrive(leftSpeed, rightSpeed);
 }
 
 double Drivetrain::GetLeftEncoder() {

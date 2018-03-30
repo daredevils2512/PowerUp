@@ -10,7 +10,8 @@ private:
 	std::shared_ptr<WPI_TalonSRX> RearLeftMotor;
 	std::shared_ptr<WPI_TalonSRX> FrontRightMotor;
 	std::shared_ptr<WPI_TalonSRX> RearRightMotor;
-	std::shared_ptr<frc::DifferentialDrive> Chassis;
+	std::shared_ptr<frc::DifferentialDrive> ChassisFront;
+	std::shared_ptr<frc::DifferentialDrive> ChassisRear;
 	std::shared_ptr<DoubleSolenoid> DriveTrainShift;
 	std::shared_ptr<frc::Encoder> leftEncoder;
 	std::shared_ptr<frc::Encoder> rightEncoder;

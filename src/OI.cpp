@@ -10,6 +10,8 @@
 #include "OI.h"
 
 #include <WPILib.h>
+//#include "Commands/ClimberRunWinch.h"
+//#include "Commands/ClimberUseClaws.h"
 #include "Commands/UltraSonicStraightDrive.h"
 #include "Commands/PIDTurn.h"
 #include "Commands/PIDDriveStraight.h"
@@ -29,8 +31,8 @@
 OI::OI() {
 	DRC_leftTrigger.WhileHeld(new CubeRunIntake(-1.0)); //pull me in dad
 		DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
-	DRC_rightTrigger.WhileHeld(new LowGear()); //drop a gear
-	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
+	DRC_rightTrigger.WhileHeld(new HighGear()); //drop a gear
+	DRC_rightTrigger.WhenReleased(new LowGear()); //and disappear
 	DRC_leftBumper.WhenPressed(new CubeIntakeActuateOpen()); //spread
 	DRC_rightBumper.WhenPressed(new CubeIntakeActuateClose()); //retract
 	DRC_xButton.WhileHeld(new CubeRunIntake(1.0)); //thanks for flying air 2512
@@ -55,6 +57,12 @@ OI::OI() {
 	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
 	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
 	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder in-case something goes wrong
+//	CDB_topWhite.WhileHeld(new ClimberRunWinch(1.0));
+//	CDB_topWhite.WhenReleased(new ClimberRunWinch(0.0));
+//	CDB_topRed.WhileHeld(new ClimberRunWinch(-1.0));
+//	CDB_topRed.WhenReleased(new ClimberRunWinch(0.0));
+//	CDB_yellow.WhileHeld(new ClimberUseClaws(Climber::ClawsDirection::cDown));
+//	CDB_yellow.WhenReleased(new ClimberUseClaws(Climber::ClawsDirection::cUp));
 	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.7, 6.8)); //Top scale
 	CDB_topRed.WhenPressed(new ElevatorRunToHeight(0.7, 5.5)); //mid scale
 	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.7, 4.3)); //bottom scale
@@ -65,19 +73,32 @@ OI::OI() {
 
 	double OI::GetTurn() {
 		//gets turning values
-		return Desensitize(-driverController.GetRawAxis(4));
+		double val = Desensitize(-driverController.GetRawAxis(4));
+		return Exponate(val);
 	}
 
 	double OI::GetMove() {
 		//gets forward/backward values
-		return Desensitize(driverController.GetRawAxis(1));
+		double val = Desensitize(driverController.GetRawAxis(1))*1.1;
+		return Exponate(val);
+	}
+
+	double OI::Exponate(double val){
+		return pow( ( std::max(0.0, fabs(val)-0.15 ) ) * (1.0/(1.0-0.15)), 2.0) * GetSign(val);
 	}
 
 	double OI::Desensitize(double value) {
 		//set threshold so tiny values on the joystick don't register,
 		//sometimes resting value of joystick is not 0
-		if (fabs(value) < 0.25) value = 0;
+		if (fabs(value) < 0.15) value = 0;
 		return value;
+	}
+	double OI::GetSign(double value){
+		if(value < 0){
+			return (double) -1.0;
+		}else{
+			return (double) 1.0;
+		}
 	}
 
 	double OI::GetLiftControl() {

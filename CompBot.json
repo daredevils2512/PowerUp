@@ -443,6 +443,14 @@
                   "_title": "Talon SRX [8]",
                   "controllable": false,
                   "orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Differential Drivebase",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DifferentialDrive[2]",
+                  "_title": "DifferentialDrive[2]",
+                  "numberOfWheels": 4,
+                  "wheelDiameter": 80.0,
+                  "showVectors": true
                 }
               ]
             }
