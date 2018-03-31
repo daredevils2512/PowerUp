@@ -97,15 +97,15 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	AddSequential(new PIDTurn(45 * directionSwitch));
 	AddSequential(new Pause(0.25)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new PIDDriveStraight(69)); //66
+		AddSequential(new PIDDriveStraight(66)); //66
 	}else{
-		AddSequential(new PIDDriveStraight(56)); //54
+		AddSequential(new PIDDriveStraight(54)); //56
 	}
 	AddSequential(new Pause(0.25)); //0.3
 	AddSequential(new PIDTurn(38 * -directionSwitch)); //45
 	AddSequential(new Pause(0.25)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new PIDDriveStraight(17, 1.5)); //18
+		AddSequential(new PIDDriveStraight(20, 1.5)); //18
 	}else{
 		AddSequential(new PIDDriveStraight(26, 2.5)); //18
 	}
@@ -113,7 +113,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	if (ourSwitch == 'L') {
 		AddSequential(new AutoStraightDriveBackward(5,0.7));
 	}else{
-		AddSequential(new AutoStraightDriveBackward(6.5,0.7)); //5 inches
+		AddSequential(new AutoStraightDriveBackward(8.75,0.7)); //5 inches
 	}
 	AddSequential(new Pause(0.25)); //0.3
 	if (ourSwitch == 'L') {
@@ -127,7 +127,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	AddSequential(new AutoStraightDriveForward(27,0.6)); //34
 	AddSequential(new Pause(0.3)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new AutoStraightDriveBackward(14,0.8)); //35
+		AddSequential(new AutoStraightDriveBackward(12.5,0.8)); //14
 	}else{
 		AddSequential(new AutoStraightDriveBackward(11,0.8)); //26
 	}
@@ -167,7 +167,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 void AutoSelector::OutsideStraightScale() {
 	AddSequential(new PIDDriveStraight(185,4.5,0.9)); //258, 6.0 timeout //208 inches at 80
 	AddSequential(new Pause(0.4)); //0.2
-	AddSequential(new PIDTurn(37 * -directionScale, 0.6));//turning towards the scale //45 deg
+	AddSequential(new PIDTurn(32.5 * -directionScale, 0.6));//turning towards the scale //37 deg
 	AddSequential(new Pause(0.2));
 	AddSequential(new ElevatorRunToHeight(1.0, scaleHeight));  //Gonna be talller thane the scale
 	AddSequential(new Pause(0.2));
@@ -190,7 +190,7 @@ void AutoSelector::OutsideStraightScale() {
 
 void AutoSelector::OutsideOppositeScale() {
 //	AddSequential(new PIDDriveStraight(104));
-	AddSequential(new PIDDriveStraight(154,4.5,0.9));	//zoom to other side
+	AddSequential(new PIDDriveStraight(159,4.5,0.9));	//zoom to other side //154
 	AddSequential(new Pause(0.45));
 	AddSequential(new PIDTurn(91.2 * directionScale));//turn to go across the back of switch //90 deg
 	AddSequential(new Pause(0.3));

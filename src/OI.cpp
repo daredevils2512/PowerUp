@@ -74,7 +74,8 @@ OI::OI() {
 	double OI::GetTurn() {
 		//gets turning values
 		double val = Desensitize(-driverController.GetRawAxis(4));
-		return Exponate(val);
+		//return Exponate(val);
+		return val;
 	}
 
 	double OI::GetMove() {

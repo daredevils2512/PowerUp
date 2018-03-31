@@ -33,7 +33,6 @@ void ElevatorManualRun::Execute() {
 			Robot::elevator->RunLift(Robot::oi->GetLiftControl());
 		} else {
 			Robot::elevator->RunLift(0.0);
-			Robot::elevator->ResetMagneticEncoder(); //TODO see if this effects auto
 		}
 	} else {
 		if (Robot::oi->GetLiftControl() < -0.75) { //-0.5
