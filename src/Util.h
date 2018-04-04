@@ -23,6 +23,7 @@ class Util {
 		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 4;
 
 		static const int CLIMBER = 9;
+		static const int CLIMBER_DEPLOY = 0;
 
 		static const int CUBE_INTAKE_LEFT_MOTOR = 6;
 		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;

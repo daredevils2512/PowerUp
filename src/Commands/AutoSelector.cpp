@@ -13,6 +13,7 @@
 #include "Commands/CubeIntakeActuate.h"
 #include "Commands/CubeRunIntake.h"
 #include "Commands/CubeIntakeActuateOpen.h"
+#include "Commands/CubeIntakeActuateClose.h"
 #include "Commands/ElevatorRunToHeight.h"
 #include "Commands/ElevatorRunLift.h"
 #include "Commands/PIDTurn.h"
@@ -99,17 +100,18 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	if (ourSwitch == 'L') {
 		AddSequential(new PIDDriveStraight(66)); //66
 	}else{
-		AddSequential(new PIDDriveStraight(54)); //56
+		AddSequential(new PIDDriveStraight(51.5)); //56
 	}
 	AddSequential(new Pause(0.25)); //0.3
 	AddSequential(new PIDTurn(38 * -directionSwitch)); //45
 	AddSequential(new Pause(0.25)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new PIDDriveStraight(20, 1.5)); //18
+		AddSequential(new PIDDriveStraight(19.0, 1.25)); //18
 	}else{
-		AddSequential(new PIDDriveStraight(26, 2.5)); //18
+		AddSequential(new PIDDriveStraight(22.5, 2.5)); //18
 	}
 	AddSequential(new CubeRunIntake(0.65,0.5)); //0.8 for power
+	AddSequential(new CubeIntakeActuateOpen());
 	if (ourSwitch == 'L') {
 		AddSequential(new AutoStraightDriveBackward(5,0.7));
 	}else{
@@ -122,14 +124,16 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 		AddSequential(new PIDTurn(68.5 * -directionSwitch)); //73.5
 	}
 	AddSequential(new Pause(0.28)); //0.3
+	AddSequential(new CubeIntakeActuateClose());
+	AddSequential(new Pause(0.1));
 	AddSequential(new ElevatorRunToHeight(0.5 , 0.0)); //0 inches
-	AddParallel(new CubeRunIntake(-1.0,3));
-	AddSequential(new AutoStraightDriveForward(27,0.6)); //34
+	AddParallel(new CubeRunIntake(-1.0, 2.75));
+	AddSequential(new AutoStraightDriveForward(30,0.6)); //34
 	AddSequential(new Pause(0.3)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new AutoStraightDriveBackward(12.5,0.8)); //14
+		AddSequential(new AutoStraightDriveBackward(14.5,0.8)); //14
 	}else{
-		AddSequential(new AutoStraightDriveBackward(11,0.8)); //26
+		AddSequential(new AutoStraightDriveBackward(13,0.8)); //26
 	}
 	AddSequential(new Pause(0.1));
 	if (ourSwitch == 'L') {

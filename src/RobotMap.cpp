@@ -28,6 +28,7 @@ std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
 std::shared_ptr<frc::DigitalInput> RobotMap::cubeIntakeLimitSwitch;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::climber;
+std::shared_ptr<Victor> RobotMap::climberDeploy;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::climberFork;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::climberClaws;
 
@@ -95,8 +96,9 @@ void RobotMap::init() {
 
 	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
 	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
-
+//	climberDeploy.reset(new Victor (Util::CLIMBER_DEPLOY));
 //	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
+
 //	climberClaws.reset(new frc::DoubleSolenoid(0, 10, 11));
 //	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
 

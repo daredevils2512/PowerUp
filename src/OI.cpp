@@ -11,7 +11,7 @@
 
 #include <WPILib.h>
 //#include "Commands/ClimberRunWinch.h"
-//#include "Commands/ClimberUseClaws.h"
+//#include "Commands/ClimberRunDeploy.h"
 #include "Commands/UltraSonicStraightDrive.h"
 #include "Commands/PIDTurn.h"
 #include "Commands/PIDDriveStraight.h"
@@ -57,12 +57,12 @@ OI::OI() {
 	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
 	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
 	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder in-case something goes wrong
+//	CDB_yellow.WhileHeld(new ClimberRunDeploy(0.75));
+//	CDB_yellow.WhenReleased(new ClimberRunDeploy(0.0));
 //	CDB_topWhite.WhileHeld(new ClimberRunWinch(1.0));
 //	CDB_topWhite.WhenReleased(new ClimberRunWinch(0.0));
 //	CDB_topRed.WhileHeld(new ClimberRunWinch(-1.0));
 //	CDB_topRed.WhenReleased(new ClimberRunWinch(0.0));
-//	CDB_yellow.WhileHeld(new ClimberUseClaws(Climber::ClawsDirection::cDown));
-//	CDB_yellow.WhenReleased(new ClimberUseClaws(Climber::ClawsDirection::cUp));
 	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.7, 6.8)); //Top scale
 	CDB_topRed.WhenPressed(new ElevatorRunToHeight(0.7, 5.5)); //mid scale
 	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.7, 4.3)); //bottom scale
