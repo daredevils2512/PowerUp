@@ -14,11 +14,13 @@ void Cube::InitDefaultCommand() {
 }
 
 void Cube::SetIntakeSpeed(double speed) {
-	//TODO change these directions for the mini apple loss regional
+#ifdef Alea
 	intakeLeft->Set(speed *-1); //Alea
-//	intakeLeft->Set(speed * -1); //Atlas
 	intakeRight->Set(speed); //Alea
-//	intakeRight->Set(speed * -1); //Atlas
+#else
+	intakeLeft->Set(speed * -1); //Atlas
+	intakeRight->Set(speed * -1); //Atlas
+#endif
 }
 
 void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {
@@ -26,11 +28,7 @@ void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {
 }
 
 bool Cube::GetLimitSwitch() {
-	if (limitSwitch->Get()) {
-		return true;
-	}else{
-		return false;
-	}
+	return (limitSwitch->Get() ? true : false);
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

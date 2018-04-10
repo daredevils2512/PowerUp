@@ -95,11 +95,8 @@ OI::OI() {
 		return value;
 	}
 	double OI::GetSign(double value){
-		if(value < 0){
-			return (double) -1.0;
-		}else{
-			return (double) 1.0;
-		}
+		//returning if a double is positive or negative
+		return (double) value < 0 ? -1.0 : 1.0;
 	}
 
 	double OI::GetLiftControl() {

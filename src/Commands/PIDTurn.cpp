@@ -6,22 +6,22 @@
  * TODO: TEST, COMMAND IS UNTESTED AND EXPERIMENTAL
  ****/
 
-PIDTurn::PIDTurn(PIDTurn::PIDSettings settings, double goalAngle, double maxOutput) {
+PIDTurn::PIDTurn(PIDTurn::PIDSettings settings, double goalAngle, double maxOutput, double timeout) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg.
 	Requires(Robot::drivetrain.get());
 	m_settings = settings;
 	m_angle = goalAngle;
 	m_maxoutput = maxOutput;
-	SetTimeout(4.0); //3.0
+	SetTimeout(timeout); //3.0
 }
 
-PIDTurn::PIDTurn(double goalAngle , double maxOutput){
+PIDTurn::PIDTurn(double goalAngle , double maxOutput, double timeout){
 	Requires(Robot::drivetrain.get());
 	m_settings = PIDSettings::CARPET90;
 	m_angle = goalAngle;
 	m_maxoutput = maxOutput;
-	SetTimeout(4.0); //3.0
+	SetTimeout(timeout); //3.0
 }
 
 // Called just before this Command runs the first time

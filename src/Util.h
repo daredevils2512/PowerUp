@@ -46,6 +46,7 @@ class Util {
 		static const int ELEVATOR_BACK_MOTOR = 8;
 		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 4;
 		static constexpr double ELEVATOR_MAX_ENCODER_HEIGHT = 7.3; //7.2
+		static constexpr double ELEVATOR_HALF_SPEED_DOWN = -0.5;
 
 		enum class RobotSide {
 			unknown,
