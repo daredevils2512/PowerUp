@@ -62,10 +62,17 @@ void Robot::RobotInit() {
 //	SocketClient::Connect();
 }
 void Robot::RobotPeriodic() {
-//	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
-//	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
-//	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
-//
+	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
+	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
+	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+	SmartDashboard::PutBoolean("eX-Collision", Robot::drivetrain->IsXCollided());
+	SmartDashboard::PutBoolean("Y?-Collision", Robot::drivetrain->IsYCollided());
+	SmartDashboard::PutNumber("eX Jerk", Robot::drivetrain->m_xJerk);
+	SmartDashboard::PutNumber("Y? Jerk", Robot::drivetrain->m_yJerk);
+	SmartDashboard::PutNumber("X Accleration", RobotMap::navX->GetWorldLinearAccelX());
+	SmartDashboard::PutNumber("Y Accleration", RobotMap::navX->GetWorldLinearAccelY());
+	SmartDashboard::PutNumber("Z Accleration", RobotMap::navX->GetWorldLinearAccelZ());
+
 //	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 //	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());

@@ -16,6 +16,9 @@ private:
 	std::shared_ptr<frc::Encoder> rightEncoder;
 
 	double pidOutput = 0;
+	double m_lastXAccel = 0.0;
+	double m_lastYAccel = 0.0;
+	double COLLISION_THRESHOLD = 0.5;
 
 public:
 	Drivetrain();
@@ -27,6 +30,8 @@ public:
 	double GetRightEncoder();
 	void ResetEncoders();
 	void Shifter (frc::DoubleSolenoid::Value dir);
+	bool IsXCollided();
+	bool IsYCollided();
 	void SetAutonomous(bool isAutonomous);
 	bool GetAutonomous();
 	bool blockJoysticks;
@@ -36,6 +41,9 @@ public:
 
 	void SetPIDSetpoint(double setpoint);
 	void SetPIDEnabled(bool enabled);
+
+	double m_yJerk = 0.0;
+	double m_xJerk = 0.0;
 
 };
 

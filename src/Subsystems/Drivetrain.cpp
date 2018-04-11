@@ -82,3 +82,15 @@ double Drivetrain::GetPIDOutput() {
 void Drivetrain::SetPIDSetpoint(double setpoint){
 	RobotMap::navXTurnController->SetSetpoint(setpoint);
 }
+
+bool Drivetrain::IsXCollided() {
+	double currentXAccel = RobotMap::navX->GetWorldLinearAccelX();
+	m_xJerk = currentXAccel - m_lastXAccel;
+	return (fabs(m_xJerk) > COLLISION_THRESHOLD);
+}
+
+bool Drivetrain::IsYCollided(){
+	double currentYAccel = RobotMap::navX->GetWorldLinearAccelY();
+	m_yJerk = currentYAccel - m_lastXAccel;
+	return (fabs(m_yJerk) > COLLISION_THRESHOLD);
+}
