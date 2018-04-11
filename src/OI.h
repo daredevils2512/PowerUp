@@ -62,6 +62,8 @@ public:
 	double GetTurn();
 	double GetMove();
 	double Desensitize(double value);
+	double Exponate(double val);
+	double GetSign(double value);
 	double GetLiftControl();
 
 };

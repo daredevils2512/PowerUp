@@ -24,6 +24,7 @@ public:
 	Climber();
 	void InitDefaultCommand();
 	void SetClimbSpeed(double speed);
+	void SetDeploySpeed(double speed);
 	void SetForkDirection(ForkDirection direction);
 	void SetClawsDirection(ClawsDirection direction);
 };

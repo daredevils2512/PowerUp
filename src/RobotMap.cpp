@@ -13,7 +13,8 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainFrontLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainRearLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainFrontRightMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainRearRightMotor;
-std::shared_ptr<frc::DifferentialDrive> RobotMap::drivetrainChassis;
+std::shared_ptr<frc::DifferentialDrive> RobotMap::drivetrainChassisFront;
+std::shared_ptr<frc::DifferentialDrive> RobotMap::drivetrainChassisRear;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::drivetrainShifter;
 std::shared_ptr<frc::Encoder> RobotMap::drivetrainLeftEncoder;
 std::shared_ptr<frc::Encoder> RobotMap::drivetrainRightEncoder;
@@ -24,10 +25,10 @@ std::shared_ptr<frc::PIDController> RobotMap::navXTurnController;
 std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeRightMotor;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
-std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeGrabberSolenoid;
 std::shared_ptr<frc::DigitalInput> RobotMap::cubeIntakeLimitSwitch;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::climber;
+std::shared_ptr<Victor> RobotMap::climberDeploy;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::climberFork;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::climberClaws;
 
@@ -54,13 +55,18 @@ void RobotMap::init() {
 	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
 		Robot::dashboard->RegisterTalonSRX("drivetrain.motorControllers.rearRight",drivetrainRearRightMotor.get());
 
-	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
-	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
-	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
+//	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
+//	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
+	drivetrainChassisRear.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
+	drivetrainChassisFront.reset (new frc::DifferentialDrive(*drivetrainFrontLeftMotor.get(), *drivetrainFrontRightMotor.get()));
 
-	drivetrainChassis->SetSafetyEnabled(false);
-		drivetrainChassis->SetExpiration(0.5);
-		drivetrainChassis->SetMaxOutput(1.0);
+	drivetrainChassisFront->SetSafetyEnabled(false);
+		drivetrainChassisFront->SetExpiration(0.5);
+		drivetrainChassisFront->SetMaxOutput(1.0);
+
+	drivetrainChassisRear->SetSafetyEnabled(false);
+		drivetrainChassisRear->SetExpiration(0.5);
+		drivetrainChassisRear->SetMaxOutput(1.0);
 
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X));//TODO: util.h constants
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE);
@@ -88,14 +94,14 @@ void RobotMap::init() {
 	 cubeIntakeSolenoid.reset (new frc::DoubleSolenoid (0,6,7)); //TODO change back to 6,7 for Alea
 	 	 Robot::dashboard->RegisterDoubleSolenoid("cube.intake.grabberSolenoid",cubeIntakeSolenoid.get(),6,7);
 
-	 	 //TODO: implement dashboard registers for commented methods
-//	 cubeIntakeGrabberSolenoid.reset (new frc::DoubleSolenoid (0 , 7 , 8));
 	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
 	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
+//	climberDeploy.reset(new Victor (Util::CLIMBER_DEPLOY));
+//	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
 
-	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
-	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
-	climberClaws.reset(new frc::DoubleSolenoid(0, 10, 11));
+//	climberClaws.reset(new frc::DoubleSolenoid(0, 10, 11));
+//	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
+
 
 //	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
 //	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));
@@ -105,9 +111,10 @@ void RobotMap::init() {
 	elevatorMotor.reset(new WPI_TalonSRX (Util::ELEVATOR_MOTOR));
 		elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, 0, 0);
 		Robot::dashboard->RegisterTalonSRX("cube.elevatorMotor",elevatorMotor.get());
-//	elevatorBackMotor.reset(new WPI_TalonSRX (Util::ELEVATOR_BACK_MOTOR));
-//		elevatorBackMotor->Set(ControlMode::Follower , Util::ELEVATOR_MOTOR);
-//		elevatorBackMotor->SetInverted(true);
+
+	elevatorBackMotor.reset(new WPI_TalonSRX (Util::ELEVATOR_BACK_MOTOR));
+		elevatorBackMotor->SetInverted(true);
+
 	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
 		Robot::dashboard->RegisterLimitSwitch("cube.elevatorBottomSwitch", elevatorBottomSwitch.get());
 }

@@ -5,7 +5,6 @@ Cube::Cube() : Subsystem("Cube") {
 intakeLeft = RobotMap::cubeIntakeLeftMotor;
 intakeRight = RobotMap::cubeIntakeRightMotor;
 intakeSolenoid = RobotMap::cubeIntakeSolenoid;
-grabSolenoid = RobotMap::cubeIntakeGrabberSolenoid;
 limitSwitch = RobotMap::cubeIntakeLimitSwitch;
 }
 
@@ -15,27 +14,21 @@ void Cube::InitDefaultCommand() {
 }
 
 void Cube::SetIntakeSpeed(double speed) {
-	//TODO change these directions for the mini apple loss regional
-//	intakeLeft->Set(speed *-1); //Alea
+#ifdef Alea
+	intakeLeft->Set(speed *-1); //Alea
+	intakeRight->Set(speed); //Alea
+#else
 	intakeLeft->Set(speed * -1); //Atlas
-//	intakeRight->Set(speed); //Alea
 	intakeRight->Set(speed * -1); //Atlas
+#endif
 }
 
 void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {
 	intakeSolenoid->Set(direction);
 }
 
-void Cube::ActuateGrabber(frc::DoubleSolenoid::Value direction) {
-	grabSolenoid->Set(direction);
-}
-
 bool Cube::GetLimitSwitch() {
-	if (limitSwitch->Get()) {
-		return true;
-	}else{
-		return false;
-	}
+	return (limitSwitch->Get() ? true : false);
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

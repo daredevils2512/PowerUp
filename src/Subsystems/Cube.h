@@ -12,7 +12,6 @@ private:
 	std::shared_ptr <WPI_TalonSRX> intakeLeft;
 	std::shared_ptr <WPI_TalonSRX> intakeRight;
 	std::shared_ptr<frc::DoubleSolenoid> intakeSolenoid;
-	std::shared_ptr<frc::DoubleSolenoid> grabSolenoid;
 	std::shared_ptr<frc::DigitalInput> limitSwitch;
 
 public:
