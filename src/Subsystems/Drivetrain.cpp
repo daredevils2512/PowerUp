@@ -88,15 +88,33 @@ void Drivetrain::SetPIDSetpoint(double setpoint){
 
 bool Drivetrain::IsXCollided() {
 	double currentXAccel = RobotMap::navX->GetWorldLinearAccelX();
-	return (fabs(currentXAccel) > X_COLLISION_THRESHOLD);
+	m_xCol = (fabs(currentXAccel) > X_COLLISION_THRESHOLD) ? true : false;
+	UpdateCollisionCounters();
+	return m_xCol;
 }
 
 bool Drivetrain::IsYCollided() {
 	double currentYAccel = RobotMap::navX->GetWorldLinearAccelY();
-	return (fabs(currentYAccel) > Y_COLLISION_THRESHOLD);
+	m_yCol = (fabs(currentYAccel) > Y_COLLISION_THRESHOLD) ? true : false;
+	Drivetrain::UpdateCollisionCounters();
+	return m_yCol;
 }
 
 bool Drivetrain::IsZCollided() {
 	double currentZAccel = RobotMap::navX->GetWorldLinearAccelZ();
-	return (fabs(currentZAccel) > Z_COLLISION_THRESHOLD);
+	m_zCol = (fabs(currentZAccel) > Z_COLLISION_THRESHOLD) ? true : false;
+	Drivetrain::UpdateCollisionCounters();
+	return m_zCol;
+}
+
+void Drivetrain::UpdateCollisionCounters() {
+	if (m_xCol) {
+		m_xCollCount += 1;
+	}
+	if (m_yCol) {
+		m_yCollCount += 1;
+	}
+	if (m_zCol) {
+		m_zCollCount += 1;
+	}
 }

@@ -22,6 +22,10 @@ private:
 	static constexpr double Z_COLLISION_THRESHOLD = 0.50;
 	//highest recorded was 1.25
 
+	bool m_xCol = false;
+	bool m_yCol = false;
+	bool m_zCol = false;
+
 public:
 	Drivetrain();
 	void InitDefaultCommand();
@@ -35,6 +39,7 @@ public:
 	bool IsXCollided();
 	bool IsYCollided();
 	bool IsZCollided();
+	void UpdateCollisionCounters();
 	void SetAutonomous(bool isAutonomous);
 	bool GetAutonomous();
 	bool blockJoysticks;

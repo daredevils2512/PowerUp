@@ -69,6 +69,9 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("eX-Collision", Robot::drivetrain->IsXCollided());
 	SmartDashboard::PutBoolean("Y?-Collision", Robot::drivetrain->IsYCollided());
 	SmartDashboard::PutBoolean("Zee Collision", Robot::drivetrain->IsZCollided());
+	SmartDashboard::PutNumber("X Collisions", Robot::drivetrain->m_xCollCount);
+	SmartDashboard::PutNumber("Y Collisions", Robot::drivetrain->m_yCollCount);
+	SmartDashboard::PutNumber("Z Collisions", Robot::drivetrain->m_zCollCount);
 	SmartDashboard::PutNumber("X Velocity", RobotMap::navX->GetVelocityX());
 	SmartDashboard::PutNumber("Y Velocity", RobotMap::navX->GetVelocityY());
 	SmartDashboard::PutNumber("Z Velocity", RobotMap::navX->GetVelocityZ());
