@@ -13,7 +13,8 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainFrontLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainRearLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainFrontRightMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::drivetrainRearRightMotor;
-std::shared_ptr<frc::DifferentialDrive> RobotMap::drivetrainChassis;
+std::shared_ptr<frc::DifferentialDrive> RobotMap::drivetrainChassisFront;
+std::shared_ptr<frc::DifferentialDrive> RobotMap::drivetrainChassisRear;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::drivetrainShifter;
 std::shared_ptr<frc::Encoder> RobotMap::drivetrainLeftEncoder;
 std::shared_ptr<frc::Encoder> RobotMap::drivetrainRightEncoder;
@@ -24,10 +25,10 @@ std::shared_ptr<frc::PIDController> RobotMap::navXTurnController;
 std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeRightMotor;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
-std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeGrabberSolenoid;
 std::shared_ptr<frc::DigitalInput> RobotMap::cubeIntakeLimitSwitch;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::climber;
+std::shared_ptr<Victor> RobotMap::climberDeploy;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::climberFork;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::climberClaws;
 
@@ -96,6 +97,11 @@ void RobotMap::init() {
 //	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
 //	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
 //	climberClaws.reset(new frc::DoubleSolenoid(0, 10, 11));
+//	climberDeploy.reset(new Victor (Util::CLIMBER_DEPLOY));
+//	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
+
+//	climberClaws.reset(new frc::DoubleSolenoid(0, 10, 11));
+//	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
 
 //	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
 //	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));

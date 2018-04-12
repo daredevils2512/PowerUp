@@ -25,7 +25,7 @@ private:
 	bool doScale = false;
 	bool doSwitch = false;
 	int directionSwitch = 1;
-	int directionScale = 0;
+	int directionScale = 1;
 	char scale = ' ';
 	char ourSwitch = ' ';
 };

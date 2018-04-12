@@ -3,12 +3,10 @@
 #include "../RobotMap.h"
 #include "../Robot.h"
 
-Elevator::Elevator() :
-		Subsystem("Elevator") {
-//	left = RobotMap::elevatorLeftMotor;
-//	right = RobotMap::elevatorRightMotor;
+Elevator::Elevator() :	Subsystem("Elevator") {
 	motor = RobotMap::elevatorMotor;
 	bottom = RobotMap::elevatorBottomSwitch;
+	backmotor = RobotMap::elevatorBackMotor;
 }
 
 void Elevator::InitDefaultCommand() {
@@ -30,6 +28,7 @@ bool Elevator::GetBottomSwitch() {
 
 void Elevator::RunLift(double speed) {
 	motor->Set(speed);
+	backmotor->Set(speed);
 }
 
 double Elevator::GetLiftMagneticEncoder() {

@@ -10,6 +10,7 @@ private:
 	// for methods that implement subsystem capabilities
 std::shared_ptr<WPI_TalonSRX> motor;
 std::shared_ptr<frc::DigitalInput> bottom;
+std::shared_ptr<WPI_TalonSRX> backmotor;
 
 
 public:

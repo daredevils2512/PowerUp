@@ -20,20 +20,21 @@ void CubeRunIntake::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void CubeRunIntake::Execute() {
-	if (Robot::cube->GetLimitSwitch()) {
-		if (m_speed <= 0) {
-			Robot::cube->SetIntakeSpeed(0.0);
-		} else {
-			Robot::cube->SetIntakeSpeed(m_speed);
-		}
-	} else {
+//	if (Robot::cube->GetLimitSwitch()) {
+//		if (m_speed <= 0) {
+//			Robot::cube->SetIntakeSpeed(0.0);
+//		} else {
+//			Robot::cube->SetIntakeSpeed(m_speed);
+//		}
+//	} else {
 		Robot::cube->SetIntakeSpeed(m_speed);
-	}
+//	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool CubeRunIntake::IsFinished() {
-	return (Robot::cube->GetLimitSwitch() && m_speed <= 0) || IsTimedOut(); //m_speed >=
+	return IsTimedOut(); //m_speed >=
+//	(Robot::cube->GetLimitSwitch() && m_speed <= 0) ||
 }
 
 // Called once after isFinished returns true
