@@ -6,6 +6,7 @@
 #include "Robot.h"
 #include "Commands/AutoSelector.h"
 #include "FileAutonomousSource.h"
+#include "DareCheesecake/VisionServer.h"
 
 std::shared_ptr<Drivetrain> Robot::drivetrain;
 std::unique_ptr<OI> Robot::oi;
@@ -61,6 +62,9 @@ void Robot::RobotInit() {
 	lw->Add(RobotMap::drivetrainChassisRear);
 //	std::thread(SocketClient::recv).detach();
 //	SocketClient::Connect();
+	std::cout<<"Setting up VisionServer"<<std::endl;
+	VisionServer::setupServer();
+	std::thread(VisionServer::visionLoop).detach();
 }
 void Robot::RobotPeriodic() {
 //	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
