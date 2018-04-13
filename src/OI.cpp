@@ -56,7 +56,7 @@ OI::OI() {
 
 	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
 	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
-	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder in-case something goes wrong
+//	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder in-case something goes wrong
 //	CDB_yellow.WhileHeld(new ClimberRunDeploy(0.75));
 //	CDB_yellow.WhenReleased(new ClimberRunDeploy(0.0));
 //	CDB_topWhite.WhileHeld(new ClimberRunWinch(1.0));

@@ -2,6 +2,7 @@
 #define DRIVETRAIN_H
 #include "Commands/Subsystem.h"
 #include <WPILib.h>
+#include <vector>
 #include "ctre/Phoenix.h"
 
 class Drivetrain: public frc::Subsystem, public PIDOutput {
@@ -40,6 +41,7 @@ public:
 	bool IsYCollided();
 	bool IsZCollided();
 	void UpdateCollisionCounters();
+	void TopTenBuilder(int num);
 	void SetAutonomous(bool isAutonomous);
 	bool GetAutonomous();
 	bool blockJoysticks;
@@ -53,7 +55,11 @@ public:
 	int m_xCollCount = 0;
 	int m_yCollCount = 0;
 	int m_zCollCount = 0;
+	double m_currentXAccel = 0.0;
+	double m_currentYAccel = 0.0;
+	double m_currentZAccel = 0.0;
 
+	std::vector<double> m_xTopTen;
 
 };
 

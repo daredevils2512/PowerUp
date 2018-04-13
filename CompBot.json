@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.007894736842105263,
+  "dividerPosition": 0.20421052631578948,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -11,9 +11,9 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "11,5": {
+          "9,5": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -33,9 +33,9 @@
               "_title": "Raw Left Encoder"
             }
           },
-          "6,2": {
+          "5,2": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -44,9 +44,9 @@
               "_title": "Subsystem Get Left Encoder"
             }
           },
-          "11,2": {
+          "9,2": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -88,7 +88,7 @@
               "_title": "GetYaw"
             }
           },
-          "8,2": {
+          "6,2": {
             "size": [
               3,
               4
@@ -101,9 +101,9 @@
               "showVectors": true
             }
           },
-          "6,4": {
+          "5,4": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -112,9 +112,9 @@
               "_title": "Drivetrain Rear Left Current"
             }
           },
-          "11,3": {
+          "9,3": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -123,9 +123,9 @@
               "_title": "Drivetrain Front Right Current"
             }
           },
-          "6,3": {
+          "5,3": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -134,9 +134,9 @@
               "_title": "Drivetrain Front Left Current"
             }
           },
-          "11,4": {
+          "9,4": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -195,7 +195,7 @@
           },
           "3,4": {
             "size": [
-              3,
+              2,
               2
             ],
             "content": {
@@ -206,7 +206,7 @@
           },
           "3,2": {
             "size": [
-              3,
+              1,
               2
             ],
             "content": {
@@ -253,6 +253,144 @@
               "colorWhenTrue": "#7CFC00FF",
               "colorWhenFalse": "#8B0000FF"
             }
+          },
+          "3,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/X Acceleration",
+              "_title": "X Acceleration"
+            }
+          },
+          "4,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Z Velocity",
+              "_title": "Z Velocity"
+            }
+          },
+          "5,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Z Collisions",
+              "_title": "Z Collisions"
+            }
+          },
+          "6,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Y Acceleration",
+              "_title": "Y Acceleration"
+            }
+          },
+          "7,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Y Collisions",
+              "_title": "Y Collisions"
+            }
+          },
+          "8,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Z Acceleration",
+              "_title": "Z Acceleration"
+            }
+          },
+          "9,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/X Velocity",
+              "_title": "X Velocity"
+            }
+          },
+          "10,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/eX-Collision",
+              "_title": "eX-Collision",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "11,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/X Collisions",
+              "_title": "X Collisions"
+            }
+          },
+          "12,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Y Velocity",
+              "_title": "Y Velocity"
+            }
+          },
+          "3,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Zee Collision",
+              "_title": "Zee Collision",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "4,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Y?-Collision",
+              "_title": "Y?-Collision",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
           }
         }
       }
@@ -269,7 +407,7 @@
         "tiles": {
           "2,0": {
             "size": [
-              6,
+              5,
               6
             ],
             "content": {
@@ -455,7 +593,7 @@
               ]
             }
           },
-          "8,0": {
+          "7,0": {
             "size": [
               1,
               4
@@ -479,9 +617,9 @@
               "_children": []
             }
           },
-          "9,0": {
+          "8,0": {
             "size": [
-              2,
+              1,
               4
             ],
             "content": {
@@ -491,7 +629,7 @@
               "_children": []
             }
           },
-          "11,0": {
+          "9,0": {
             "size": [
               1,
               4
@@ -501,6 +639,94 @@
               "_source0": "network_table:///LiveWindow/DaredevilDashboard",
               "_title": "DaredevilDashboard",
               "_children": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Tab 3",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {
+          "0,0": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/X Acceleration",
+              "_title": "/SmartDashboard/X Acceleration",
+              "Visible time": 10.0
+            }
+          },
+          "0,2": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Y Acceleration",
+              "_title": "/SmartDashboard/Y Acceleration",
+              "Visible time": 10.0
+            }
+          },
+          "0,4": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/Z Acceleration",
+              "_title": "/SmartDashboard/Z Acceleration",
+              "Visible time": 10.0
+            }
+          },
+          "3,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Y?-Collision",
+              "_title": "/SmartDashboard/Y?-Collision",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "3,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Zee Collision",
+              "_title": "/SmartDashboard/Zee Collision",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
+            }
+          },
+          "3,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/eX-Collision",
+              "_title": "/SmartDashboard/eX-Collision",
+              "colorWhenTrue": "#7CFC00FF",
+              "colorWhenFalse": "#8B0000FF"
             }
           }
         }

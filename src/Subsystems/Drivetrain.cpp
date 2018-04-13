@@ -1,4 +1,5 @@
 #include <cmath>
+#include <algorithm>
 
 #include "Drivetrain.h"
 #include "../RobotMap.h"
@@ -87,27 +88,28 @@ void Drivetrain::SetPIDSetpoint(double setpoint){
 }
 
 bool Drivetrain::IsXCollided() {
-	double currentXAccel = RobotMap::navX->GetWorldLinearAccelX();
-	m_xCol = (fabs(currentXAccel) > X_COLLISION_THRESHOLD) ? true : false;
+	m_currentXAccel = RobotMap::navX->GetWorldLinearAccelX();
+	m_xCol = (fabs(m_currentXAccel) > X_COLLISION_THRESHOLD) ? true : false;
 	UpdateCollisionCounters();
 	return m_xCol;
 }
 
 bool Drivetrain::IsYCollided() {
-	double currentYAccel = RobotMap::navX->GetWorldLinearAccelY();
-	m_yCol = (fabs(currentYAccel) > Y_COLLISION_THRESHOLD) ? true : false;
+	m_currentYAccel = RobotMap::navX->GetWorldLinearAccelY();
+	m_yCol = (fabs(m_currentYAccel) > Y_COLLISION_THRESHOLD) ? true : false;
 	Drivetrain::UpdateCollisionCounters();
 	return m_yCol;
 }
 
 bool Drivetrain::IsZCollided() {
-	double currentZAccel = RobotMap::navX->GetWorldLinearAccelZ();
-	m_zCol = (fabs(currentZAccel) > Z_COLLISION_THRESHOLD) ? true : false;
+	m_currentZAccel = RobotMap::navX->GetWorldLinearAccelZ();
+	m_zCol = (fabs(m_currentZAccel) > Z_COLLISION_THRESHOLD) ? true : false;
 	Drivetrain::UpdateCollisionCounters();
 	return m_zCol;
 }
 
 void Drivetrain::UpdateCollisionCounters() {
+//	TopTenBuilder(m_currentXAccel);
 	if (m_xCol) {
 		m_xCollCount += 1;
 	}
@@ -118,3 +120,11 @@ void Drivetrain::UpdateCollisionCounters() {
 		m_zCollCount += 1;
 	}
 }
+
+//void Drivetrain::TopTenBuilder(int num) {
+//	m_xTopTen.push_back(num);
+//	std::sort(m_xTopTen.begin(), m_xTopTen.end());
+//	while (m_xTopTen.size() > 10) {
+//		m_xTopTen.erase(m_xTopTen.begin());
+//	}
+//}

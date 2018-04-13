@@ -57,8 +57,8 @@ void Robot::RobotInit() {
 	oi.reset(new OI());
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
-	lw->Add(RobotMap::drivetrainChassisFront);
-	lw->Add(RobotMap::drivetrainChassisRear);
+//	lw->Add(RobotMap::drivetrainChassisFront);
+//	lw->Add(RobotMap::drivetrainChassisRear);
 //	std::thread(SocketClient::recv).detach();
 //	SocketClient::Connect();
 }
@@ -66,6 +66,8 @@ void Robot::RobotPeriodic() {
 //	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
 //	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
 //	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
+	SmartDashboard::PutBoolean("Connected?", RobotMap::navX->IsConnected());
+	SmartDashboard::PutString("firmware" , RobotMap::navX->GetFirmwareVersion());
 	SmartDashboard::PutBoolean("eX-Collision", Robot::drivetrain->IsXCollided());
 	SmartDashboard::PutBoolean("Y?-Collision", Robot::drivetrain->IsYCollided());
 	SmartDashboard::PutBoolean("Zee Collision", Robot::drivetrain->IsZCollided());
@@ -78,6 +80,8 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("X Acceleration", RobotMap::navX->GetWorldLinearAccelX());
 	SmartDashboard::PutNumber("Y Acceleration", RobotMap::navX->GetWorldLinearAccelY());
 	SmartDashboard::PutNumber("Z Acceleration", RobotMap::navX->GetWorldLinearAccelZ());
+
+//	SmartDashboard::PutNumberArray("X-Top Ten", Robot::drivetrain->m_xTopTen);
 
 //	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
@@ -139,7 +143,7 @@ void Robot::AutonomousInit() {
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
 
-	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kForward);
+//	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kForward);
 
 	Robot::elevator->GetBottomSwitch();
 	this->PickAuto();
@@ -159,7 +163,7 @@ void Robot::TeleopInit() {
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
 
-	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kReverse);
+//	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kReverse);
 
 	cube->SetIntakeSpeed(0.0);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
