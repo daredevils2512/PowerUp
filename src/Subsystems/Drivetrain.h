@@ -18,14 +18,6 @@ private:
 	std::shared_ptr<frc::Encoder> rightEncoder;
 
 	double pidOutput = 0;
-	static constexpr double X_COLLISION_THRESHOLD = 0.75;
-	static constexpr double Y_COLLISION_THRESHOLD = 0.75;
-	static constexpr double Z_COLLISION_THRESHOLD = 0.50;
-	//highest recorded was 1.25
-
-	bool m_xCol = false;
-	bool m_yCol = false;
-	bool m_zCol = false;
 
 public:
 	Drivetrain();
@@ -37,11 +29,6 @@ public:
 	double GetRightEncoder();
 	void ResetEncoders();
 	void Shifter (frc::DoubleSolenoid::Value dir);
-	bool IsXCollided();
-	bool IsYCollided();
-	bool IsZCollided();
-	void UpdateCollisionCounters();
-	void TopTenBuilder(int num);
 	void SetAutonomous(bool isAutonomous);
 	bool GetAutonomous();
 	bool blockJoysticks;
@@ -51,15 +38,6 @@ public:
 
 	void SetPIDSetpoint(double setpoint);
 	void SetPIDEnabled(bool enabled);
-
-	int m_xCollCount = 0;
-	int m_yCollCount = 0;
-	int m_zCollCount = 0;
-	double m_currentXAccel = 0.0;
-	double m_currentYAccel = 0.0;
-	double m_currentZAccel = 0.0;
-
-	std::vector<double> m_xTopTen;
 
 };
 
