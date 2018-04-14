@@ -14,9 +14,15 @@ void Drive::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Drive::Execute() {
-	if(!Robot::drivetrain->GetAutonomous()) {
+	if(!Robot::drivetrain->GetAutonomous() && Robot::elevator->GetLiftMagneticEncoder() <= 4.5) {
+			std::cout << "You've been a good boy, letting you drive normally" << std::endl;
 			Robot::drivetrain->DriveRobotArcade(Robot::oi->GetMove() , Robot::oi->GetTurn());
-		}
+	}else if (Robot::elevator->GetLiftMagneticEncoder() > 6.5) {
+		std::cout << "You're too tall! Limiting your throttle range" << std::endl;
+		Robot::drivetrain->DriveRobotArcade(Robot::oi->GetMove() * 0.5 , Robot::oi->GetTurn() * 0.5);
+	}else{
+		Robot::drivetrain->DriveRobotArcade(Robot::oi->GetMove() , Robot::oi->GetTurn());
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

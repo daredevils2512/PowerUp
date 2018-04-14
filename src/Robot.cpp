@@ -70,11 +70,10 @@ void Robot::RobotPeriodic() {
 //	SmartDashboard::PutBoolean("moving?" , RobotMap::navX->IsMoving());
 //	SmartDashboard::PutBoolean("rotating?" , RobotMap::navX->IsRotating());
 
-
 	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
-//	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
+	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
-//	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
+	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
 	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
 
 //	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
@@ -106,7 +105,7 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 //
 //	SmartDashboard::PutNumber("Y-Axis", Robot::oi->GetMove());
-//	SmartDashboard::PutNumber("X-Axis", Robot::oi->GetTurn());
+//	SmartDashboard::PutNumber("X-Axis", Robot::oi->GetTurn())
 	}
 void Robot::DisabledInit(){
 	std::cout << "Let's start being disabled" << std::endl;

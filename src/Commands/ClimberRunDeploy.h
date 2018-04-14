@@ -18,6 +18,6 @@ public:
 	void End() override;
 	void Interrupted() override;
 private:
-	double m_deploy = 0.0;
+	double m_speed = 0.0;
 };
 

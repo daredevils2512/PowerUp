@@ -102,7 +102,6 @@ void RobotMap::init() {
 //	climberClaws.reset(new frc::DoubleSolenoid(0, 10, 11));
 //	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
 
-
 //	ultrasonicFrontLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_LEFT)));
 //	ultrasonicRearLeft.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_REAR_LEFT)));
 //	ultrasonicFrontRight.reset(new UltrasonicSensor(new frc::AnalogInput(Util::ULTRASONIC_FRONT_RIGHT)));
