@@ -24,6 +24,7 @@
 #include "Commands/HighGear.h"
 #include "Commands/AutoStraightDriveForward.h"
 #include "Commands/AutoStraightDriveBackward.h"
+#include "Commands/UpdateCollisionData.h"
 #include "Robot.h"
 #include "Util.h"
 
@@ -59,6 +60,7 @@ OI::OI() {
 //	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder in-case something goes wrong
 //	CDB_yellow.WhileHeld(new ClimberRunDeploy(0.75));
 //	CDB_yellow.WhenReleased(new ClimberRunDeploy(0.0));
+	CDB_yellow.WhileHeld(new UpdateCollisionData());
 //	CDB_topWhite.WhileHeld(new ClimberRunWinch(1.0));
 //	CDB_topWhite.WhenReleased(new ClimberRunWinch(0.0));
 //	CDB_topRed.WhileHeld(new ClimberRunWinch(-1.0));

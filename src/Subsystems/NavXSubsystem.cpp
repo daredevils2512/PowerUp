@@ -1,5 +1,6 @@
 #include "NavXSubsystem.h"
 #include "../RobotMap.h"
+#include "../Commands/Pause.h"
 
 //keep in mind for future if classdef error on constants, do this
 const double NavXSubsystem::NAVX_P_VALUE = 0.03;
@@ -7,7 +8,7 @@ const double NavXSubsystem::NAVX_I_VALUE = 0.00;
 const double NavXSubsystem::NAVX_D_VALUE = 0.00;
 const double NavXSubsystem::NAVX_F_VALUE = 0.00;
 
-NavXSubsystem::NavXSubsystem() : Subsystem("ExampleSubsystem") {
+NavXSubsystem::NavXSubsystem() : Subsystem("NavXSubsystem") {
 	xData.name = 'x';
 	yData.name = 'y';
 	zData.name = 'z';
@@ -17,6 +18,7 @@ NavXSubsystem::NavXSubsystem() : Subsystem("ExampleSubsystem") {
 void NavXSubsystem::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
 	// SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new ::UpdateCollisionData());
 }
 
 // Put methods for controlling this subsystem
@@ -24,34 +26,77 @@ void NavXSubsystem::InitDefaultCommand() {
 void NavXSubsystem::UpdateAccelerations(char name) {
 	if (name == xData.name) {
 		xData.currentAccel = RobotMap::navX->GetWorldLinearAccelX();
+		collisionData.currentAccel = xData.currentAccel;
 	} else if (name == yData.name) {
 		yData.currentAccel = RobotMap::navX->GetWorldLinearAccelY();
+		collisionData.currentAccel = yData.currentAccel;
 	} else if (name == zData.name) {
 		zData.currentAccel = RobotMap::navX->GetWorldLinearAccelZ();
+		collisionData.currentAccel = zData.currentAccel;
 	}
 }
 
-void NavXSubsystem::UpdateCollisionCounters(CollisionData collisionData) {
-	if (collisionData.collided) {
-		collisionData.collisionCount += 1;
+void NavXSubsystem::UpdateCollisionCounters(char name) {
+	if (name == xData.name) {
+		if (xData.collided) {
+			xData.collisionCount += 1;
+		}
+	} else if (name == yData.name) {
+		if (yData.collided) {
+			yData.collisionCount += 1;
+		}
+	} else if (name == zData.name) {
+		if (zData.collided) {
+			zData.collisionCount += 1;
+		}
 	}
 }
 
-void NavXSubsystem::UpdateCollisions(NavXSubsystem::CollisionData collisionData) {
+void NavXSubsystem::UpdateCollisions(char name) {
 	collisionData.collided = (fabs(collisionData.currentAccel) > collisionData.collisionThreshold) ? true : false;
-}
-
-void NavXSubsystem::UpdateTopTens(NavXSubsystem::CollisionData collisionData, int num) {
-	collisionData.TopTen.push_back(num);
-	std::sort(collisionData.TopTen.begin(), collisionData.TopTen.end());
-	while (collisionData.TopTen.size() > 10) {
-		collisionData.TopTen.erase(collisionData.TopTen.begin());
+	if (name == xData.name) {
+		xData.collided = collisionData.collided;
+	} else if (name == yData.name) {
+		yData.collided = collisionData.collided;
+	} else if (name == zData.name) {
+		zData.collided = collisionData.collided;
+	}
+	if (collisionData.collided) {
+		std::cout << name << std::endl;
+		std::cout << "Collision data: " << collisionData.collided << std::endl;
+		std::cout << "X Collision: " << xData.collided << std::endl;
+		std::cout << "Y Collision: " << yData.collided << std::endl;
+		std::cout << "Z Collision: " << zData.collided << std::endl;
 	}
 }
 
-void NavXSubsystem::UpdateCollisionData(NavXSubsystem::CollisionData collisionData, char name) {
-	NavXSubsystem::UpdateCollisionCounters(collisionData);
-	NavXSubsystem::UpdateCollisions(collisionData);
+void NavXSubsystem::UpdateTopTens(char name) {
+	if (name == xData.name) {
+		xData.TopTenList = BuildTopTen(xData.TopTenList, xData.currentAccel);
+		std::copy(xData.TopTenList.begin(), xData.TopTenList.end(), xData.TopTenArray);
+	} else if (name == yData.name) {
+		yData.TopTenList = BuildTopTen(yData.TopTenList, yData.currentAccel);
+		std::copy(yData.TopTenList.begin(), yData.TopTenList.end(), yData.TopTenArray);
+	} else if (name == zData.name) {
+		zData.TopTenList = BuildTopTen(zData.TopTenList, zData.currentAccel);
+		std::copy(zData.TopTenList.begin(), zData.TopTenList.end(), zData.TopTenArray);
+	}
+}
+
+std::list<double> NavXSubsystem::BuildTopTen(std::list<double> topTen, double num) {
+	topTen.sort();
+	if (num > topTen.back()) {
+		topTen.push_back(num);
+		while (topTen.size() > 10) {
+			topTen.pop_front();
+		}
+	}
+	return topTen;
+}
+
+void NavXSubsystem::UpdateCollisionData(char name) {
 	NavXSubsystem::UpdateAccelerations(name);
-//	NavXSubsystem::UpdateTopTens(collisionData, collisionData.currentAccel);
+	NavXSubsystem::UpdateCollisions(name);
+	NavXSubsystem::UpdateCollisionCounters(name);
+	NavXSubsystem::UpdateTopTens(name);
 }

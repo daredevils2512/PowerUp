@@ -31,12 +31,14 @@ void Robot::PrintFaults(WPI_TalonSRX * talonPtr, std::string name) {
 	}
 }
 
+
 void Robot::RobotInit() {
 	std::cout << "Robot Init" << std::endl;
 	dashboard.reset(new DareDashboard());
 	RobotMap::init();
     drivetrain.reset(new Drivetrain());
     ultrasonicSubsystem.reset(new UltrasonicSubsystem());
+    navXSubsystem.reset(new NavXSubsystem());
     navxPidSource.reset(new NavXPIDSource());
     elevator.reset(new Elevator());
     RobotMap::navXTurnController.reset(new frc::PIDController(
@@ -62,10 +64,11 @@ void Robot::RobotInit() {
 //	std::thread(SocketClient::recv).detach();
 //	SocketClient::Connect();
 }
+
 void Robot::RobotPeriodic() {
-//	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->xData, Robot::navXSubsystem->xData.name);
-//	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->yData, Robot::navXSubsystem->yData.name);
-//	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->zData, Robot::navXSubsystem->zData.name);
+	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->xData.name);
+	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->yData.name);
+	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->zData.name);
 
 //	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
 //	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
@@ -84,9 +87,9 @@ void Robot::RobotPeriodic() {
     SmartDashboard::PutNumber("X Counter", Robot::navXSubsystem->xData.collisionCount);
     SmartDashboard::PutNumber("Y Counter", Robot::navXSubsystem->yData.collisionCount);
     SmartDashboard::PutNumber("Z Counter", Robot::navXSubsystem->zData.collisionCount);
-    SmartDashboard::PutNumberArray("X Top Ten", Robot::navXSubsystem->xData.TopTen);
-
-//	SmartDashboard::PutNumberArray("X-Top Ten", Robot::drivetrain->m_xTopTen);
+    SmartDashboard::PutNumberArray("X Top Ten", Robot::navXSubsystem->xData.TopTenArray);
+    SmartDashboard::PutNumberArray("Y Top Ten", Robot::navXSubsystem->yData.TopTenArray);
+    SmartDashboard::PutNumberArray("Z Top Ten", Robot::navXSubsystem->zData.TopTenArray);
 
 //	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
@@ -130,8 +133,8 @@ void Robot::DisabledInit(){
 	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
-	drivetrain->SetPIDEnabled(false);
-	drivetrain->GetPIDOutput();
+//	drivetrain->SetPIDEnabled(false);
+//	drivetrain->GetPIDOutput();
 }
 
 void Robot::DisabledPeriodic() {
@@ -145,15 +148,15 @@ void Robot::PickAuto() {
 }
 void Robot::AutonomousInit() {
 	std::cout << "Starting auto..." << std::endl;
-	Robot::drivetrain->ResetEncoders();
-	Robot::elevator->ResetMagneticEncoder();
+//	Robot::drivetrain->ResetEncoders();
+//	Robot::elevator->ResetMagneticEncoder();
 
 //	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kForward);
 
-	Robot::elevator->GetBottomSwitch();
+//	Robot::elevator->GetBottomSwitch();
 	this->PickAuto();
-	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
-	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);
+//	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
+//	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);
 	if (autonomousCommand.get() != nullptr) {
 		autonomousCommand->Start();
 	}
@@ -165,14 +168,14 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
 	std::cout << "Let's start teleop" << std::endl;
-	Robot::drivetrain->ResetEncoders();
-	Robot::elevator->ResetMagneticEncoder();
+//	Robot::drivetrain->ResetEncoders();
+//	Robot::elevator->ResetMagneticEncoder();
 
 //	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kReverse);
 
-	cube->SetIntakeSpeed(0.0);
-	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
-	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
+//	cube->SetIntakeSpeed(0.0);
+//	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
+//	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
 	compressor->SetClosedLoopControl(true);
 	if (autonomousCommand.get() != nullptr) {
 			autonomousCommand->Cancel();
@@ -191,25 +194,25 @@ void Robot::TeleopPeriodic() {
 	}
 
 void Robot::TestInit() {
-	Robot::drivetrain->ResetEncoders();
+//	Robot::drivetrain->ResetEncoders();
 	drivetrain->SetPIDEnabled(false);
 	if (autonomousCommand.get() != nullptr) {
 		autonomousCommand->Cancel();
 	}
-	drivetrain->SetPIDSetpoint(90);
+//	drivetrain->SetPIDSetpoint(90);
 }
 
 void Robot::TestPeriodic() {
 	Scheduler::GetInstance()->Run();
 
-	if (drivetrain->IsPIDEnabled()) {
-		double output = drivetrain->GetPIDOutput();
-		SmartDashboard::PutNumber("PID Input", navxPidSource->PIDGet());
-		SmartDashboard::PutNumber("PID Output", output);
-		drivetrain->DriveRobotTank(-output,output);
-	} else {
-		drivetrain->DriveRobotTank(0,0);
-	}
+//	if (drivetrain->IsPIDEnabled()) {
+//		double output = drivetrain->GetPIDOutput();
+//		SmartDashboard::PutNumber("PID Input", navxPidSource->PIDGet());
+//		SmartDashboard::PutNumber("PID Output", output);
+//		drivetrain->DriveRobotTank(-output,output);
+//	} else {
+//		drivetrain->DriveRobotTank(0,0);
+//	}
 	//lw->Run();
 }
 

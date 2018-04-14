@@ -3,6 +3,9 @@
 
 #include <Commands/Subsystem.h>
 #include <vector>
+#include <list>
+
+#include "../Commands/UpdateCollisionData.h"
 
 class NavXSubsystem : public frc::Subsystem {
 private:
@@ -12,20 +15,22 @@ private:
 public:
 	struct CollisionData {
 		char name;
-		bool collided;
-		int collisionCount;
-		double currentAccel;
-		std::vector<double> TopTen;
-		double collisionThreshold;
-	} xData, yData, zData;
+		bool collided = false;
+		int collisionCount = 0;
+		double currentAccel = 0.0;
+		std::list<double> TopTenList;
+		double TopTenArray [10];
+		double collisionThreshold = 0.75;
+	} xData, yData, zData, collisionData;
 
 	NavXSubsystem();
 	void InitDefaultCommand();
 	void UpdateAccelerations(char name);
-	void UpdateCollisions(CollisionData collisionData);
-	void UpdateCollisionCounters(CollisionData collisionData);
-	void UpdateTopTens(CollisionData collisionData, int num);
-	void UpdateCollisionData(CollisionData collisionData, char name);
+	void UpdateCollisions(char name);
+	void UpdateCollisionCounters(char name);
+	void UpdateTopTens(char name);
+	std::list<double> BuildTopTen(std::list<double> topTen, double num);
+	void UpdateCollisionData(char name);
 
 	const static double NAVX_P_VALUE;
 	const static double NAVX_I_VALUE;
