@@ -11,6 +11,7 @@
 ClimberRunWinch::ClimberRunWinch(double speed) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
+	Requires(Robot::climber.get());
 	m_speed = speed;
 }
 

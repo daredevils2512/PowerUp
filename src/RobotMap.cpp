@@ -41,6 +41,8 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorBackMotor;
 std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
 
+std::shared_ptr<frc::PowerDistributionPanel> RobotMap::powerDistributionPanel;
+
 void RobotMap::init() {
 	//TODO PCM ID is 60 on Atlas, change this on Alea when you can
 	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
@@ -116,4 +118,6 @@ void RobotMap::init() {
 
 	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
 		Robot::dashboard->RegisterLimitSwitch("cube.elevatorBottomSwitch", elevatorBottomSwitch.get());
+
+	powerDistributionPanel.reset(new frc::PowerDistributionPanel(Util::POWER_DISTRIBUTION_PANEL));
 }

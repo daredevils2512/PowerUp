@@ -169,13 +169,13 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
  }
 
 void AutoSelector::OutsideStraightScale() {
-	AddSequential(new PIDDriveStraight(185,4.5,0.9)); //258, 6.0 timeout //208 inches at 80
-	AddSequential(new Pause(0.4)); //0.2
+	AddSequential(new PIDDriveStraight(185,3.5,0.9)); //258, 4.5 timeout //208 inches at 80
+	AddSequential(new Pause(0.5)); //0.4
 	AddSequential(new PIDTurn(32.5 * -directionScale, 0.6));//turning towards the scale //37 deg
 	AddSequential(new Pause(0.2));
 	AddSequential(new ElevatorRunToHeight(1.0, scaleHeight));  //Gonna be talller thane the scale
 	AddSequential(new Pause(0.2));
-	AddSequential(new CubeRunIntake(1.0,0.5));	//bye bye cube
+	AddSequential(new CubeRunIntake(0.8,0.5));	//bye bye cube //1.0 speed
 	AddSequential(new Pause(0.2));
 	AddSequential(new ElevatorRunToHeight(0.3, 0.0)); //0.08
 	AddSequential(new Pause(0.2));
@@ -195,7 +195,7 @@ void AutoSelector::OutsideStraightScale() {
 void AutoSelector::OutsideOppositeScale() {
 //	AddSequential(new PIDDriveStraight(104));
 	AddSequential(new PIDDriveStraight(159,4.5,0.9));	//zoom to other side //154
-	AddSequential(new Pause(0.45));
+	AddSequential(new Pause(0.5)); //0.45
 	AddSequential(new PIDTurn(91.2 * directionScale));//turn to go across the back of switch //90 deg
 	AddSequential(new Pause(0.3));
 	AddSequential(new PIDDriveStraight(139, 4.5,0.9));	//zoom to other side //160
