@@ -42,3 +42,12 @@ void Util::trim(std::string &s) {
     ltrim(s);
     rtrim(s);
 }
+
+void Util::PrintDoublesList(std::list<double> list) {
+	std::cout << "[" << std::endl;
+	for (int i = 0; i < int(list.size() - 1); i++) {
+		std::cout << list.front() << "," << std::endl;
+		list.pop_front();
+	}
+	std::cout << "]" << std::endl;
+}

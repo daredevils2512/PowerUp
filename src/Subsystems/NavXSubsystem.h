@@ -19,7 +19,7 @@ public:
 		int collisionCount = 0;
 		double currentAccel = 0.0;
 		std::list<double> TopTenList;
-		double TopTenArray [10];
+		std::list<double> LastTopTen;
 		double collisionThreshold = 0.75;
 	} xData, yData, zData, collisionData;
 

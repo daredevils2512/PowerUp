@@ -34,7 +34,7 @@ void Robot::PrintFaults(WPI_TalonSRX * talonPtr, std::string name) {
 
 void Robot::RobotInit() {
 	std::cout << "Robot Init" << std::endl;
-	dashboard.reset(new DareDashboard());
+//	dashboard.reset(new DareDashboard());
 	RobotMap::init();
     drivetrain.reset(new Drivetrain());
     ultrasonicSubsystem.reset(new UltrasonicSubsystem());
@@ -59,6 +59,7 @@ void Robot::RobotInit() {
 	oi.reset(new OI());
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
+	lw->Add(Robot::navXSubsystem);
 //	lw->Add(RobotMap::drivetrainChassisFront);
 //	lw->Add(RobotMap::drivetrainChassisRear);
 //	std::thread(SocketClient::recv).detach();
@@ -87,9 +88,6 @@ void Robot::RobotPeriodic() {
     SmartDashboard::PutNumber("X Counter", Robot::navXSubsystem->xData.collisionCount);
     SmartDashboard::PutNumber("Y Counter", Robot::navXSubsystem->yData.collisionCount);
     SmartDashboard::PutNumber("Z Counter", Robot::navXSubsystem->zData.collisionCount);
-    SmartDashboard::PutNumberArray("X Top Ten", Robot::navXSubsystem->xData.TopTenArray);
-    SmartDashboard::PutNumberArray("Y Top Ten", Robot::navXSubsystem->yData.TopTenArray);
-    SmartDashboard::PutNumberArray("Z Top Ten", Robot::navXSubsystem->zData.TopTenArray);
 
 //	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());

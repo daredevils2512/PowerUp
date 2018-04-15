@@ -12,6 +12,8 @@
 #include <algorithm>
 #include <locale>
 #include <cctype>
+#include <list>
+#include <iostream>
 
 class Util {
 	public:
@@ -63,6 +65,7 @@ class Util {
 		static void rtrim(std::string &s);
 		static void trim(std::string &s);
 
+		static void PrintDoublesList(std::list<double> list);
 };
 
 #endif /* SRC_UTIL_H_ */

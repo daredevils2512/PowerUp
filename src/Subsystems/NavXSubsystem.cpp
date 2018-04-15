@@ -1,6 +1,7 @@
 #include "NavXSubsystem.h"
 #include "../RobotMap.h"
 #include "../Commands/Pause.h"
+#include "../Util.h"
 
 //keep in mind for future if classdef error on constants, do this
 const double NavXSubsystem::NAVX_P_VALUE = 0.03;
@@ -61,25 +62,30 @@ void NavXSubsystem::UpdateCollisions(char name) {
 	} else if (name == zData.name) {
 		zData.collided = collisionData.collided;
 	}
-	if (collisionData.collided) {
-		std::cout << name << std::endl;
-		std::cout << "Collision data: " << collisionData.collided << std::endl;
-		std::cout << "X Collision: " << xData.collided << std::endl;
-		std::cout << "Y Collision: " << yData.collided << std::endl;
-		std::cout << "Z Collision: " << zData.collided << std::endl;
-	}
 }
 
 void NavXSubsystem::UpdateTopTens(char name) {
 	if (name == xData.name) {
 		xData.TopTenList = BuildTopTen(xData.TopTenList, xData.currentAccel);
-		std::copy(xData.TopTenList.begin(), xData.TopTenList.end(), xData.TopTenArray);
+		if (xData.LastTopTen != xData.TopTenList) {
+			std::cout << "X-Values:" << std::endl;
+			Util::PrintDoublesList(xData.TopTenList);
+		}
+		xData.LastTopTen = xData.TopTenList;
 	} else if (name == yData.name) {
 		yData.TopTenList = BuildTopTen(yData.TopTenList, yData.currentAccel);
-		std::copy(yData.TopTenList.begin(), yData.TopTenList.end(), yData.TopTenArray);
+		if (yData.LastTopTen != yData.TopTenList) {
+			std::cout << "Y-Values:" << std::endl;
+			Util::PrintDoublesList(yData.TopTenList);
+		}
+		yData.LastTopTen = yData.TopTenList;
 	} else if (name == zData.name) {
 		zData.TopTenList = BuildTopTen(zData.TopTenList, zData.currentAccel);
-		std::copy(zData.TopTenList.begin(), zData.TopTenList.end(), zData.TopTenArray);
+		if (zData.LastTopTen != zData.TopTenList) {
+			std::cout << "Z-Values:" << std::endl;
+			Util::PrintDoublesList(zData.TopTenList);
+		}
+		zData.LastTopTen = zData.TopTenList;
 	}
 }
 
