@@ -25,11 +25,3 @@ void Climber::SetForkDirection(ForkDirection direction) {
 		RobotMap::climberFork->Set(frc::DoubleSolenoid::Value::kReverse);
 	}
 }
-
-void Climber::SetClawsDirection(ClawsDirection direction) {
-	if (direction == ClawsDirection::cDown) {
-		RobotMap::climberClaws->Set(frc::DoubleSolenoid::Value::kForward);
-	} else {
-		RobotMap::climberClaws->Set(frc::DoubleSolenoid::Value::kReverse);
-	}
-}
