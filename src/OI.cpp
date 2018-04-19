@@ -10,8 +10,8 @@
 #include "OI.h"
 
 #include <WPILib.h>
-//#include "Commands/ClimberRunWinch.h"
-//#include "Commands/ClimberRunDeploy.h"
+#include "Commands/ClimberRunWinch.h"
+#include "Commands/ClimberRunDeploy.h"
 #include "Commands/UltraSonicStraightDrive.h"
 #include "Commands/PIDTurn.h"
 #include "Commands/PIDDriveStraight.h"
@@ -38,13 +38,13 @@ OI::OI() {
 	DRC_xButton.WhileHeld(new CubeRunIntake(1.0)); //thanks for flying air 2512
 		DRC_xButton.WhenReleased(new CubeRunIntake(0.0));
 
-	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //full send out
+	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //normal send out
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
-	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.55)); //medium cube out
+	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.55)); //medium send out
 		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));
-	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(-1.0)); //run cube in //1.0
+	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(1.0)); //full send out
 	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
-	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(0.4)); //run cube out //-1.0
+	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(0.4)); //soft send out
 	CDR_bottomLeftJoystick.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuateClose()); //actuate intake arms in
 	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuateOpen()); //actuate intake arms out
@@ -56,25 +56,22 @@ OI::OI() {
 
 	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
 	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
-	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder in-case something goes wrong
-//	CDB_yellow.WhileHeld(new ClimberRunDeploy(0.75)); //run seperate stage up to deliver hooks
-//	CDB_yellow.WhenReleased(new ClimberRunDeploy(0.0));
-//	CDB_topWhite.WhileHeld(new ClimberRunWinch(1.0)); //run winch up
-//	CDB_topWhite.WhenReleased(new ClimberRunWinch(0.0));
-//	CDB_topRed.WhileHeld(new ClimberRunWinch(-1.0)); //run winch down
-//	CDB_topRed.WhenReleased(new ClimberRunWinch(0.0));
-	CDB_topWhite.WhenPressed(new ElevatorRunToHeight(0.7, 6.8)); //Top scale
-	CDB_topRed.WhenPressed(new ElevatorRunToHeight(0.7, 5.5)); //mid scale
-	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.7, 4.3)); //bottom scale
+	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder
+	CDB_yellow.WhileHeld(new ClimberRunWinch(1.0)); //run winch up, robot up
+	CDB_yellow.WhenReleased(new ClimberRunWinch(0.0));
+	CDB_topWhite.WhileHeld(new ClimberRunDeploy(0.75)); //hooks up
+	CDB_topWhite.WhenReleased(new ClimberRunDeploy(0.0));
+	CDB_topRed.WhileHeld(new ClimberRunDeploy(-0.5)); //hooks down
+	CDB_topRed.WhenReleased(new ClimberRunDeploy(0.0));
+	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.7, 5.5)); //middle scale
 	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.7, 2.6)); //switch
 	CDB_bottomWhite.WhenPressed(new ElevatorRunToHeight(0.7, 1.42)); //portal
-	CDB_bottomRed.WhenPressed(new ElevatorRunToHeight(0.7, 0.08)); //bottom
+	CDB_bottomRed.WhenPressed(new ElevatorRunToHeight(0.7, 0.5)); //cube carry height
 }
 
 	double OI::GetTurn() {
 		//gets turning values
 		double val = Desensitize(-driverController.GetRawAxis(4));
-		//return Exponate(val);
 		return val;
 	}
 

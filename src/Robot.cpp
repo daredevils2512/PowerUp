@@ -82,11 +82,6 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
 	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
 
-	SmartDashboard::PutNumber("Total Current" , RobotMap::powerDistributionPanel->GetTotalCurrent());
-	SmartDashboard::PutNumber("Total Joules" , RobotMap::powerDistributionPanel->GetTotalEnergy());
-	SmartDashboard::PutNumber("Total Voltage" , RobotMap::powerDistributionPanel->GetVoltage());
-	SmartDashboard::PutNumber("Temp in Celsius" , RobotMap::powerDistributionPanel->GetTemperature());
-
 //	PrintFaults(RobotMap::drivetrainFrontLeftMotor.get(), "FL");
 //	PrintFaults(RobotMap::drivetrainFrontRightMotor.get(), "FR");
 //	PrintFaults(RobotMap::drivetrainRearLeftMotor.get(), "RL");

@@ -40,7 +40,7 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorBackMotor;
 std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
 
-std::shared_ptr<frc::PowerDistributionPanel> RobotMap::powerDistributionPanel;
+//std::shared_ptr<frc::PowerDistributionPanel> RobotMap::powerDistributionPanel;
 
 void RobotMap::init() {
 	//TODO PCM ID is 60 on Atlas, change this on Alea when you can
@@ -61,11 +61,11 @@ void RobotMap::init() {
 	drivetrainChassisRear.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 	drivetrainChassisFront.reset (new frc::DifferentialDrive(*drivetrainFrontLeftMotor.get(), *drivetrainFrontRightMotor.get()));
 
-	drivetrainChassisFront->SetSafetyEnabled(false);
+	drivetrainChassisFront->SetSafetyEnabled(true); //TODO make sure this is okay as true
 		drivetrainChassisFront->SetExpiration(0.5);
 		drivetrainChassisFront->SetMaxOutput(1.0);
 
-	drivetrainChassisRear->SetSafetyEnabled(false);
+drivetrainChassisRear->SetSafetyEnabled(true);
 		drivetrainChassisRear->SetExpiration(0.5);
 		drivetrainChassisRear->SetMaxOutput(1.0);
 
@@ -97,8 +97,9 @@ void RobotMap::init() {
 
 	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
 	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
-//	climberDeploy.reset(new WPI_TalonSRX (Util::CLIMBER_DEPLOY));
-//	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
+
+	climberDeploy.reset(new WPI_TalonSRX (Util::CLIMBER_DEPLOY));
+	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
 
 //	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
 
@@ -116,6 +117,4 @@ void RobotMap::init() {
 
 	elevatorBottomSwitch.reset(new frc::DigitalInput(Util::ELEVATOR_BOTTOM_LIMIT_SWITCH));
 		Robot::dashboard->RegisterLimitSwitch("cube.elevatorBottomSwitch", elevatorBottomSwitch.get());
-
-	powerDistributionPanel.reset(new frc::PowerDistributionPanel(Util::POWER_DISTRIBUTION_PANEL));
 }

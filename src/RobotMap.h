@@ -39,7 +39,6 @@ public:
 	static std::shared_ptr<WPI_TalonSRX> elevatorBackMotor;
 	static std::shared_ptr<frc::DigitalInput> elevatorBottomSwitch;
 
-	static std::shared_ptr<frc::PowerDistributionPanel> powerDistributionPanel;
 
 	static void init();
 

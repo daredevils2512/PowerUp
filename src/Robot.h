@@ -13,7 +13,6 @@
 #include "Subsystems/DareDashboard.h"
 #include "NavXPIDSource.h"
 #include "Subsystems/Elevator.h"
-#include <PowerDistributionPanel.h>
 
 #include "OI.h"
 
