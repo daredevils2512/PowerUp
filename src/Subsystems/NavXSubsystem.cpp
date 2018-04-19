@@ -90,10 +90,11 @@ void NavXSubsystem::UpdateTopTens(char name) {
 }
 
 std::list<double> NavXSubsystem::BuildTopTen(std::list<double> topTen, double num) {
-	topTen.sort();
-	if (num > topTen.back()) {
+	if (num > topTen.front()) {
 		topTen.push_back(num);
-		while (topTen.size() > 10) {
+		topTen.sort();
+		topTen.unique();
+		if (topTen.size() > 10) {
 			topTen.pop_front();
 		}
 	}
