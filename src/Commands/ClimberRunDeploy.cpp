@@ -12,7 +12,7 @@ ClimberRunDeploy::ClimberRunDeploy(double speed) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	Requires(Robot::climber.get());
-	m_deploy = speed;
+	m_speed = speed;
 }
 
 // Called just before this Command runs the first time
@@ -22,7 +22,7 @@ void ClimberRunDeploy::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ClimberRunDeploy::Execute() {
-	Robot::climber->SetDeploySpeed(m_deploy);
+	Robot::climber->SetDeploySpeed(m_speed);
 }
 
 // Make this return true when this Command no longer needs to run execute()

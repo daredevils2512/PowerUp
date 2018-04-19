@@ -15,8 +15,14 @@ void Drive::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void Drive::Execute() {
 	if(!Robot::drivetrain->GetAutonomous()) {
-			Robot::drivetrain->DriveRobotArcade(Robot::oi->GetMove() , Robot::oi->GetTurn());
+		double move = Robot::oi->GetMove();
+		double turn = Robot::oi->GetTurn();
+		if(Robot::elevator->GetLiftMagneticEncoder() > Util::ELEVATOR_THROTTLE_HEIGHT){
+		  move *= Util::ELEVATOR_THROTTLE_AMOUNT;
+		  turn *= Util::ELEVATOR_THROTTLE_AMOUNT;
 		}
+		Robot::drivetrain->DriveRobotArcade(move,turn);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -23,7 +23,7 @@ class Util {
 		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 4;
 
 		static const int CLIMBER = 9;
-		static const int CLIMBER_DEPLOY = 0;
+		static const int CLIMBER_DEPLOY = 10;
 
 		static const int CUBE_INTAKE_LEFT_MOTOR = 6;
 		static const int CUBE_INTAKE_RIGHT_MOTOR = 7;
@@ -47,6 +47,8 @@ class Util {
 		static const int ELEVATOR_BOTTOM_LIMIT_SWITCH = 4;
 		static constexpr double ELEVATOR_MAX_ENCODER_HEIGHT = 7.3; //7.2
 		static constexpr double ELEVATOR_HALF_SPEED_DOWN = -0.5;
+		static constexpr double ELEVATOR_THROTTLE_HEIGHT = 5.0;
+		static constexpr double ELEVATOR_THROTTLE_AMOUNT = 0.24;
 
 		enum class RobotSide {
 			unknown,
