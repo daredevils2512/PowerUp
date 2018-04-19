@@ -58,14 +58,14 @@ void RobotMap::init() {
 
 //	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
 //	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
-	drivetrainChassisRear.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 	drivetrainChassisFront.reset (new frc::DifferentialDrive(*drivetrainFrontLeftMotor.get(), *drivetrainFrontRightMotor.get()));
+	drivetrainChassisRear.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 
 	drivetrainChassisFront->SetSafetyEnabled(true); //TODO make sure this is okay as true
 		drivetrainChassisFront->SetExpiration(0.5);
 		drivetrainChassisFront->SetMaxOutput(1.0);
 
-drivetrainChassisRear->SetSafetyEnabled(true);
+	drivetrainChassisRear->SetSafetyEnabled(true);
 		drivetrainChassisRear->SetExpiration(0.5);
 		drivetrainChassisRear->SetMaxOutput(1.0);
 
