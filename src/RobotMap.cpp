@@ -61,13 +61,13 @@ void RobotMap::init() {
 	drivetrainChassisFront.reset (new frc::DifferentialDrive(*drivetrainFrontLeftMotor.get(), *drivetrainFrontRightMotor.get()));
 	drivetrainChassisRear.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
 
-	drivetrainChassisFront->SetSafetyEnabled(true); //TODO make sure this is okay as true
-		drivetrainChassisFront->SetExpiration(0.5);
-		drivetrainChassisFront->SetMaxOutput(1.0);
+	drivetrainChassisFront->SetSafetyEnabled(true);
+	drivetrainChassisFront->SetExpiration(0.5);
+	drivetrainChassisFront->SetMaxOutput(1.0);
 
 	drivetrainChassisRear->SetSafetyEnabled(true);
-		drivetrainChassisRear->SetExpiration(0.5);
-		drivetrainChassisRear->SetMaxOutput(1.0);
+	drivetrainChassisRear->SetExpiration(0.5);
+	drivetrainChassisRear->SetMaxOutput(1.0);
 
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X));//TODO: util.h constants
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE);

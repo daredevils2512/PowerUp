@@ -36,7 +36,7 @@ void ElevatorManualRun::Execute() {
 		Robot::elevator->RunLift(Robot::oi->GetLiftControl());
 
 	//else don't run lift cause no bueno
-	} else {
+	} else if (Robot::elevator->GetBottomSwitch() || (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT)) {
 		Robot::elevator->RunLift(0.0);
 	}
 }
