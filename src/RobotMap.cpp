@@ -43,25 +43,30 @@ std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
 
 void RobotMap::init() {
 	//TODO PCM ID is 60 on Atlas, change this on Alea when you can
-//	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
+	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
 //		Robot::dashboard->RegisterTalonSRX("drivetrain.motorControllers.frontLeft",drivetrainFrontLeftMotor.get());
 //
-//	drivetrainRearLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_LEFT_MOTOR));
+	drivetrainRearLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_LEFT_MOTOR));
 //		Robot::dashboard->RegisterTalonSRX("drivetrain.motorControllers.rearLeft",drivetrainRearLeftMotor.get());
 //
-//	drivetrainFrontRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_RIGHT_MOTOR));
+	drivetrainFrontRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_RIGHT_MOTOR));
 //		Robot::dashboard->RegisterTalonSRX("drivetrain.motorControllers.frontRight",drivetrainFrontRightMotor.get());
 //
-//	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
+	drivetrainRearRightMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_REAR_RIGHT_MOTOR));
 //		Robot::dashboard->RegisterTalonSRX("drivetrain.motorControllers.rearRight",drivetrainRearRightMotor.get());
 //
 //	drivetrainFrontLeftMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_LEFT_MOTOR);
 //	drivetrainFrontRightMotor->Set(ControlMode::Follower, Util::DRIVETRAIN_REAR_RIGHT_MOTOR);
-//	drivetrainChassis.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
-//
-//	drivetrainChassis->SetSafetyEnabled(false);
-//		drivetrainChassis->SetExpiration(0.5);
-//		drivetrainChassis->SetMaxOutput(1.0);
+	drivetrainChassisRear.reset (new frc::DifferentialDrive(*drivetrainRearLeftMotor.get(), *drivetrainRearRightMotor.get()));
+	drivetrainChassisFront.reset (new frc::DifferentialDrive(*drivetrainFrontLeftMotor.get(), *drivetrainFrontRightMotor.get()));
+
+	drivetrainChassisFront->SetSafetyEnabled(false);
+		drivetrainChassisFront->SetExpiration(0.5);
+		drivetrainChassisFront->SetMaxOutput(1.0);
+
+	drivetrainChassisRear->SetSafetyEnabled(false);
+		drivetrainChassisRear->SetExpiration(0.5);
+		drivetrainChassisRear->SetMaxOutput(1.0);
 //
 //	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X));//TODO: util.h constants
 //		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE);
@@ -75,7 +80,7 @@ void RobotMap::init() {
 //
 //		Robot::dashboard->RegisterEncoder("drivetrain.encoders.right",drivetrainRightEncoder.get(),2,3);
 //
-//	drivetrainShifter.reset (new frc::DoubleSolenoid (0,4,5)); //TODO change back to 4,5 for Alea & USE UTIL CONSTANTS!!!
+	drivetrainShifter.reset (new frc::DoubleSolenoid (0,4,5)); //TODO change back to 4,5 for Alea & USE UTIL CONSTANTS!!!
 //		Robot::dashboard->RegisterDoubleSolenoid("drivetrain.shifter",drivetrainShifter.get(),4,5);
 
 	 navX.reset(new AHRS(SPI::Port::kMXP));

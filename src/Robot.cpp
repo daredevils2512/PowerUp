@@ -40,7 +40,7 @@ void Robot::RobotInit() {
     ultrasonicSubsystem.reset(new UltrasonicSubsystem());
     navXSubsystem.reset(new NavXSubsystem());
     navxPidSource.reset(new NavXPIDSource());
-    elevator.reset(new Elevator());
+//    elevator.reset(new Elevator());
     RobotMap::navXTurnController.reset(new frc::PIDController(
     		NavXSubsystem::NAVX_P_VALUE,
 			NavXSubsystem::NAVX_I_VALUE,
@@ -54,14 +54,14 @@ void Robot::RobotInit() {
 		RobotMap::navXTurnController->SetAbsoluteTolerance(0.5f);
 		RobotMap::navXTurnController->SetContinuous(true);
 	compressor.reset(new frc::Compressor());
-	cube.reset(new Cube());
-	climber.reset (new Climber());
+//	cube.reset(new Cube());
+//	climber.reset (new Climber());
 	oi.reset(new OI());
 	lw = frc::LiveWindow::GetInstance();
 	lw->Add(RobotMap::navXTurnController);
 	lw->Add(Robot::navXSubsystem);
-//	lw->Add(RobotMap::drivetrainChassisFront);
-//	lw->Add(RobotMap::drivetrainChassisRear);
+	lw->Add(RobotMap::drivetrainChassisFront);
+	lw->Add(RobotMap::drivetrainChassisRear);
 //	std::thread(SocketClient::recv).detach();
 //	SocketClient::Connect();
 }
@@ -131,8 +131,8 @@ void Robot::DisabledInit(){
 	compressor->SetClosedLoopControl(false);
 	RobotMap::navX->Reset();
 	RobotMap::navX->ResetDisplacement();
-//	drivetrain->SetPIDEnabled(false);
-//	drivetrain->GetPIDOutput();
+	drivetrain->SetPIDEnabled(false);
+	drivetrain->GetPIDOutput();
 }
 
 void Robot::DisabledPeriodic() {
@@ -149,12 +149,10 @@ void Robot::AutonomousInit() {
 //	Robot::drivetrain->ResetEncoders();
 //	Robot::elevator->ResetMagneticEncoder();
 
-//	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kForward);
-
 //	Robot::elevator->GetBottomSwitch();
 	this->PickAuto();
-//	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
-//	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);
+	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
+	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);
 	if (autonomousCommand.get() != nullptr) {
 		autonomousCommand->Start();
 	}
@@ -169,11 +167,9 @@ void Robot::TeleopInit() {
 //	Robot::drivetrain->ResetEncoders();
 //	Robot::elevator->ResetMagneticEncoder();
 
-//	Robot::drivetrain->Shifter(frc::DoubleSolenoid::Value::kReverse);
-
 //	cube->SetIntakeSpeed(0.0);
-//	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
-//	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
+	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
+	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
 	compressor->SetClosedLoopControl(true);
 	if (autonomousCommand.get() != nullptr) {
 			autonomousCommand->Cancel();

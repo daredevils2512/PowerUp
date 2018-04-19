@@ -19,10 +19,10 @@ class Util {
 	public:
 
 		//Keeping all the constants in one place
-		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 1;
-		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 2;
-		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 3;
-		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 4;
+		static const int DRIVETRAIN_FRONT_LEFT_MOTOR = 4;
+		static const int DRIVETRAIN_REAR_LEFT_MOTOR = 1;
+		static const int DRIVETRAIN_FRONT_RIGHT_MOTOR = 9;
+		static const int DRIVETRAIN_REAR_RIGHT_MOTOR = 2;
 
 		static const int CLIMBER = 9;
 		static const int CLIMBER_DEPLOY = 0;
