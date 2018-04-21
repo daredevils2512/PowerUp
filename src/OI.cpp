@@ -37,6 +37,8 @@ OI::OI() {
 	DRC_rightBumper.WhenPressed(new CubeIntakeActuateClose()); //retract
 	DRC_xButton.WhileHeld(new CubeRunIntake(1.0)); //thanks for flying air 2512
 		DRC_xButton.WhenReleased(new CubeRunIntake(0.0));
+	DRC_aButton.WhenPressed(new PIDTurn(90.0,0.85)); //TODO remove when done testing
+	DRC_bButton.WhenPressed(new PIDTurn(-90.0,0.85));
 
 	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //normal send out
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));

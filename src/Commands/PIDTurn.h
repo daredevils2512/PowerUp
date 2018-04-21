@@ -11,7 +11,7 @@ public:
 	};
 
 	PIDTurn(PIDSettings settings, double goalAngle , double maxOutput, double timeout = 3.0);
-	PIDTurn(double goalAngle, double maxOutput = 0.75, double timeout = 3.0);
+	PIDTurn(double goalAngle, double maxOutput = 0.85, double timeout = 3.0); //0.75 output
 	void Initialize();
 	void Execute();
 	bool IsFinished();
