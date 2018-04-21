@@ -23,7 +23,6 @@ void UpdateCollisionData::Initialize() {
 void UpdateCollisionData::Execute() {
 	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->xData.name);
 	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->yData.name);
-	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->zData.name);
 
 }
 

@@ -6,6 +6,7 @@
  */
 
 #include <Commands/HighGear.h>
+#include "../Robot.h"
 
 HighGear::HighGear() {
 	// TODO Auto-generated constructor stub

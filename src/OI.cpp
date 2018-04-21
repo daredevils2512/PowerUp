@@ -75,14 +75,14 @@ OI::OI() {
 
 	double OI::GetTurn() {
 		//gets turning values
-		double val = Desensitize(-driverController.GetRawAxis(4));
+		double val = Desensitize(driverController.GetRawAxis(4));
 		//return Exponate(val);
 		return val;
 	}
 
 	double OI::GetMove() {
 		//gets forward/backward values
-		double val = Desensitize(driverController.GetRawAxis(1))*1.1;
+		double val = Desensitize(-driverController.GetRawAxis(1))*1.1;
 		return Exponate(val);
 	}
 
@@ -101,7 +101,7 @@ OI::OI() {
 		return (double) value < 0 ? -1.0 : 1.0;
 	}
 
-	double OI::GetLiftControl() {
-		//manual control to control elevator movement with joystick
-		return Desensitize(coDriverController.GetRawAxis(1));
-	}
+//	double OI::GetLiftControl() {
+//		//manual control to control elevator movement with joystick
+//		return Desensitize(coDriverController.GetRawAxis(1));
+//	}

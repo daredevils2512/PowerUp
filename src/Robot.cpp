@@ -69,7 +69,6 @@ void Robot::RobotInit() {
 void Robot::RobotPeriodic() {
 	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->xData.name);
 	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->yData.name);
-	Robot::navXSubsystem->UpdateCollisionData(Robot::navXSubsystem->zData.name);
 
 //	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
 //	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
@@ -78,16 +77,12 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutString("firmware" , RobotMap::navX->GetFirmwareVersion());
 	SmartDashboard::PutNumber("X Velocity", RobotMap::navX->GetVelocityX());
 	SmartDashboard::PutNumber("Y Velocity", RobotMap::navX->GetVelocityY());
-	SmartDashboard::PutNumber("Z Velocity", RobotMap::navX->GetVelocityZ());
 	SmartDashboard::PutNumber("X Acceleration", Robot::navXSubsystem->xData.currentAccel);
 	SmartDashboard::PutNumber("Y Acceleration", Robot::navXSubsystem->yData.currentAccel);
-	SmartDashboard::PutNumber("Z Acceleration", Robot::navXSubsystem->zData.currentAccel);
 	SmartDashboard::PutBoolean("X Collided?", Robot::navXSubsystem->xData.collided);
     SmartDashboard::PutBoolean("Y Collided?", Robot::navXSubsystem->yData.collided);
-    SmartDashboard::PutBoolean("Z Collided?", Robot::navXSubsystem->zData.collided);
     SmartDashboard::PutNumber("X Counter", Robot::navXSubsystem->xData.collisionCount);
     SmartDashboard::PutNumber("Y Counter", Robot::navXSubsystem->yData.collisionCount);
-    SmartDashboard::PutNumber("Z Counter", Robot::navXSubsystem->zData.collisionCount);
 
 //	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());

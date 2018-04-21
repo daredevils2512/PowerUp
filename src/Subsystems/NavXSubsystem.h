@@ -21,7 +21,7 @@ public:
 		std::list<double> TopTenList;
 		std::list<double> LastTopTen;
 		double collisionThreshold = 0.75;
-	} xData, yData, zData, collisionData;
+	} xData, yData, collisionData;
 
 	NavXSubsystem();
 	void InitDefaultCommand();

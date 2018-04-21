@@ -12,8 +12,6 @@ const double NavXSubsystem::NAVX_F_VALUE = 0.00;
 NavXSubsystem::NavXSubsystem() : Subsystem("NavXSubsystem") {
 	xData.name = 'x';
 	yData.name = 'y';
-	zData.name = 'z';
-	zData.collisionThreshold = 0.5;
 }
 
 void NavXSubsystem::InitDefaultCommand() {
@@ -31,9 +29,6 @@ void NavXSubsystem::UpdateAccelerations(char name) {
 	} else if (name == yData.name) {
 		yData.currentAccel = RobotMap::navX->GetWorldLinearAccelY();
 		collisionData.currentAccel = yData.currentAccel;
-	} else if (name == zData.name) {
-		zData.currentAccel = RobotMap::navX->GetWorldLinearAccelZ();
-		collisionData.currentAccel = zData.currentAccel;
 	}
 }
 
@@ -46,10 +41,6 @@ void NavXSubsystem::UpdateCollisionCounters(char name) {
 		if (yData.collided) {
 			yData.collisionCount += 1;
 		}
-	} else if (name == zData.name) {
-		if (zData.collided) {
-			zData.collisionCount += 1;
-		}
 	}
 }
 
@@ -59,8 +50,6 @@ void NavXSubsystem::UpdateCollisions(char name) {
 		xData.collided = collisionData.collided;
 	} else if (name == yData.name) {
 		yData.collided = collisionData.collided;
-	} else if (name == zData.name) {
-		zData.collided = collisionData.collided;
 	}
 }
 
@@ -79,13 +68,6 @@ void NavXSubsystem::UpdateTopTens(char name) {
 			Util::PrintDoublesList(yData.TopTenList);
 		}
 		yData.LastTopTen = yData.TopTenList;
-	} else if (name == zData.name) {
-		zData.TopTenList = BuildTopTen(zData.TopTenList, zData.currentAccel);
-		if (zData.LastTopTen != zData.TopTenList) {
-			std::cout << "Z-Values:" << std::endl;
-			Util::PrintDoublesList(zData.TopTenList);
-		}
-		zData.LastTopTen = zData.TopTenList;
 	}
 }
 
