@@ -106,9 +106,9 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	AddSequential(new PIDTurn(38 * -directionSwitch)); //45
 	AddSequential(new Pause(0.25)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new PIDDriveStraight(19.0, 1.25)); //18
+		AddSequential(new PIDDriveStraight(19.0, 1.5)); //18
 	}else{
-		AddSequential(new PIDDriveStraight(22.5, 2.5)); //18
+		AddSequential(new PIDDriveStraight(22.5, 1.5)); //18
 	}
 	AddSequential(new CubeRunIntake(0.65,0.5)); //0.8 for power
 	AddSequential(new CubeIntakeActuateOpen());
@@ -123,7 +123,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	}else{
 		AddSequential(new PIDTurn(68.5 * -directionSwitch)); //73.5
 	}
-	AddSequential(new Pause(0.28)); //0.3
+	AddSequential(new Pause(0.3)); //0.3
 	AddSequential(new CubeIntakeActuateClose());
 	AddSequential(new Pause(0.1));
 	AddSequential(new ElevatorRunToHeight(0.5 , 0.0)); //0 inches
@@ -193,7 +193,6 @@ void AutoSelector::OutsideStraightScale() {
 }
 
 void AutoSelector::OutsideOppositeScale() {
-//	AddSequential(new PIDDriveStraight(104));
 	AddSequential(new PIDDriveStraight(159,4.5,0.9));	//zoom to other side //154
 	AddSequential(new Pause(0.5)); //0.45
 	AddSequential(new PIDTurn(91.2 * directionScale));//turn to go across the back of switch //90 deg

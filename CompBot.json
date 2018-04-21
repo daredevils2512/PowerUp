@@ -55,39 +55,6 @@
               "_title": "Subsystem Get Right Encoder"
             }
           },
-          "0,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/GetPitch",
-              "_title": "GetPitch"
-            }
-          },
-          "1,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/GetRoll",
-              "_title": "GetRoll"
-            }
-          },
-          "2,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/GetYaw",
-              "_title": "GetYaw"
-            }
-          },
           "8,2": {
             "size": [
               3,
@@ -145,10 +112,10 @@
               "_title": "Drivetrain Rear Right Current"
             }
           },
-          "0,1": {
+          "0,2": {
             "size": [
-              3,
-              1
+              5,
+              2
             ],
             "content": {
               "_type": "Text View",
@@ -156,10 +123,10 @@
               "_title": "Elevator Encoder"
             }
           },
-          "0,3": {
+          "0,0": {
             "size": [
-              3,
-              1
+              5,
+              2
             ],
             "content": {
               "_type": "Boolean Box",
@@ -171,8 +138,8 @@
           },
           "0,4": {
             "size": [
-              3,
-              1
+              5,
+              2
             ],
             "content": {
               "_type": "Boolean Box",
@@ -182,76 +149,15 @@
               "colorWhenFalse": "#8B0000FF"
             }
           },
-          "0,2": {
+          "5,2": {
             "size": [
-              3,
-              1
+              1,
+              4
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drivetrain PID",
-              "_title": "Drivetrain PID"
-            }
-          },
-          "3,4": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Y-Axis",
-              "_title": "Y-Axis"
-            }
-          },
-          "3,2": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/X-Axis",
-              "_title": "X-Axis"
-            }
-          },
-          "0,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/connected?",
-              "_title": "connected?",
-              "colorWhenTrue": "#7CFC00FF",
-              "colorWhenFalse": "#8B0000FF"
-            }
-          },
-          "1,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/rotating?",
-              "_title": "rotating?",
-              "colorWhenTrue": "#7CFC00FF",
-              "colorWhenFalse": "#8B0000FF"
-            }
-          },
-          "2,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/moving?",
-              "_title": "moving?",
-              "colorWhenTrue": "#7CFC00FF",
-              "colorWhenFalse": "#8B0000FF"
+              "_source0": "network_table:///SmartDashboard/Climber Winch",
+              "_title": "Climber Winch"
             }
           }
         }
@@ -451,6 +357,20 @@
                   "numberOfWheels": 4,
                   "wheelDiameter": 80.0,
                   "showVectors": true
+                },
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [9]",
+                  "_title": "Talon SRX [9]",
+                  "controllable": false,
+                  "orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [10]",
+                  "_title": "Talon SRX [10]",
+                  "controllable": false,
+                  "orientation": "HORIZONTAL"
                 }
               ]
             }

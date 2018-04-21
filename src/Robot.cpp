@@ -82,6 +82,8 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
 	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
 
+	SmartDashboard::PutNumber("Climber Winch" , RobotMap::climber->GetOutputCurrent());
+
 //	PrintFaults(RobotMap::drivetrainFrontLeftMotor.get(), "FL");
 //	PrintFaults(RobotMap::drivetrainFrontRightMotor.get(), "FR");
 //	PrintFaults(RobotMap::drivetrainRearLeftMotor.get(), "RL");
