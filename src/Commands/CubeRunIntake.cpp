@@ -33,7 +33,7 @@ void CubeRunIntake::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool CubeRunIntake::IsFinished() {
-	return IsTimedOut() || (Robot::cube->GetLimitSwitch() && m_speed <= 0);
+	return (Robot::cube->GetLimitSwitch() && m_speed <= 0) || IsTimedOut();
 }
 
 // Called once after isFinished returns true

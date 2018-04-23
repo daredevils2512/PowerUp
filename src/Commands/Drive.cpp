@@ -19,7 +19,7 @@ void Drive::Execute() {
 		double turn = Robot::oi->GetTurn();
 		if(Robot::elevator->GetLiftMagneticEncoder() > Util::ELEVATOR_THROTTLE_HEIGHT){
 		  move *= Util::ELEVATOR_THROTTLE_AMOUNT;
-		  turn *= Util::ELEVATOR_THROTTLE_AMOUNT;
+		  turn *= Util::ELEVATOR_TURN_AMOUNT;
 		}
 		Robot::drivetrain->DriveRobotArcade(move,turn);
 	}

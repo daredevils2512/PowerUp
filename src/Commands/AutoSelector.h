@@ -22,6 +22,7 @@ public:
 
 private:
 	static constexpr double scaleHeight = 6.8;
+	static constexpr double carryHeight = 0.35;
 	bool doScale = false;
 	bool doSwitch = false;
 	int directionSwitch = 1;

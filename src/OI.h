@@ -34,8 +34,8 @@ private:
 		JoystickButton CDR_topLeftJoystick{&coDriverController, 5};
 		JoystickButton CDR_bottomRightJoystick{&coDriverController, 4};
 		JoystickButton CDR_topRightJoystick{&coDriverController, 6};
-		JoystickButton CDR_bottomLeftBase{&coDriverController, 12};
-		JoystickButton CDR_bottomRightBase{&coDriverController, 11};
+		JoystickButton CDR_bottomRightBase{&coDriverController, 12};
+		JoystickButton CDR_bottomLeftBase{&coDriverController, 11};
 		JoystickButton CDR_middleLeftBase{&coDriverController, 9};
 		JoystickButton CDR_middleRightBase{&coDriverController, 10};
 		JoystickButton CDR_topLeftBase{&coDriverController, 7};

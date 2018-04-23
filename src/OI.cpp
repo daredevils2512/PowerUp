@@ -37,6 +37,8 @@ OI::OI() {
 	DRC_rightBumper.WhenPressed(new CubeIntakeActuateClose()); //retract
 	DRC_xButton.WhileHeld(new CubeRunIntake(1.0)); //thanks for flying air 2512
 		DRC_xButton.WhenReleased(new CubeRunIntake(0.0));
+	DRC_aButton.WhenPressed(new PIDTurn(90.0,0.85)); //TODO remove when done testing
+	DRC_bButton.WhenPressed(new PIDTurn(-90.0,0.85));
 
 	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //normal send out
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
@@ -53,11 +55,13 @@ OI::OI() {
 	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0)); //alt run cube out
 	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
+	CDR_bottomLeftBase.WhileHeld(new ClimberRunWinch(-1.0)); //run winch out, robot down
+	CDR_bottomLeftBase.WhenReleased(new ClimberRunDeploy(0.0));
 
 	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
 	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
 	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder
-	CDB_yellow.WhileHeld(new ClimberRunWinch(1.0)); //run winch up, robot up
+	CDB_yellow.WhileHeld(new ClimberRunWinch(1.0)); //run winch in, robot up
 	CDB_yellow.WhenReleased(new ClimberRunWinch(0.0));
 	CDB_topWhite.WhileHeld(new ClimberRunDeploy(0.75)); //hooks up
 	CDB_topWhite.WhenReleased(new ClimberRunDeploy(0.0));

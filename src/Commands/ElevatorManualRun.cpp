@@ -23,21 +23,23 @@ void ElevatorManualRun::Execute() {
 	} else if ((Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT) && (Robot::oi->GetLiftControl() < 0)) {
 		Robot::elevator->RunLift(Robot::oi->GetLiftControl());
 
-	//if lift is at the bottom don't let it run any farther down
-	} else if (Robot::elevator->GetBottomSwitch() && (Robot::oi->GetLiftControl() > 0)) {
-		Robot::elevator->RunLift(Robot::oi->GetLiftControl());
-
 	//if we are trying to run down faster than 3/4 speed slow it down to max of 3/4
+	} else if ((Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT)) {
+		Robot::elevator->RunLift(0.0);
+
+	} else if (Robot::elevator->GetBottomSwitch()) {
+		if (Robot::oi->GetLiftControl() > 0) {
+			Robot::elevator->RunLift(Robot::oi->GetLiftControl());
+	} else {
+		Robot::elevator->RunLift(0.0);
+	}
+
 	} else if (Robot::oi->GetLiftControl() < -0.75) {
 		Robot::elevator->RunLift(Robot::oi->GetLiftControl() * 0.75); //0.5
 
 	//run lift off of joystick
 	} else if (Robot::oi->GetLiftControl() != 0) {
 		Robot::elevator->RunLift(Robot::oi->GetLiftControl());
-
-	//else don't run lift cause no bueno
-	} else if (Robot::elevator->GetBottomSwitch() || (Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT)) {
-		Robot::elevator->RunLift(0.0);
 	}
 }
 
