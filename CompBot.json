@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.007894736842105263,
+  "dividerPosition": 0.01251303441084463,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -371,6 +371,11 @@
                   "_title": "Talon SRX [10]",
                   "controllable": false,
                   "orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[0,0]/Value",
+                  "_title": "DoubleSolenoid[0,0]/Value"
                 }
               ]
             }

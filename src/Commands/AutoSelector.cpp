@@ -24,6 +24,7 @@
 #include "Commands/AutoTimedDrive.h"
 #include "Commands/ElevatorSafety.h"
 #include "Commands/AutoStraightDriveBackward.h"
+#include "Commands/CubeIntakeDeploy.h"
 
 AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	std::string gameMessage =
@@ -94,7 +95,9 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 //	AddSequential(new Pause(0.3));//t
 //	AddParallel(new ElevatorRunToHeight(0.7 , 2.7)); //0.7,2.6
 //	AddSequential(new PIDDriveStraight(18));
+	AddSequential (new CubeIntakeDeploy (true));
 	AddParallel(new ElevatorRunToHeight(0.7,2.7));
+	AddSequential(new Pause(0.25));
 	AddSequential(new PIDDriveStraight(28));
 	AddSequential(new Pause(0.3)); //0.4
 	AddSequential(new PIDTurn(45 * directionSwitch));
@@ -128,13 +131,13 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	}
 	AddSequential(new Pause(0.2)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new PIDTurn(72 * -directionSwitch,0.9)); //77.5
+		AddSequential(new PIDTurn(70 * -directionSwitch,0.9)); //77.5
 	}else{
 		AddSequential(new PIDTurn(68.5 * -directionSwitch,0.9)); //73.5
 	}
 	AddSequential(new Pause(0.1)); //0.3
 	AddParallel(new CubeRunIntake(-1.0, 2.5)); //3 seconds
-	AddSequential(new AutoStraightDriveForward(30,0.7)); //30,0.6
+	AddSequential(new AutoStraightDriveForward(27,0.7)); //30,0.6
 	AddSequential(new Pause(0.3)); //0.3
 	if (ourSwitch == 'L') {
 		AddSequential(new AutoStraightDriveBackward(16,0.8)); //14.5
@@ -151,7 +154,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 	AddSequential(new ElevatorRunToHeight(0.75 , 2.5));
 	AddSequential(new Pause(0.2)); //0.3
 	if (ourSwitch == 'L') {
-		AddSequential(new PIDDriveStraight(27 , 1.5)); //30
+		AddSequential(new PIDDriveStraight(26 , 1.5)); //27
 	}else{
 		AddSequential(new PIDDriveStraight(24 , 1.5)); //30
 	}
@@ -181,7 +184,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
  }
 
 void AutoSelector::OutsideStraightScale() {
-	AddSequential(new ElevatorRunToHeight(0.7,carryHeight));
+	AddSequential (new CubeIntakeDeploy (true));
 	AddSequential(new PIDDriveStraight(212,4.0,0.9)); //258, 4.5 timeout //185 inches at 80
 	AddSequential(new Pause(0.5)); //0.4
 	AddSequential(new PIDTurn(80 * -directionScale));//turning towards the scale //37 deg
@@ -209,7 +212,7 @@ void AutoSelector::OutsideStraightScale() {
 }
 
 void AutoSelector::OutsideOppositeScale() {
-	AddSequential(new ElevatorRunToHeight(0.7,carryHeight));
+	AddSequential (new CubeIntakeDeploy (true));
 	AddSequential(new PIDDriveStraight(156,4.5,0.9));	//zoom to other side //154
 	AddSequential(new Pause(0.75)); //0.5
 	AddSequential(new PIDTurn(88 * directionScale,0.75));//turn to go across the back of switch //90 deg

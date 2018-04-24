@@ -26,6 +26,7 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeLeftMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::cubeIntakeRightMotor;
 std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeIntakeSolenoid;
 std::shared_ptr<frc::DigitalInput> RobotMap::cubeIntakeLimitSwitch;
+std::shared_ptr<frc::DoubleSolenoid> RobotMap::cubeDeploySolenoid;
 
 std::shared_ptr<WPI_TalonSRX> RobotMap::climber;
 std::shared_ptr<WPI_TalonSRX> RobotMap::climberDeploy;
@@ -40,7 +41,6 @@ std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorMotor;
 std::shared_ptr<WPI_TalonSRX> RobotMap::elevatorBackMotor;
 std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
 
-//std::shared_ptr<frc::PowerDistributionPanel> RobotMap::powerDistributionPanel;
 
 void RobotMap::init() {
 	//TODO PCM ID is 60 on Atlas, change this on Alea when you can
@@ -97,6 +97,7 @@ void RobotMap::init() {
 
 	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
 	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
+	 cubeDeploySolenoid.reset (new frc::DoubleSolenoid(0,0,1));
 
 	climberDeploy.reset(new WPI_TalonSRX (Util::CLIMBER_DEPLOY));
 	climber.reset (new WPI_TalonSRX (Util::CLIMBER));

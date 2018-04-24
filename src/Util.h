@@ -48,7 +48,7 @@ class Util {
 		static constexpr double ELEVATOR_MAX_ENCODER_HEIGHT = 7.3; //7.2
 		static constexpr double ELEVATOR_HALF_SPEED_DOWN = -0.5;
 		static constexpr double ELEVATOR_THROTTLE_HEIGHT = 6.0;
-		static constexpr double ELEVATOR_THROTTLE_AMOUNT = 0.5;
+		static constexpr double ELEVATOR_THROTTLE_AMOUNT = 0.6;
 		static constexpr double ELEVATOR_TURN_AMOUNT = 0.75;
 
 		enum class RobotSide {

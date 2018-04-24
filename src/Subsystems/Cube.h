@@ -13,6 +13,7 @@ private:
 	std::shared_ptr <WPI_TalonSRX> intakeRight;
 	std::shared_ptr<frc::DoubleSolenoid> intakeSolenoid;
 	std::shared_ptr<frc::DigitalInput> limitSwitch;
+	std::shared_ptr<frc::DoubleSolenoid> intakeDeploy;
 
 public:
 	Cube();
@@ -20,6 +21,7 @@ public:
 	void SetIntakeSpeed(double speed);
 	void ActuateIntake(frc::DoubleSolenoid::Value direction);
 	void ActuateGrabber (frc::DoubleSolenoid::Value direction);
+	void ActuateDeploy (frc::DoubleSolenoid::Value direction);
 	bool GetLimitSwitch();
 
 };
