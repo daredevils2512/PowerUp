@@ -6,6 +6,7 @@ intakeLeft = RobotMap::cubeIntakeLeftMotor;
 intakeRight = RobotMap::cubeIntakeRightMotor;
 intakeSolenoid = RobotMap::cubeIntakeSolenoid;
 limitSwitch = RobotMap::cubeIntakeLimitSwitch;
+intakeDeploy = RobotMap::cubeDeploySolenoid;
 }
 
 void Cube::InitDefaultCommand() {
@@ -25,6 +26,10 @@ void Cube::SetIntakeSpeed(double speed) {
 
 void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {
 	intakeSolenoid->Set(direction);
+}
+
+void Cube::ActuateDeploy(frc::DoubleSolenoid::Value direction) {
+	intakeDeploy->Set(direction);
 }
 
 bool Cube::GetLimitSwitch() {
