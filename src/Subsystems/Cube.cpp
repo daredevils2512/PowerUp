@@ -15,13 +15,10 @@ void Cube::InitDefaultCommand() {
 }
 
 void Cube::SetIntakeSpeed(double speed) {
-#ifdef Alea
 	intakeLeft->Set(speed *-1); //Alea
 	intakeRight->Set(speed); //Alea
-#else
-	intakeLeft->Set(speed * -1); //Atlas
-	intakeRight->Set(speed * -1); //Atlas
-#endif
+//	intakeLeft->Set(speed * -1); //Atlas
+//	intakeRight->Set(speed * -1); //Atlas
 }
 
 void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {

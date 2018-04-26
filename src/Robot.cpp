@@ -133,6 +133,7 @@ void Robot::AutonomousInit() {
 	Robot::elevator->ResetMagneticEncoder();
 	Robot::elevator->GetBottomSwitch();
 	this->PickAuto();
+//	Robot::cube->ActuateDeploy(frc::DoubleSolenoid::kForward);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);
 	if (autonomousCommand.get() != nullptr) {

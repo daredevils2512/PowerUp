@@ -52,6 +52,7 @@ OI::OI() {
 
 	CDR_topLeftBase.WhenPressed(new CubeIntakeDeploy(true)); //deploy intake
 	CDR_topRightBase.WhenPressed(new CubeIntakeDeploy(false)); //back
+
 	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0)); //alt run cube in
 	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0)); //alt run cube out
