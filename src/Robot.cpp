@@ -131,9 +131,9 @@ void Robot::AutonomousInit() {
 	std::cout << "Starting auto..." << std::endl;
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
-	Robot::elevator->GetBottomSwitch();
 	this->PickAuto();
-//	Robot::cube->ActuateDeploy(frc::DoubleSolenoid::kForward);
+	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward);
+	Robot::cube->ActuateDeploy(frc::DoubleSolenoid::kForward);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);
 	if (autonomousCommand.get() != nullptr) {
@@ -150,6 +150,7 @@ void Robot::TeleopInit() {
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
 	cube->SetIntakeSpeed(0.0);
+	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
 	compressor->SetClosedLoopControl(true);

@@ -32,8 +32,8 @@
 OI::OI() {
 	DRC_leftTrigger.WhileHeld(new CubeRunIntake(-1.0)); //pull me in dad
 		DRC_leftTrigger.WhenReleased(new CubeRunIntake(0.0));
-	DRC_rightTrigger.WhileHeld(new LowGear()); //drop a gear
-	DRC_rightTrigger.WhenReleased(new HighGear()); //and disappear
+	DRC_rightTrigger.WhileHeld(new HighGear()); //drop a gear
+	DRC_rightTrigger.WhenReleased(new LowGear()); //and disappear
 	DRC_leftBumper.WhenPressed(new CubeIntakeActuateOpen()); //spread
 	DRC_rightBumper.WhenPressed(new CubeIntakeActuateClose()); //retract
 	DRC_xButton.WhileHeld(new CubeRunIntake(1.0)); //thanks for flying air 2512
@@ -65,9 +65,9 @@ OI::OI() {
 	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder
 	CDB_yellow.WhileHeld(new ClimberRunWinch(1.0)); //run winch in, robot up
 	CDB_yellow.WhenReleased(new ClimberRunWinch(0.0));
-	CDB_topWhite.WhileHeld(new ClimberRunDeploy(0.75)); //hooks up
+	CDB_topWhite.WhileHeld(new ClimberRunDeploy(1.0)); //hooks up
 	CDB_topWhite.WhenReleased(new ClimberRunDeploy(0.0));
-	CDB_topRed.WhileHeld(new ClimberRunDeploy(-0.5)); //hooks down
+	CDB_topRed.WhileHeld(new ClimberRunDeploy(-0.75)); //hooks down
 	CDB_topRed.WhenReleased(new ClimberRunDeploy(0.0));
 	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.7, 5.5)); //middle scale
 	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.7, 2.6)); //switch

@@ -5,7 +5,7 @@
 
 class ElevatorRunToHeight : public frc::Command {
 public:
-	ElevatorRunToHeight(double speed, double encPos);
+	ElevatorRunToHeight(double speed, double encPos, double timeout = 2.0);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
