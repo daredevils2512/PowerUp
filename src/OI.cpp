@@ -52,13 +52,12 @@ OI::OI() {
 
 	CDR_topLeftBase.WhenPressed(new CubeIntakeDeploy(true)); //deploy intake
 	CDR_topRightBase.WhenPressed(new CubeIntakeDeploy(false)); //back
-
 	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0)); //alt run cube in
 	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0)); //alt run cube out
 	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_bottomLeftBase.WhileHeld(new ClimberRunWinch(-1.0)); //run winch out, robot down
-	CDR_bottomLeftBase.WhenReleased(new ClimberRunDeploy(0.0));
+	CDR_bottomLeftBase.WhenReleased(new ClimberRunWinch(0.0));
 
 	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
 	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down

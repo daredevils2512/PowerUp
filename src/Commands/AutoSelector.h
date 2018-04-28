@@ -21,7 +21,7 @@ public:
 	//TODO Add in functions for doing alternate switch autos
 
 private:
-	static constexpr double scaleHeight = 6.8;
+	static constexpr double scaleHeight = 7.2; //6.8(not high enough for tipped scale)
 	static constexpr double carryHeight = 0.35;
 	bool doScale = false;
 	bool doSwitch = false;
