@@ -34,8 +34,8 @@ void ElevatorManualRun::Execute() {
 		Robot::elevator->RunLift(0.0);
 	}
 
-	} else if (Robot::oi->GetLiftControl() < -0.75) {
-		Robot::elevator->RunLift(Robot::oi->GetLiftControl() * 0.75); //0.5
+	} else if (Robot::oi->GetLiftControl() < -0.8) {
+		Robot::elevator->RunLift(Robot::oi->GetLiftControl() * 0.8); //0.5
 
 	//run lift off of joystick
 	} else if (Robot::oi->GetLiftControl() != 0) {

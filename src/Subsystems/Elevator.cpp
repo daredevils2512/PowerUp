@@ -19,11 +19,7 @@ void Elevator::InitDefaultCommand() {
 // here. Call these from Commands.
 
 bool Elevator::GetBottomSwitch() {
-	if (bottom->Get()) {
-		return true;
-	}else{
-		return false;
-	}
+	return bottom->Get();
 }
 
 void Elevator::RunLift(double speed) {

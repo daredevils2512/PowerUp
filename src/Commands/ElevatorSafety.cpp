@@ -32,6 +32,7 @@ bool ElevatorSafety::IsFinished() {
 // Called once after isFinished returns true
 void ElevatorSafety::End() {
 	Robot::elevator->RunLift(0);
+	Robot::elevator->ResetMagneticEncoder();
 }
 
 // Called when another command which requires one or more of the same
