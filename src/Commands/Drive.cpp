@@ -23,6 +23,13 @@ void Drive::Execute() {
 		}
 		Robot::drivetrain->DriveRobotArcade(move,turn);
 	}
+	if (fabs(Robot::oi->GetMove() > 0.8)){
+		std::cout << "Shifting up because you're slow" << std::endl;
+		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward);
+	}else{
+		std::cout << "Shifting down because you suck" << std::endl;
+		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()

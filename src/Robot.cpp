@@ -70,11 +70,11 @@ void Robot::RobotPeriodic() {
 //	SmartDashboard::PutBoolean("moving?" , RobotMap::navX->IsMoving());
 //	SmartDashboard::PutBoolean("rotating?" , RobotMap::navX->IsRotating());
 
-	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
-	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
-	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
-	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
-	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
+//	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
+//	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
+//	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
+//	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
+//	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
 
 //	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
 //	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
@@ -92,10 +92,10 @@ void Robot::RobotPeriodic() {
 //	PrintFaults(RobotMap::cubeIntakeLeftMotor.get(), "IL");
 //	PrintFaults(RobotMap::cubeIntakeRightMotor.get(), "IR");
 
-	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+//	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 //	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
 
-	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
+//	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 
 //	SmartDashboard::PutNumber("Y-Axis", Robot::oi->GetMove());
 //	SmartDashboard::PutNumber("X-Axis", Robot::oi->GetTurn())
@@ -125,6 +125,8 @@ void Robot::AutonomousInit() {
 	this->PickAuto();
 	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward);
 	Robot::cube->ActuateDeploy(frc::DoubleSolenoid::kForward);
+	RobotMap::drivetrainFrontLeftMotor->SetNeutralMode(NeutralMode::Brake);
+	RobotMap::drivetrainFrontRightMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Brake);
 	if (autonomousCommand.get() != nullptr) {
@@ -142,6 +144,8 @@ void Robot::TeleopInit() {
 	Robot::elevator->ResetMagneticEncoder();
 	cube->SetIntakeSpeed(0.0);
 	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse);
+	RobotMap::drivetrainFrontLeftMotor->SetNeutralMode(NeutralMode::Coast);
+	RobotMap::drivetrainFrontRightMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearRightMotor->SetNeutralMode(NeutralMode::Coast);
 	compressor->SetClosedLoopControl(true);
