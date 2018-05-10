@@ -23,12 +23,15 @@ void Drive::Execute() {
 		}
 		Robot::drivetrain->DriveRobotArcade(move,turn);
 	}
-	if (fabs(Robot::oi->GetMove() > 0.8)){
-		std::cout << "Shifting up because you're slow" << std::endl;
-		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward);
+	//EXPERIMENTAL, if the joystick position is above a certain value and it's been long enough
+	//since our last gear shift then let the drivetrain shift into high gear
+	if (fabs(Robot::oi->GetMove() > m_shiftThreshold) && (m_currentTime - m_lastShiftTime) > m_shiftTimeThreshold){
+		Util::ReportWarning("Shifting up because you're slow");
+		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward); //shift into high gear
+		m_lastShiftTime = m_currentTime;
 	}else{
-		std::cout << "Shifting down because you suck" << std::endl;
-		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse);
+		Util::ReportWarning("Shifting down because you suck");
+		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse); //drop into low gear
 	}
 }
 

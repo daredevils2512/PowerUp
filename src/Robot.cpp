@@ -156,6 +156,8 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 	Scheduler::GetInstance()->Run();
+	SmartDashboard::PutNumber("Left Encoder Rate" , RobotMap::drivetrainLeftEncoder->GetRate());
+	SmartDashboard::PutNumber("Right Encoder Rate" , RobotMap::drivetrainRightEncoder->GetRate());
 //	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 //	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
