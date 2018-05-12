@@ -23,13 +23,16 @@ void Drive::Execute() {
 		}
 		Robot::drivetrain->DriveRobotArcade(move,turn);
 	}
-	//EXPERIMENTAL, if the joystick position is above a certain value and it's been long enough
-	//since our last gear shift then let the drivetrain shift into high gear
-	if (fabs(Robot::oi->GetMove() > m_shiftThreshold) && (m_currentTime - m_lastShiftTime) > m_shiftTimeThreshold){
+	//EXPERIMENTAL, if the joystick position is above a certain value meaning we're driving fast enough,
+	//we aren't trying to make a turn,
+	//and it's been long enough since our last gear shift,
+	//then let the drivetrain shift into high gear
+	if (fabs(Robot::oi->GetMove() > m_shiftThreshold) && (m_currentTime - m_lastShiftTime) > m_shiftTimeThreshold && (fabs(Robot::oi->GetTurn() < m_shiftTurnThreshold))){
 		Util::ReportWarning("Shifting up because you're slow");
 		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward); //shift into high gear
 		m_lastShiftTime = m_currentTime;
 	}else{
+		//otherwise go into/stay in low if these conditions aren't met
 		Util::ReportWarning("Shifting down because you suck");
 		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse); //drop into low gear
 	}

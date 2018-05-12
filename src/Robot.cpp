@@ -124,7 +124,6 @@ void Robot::AutonomousInit() {
 	Robot::elevator->ResetMagneticEncoder();
 	this->PickAuto();
 	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward);
-	Robot::cube->ActuateDeploy(frc::DoubleSolenoid::kForward);
 	RobotMap::drivetrainFrontLeftMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainFrontRightMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);

@@ -48,6 +48,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 
 	AddSequential(new PrintCurrentFPGATime());
 	AddSequential(new ElevatorSafety());
+	AddSequential(new CubeIntakeDeploy(true));
 
 	if (startingPosition == Robot::StartLocation::center) {
 		std::cout << "The pleasures of a journey to the center of the mind..." << std::endl;
@@ -190,7 +191,7 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 
 void AutoSelector::OutsideStraightScale() {
 	AddSequential(new PIDDriveStraight(212,4.0,0.9)); //258, 4.5 timeout //185 inches at 80
-	AddSequential(new Pause(0.5)); //0.4
+	AddSequential(new Pause(1.25)); //0.5
 	AddSequential(new PIDTurn(60 * -directionScale));//turning towards the scale //37 deg
 	AddSequential(new Pause(0.2));
 	AddSequential(new AutoStraightDriveBackward(9,0.7));
