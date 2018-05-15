@@ -141,13 +141,6 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 	Scheduler::GetInstance()->Run();
-//	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
-//	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
-//	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
-//	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
-//	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
-//	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
-//	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	}
 
 void Robot::TestInit() {
