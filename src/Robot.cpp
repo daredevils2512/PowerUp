@@ -70,35 +70,21 @@ void Robot::RobotPeriodic() {
 //	SmartDashboard::PutBoolean("moving?" , RobotMap::navX->IsMoving());
 //	SmartDashboard::PutBoolean("rotating?" , RobotMap::navX->IsRotating());
 
-//	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
-//	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
-//	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
-//	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
-//	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
+	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
+	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
+	SmartDashboard::PutNumber("Left Encoder Rate" , RobotMap::drivetrainLeftEncoder->GetRate());
+	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());
+	SmartDashboard::PutNumber("Raw Right Encoder", RobotMap::drivetrainRightEncoder->Get());
+	SmartDashboard::PutNumber("Right Encoder Rate" , RobotMap::drivetrainRightEncoder->GetRate());
+	SmartDashboard::PutNumber("Elevator Encoder" , Robot::elevator->GetLiftMagneticEncoder());
+	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
+	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 
-//	SmartDashboard::PutNumber("Drivetrain PID", Robot::drivetrain->GetPIDOutput());
 //	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
 //	SmartDashboard::PutNumber("Drivetrain Front Right Current" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
 //	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
 //	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
-
-//	SmartDashboard::PutNumber("Climber Winch" , RobotMap::climber->GetOutputCurrent());
-
-//	PrintFaults(RobotMap::drivetrainFrontLeftMotor.get(), "FL");
-//	PrintFaults(RobotMap::drivetrainFrontRightMotor.get(), "FR");
-//	PrintFaults(RobotMap::drivetrainRearLeftMotor.get(), "RL");
-//	PrintFaults(RobotMap::drivetrainRearRightMotor.get(), "RR");
-//	PrintFaults(RobotMap::elevatorMotor.get(), "elevator");
-//	PrintFaults(RobotMap::cubeIntakeLeftMotor.get(), "IL");
-//	PrintFaults(RobotMap::cubeIntakeRightMotor.get(), "IR");
-
-//	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 //	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
-
-//	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
-
-//	SmartDashboard::PutNumber("Y-Axis", Robot::oi->GetMove());
-//	SmartDashboard::PutNumber("X-Axis", Robot::oi->GetTurn())
 	}
 void Robot::DisabledInit(){
 	std::cout << "Let's start being disabled" << std::endl;
@@ -123,7 +109,7 @@ void Robot::AutonomousInit() {
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
 	this->PickAuto();
-	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward);
+	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward); //high gear
 	RobotMap::drivetrainFrontLeftMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainFrontRightMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
@@ -142,7 +128,7 @@ void Robot::TeleopInit() {
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
 	cube->SetIntakeSpeed(0.0);
-	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse);
+	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse); //low gear
 	RobotMap::drivetrainFrontLeftMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainFrontRightMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);
@@ -155,8 +141,6 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() {
 	Scheduler::GetInstance()->Run();
-	SmartDashboard::PutNumber("Left Encoder Rate" , RobotMap::drivetrainLeftEncoder->GetRate());
-	SmartDashboard::PutNumber("Right Encoder Rate" , RobotMap::drivetrainRightEncoder->GetRate());
 //	SmartDashboard::PutNumber("Subsystem Get Left Encoder", Robot::drivetrain->GetLeftEncoder());
 //	SmartDashboard::PutNumber("Raw Left Encoder", RobotMap::drivetrainLeftEncoder->Get());
 //	SmartDashboard::PutNumber("Subsystem Get Right Encoder", Robot::drivetrain->GetRightEncoder());

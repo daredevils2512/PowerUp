@@ -15,11 +15,10 @@ public:
 	void End();
 	void Interrupted();
 private:
-	double m_lastShiftTime = 0.0;
 	double m_shiftThreshold = 0.6;
-	double m_shiftTurnThreshold = 0.6;
-	double m_shiftTimeThreshold = 2.0;
-	double m_currentTime = frc::RobotController::GetFPGATime()/1000000.0; //FPGA returns in nanoseconds, dividing by 1 million gives us seconds
+	double m_lowGearRate = 100;
+	double m_highGearRate = 200;
+	double m_encoderShiftThreshold = 0.8;
 };
 
 #endif  // Drive_H

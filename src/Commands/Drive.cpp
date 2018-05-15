@@ -23,21 +23,19 @@ void Drive::Execute() {
 		}
 		Robot::drivetrain->DriveRobotArcade(move,turn);
 	}
-	//EXPERIMENTAL, if the joystick position is above a certain value meaning we're driving fast enough,
-	//we aren't trying to make a turn,
-	//and it's been long enough since our last gear shift,
-	//then let the drivetrain shift into high gear
-	if (fabs(Robot::oi->GetMove() > m_shiftThreshold) && (m_currentTime - m_lastShiftTime) > m_shiftTimeThreshold && (fabs(Robot::oi->GetTurn() < m_shiftTurnThreshold))){
-		Util::ReportWarning("Shifting up because you're slow");
-		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward); //shift into high gear
-		m_lastShiftTime = m_currentTime;
-	}else{
-		//otherwise go into/stay in low if these conditions aren't met
-		Util::ReportWarning("Shifting down because you suck");
-		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse); //drop into low gear
+	//AUTOMATIC SHIFTER
+	//check to see if joystick is at zero and we are currently in high gear -- SHIFT INTO LOW GEAR
+	//check to make sure joystick value is over 80% and we're over the max encoder rate for the gear we're in -- SHIFT INTO HIGH
+	if (Robot::drivetrain->GetShifter() == DoubleSolenoid::kForward && fabs(Robot::oi->GetMove()) == 0.0) {
+		Util::ReportWarning("Shifting into low");
+		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse);
+	} else if
+		(Robot::drivetrain->GetShifter() == DoubleSolenoid::kReverse && fabs(Robot::oi->GetMove()) >= m_shiftThreshold
+		&& (fabs(RobotMap::drivetrainLeftEncoder->GetRate()) + fabs(RobotMap::drivetrainRightEncoder->GetRate())) / 2 >= m_lowGearRate * m_encoderShiftThreshold ) {
+		Util::ReportWarning("Shifting into high");
+		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward);
 	}
 }
-
 // Make this return true when this Command no longer needs to run execute()
 bool Drive::IsFinished() {
 	return true;

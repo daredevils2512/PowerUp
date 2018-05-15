@@ -93,10 +93,6 @@ AutoSelector::AutoSelector(AutonomousSource* autonomousSource) {
 }
 
  void AutoSelector::SwitchY() {
-//	AddSequential(new PIDDriveStraight(18));
-//	AddSequential(new Pause(0.3));//t
-//	AddParallel(new ElevatorRunToHeight(0.7 , 2.7)); //0.7,2.6
-//	AddSequential(new PIDDriveStraight(18));
 	AddSequential(new ElevatorRunToHeight(0.7,2.7));
 	AddSequential(new Pause(0.25));
 	AddSequential(new PIDDriveStraight(28));
@@ -200,7 +196,6 @@ void AutoSelector::OutsideStraightScale() {
 	AddSequential(new CubeRunIntake(1.0,0.5));	//bye bye cube //1.0 speed
 	AddSequential(new Pause(0.5)); //0.2
 	AddSequential(new ElevatorRunToHeight(0.3, 0.0,8.0)); //0.08
-//	AddSequential(new ElevatorRunToBottom(-0.7,3));
 	AddSequential(new Pause(0.2));
 	AddSequential(new PIDTurn(-75 * -directionScale,0.8)); //76
 	AddSequential(new AutoStraightDriveForward(8,0.6)); //10

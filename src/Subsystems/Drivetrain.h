@@ -28,6 +28,7 @@ public:
 	double GetRightEncoder();
 	void ResetEncoders();
 	void Shifter (frc::DoubleSolenoid::Value dir);
+	frc::DoubleSolenoid::Value GetShifter();
 	void SetAutonomous(bool isAutonomous);
 	bool GetAutonomous();
 	bool blockJoysticks;
