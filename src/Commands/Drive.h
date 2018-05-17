@@ -17,6 +17,7 @@ public:
 private:
 	double m_shiftThreshold = 0.6;
 	double m_lowGearRate = 100;
+	double m_HighGearShiftDown = 100;
 	double m_highGearRate = 200;
 	double m_encoderShiftThreshold = 0.8;
 };

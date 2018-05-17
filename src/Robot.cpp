@@ -109,7 +109,7 @@ void Robot::AutonomousInit() {
 	Robot::drivetrain->ResetEncoders();
 	Robot::elevator->ResetMagneticEncoder();
 	this->PickAuto();
-	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward); //high gear
+//	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward); //high gear
 	RobotMap::drivetrainFrontLeftMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainFrontRightMotor->SetNeutralMode(NeutralMode::Brake);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Brake);
@@ -129,6 +129,7 @@ void Robot::TeleopInit() {
 	Robot::elevator->ResetMagneticEncoder();
 	cube->SetIntakeSpeed(0.0);
 	Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse); //low gear
+	Robot::cube->ActuateDeploy(frc::DoubleSolenoid::kReverse);
 	RobotMap::drivetrainFrontLeftMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainFrontRightMotor->SetNeutralMode(NeutralMode::Coast);
 	RobotMap::drivetrainRearLeftMotor->SetNeutralMode(NeutralMode::Coast);

@@ -8,7 +8,7 @@
 #include "ElevatorRunToBottom.h"
 #include "../Robot.h"
 
-ElevatorRunToBottom::ElevatorRunToBottom(double speed = -0.7, double timeout = 3.0) {
+ElevatorRunToBottom::ElevatorRunToBottom(double speed = -0.7, double timeout = 4.0) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 	SetTimeout(timeout);
@@ -32,11 +32,11 @@ bool ElevatorRunToBottom::IsFinished() {
 
 // Called once after isFinished returns true
 void ElevatorRunToBottom::End() {
-
+	Robot::elevator->RunLift(0.0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ElevatorRunToBottom::Interrupted() {
-
+	Robot::elevator->RunLift(0.0);
 }
