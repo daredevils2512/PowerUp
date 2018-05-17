@@ -43,7 +43,6 @@ std::shared_ptr<frc::DigitalInput> RobotMap::elevatorBottomSwitch;
 
 
 void RobotMap::init() {
-	//TODO PCM ID is 60 on Atlas, change this on Alea when you can
 	drivetrainFrontLeftMotor.reset (new WPI_TalonSRX (Util::DRIVETRAIN_FRONT_LEFT_MOTOR));
 		Robot::dashboard->RegisterTalonSRX("drivetrain.motorControllers.frontLeft",drivetrainFrontLeftMotor.get());
 
@@ -99,8 +98,8 @@ void RobotMap::init() {
 	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
 	 cubeDeploySolenoid.reset (new frc::DoubleSolenoid(0,0,1));
 
-	climberDeploy.reset(new WPI_TalonSRX (Util::CLIMBER_DEPLOY));
-	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
+//	climberDeploy.reset(new WPI_TalonSRX (Util::CLIMBER_DEPLOY));
+//	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
 
 //	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
 

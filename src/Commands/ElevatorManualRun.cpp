@@ -17,7 +17,7 @@ void ElevatorManualRun::Execute() {
 	//unless we're using the joystick, just apply a constant 10% power
 	//Doing this to correct backdriving of lift motor
 	if (Robot::oi->GetLiftControl() == 0 && Robot::elevator->GetLiftMagneticEncoder() >= 0.0) { //3.1 feet
-		Robot::elevator->RunLift(0.1); //0.05
+		Robot::elevator->RunLift(0.08); //0.1
 
 	//if lift is at the top don't let it run up any farther
 	} else if ((Robot::elevator->GetLiftMagneticEncoder() >= Util::ELEVATOR_MAX_ENCODER_HEIGHT) && (Robot::oi->GetLiftControl() < 0)) {

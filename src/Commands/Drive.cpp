@@ -23,8 +23,20 @@ void Drive::Execute() {
 		}
 		Robot::drivetrain->DriveRobotArcade(move,turn);
 	}
+	//AUTOMATIC SHIFTER
+	//check to see if joystick is at zero and we are currently in high gear -- SHIFT INTO LOW GEAR
+	//check to make sure joystick value is over 80% and we're over the max encoder rate for the gear we're in -- SHIFT INTO HIGH
+	if (Robot::drivetrain->GetShifter() == DoubleSolenoid::kForward && fabs(Robot::oi->GetMove()) == 0.0
+		&& (fabs(RobotMap::drivetrainLeftEncoder->GetRate()) + fabs(RobotMap::drivetrainRightEncoder->GetRate())) / 2 < m_HighGearShiftDown ) {
+		Util::ReportWarning("Shifting into low");
+		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kReverse);
+	} else if
+		(Robot::drivetrain->GetShifter() == DoubleSolenoid::kReverse && fabs(Robot::oi->GetMove()) >= m_shiftThreshold
+		&& (fabs(RobotMap::drivetrainLeftEncoder->GetRate()) + fabs(RobotMap::drivetrainRightEncoder->GetRate())) / 2 >= m_lowGearRate * m_encoderShiftThreshold ) {
+		Util::ReportWarning("Shifting into high");
+		Robot::drivetrain->Shifter(frc::DoubleSolenoid::kForward);
+	}
 }
-
 // Make this return true when this Command no longer needs to run execute()
 bool Drive::IsFinished() {
 	return true;

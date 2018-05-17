@@ -1,5 +1,5 @@
 {
-  "dividerPosition": 0.01263157894736842,
+  "dividerPosition": 0.017368421052631578,
   "tabPane": [
     {
       "title": "SmartDashboard",
@@ -68,53 +68,9 @@
               "showVectors": true
             }
           },
-          "6,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drivetrain Rear Left Current",
-              "_title": "Drivetrain Rear Left Current"
-            }
-          },
-          "11,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drivetrain Front Right Current",
-              "_title": "Drivetrain Front Right Current"
-            }
-          },
-          "6,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drivetrain Front Left Current",
-              "_title": "Drivetrain Front Left Current"
-            }
-          },
-          "11,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Drivetrain Rear Right Current",
-              "_title": "Drivetrain Rear Right Current"
-            }
-          },
           "0,2": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -138,7 +94,7 @@
           },
           "0,4": {
             "size": [
-              5,
+              6,
               2
             ],
             "content": {
@@ -149,15 +105,26 @@
               "colorWhenFalse": "#8B0000FF"
             }
           },
-          "5,2": {
+          "11,3": {
             "size": [
-              1,
-              4
+              2,
+              2
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climber Winch",
-              "_title": "Climber Winch"
+              "_source0": "network_table:///SmartDashboard/Right Encoder Rate",
+              "_title": "Right Encoder Rate"
+            }
+          },
+          "6,3": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left Encoder Rate",
+              "_title": "Left Encoder Rate"
             }
           }
         }

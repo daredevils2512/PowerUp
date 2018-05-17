@@ -54,6 +54,9 @@ void Drivetrain::Shifter(frc::DoubleSolenoid::Value dir) {
 	DriveTrainShift->Set(dir);
 }
 
+frc::DoubleSolenoid::Value Drivetrain::GetShifter() {
+	return DriveTrainShift->Get();
+}
 void Drivetrain::SetAutonomous(bool isAutonomous) {
 	blockJoysticks = isAutonomous;
 }
