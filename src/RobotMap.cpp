@@ -98,8 +98,8 @@ void RobotMap::init() {
 	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
 	 cubeDeploySolenoid.reset (new frc::DoubleSolenoid(0,0,1));
 
-//	climberDeploy.reset(new WPI_TalonSRX (Util::CLIMBER_DEPLOY));
-//	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
+	climberDeploy.reset(new WPI_TalonSRX (Util::CLIMBER_DEPLOY));
+	climber.reset (new WPI_TalonSRX (Util::CLIMBER));
 
 //	climberFork.reset(new frc::DoubleSolenoid(0, 8, 9));
 
