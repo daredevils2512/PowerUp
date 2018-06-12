@@ -38,7 +38,21 @@ OI::OI() {
 	DRC_rightBumper.WhenPressed(new CubeIntakeActuateClose()); //retract
 	DRC_xButton.WhileHeld(new CubeRunIntake(1.0)); //thanks for flying air 2512
 		DRC_xButton.WhenReleased(new CubeRunIntake(0.0));
+#ifdef Community
+	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //normal send out
+		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
+	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.55)); //medium send out
+		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));
+	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuateClose()); //actuate intake arms in
+	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuateOpen()); //actuate intake arms out
 
+	CDR_topLeftBase.WhenPressed(new CubeIntakeDeploy(true)); //deploy intake
+	CDR_topRightBase.WhenPressed(new CubeIntakeDeploy(false)); //back
+	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0)); //alt run cube in
+	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
+	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0)); //alt run cube out
+	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
+#else
 	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //normal send out
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
 	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.55)); //medium send out
@@ -68,10 +82,7 @@ OI::OI() {
 //	CDB_topWhite.WhenReleased(new ClimberRunDeploy(0.0));
 //	CDB_topRed.WhileHeld(new ClimberRunDeploy(-0.75)); //hooks down
 //	CDB_topRed.WhenReleased(new ClimberRunDeploy(0.0));
-	CDB_middleWhite.WhenPressed(new ElevatorRunToHeight(0.7, 5.5)); //middle scale
-	CDB_middleRed.WhenPressed(new ElevatorRunToHeight(0.7, 2.6)); //switch
-	CDB_bottomWhite.WhenPressed(new ElevatorRunToHeight(0.7, 1.42)); //portal
-	CDB_bottomRed.WhenPressed(new ElevatorRunToHeight(0.7, 0.5)); //cube carry height
+#endif
 }
 
 	double OI::GetTurn() {
@@ -96,6 +107,7 @@ OI::OI() {
 		if (fabs(value) < 0.15) value = 0;
 		return value;
 	}
+
 	double OI::GetSign(double value){
 		//returning if a double is positive or negative
 		return (double) value < 0 ? -1.0 : 1.0;
