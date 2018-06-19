@@ -66,7 +66,7 @@ void Robot::RobotPeriodic() {
 //	SmartDashboard::PutNumber("GetYaw",RobotMap::navX->GetYaw());
 //	SmartDashboard::PutNumber("GetRoll",RobotMap::navX->GetRoll());
 //	SmartDashboard::PutNumber("GetPitch",RobotMap::navX->GetPitch());
-//	SmartDashboard::PutBoolean("connected?" , RobotMap::navX->IsConnected());
+	SmartDashboard::PutBoolean("connected?" , RobotMap::navX->IsConnected());
 //	SmartDashboard::PutBoolean("moving?" , RobotMap::navX->IsMoving());
 //	SmartDashboard::PutBoolean("rotating?" , RobotMap::navX->IsRotating());
 
@@ -80,11 +80,12 @@ void Robot::RobotPeriodic() {
 	SmartDashboard::PutBoolean("Bottom Limit Switch" , RobotMap::elevatorBottomSwitch->Get());
 	SmartDashboard::PutBoolean("Intake Limit Switch" , RobotMap::cubeIntakeLimitSwitch->Get());
 
-//	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
-//	SmartDashboard::PutNumber("Drivetrain Front Right Current" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
-//	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
-//	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
-//	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Elevator Current" , RobotMap::elevatorMotor->GetOutputCurrent());
+
+	SmartDashboard::PutNumber("Drivetrain Front Left Current" , RobotMap::drivetrainFrontLeftMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Front Right Current" , RobotMap::drivetrainFrontRightMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Rear Left Current" , RobotMap::drivetrainRearLeftMotor->GetOutputCurrent());
+	SmartDashboard::PutNumber("Drivetrain Rear Right Current" , RobotMap::drivetrainRearRightMotor->GetOutputCurrent());
 	}
 void Robot::DisabledInit(){
 	std::cout << "Let's start being disabled" << std::endl;

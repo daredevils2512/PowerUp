@@ -73,9 +73,9 @@ OI::OI() {
 //	CDR_bottomLeftBase.WhileHeld(new ClimberRunWinch(-1.0)); //run winch out, robot down
 //	CDR_bottomLeftBase.WhenReleased(new ClimberRunWinch(0.0));
 
-	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
-	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
-	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder
+//	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
+//	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
+//	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder
 //	CDB_yellow.WhileHeld(new ClimberRunWinch(1.0)); //run winch in, robot up
 //	CDB_yellow.WhenReleased(new ClimberRunWinch(0.0));
 //	CDB_topWhite.WhileHeld(new ClimberRunDeploy(1.0)); //hooks up

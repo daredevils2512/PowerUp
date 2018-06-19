@@ -62,11 +62,16 @@ void RobotMap::init() {
 
 	drivetrainChassisFront->SetSafetyEnabled(false);
 	drivetrainChassisFront->SetExpiration(0.5);
-	drivetrainChassisFront->SetMaxOutput(1.0);
 
 	drivetrainChassisRear->SetSafetyEnabled(false);
 	drivetrainChassisRear->SetExpiration(0.5);
+#ifdef Community
+	drivetrainChassisFront->SetMaxOutput(0.75);
+	drivetrainChassisRear->SetMaxOutput(0.75);
+#else
+	drivetrainChassisFront->SetMaxOutput(1.0);
 	drivetrainChassisRear->SetMaxOutput(1.0);
+#endif
 
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X));//TODO: util.h constants
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE);
