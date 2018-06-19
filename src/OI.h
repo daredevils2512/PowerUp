@@ -56,7 +56,6 @@ private:
 		JoystickButton CDB_bigWhite{&coDriverBox, 3};
 		JoystickButton CDB_bigRed{&coDriverBox, 14};
 
-
 public:
 	OI();
 	double GetTurn();

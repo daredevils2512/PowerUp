@@ -38,7 +38,7 @@ OI::OI() {
 	DRC_rightBumper.WhenPressed(new CubeIntakeActuateClose()); //retract
 	DRC_xButton.WhileHeld(new CubeRunIntake(1.0)); //thanks for flying air 2512
 		DRC_xButton.WhenReleased(new CubeRunIntake(0.0));
-#ifdef Community
+
 	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //normal send out
 		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
 	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.55)); //medium send out
@@ -52,37 +52,6 @@ OI::OI() {
 	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
 	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0)); //alt run cube out
 	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
-#else
-	CDR_trigger.WhileHeld(new CMG_ExtakeCube()); //normal send out
-		CDR_trigger.WhenReleased(new CubeRunIntake(0.0));
-	CDR_sideJoystickButton.WhileHeld(new CubeRunIntake(0.55)); //medium send out
-		CDR_sideJoystickButton.WhenReleased(new CubeRunIntake(0.0));
-	CDR_topLeftJoystick.WhileHeld (new CubeRunIntake(1.0)); //full send out
-	CDR_topLeftJoystick.WhenReleased (new CubeRunIntake(0.0)); //stop intake
-	CDR_bottomLeftJoystick.WhileHeld(new CubeRunIntake(0.4)); //soft send out
-	CDR_bottomLeftJoystick.WhenReleased(new CubeRunIntake(0.0)); //stop intake
-	CDR_topRightJoystick.WhenPressed(new CubeIntakeActuateClose()); //actuate intake arms in
-	CDR_bottomRightJoystick.WhenPressed(new CubeIntakeActuateOpen()); //actuate intake arms out
-
-	CDR_topLeftBase.WhenPressed(new CubeIntakeDeploy(true)); //deploy intake
-	CDR_topRightBase.WhenPressed(new CubeIntakeDeploy(false)); //back
-	CDR_middleLeftBase.WhileHeld(new CubeRunIntake(-1.0)); //alt run cube in
-	CDR_middleLeftBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
-	CDR_middleRightBase.WhileHeld(new CubeRunIntake(1.0)); //alt run cube out
-	CDR_middleRightBase.WhenReleased(new CubeRunIntake(0.0)); //stop intake
-//	CDR_bottomLeftBase.WhileHeld(new ClimberRunWinch(-1.0)); //run winch out, robot down
-//	CDR_bottomLeftBase.WhenReleased(new ClimberRunWinch(0.0));
-
-//	CDB_bigWhite.WhileHeld(new ElevatorRunLift (0.7)); //run lift up
-//	CDB_bigRed.WhileHeld(new ElevatorRunLift (-0.50)); //run lift down
-//	CDB_green.WhenPressed(new ElevatorResetEncoder()); //manually reset encoder
-//	CDB_yellow.WhileHeld(new ClimberRunWinch(1.0)); //run winch in, robot up
-//	CDB_yellow.WhenReleased(new ClimberRunWinch(0.0));
-//	CDB_topWhite.WhileHeld(new ClimberRunDeploy(1.0)); //hooks up
-//	CDB_topWhite.WhenReleased(new ClimberRunDeploy(0.0));
-//	CDB_topRed.WhileHeld(new ClimberRunDeploy(-0.75)); //hooks down
-//	CDB_topRed.WhenReleased(new ClimberRunDeploy(0.0));
-#endif
 }
 
 	double OI::GetTurn() {
