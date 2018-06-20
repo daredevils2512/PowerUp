@@ -66,8 +66,8 @@ void RobotMap::init() {
 	drivetrainChassisRear->SetSafetyEnabled(false);
 	drivetrainChassisRear->SetExpiration(0.5);
 
-	drivetrainChassisFront->SetMaxOutput(1.0);
-	drivetrainChassisRear->SetMaxOutput(1.0);
+	drivetrainChassisFront->SetMaxOutput(0.75);
+	drivetrainChassisRear->SetMaxOutput(0.75);
 
 	drivetrainLeftEncoder.reset (new frc::Encoder (0, 1, false, frc::Encoder::k4X));//TODO: util.h constants
 		drivetrainLeftEncoder->SetDistancePerPulse(Util::LEFT_INCH_PER_PULSE);
@@ -97,7 +97,7 @@ void RobotMap::init() {
 
 	 cubeIntakeLimitSwitch.reset (new frc::DigitalInput(Util::CUBE_INTAKE_LIMIT_SWITCH));
 	 	 Robot::dashboard->RegisterLimitSwitch("cube.intake.cubeSwitch",cubeIntakeLimitSwitch.get());
-	 cubeDeploySolenoid.reset (new frc::DoubleSolenoid(0,0,1));
+//	 	 cubeDeploySolenoid.reset (new frc::DoubleSolenoid(0,0,1));
 
 //	climberDeploy.reset(new WPI_TalonSRX (Util::CLIMBER_DEPLOY));
 //	climber.reset (new WPI_TalonSRX (Util::CLIMBER));

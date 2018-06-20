@@ -13,7 +13,7 @@ private:
 	//declares controllers
 	Joystick driverController{0};
 	Joystick coDriverController{1};
-	Joystick coDriverBox{2};
+//	Joystick coDriverBox{2};
 
 
 		//xbox controls
@@ -45,16 +45,16 @@ private:
 		ThrottleButton CDR_throttle{&coDriverController, 3};
 
 		//co-driver button box controls
-		JoystickButton CDB_topWhite{&coDriverBox, 2};
-		JoystickButton CDB_topRed{&coDriverBox, 6};
-		JoystickButton CDB_middleWhite{&coDriverBox, 8};
-		JoystickButton CDB_middleRed{&coDriverBox, 4};
-		JoystickButton CDB_bottomWhite{&coDriverBox, 5};
-		JoystickButton CDB_bottomRed{&coDriverBox, 16};
-		JoystickButton CDB_green{&coDriverBox, 7};
-		JoystickButton CDB_yellow{&coDriverBox, 15};
-		JoystickButton CDB_bigWhite{&coDriverBox, 3};
-		JoystickButton CDB_bigRed{&coDriverBox, 14};
+//		JoystickButton CDB_topWhite{&coDriverBox, 2};
+//		JoystickButton CDB_topRed{&coDriverBox, 6};
+//		JoystickButton CDB_middleWhite{&coDriverBox, 8};
+//		JoystickButton CDB_middleRed{&coDriverBox, 4};
+//		JoystickButton CDB_bottomWhite{&coDriverBox, 5};
+//		JoystickButton CDB_bottomRed{&coDriverBox, 16};
+//		JoystickButton CDB_green{&coDriverBox, 7};
+//		JoystickButton CDB_yellow{&coDriverBox, 15};
+//		JoystickButton CDB_bigWhite{&coDriverBox, 3};
+//		JoystickButton CDB_bigRed{&coDriverBox, 14};
 
 public:
 	OI();
