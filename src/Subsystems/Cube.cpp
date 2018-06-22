@@ -26,7 +26,7 @@ void Cube::ActuateIntake(frc::DoubleSolenoid::Value direction) {
 }
 
 void Cube::ActuateDeploy(frc::DoubleSolenoid::Value direction) {
-	intakeDeploy->Set(direction);
+//	intakeDeploy->Set(direction);
 }
 
 bool Cube::GetLimitSwitch() {
