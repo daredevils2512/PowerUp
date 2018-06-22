@@ -126,6 +126,17 @@
               "_source0": "network_table:///SmartDashboard/Left Encoder Rate",
               "_title": "Left Encoder Rate"
             }
+          },
+          "4,4": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Elevator Current",
+              "_title": "Elevator Current"
+            }
           }
         }
       }
